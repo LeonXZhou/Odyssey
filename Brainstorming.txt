@@ -1,0 +1,35 @@
+Map/physical route 
+  date aspect
+	mark out camp sites
+Meal prep 
+	by day (look into nutrition apis to make suggestions)
+Gear 
+	link in weather api (possibly make suggestions based on category of gear)
+	make suggestions on basics such as emergency gear
+Emergency Contact
+	set check-in date with app. If you don't sign back in app sends out a notification
+  reflection/summary 
+
+Possible names:
+odyssey
+
+voyage
+travels
+explore
+
+
+Map/physical route:
+list out sunset sunrise
+
+meal:
+day 1, day 2, day3
+
+gear:
+Expected weather conditions:
+different conditions
+temperature ranges
+
+title: rain jacket
+category: shell/windbreaker
+
+
