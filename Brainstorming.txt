@@ -1,13 +1,18 @@
 Map/physical route 
   date aspect
 	mark out camp sites
+	react leafletjs
+	routing roads https://www.liedman.net/leaflet-routing-machine/
+	routing trail https://github.com/Raruto/leaflet-trails
 Meal prep 
 	by day (look into nutrition apis to make suggestions)
+	
 Gear 
 	link in weather api (possibly make suggestions based on category of gear)
 	make suggestions on basics such as emergency gear
+	
 Emergency Contact
-	set check-in date with app. If you don't sign back in app sends out a notification
+  set check-in date with app. If you don't sign back in app sends out a notification
   reflection/summary 
 
 Possible names:
