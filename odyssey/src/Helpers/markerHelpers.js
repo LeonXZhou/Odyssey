@@ -12,7 +12,7 @@ export function iconFinder(iconString) {
   }
 }
 
-export function generateMarkers(markers, markersState, setMarkers, markerEvents) {
+export function generateMarkers(markers) {
   const markersJSX = markers.map((marker, i) => {
     //setting default options for markers
     const markerWidth = marker.iconSize ? marker.iconSize[0] : 20;
@@ -32,6 +32,8 @@ export function generateMarkers(markers, markersState, setMarkers, markerEvents)
             // iconAnchor: iconAnchor
           })}
         key={i}
+
+        // we can pass an eventHandler prop to marker to attach listeners to it
         // eventHandlers={{
         //   click: (e) => {
         //     console.log('marker clicked', e);
@@ -46,5 +48,4 @@ export function generateMarkers(markers, markersState, setMarkers, markerEvents)
       </Marker>)
   })
   return markersJSX
-
 }
