@@ -24,6 +24,7 @@ function App() {
       >
       </MapDisplay>
       <br></br>
+      
       <MapEditor
         mapOptions={{
           zoom: 5,
