@@ -1,58 +1,36 @@
 import './App.css';
-import 'leaflet/dist/leaflet.css';
-import { useState } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet'
-import L from 'leaflet';
 
 
-function LocationMarker() {
-  const [markerPosition, setPosition] = useState([])
-  const map = useMapEvents({
-    click: (e) => {
-      console.log(e)
-      setPosition((prev) => { return [...prev, [e.latlng.lat, e.latlng.lng]] })
-    },
-  })
-  const markers = markerPosition.map((mP, i) => {
-    return (<Marker position={mP} icon={new L.Icon({
-      iconUrl: "https://i.imgur.com/LpaY82x.png",
-      iconAnchor: null,
-      popupAnchor: [0, 0],
-      shadowUrl: null,
-      shadowSize: null,
-      shadowAnchor: null,
-      iconSize: new L.Point(20, 20),
-      className: 'leaflet-div-icon'
-    })}
-      key={i}></Marker>)
-  })
-  return (<>{markers}</>)
-}
-
+import MapEditor from './Components/MapComponents/MapEditor';
+import MapDisplay from './Components/MapComponents/MapDisplay';
 function App() {
+
   return (
     <div className="App">
-      <MapContainer center={[51.505, -0.09]} zoom={10} scrollWheelZoom={false} doubleClickZoom={false}>
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-          <Marker position={[51.505, -0.09]} icon={new L.Icon({
-            iconUrl: "https://i.imgur.com/LpaY82x.png",
-            iconAnchor: null,
-            popupAnchor: [0, 0],
-            shadowUrl: null,
-            shadowSize: null,
-            shadowAnchor: null,
-            iconSize: new L.Point(20, 20),
-            className: 'leaflet-div-icon'
-          })}>
-            <Popup>
-              Popup Text
-            </Popup>
-          </Marker>
-        <LocationMarker></LocationMarker>
-      </MapContainer>
+      <MapDisplay
+
+        mapOptions={{
+          zoom: 10,
+          center: [49.246292, -123.116226],
+          themeAttribution: "TOPO",
+          themeURL: "TOPO"
+        }}
+
+        markers={[
+          { position: [49.246292, -123.116226], iconSize: [40,40]},
+          { position: [49.286292, -123.136226], icon: "TENT", iconSize: [20,20] },
+          { position: [49.346292, -123.166226], icon: "TENT", iconSize: [20,20], popUp:{name: "First Night", description: "I <3 Camping"} }
+        ]}
+      >
+      </MapDisplay>
+      <br></br>
+      <MapEditor
+        mapOptions={{
+          zoom: 5,
+          center: [51.505, -0.09]
+        }}
+      >
+      </MapEditor>
     </div>
   );
 }
