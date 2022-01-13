@@ -31,7 +31,6 @@ app.use(
   })
 );
 
-app.use(express.static("public"));
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
@@ -49,7 +48,7 @@ app.use("/api/widgets", widgetsRoutes(db));
 // Separate them into separate routes files (see above).
 
 app.get("/", (req, res) => {
-  res.render("index");
+  res.send("index");
 });
 
 app.listen(PORT, () => {
