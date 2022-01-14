@@ -5,10 +5,14 @@ const Navigation = () => {
   return (
     <main className="header-container">
       <div className="header-left">
-        <a href="" type="button" class="btn btn-default header-right-button">
+        <a href="/" type="button" class="btn btn-default header-right-button">
           Home
         </a>
-        <a href="" type="button" class="btn btn-default header-right-button">
+        <a
+          href="/planning"
+          type="button"
+          class="btn btn-default header-right-button"
+        >
           Discover
         </a>
         <a href="" type="button" class="btn btn-default header-right-button">

@@ -1,44 +1,16 @@
 import React from "react";
-import "./component-styles/addTrip.scss";
+import "./component-styles/displayTrips.scss";
 
-const DisplayTrips = () => {
+const DisplayTrips = ({ name, map, numberOfDays }) => {
+  console.log("THIS");
   return (
     <div>
       <button className="trip-box">
-        <h1>NO</h1>
+        <h1>{name}</h1>
+        <h1>{map}</h1>
+        <h1>{numberOfDays}</h1>
       </button>
       <br />
-      <button className="trip-box">
-        <h1>NO</h1>
-      </button>
-      <br />
-      <button className="trip-box">
-        <h1>NO</h1>
-      </button>
-      <br />
-      <button className="trip-box">
-        <h1>NO</h1>
-      </button>
-      <br />
-      <button className="trip-box">
-        <h1>NO</h1>
-      </button>
-      <br />
-      <button className="trip-box">
-        <h1>NO</h1>
-      </button>
-      <br />
-      <button className="trip-box">
-        <h1>NO</h1>
-      </button>
-      <br />
-      <button className="trip-box">
-        <h1>NO</h1>
-      </button>
-      <br />
-      <button className="trip-box">
-        <h1>NO</h1>
-      </button>
     </div>
   );
 };
