@@ -6,4 +6,18 @@
   height: 30em;
   background-color: beige;
   border: 1px solid blue;
+  .home-banner {
+    display: flex;
+  }
+  .home-trip-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    border: 1px solid red;
+    height: 15em;
+    min-width: 13em;
+    margin: 1.5em;
+    overflow: auto;
+  }
 }

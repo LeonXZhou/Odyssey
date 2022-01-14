@@ -1,5 +1,4 @@
 import React from "react";
-import DisplayTrips from "./DisplayTrips";
 import TripDisplayItem from "./TripDisplayItem";
 import "./component-styles/home.scss";
 
@@ -233,17 +232,26 @@ const tripsArray = [
 const Home = () => {
   const displayedTrips = tripsArray.map((trip, i) => {
     return (
-      <TripDisplayItem
-        key={i}
-        mapOptions={trip.mapOptions}
-        markers={trip.markers}
-        name={trip.name}
-        map={trip.map}
-        numberOfDays={trip.numberOfDays}
-      />
+      <section className="home-trip-box">
+        <TripDisplayItem
+          key={i}
+          mapOptions={trip.mapOptions}
+          markers={trip.markers}
+          name={trip.name}
+          description={trip.description}
+          username={trip.username}
+        />
+      </section>
     );
   });
-  return <main className="home-page">{displayedTrips}</main>;
+  return (
+    <main className="home-page">
+      <section className="home-banner">
+        <h1>BANNER</h1>
+      </section>
+      {displayedTrips}
+    </main>
+  );
 };
 
 export default Home;
