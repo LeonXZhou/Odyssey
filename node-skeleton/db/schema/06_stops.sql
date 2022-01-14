@@ -1,0 +1,13 @@
+DROP TABLE IF EXISTS stops CASCADE;
+
+
+CREATE TABLE stops (
+  id SERIAL PRIMARY KEY NOT NULL,
+
+  route_id INTEGER REFERENCES routes(id) ON DELETE CASCADE,
+  day DATE,
+  name VARCHAR(255) NOT NULL,
+  latitude DECIMAL(19,15) NOT NULL,
+  longitude DECIMAL(19,15) NOT NULL,
+  type TEXT
+)

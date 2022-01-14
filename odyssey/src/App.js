@@ -1,11 +1,18 @@
+<<<<<<< HEAD
 import './App.css';
 
 
 import MapEditor from './Components/MapComponents/MapEditor';
 import MapDisplay from './Components/MapComponents/MapDisplay';
+=======
+import { Link } from 'react-router-dom';
+import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+>>>>>>> main
 function App() {
 
   return (
+<<<<<<< HEAD
     <div className="App">
       <MapDisplay
         //the MapDisplay component can accept an options prop. which will determine how it is rendered
@@ -39,6 +46,23 @@ function App() {
         markers={[]}
       >
       </MapEditor>
+=======
+    <div>
+      <BrowserRouter>
+        <h1>always here</h1>
+        <Link to='/'>home</Link>
+        <br />
+        <Link to='/planning'>planning</Link>
+        <br />
+        <Link to='/asdf'>asdf</Link>
+        
+        <Routes>
+          <Route path="/" element={<h1>this is: home</h1>} />
+          <Route path="/planning" element={<h1>this is: planning</h1>} />
+          <Route path="/asdf" element={<h1>this is: asdf</h1>} />
+        </Routes>
+      </BrowserRouter>
+>>>>>>> main
     </div>
   );
 }
