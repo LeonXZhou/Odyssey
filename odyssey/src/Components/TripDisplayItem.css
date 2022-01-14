@@ -1,0 +1,45 @@
+.tripDisplayCard {
+  /* Add shadows to create the "card" effect */
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 40%;
+  height: 300px;
+  border-radius: 5px;
+}
+
+/* On mouse-over, add a deeper shadow */
+.tripDisplayCard:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,.5);
+}
+
+.tripDisplayCard .leaflet-container {
+  width: 100%; 
+  height: 80%;
+  padding: .2%;
+  margin: 0;
+}
+.descriptionContainer {
+  padding: 2px 16px;
+}
+
+h1 {
+  font-size: 17px;
+  display: block;
+  margin-block-start: 0px;
+  margin-block-end: 0px;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+  height: 0%;
+}
+p {
+  font-size: 11px;
+  display: block;
+  margin-block-start: 0px;
+  margin-block-end: 0px;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
