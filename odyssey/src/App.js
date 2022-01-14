@@ -6,9 +6,13 @@ import { latLng } from 'leaflet';
 import MapEditor from './Components/MapComponents/MapEditor';
 import MapDisplay from './Components/MapComponents/MapDisplay';
 import TripDisplayItem from './Components/TripDisplayItem';
+import Navigation from './components/Navigation'
+import Home from './components/Home';
+
 function App() {
   return (
     <BrowserRouter>
+      <Navigation />
       <h1>always here</h1>
       <Link to='/'>home</Link>
       <br />
@@ -18,7 +22,7 @@ function App() {
       <br />
       <Link to='/tripDisplayCard'>tripDisplayCard</Link>
       <Routes>
-        <Route path="/" element={<h1>this is: home</h1>} />
+        <Route path="/" element={<Home />} />
 
         <Route path="/map-editor" element={<MapEditor
           //same map options as Mapdisplay
