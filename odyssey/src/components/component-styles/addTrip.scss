@@ -1,0 +1,11 @@
+.trip-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  border: 1px solid red;
+  height: 15em;
+  min-width: 15em;
+  margin: 1.5em;
+  overflow: auto;
+}
