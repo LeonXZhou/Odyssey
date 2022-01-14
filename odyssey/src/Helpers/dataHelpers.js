@@ -143,32 +143,34 @@ const allData = [
 const formatedData = {};
 for (dataPoint of allData) {
   if (!formatedData[dataPoint.trip_id]) {
-   
     formatedData[dataPoint.trip_id] = {};
   }
 
   if (!formatedData[dataPoint.trip_id]["title"]) {
-
-    formatedData[dataPoint.trip_id]["title"] = dataPoint.trips_name
+    formatedData[dataPoint.trip_id]["title"] = dataPoint.trips_name;
   }
   if (!formatedData[dataPoint.trip_id]["description"]) {
-
-    formatedData[dataPoint.trip_id]["description"] = dataPoint.description
+    formatedData[dataPoint.trip_id]["description"] = dataPoint.description;
   }
   if (!formatedData[dataPoint.trip_id]["markers"]) {
-
-    formatedData[dataPoint.trip_id]["markers"] = []
+    formatedData[dataPoint.trip_id]["markers"] = [];
   }
-  formatedData[dataPoint.trip_id]["markers"].push({type: dataPoint.stop_types, lat: dataPoint.stops_lat , long: dataPoint.stops_long})
+  formatedData[dataPoint.trip_id]["markers"].push({
+    type: dataPoint.stop_types,
+    lat: dataPoint.stops_lat,
+    long: dataPoint.stops_long,
+  });
   if (!formatedData[dataPoint.trip_id]["maps"]) {
-
-    formatedData[dataPoint.trip_id]["maps"] = {lat : dataPoint.routes_lat, long:dataPoint.routes_long}
+    formatedData[dataPoint.trip_id]["maps"] = {
+      lat: dataPoint.routes_lat,
+      long: dataPoint.routes_long,
+    };
   }
   if (!formatedData[dataPoint.trip_id]["users"]) {
-
-    formatedData[dataPoint.trip_id]["users"] = {firstName : dataPoint.first_name, LastName:dataPoint.last_name}
+    formatedData[dataPoint.trip_id]["users"] = {
+      firstName: dataPoint.first_name,
+      LastName: dataPoint.last_name,
+    };
   }
-
 }
 console.log(formatedData);
-
