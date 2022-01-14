@@ -5,5 +5,5 @@ CREATE TABLE emergency_contacts (
   name VARCHAR(255),
   phone_number VARCHAR(255),
   email VARCHAR(255),
-  send_date DATE,
+  send_date DATE
 );
