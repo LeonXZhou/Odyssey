@@ -29,7 +29,7 @@ const Home = () => {
   return (
     <main className="home-page">
       <a
-        href="/planner"
+        href="/planning"
         type="button"
         className="add-button btn btn-default header-right-button"
       >

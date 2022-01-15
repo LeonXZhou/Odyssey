@@ -2,7 +2,7 @@ import React from "react";
 import "./component-styles/addTrip.scss";
 
 const AddTrip = () => {
-  return <div className="add-trip"></div>;
+  return <main className="home-page"></main>;
 };
 
 export default AddTrip;

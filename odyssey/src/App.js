@@ -7,7 +7,7 @@ import MapDisplay from "./components/MapComponents/MapDisplay";
 import TripDisplayItem from "./components/TripDisplayItem";
 import Navigation from "./components/Navigation";
 import Home from "./components/Home";
-import Planner from "./components/planner/Planner";
+import Planning from "./components/planning/Planning";
 
 function App() {
   return (
@@ -23,7 +23,17 @@ function App() {
       <Link to="/tripDisplayCard">tripDisplayCard</Link> */}
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/planner" element={<Planner />} />
+        <Route path="/planning" element={<Planning page="route" />} />
+        <Route path="/planning/route" element={<Planning page="route" />} />
+        <Route
+          path="/planning/equipment"
+          element={<Planning page="equipment" />}
+        />
+        <Route path="/planning/meals" element={<Planning page="meals" />} />
+        <Route
+          path="/planning/emergency"
+          element={<Planning page="emergency" />}
+        />
         <Route
           path="/map-editor"
           element={

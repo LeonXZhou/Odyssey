@@ -26,18 +26,10 @@ function TripDisplayItem(props) {
       ></MapDisplay>
       <div className="descriptionContainer">
         <h1>
-          <b>Trip Title</b>
+          <b>{props.name}</b>
         </h1>
-        <p>
-          Trip Description: alsdkfjlaksdf asdif asdif aisd fidkle id kei
-          dkllelalsdkfjlaksdf asdif asdif aisd fidkle id kei dkllelalsdkfjlaksdf
-          asdif asdif aisd fidkle id kei dkllelalsdkfjlaksdf asdif asdif aisd
-          fidkle id kei dkllelalsdkfjlaksdf asdif asdif aisd fidkle id kei
-          dkllelalsdkfjlaksdf asdif asdif aisd fidkle id kei dkllelalsdkfjlaksdf
-          asdif asdif aisd fidkle id kei dkllelalsdkfjlaksdf asdif asdif aisd
-          fidkle id kei dkllel
-        </p>
-        <p>Created By: First Last</p>
+        <p>{props.description}</p>
+        <p>Created By: {props.username}</p>
       </div>
     </div>
   );
