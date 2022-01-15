@@ -1,6 +1,7 @@
-export function tripFormatter(allTripData) {
+export function formatTripData(allTripData) {
   const formatedTripData = {};
-  for (dataPoint of allTripData) {
+  const formatedTripDataArray = [];
+  for (const dataPoint of allTripData) {
     if (!formatedTripData[dataPoint.trip_id]) {
       formatedTripData[dataPoint.trip_id] = {};
     }
@@ -32,6 +33,11 @@ export function tripFormatter(allTripData) {
       };
     }
   }
-  return 
+  for (const data in formatedTripData)
+  {
+    formatedTripData[data]["trip_id"] = data;
+    formatedTripDataArray.push(formatedTripData[data])
+  }
+  return formatedTripDataArray
 }
 
