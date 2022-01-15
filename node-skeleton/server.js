@@ -34,14 +34,12 @@ app.use(
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const usersRoutes = require("./routes/users");
-const tripsRoutes = require("./routes/trips");
 const widgetsRoutes = require("./routes/widgets");
 const tripsRoutes = require("./routes/trips");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/api/users", usersRoutes(db));
-app.use("/api/trips", tripsRoutes(db));
 app.use("/api/widgets", widgetsRoutes(db));
 app.use("/api/plan-trips-gear", widgetsRoutes(db));
 

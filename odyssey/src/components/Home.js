@@ -28,18 +28,22 @@ import { formatTripData } from "../Helpers/dataHelpers";
 const Home = () => {
   const [tripsArray, setTripsArray] = useState([]);
   useEffect(() => {
-    getTrips()
-      .then((res) => {
-        setTripsArray(formatTripData(res.data))
-      });
-  }, [])
+    getTrips().then((res) => {
+      setTripsArray(formatTripData(res.data));
+    });
+  }, []);
   console.log(tripsArray);
   const displayedTrips = tripsArray.map((trip, i) => {
     return (
       <TripDisplayItem
         key={i}
         mapOptions={{ center: [trip.maps.lat, trip.maps.long] }}
-        markers={trip.markers.map((serverMarker) => { return { position: [serverMarker.lat, serverMarker.long], icon: serverMarker.type } })}
+        markers={trip.markers.map((serverMarker) => {
+          return {
+            position: [serverMarker.lat, serverMarker.long],
+            icon: serverMarker.type,
+          };
+        })}
         name={"asdf"}
         description={"ASDF"}
         userName={"asdf"}
