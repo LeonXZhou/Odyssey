@@ -1,6 +1,6 @@
 import React from "react";
 import MealDay from "./MealDay";
-import "../component-styles/Meals.scss";
+import "../../component-styles/Meals.scss";
 
 const Meals = () => {
   return (<main className="meal">
