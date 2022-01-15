@@ -23,9 +23,8 @@ function App() {
       <Link to="/tripDisplayCard">tripDisplayCard</Link> */}
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/planner" element={<Planner />} />
         <Route
-          path="/planner"
-          element={<Planner />}
           path="/map-editor"
           element={
             <MapEditor
