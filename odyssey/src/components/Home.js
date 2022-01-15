@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import DisplayTrips from "./DisplayTrips";
 import TripDisplayItem from "./TripDisplayItem";
 import "./component-styles/home.scss";
 import { useState } from "react";
@@ -23,11 +22,26 @@ const Home = () => {
         markers={parseDBMarkers(trip.markers)}
         name={"asdf"}
         description={"ASDF"}
-        userName={"asdf"}
+        username={"asdf"}
       />
     );
   });
-  return <main className="home-page">{displayedTrips}</main>;
+  return (
+    <main className="home-page">
+      <a
+        href="/planner"
+        type="button"
+        className="add-button btn btn-default header-right-button"
+      >
+        Begin your journey now
+        <img
+          className="arrows"
+          src="https://www.pngall.com/wp-content/uploads/5/Black-Fast-Forward-Button-PNG-Clipart.png"
+        ></img>
+      </a>
+      <section className="trip-cards">{displayedTrips}</section>
+    </main>
+  );
 };
 
 export default Home;

@@ -7,23 +7,25 @@ import MapDisplay from "./components/MapComponents/MapDisplay";
 import TripDisplayItem from "./components/TripDisplayItem";
 import Navigation from "./components/Navigation";
 import Home from "./components/Home";
+import Planner from "./components/planner/Planner";
 
 function App() {
   return (
     <BrowserRouter>
       <Navigation />
-      <h1>always here</h1>
+      {/* <h1>always here</h1>
       <Link to="/">home</Link>
       <br />
       <Link to="/map-display">map-display</Link>
       <br />
       <Link to="/map-editor">map-editor</Link>
       <br />
-      <Link to="/tripDisplayCard">tripDisplayCard</Link>
+      <Link to="/tripDisplayCard">tripDisplayCard</Link> */}
       <Routes>
         <Route path="/" element={<Home />} />
-
         <Route
+          path="/planner"
+          element={<Planner />}
           path="/map-editor"
           element={
             <MapEditor
