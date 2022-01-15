@@ -23,9 +23,13 @@ for (dataPoint of allData) {
       if (!formatedData[dataPoint.id]["categories"]) {
         formatedData[dataPoint.id]["categories"] = [];
       }
+       formatedData[dataPoint.id]["categories"].push({
+          type: dataPoint.catergory,
+          gearName: dataPoint.gear_item
+        });
 
 
-console.log(formatedData);
+console.log(formatedData[dataPoint.id]["categories"]);
 
 }
 // { tripid: trip_id , tripsName: trip_name,gear_categories.name: [{gearName  : gear_item.name }]}

@@ -44,7 +44,7 @@ const mealsRoutes = require("./routes/meals");
 app.use("/api/users", usersRoutes(db));
 app.use("/api/widgets", widgetsRoutes(db));
 app.use("/api/plan-trips-gear", widgetsRoutes(db));
-app.use("/api/plan-trips-meals", MealsRoutes(db));
+app.use("/api/plan-trips-meals", mealsRoutes(db));
 
 app.use("/api/trips", tripsRoutes(db));
 // Note: mount other resources here, using the same pattern above
