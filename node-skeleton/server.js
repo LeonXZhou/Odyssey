@@ -31,7 +31,6 @@ app.use(
   })
 );
 
-
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const usersRoutes = require("./routes/users");
@@ -54,7 +53,6 @@ app.use("/api/trips", tripsRoutes(db));
 // Separate them into separate routes files (see above).
 
 app.get("/", (req, res) => {
-
   res.send("i display here");
 });
 

@@ -8,21 +8,19 @@ import { formatTripData } from "../Helpers/dataHelpers";
 
 import { parseDBMap, parseDBMarkers } from "../Helpers/mapHelper";
 
-
 const Home = () => {
   const [tripsArray, setTripsArray] = useState([]);
   useEffect(() => {
-    getTrips()
-      .then((res) => {
-        setTripsArray(formatTripData(res.data))
-      });
-  }, [])
+    getTrips().then((res) => {
+      setTripsArray(formatTripData(res.data));
+    });
+  }, []);
   const displayedTrips = tripsArray.map((trip, i) => {
     return (
       <TripDisplayItem
         key={i}
-        mapOptions= {parseDBMap(trip.maps)}
-        markers= {parseDBMarkers(trip.markers)}
+        mapOptions={parseDBMap(trip.maps)}
+        markers={parseDBMarkers(trip.markers)}
         name={"asdf"}
         description={"ASDF"}
         userName={"asdf"}
