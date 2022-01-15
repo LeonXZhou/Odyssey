@@ -1,4 +1,4 @@
-export function formatTripData(allTripData) {
+export function formatTripCategoriesData(allTripData) {
   const formatedData = {};
   for (dataPoint of allTripData) {
     if (!formatedData[dataPoint.id]) {
