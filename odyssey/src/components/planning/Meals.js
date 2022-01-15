@@ -1,9 +1,12 @@
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
-import "../component-styles/Planning.scss";
+import React from "react";
+import MealDay from "./MealDay";
 
-const Sidebar = () => {
-  return <main className="equipment">THIS IS MEALS</main>;
+const Meals = () => {
+  return (<main className="meal">
+    <MealDay></MealDay>
+    <MealDay></MealDay>
+  </main>
+  )
 };
 
-export default Sidebar;
+export default Meals;
