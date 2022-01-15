@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from "axios";
 export function getTrips() {
-  return axios.get('/api/trips');
+  return axios.get("/api/trips");
 }
