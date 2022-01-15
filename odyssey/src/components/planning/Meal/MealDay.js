@@ -1,5 +1,5 @@
 import React from "react";
-import "../component-styles/MealDay.scss";
+import "../../component-styles/MealDay.scss";
 import MealCard from "./MealCard";
 
 const MealDay = (props) => {
