@@ -6,7 +6,7 @@ const Planner = () => {
   return (
     <main className="planner-page">
       <Sidebar />
-      <section className="page">NOT SIDEBAR</section>
+      <section></section>
     </main>
   );
 };
