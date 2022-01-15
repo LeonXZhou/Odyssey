@@ -19,19 +19,25 @@ export function themeURLFinder(themeString) {
   }
 }
 
-
-// mapOptions={
-//   zoom: 10,
-//   center: [49.246292, -123.116226],
-//   themeAttribution: "TOPO", //needed for theme: converted to url by helper functions in mapHelpers.js
-//   themeURL: "TOPO", //needed for theme: converted to url by helper functions in mapHelpers.js
-//   //route_id: we can pass in the id from the db later
-// }
+// paseDBinput {lat: number, long number}
 export function parseDBMap(tripMaps) {
   return { center: [tripMaps.lat, tripMaps.long] }
 }
+// parseDBMap options
+// mapOptions={
+//   zoom: 10, OPTIONAL
+//   center: [49.246292, -123.116226], NEEDED
+//   themeAttribution: "TOPO", OPTIONAL
+//   themeURL: "TOPO", OPTIONAL
+//   //route_id: we can pass in the id from the db later
+// }
 
 
+// parseDBinput [{type:"string",lat: number, long number}]
+export function parseDBMarkers(tripMarkers) {
+  return tripMarkers.map((serverMarker) => { return { position: [serverMarker.lat, serverMarker.long], icon: serverMarker.type } })
+}
+// parseDBoutput
 // markers=[
 //   { position: [49.246292, -123.116226], iconSize: [40, 40] },
 //   {
@@ -46,6 +52,3 @@ export function parseDBMap(tripMaps) {
 //     popUp: { name: "First Night", description: "I <3 Camping" },
 //   },
 // }
-export function parseDBMarkers(tripMarkers) {
-  return tripMarkers.map((serverMarker) => { return { position: [serverMarker.lat, serverMarker.long], icon: serverMarker.type } })
-}
