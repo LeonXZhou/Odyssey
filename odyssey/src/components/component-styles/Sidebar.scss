@@ -1,7 +1,13 @@
 .sidebar {
-  border: 2px solid black;
-  height: 36em;
-  width: 12.5em;
+  display: flex;
+  flex-direction: column;
+  height: 36.25em;
+  width: 13em;
   background-color: rgb(177, 124, 124);
-  font-size: 20px;
+  .sidebar-item {
+    display: flex;
+    width: 13em;
+    font-size: 20px;
+    font-weight: 450;
+  }
 }
