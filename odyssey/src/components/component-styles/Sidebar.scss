@@ -1,0 +1,13 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 36.25em;
+  width: 13em;
+  background-color: rgb(177, 124, 124);
+  .sidebar-item {
+    display: flex;
+    width: 13em;
+    font-size: 20px;
+    font-weight: 450;
+  }
+}
