@@ -1,5 +1,5 @@
 import "leaflet/dist/leaflet.css";
-import "./TripDisplayItem.css";
+import "./component-styles/TripDisplayItem.scss";
 import { generateMarkers } from "../Helpers/markerHelpers";
 import { themeAttributionFinder, themeURLFinder } from "../Helpers/mapHelper";
 

@@ -4,12 +4,13 @@ export function tripFormatter(allTripData) {
     if (!formatedTripData[dataPoint.trip_id]) {
       formatedTripData[dataPoint.trip_id] = {};
     }
-  
+
     if (!formatedTripData[dataPoint.trip_id]["title"]) {
       formatedTripData[dataPoint.trip_id]["title"] = dataPoint.trips_name;
     }
     if (!formatedTripData[dataPoint.trip_id]["description"]) {
-      formatedTripData[dataPoint.trip_id]["description"] = dataPoint.description;
+      formatedTripData[dataPoint.trip_id]["description"] =
+        dataPoint.description;
     }
     if (!formatedTripData[dataPoint.trip_id]["markers"]) {
       formatedTripData[dataPoint.trip_id]["markers"] = [];
@@ -32,6 +33,5 @@ export function tripFormatter(allTripData) {
       };
     }
   }
-  return 
+  return formatedTripData;
 }
-
