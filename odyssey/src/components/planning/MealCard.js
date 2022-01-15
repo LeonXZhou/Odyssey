@@ -4,13 +4,11 @@ import "../component-styles/MealCard.scss";
 const MealCard = (props) => {
   return (
     <div className={"mealCard"}>
-      <h1>Mean Name</h1>
+      <div>Mean Name</div>
       <div>
-      <ul>
-        <li>Coffee</li>
-        <li>Tea</li>
-        <li>Milk</li>
-      </ul>
+        Coffee
+
+
       </div>
     </div>
   );
