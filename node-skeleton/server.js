@@ -36,15 +36,17 @@ app.use(
 // Note: Feel free to replace the example routes below with your own
 const usersRoutes = require("./routes/users");
 const widgetsRoutes = require("./routes/widgets");
-const tripMealsRoutes = require("./routes/planTripsMeals");
-const tripEquipmentRoutes = require("./routes/planTripsEquipment");
+const tripsRoutes = require("./routes/trips");
+const mealsRoutes = require("./routes/meals");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/api/users", usersRoutes(db));
 app.use("/api/widgets", widgetsRoutes(db));
-app.use("/api/plan-trips-meals", tripMealsRoutes(db));
-app.use("/api/plan-trips-equipment", tripEquipmentRoutes(db));
+app.use("/api/plan-trips-gear", widgetsRoutes(db));
+app.use("/api/plan-trips-meals", MealsRoutes(db));
+
+app.use("/api/trips", tripsRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
 // Home page
