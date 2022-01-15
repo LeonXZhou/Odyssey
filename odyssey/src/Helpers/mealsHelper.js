@@ -1,4 +1,4 @@
-export function formatTripData(allTripData) {
+export function formatMealsData(allTripData) {
   const formatedData = {};
   for (dataPoint of allTripData) {
     if (!formatedData[dataPoint.days_id]) {
