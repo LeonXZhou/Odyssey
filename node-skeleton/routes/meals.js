@@ -1,5 +1,10 @@
-const express = require('express');
-const router  = express.Router();
+const express = require("express");
+const router = express.Router();
+
+// const accountSid = "ACab6e2eae17eb65bd94de329bf0201591";
+// const authToken = "ee9c5fd4448f2a0942a21c13628dd3f9";
+// const client = require("twilio")(accountSid, authToken);
+// const cron = require("node-cron");
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
@@ -12,13 +17,11 @@ module.exports = (db) => {
     `)
       .then(data => {
         const allMeals = data.rows;
-        console.log(allMeals)
+        console.log(allMeals);
         res.json(allMeals);
       })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
       });
   });
   return router;

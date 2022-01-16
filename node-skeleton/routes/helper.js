@@ -9,26 +9,28 @@ const allData = [
   },
   { gear_item: "gloves", catergory: "Apparel", id: 1, name: "Small Hike" },
 ];
-const formatedData = {};
 
-for (const dataPoint of allData) {
-  if (!formatedData[dataPoint.id]) {
-    formatedData[dataPoint.id] = {};
-  }
-  if (!formatedData[dataPoint.id]["tripID"]) {
-    formatedData[dataPoint.id]["tripID"] = dataPoint.id;
-  }
-  if (!formatedData[dataPoint.id]["tripName"]) {
-    formatedData[dataPoint.id]["tripName"] = dataPoint.name;
-  }
-  if (!formatedData[dataPoint.id]["categories"]) {
-    formatedData[dataPoint.id]["categories"] = [];
-  }
-  formatedData[dataPoint.id]["categories"].push({
-    type: dataPoint.catergory,
-    gearName: dataPoint.gear_item,
-  });
-  console.log(formatedData[dataPoint.id]["categories"]);
-}
-
-// { day: day_id , meals: [{meal_name  : meal_name ,meal.id , meal_items: [{meals_itemname: meal_items.name, meal_items.id mealsquantity: meal_items.quantity}]}]}
+    const formatedData = {};
+    for (dataPoint of allData) {
+      if (!formatedData[dataPoint.days_id]) {
+        formatedData[dataPoint.days_id] = {};
+      }
+      if (!formatedData[dataPoint.days_id]["day"]) {
+        formatedData[dataPoint.days_id]["day"] = dataPoint.days_id;
+      }
+      if (!formatedData[dataPoint.days_id]["meals"]) {
+        formatedData[dataPoint.days_id]["meals"] = [];
+      }
+      formatedData[dataPoint.days_id]["meals"].push({
+        mealID: dataPoint.meals_id,
+        mealName: dataPoint.meal,
+        mealsItems: {
+          itemid: dataPoint.meal_itemid,
+          itemName: dataPoint.food_item,
+          quantity: dataPoint.quantity,
+        },
+      });
+    }
+  
+   
+// { tripid: trip_id , tripsName: trip_name,gear_categories.name: [{gearName  : gear_item.name }]}
