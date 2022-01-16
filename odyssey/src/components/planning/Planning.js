@@ -2,13 +2,11 @@ import React, { useEffect } from "react";
 import "../component-styles/Planning.scss";
 import Sidebar from "./Sidebar";
 import TripDisplayItem from "../TripDisplayItem";
-import Equipment from "./Equipment";
+import Equipment from "./Equipment/Equipment";
 import Meals from "./Meal/Meals";
 import Emergency from "./Emergency";
 
-
 const Planning = (props) => {
-
   const checkPage = (props) => {
     if (props.page === "route") {
       return (
