@@ -58,6 +58,7 @@ export function formatTripEquipmentData(allTripData) {
     formatedData[dataPoint.catergory]["items"].push({
       type: dataPoint.catergory,
       gearName: dataPoint.gear_item,
+      quantity : dataPoint.quantity,
     });
   }
   for (const data in formatedData)
@@ -65,6 +66,7 @@ export function formatTripEquipmentData(allTripData) {
     formatedData[data]["category"] = data;
     formatedDataArray.push(formatedData[data])
   }
+  console.log(formatedData,"here")
   return formatedDataArray;
 }
 
