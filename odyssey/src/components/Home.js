@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
-import TripDisplayItem from "./TripDisplayItem";
+import { Link } from "react-router-dom";
+import TripDisplayItemLink from "./TripDisplayItemLink";
 import "./component-styles/home.scss";
 import { useState } from "react";
 import { getTrips } from "../Helpers/apiHelpers";
@@ -15,22 +16,24 @@ const Home = () => {
       console.log(res.data);
     });
   }, []);
+
   const displayedTrips = tripsArray.map((trip, i) => {
     return (
-      <TripDisplayItem
+      <TripDisplayItemLink
         key={i}
         mapOptions={parseDBMap(trip.maps)}
         markers={parseDBMarkers(trip.markers)}
         name={"asdf"}
         description={"ASDF"}
         username={"asdf"}
+        trip_id={trip.trip_id}
       />
     );
   });
   return (
     <main className="home-page">
-      <a
-        href="/planning"
+      <Link
+        to="/planning"
         type="button"
         className="add-button btn btn-default header-right-button"
       >
@@ -39,7 +42,7 @@ const Home = () => {
           className="arrows"
           src="https://www.pngall.com/wp-content/uploads/5/Black-Fast-Forward-Button-PNG-Clipart.png"
         ></img>
-      </a>
+      </Link>
       <section className="trip-cards">{displayedTrips}</section>
     </main>
   );

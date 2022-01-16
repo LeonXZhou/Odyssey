@@ -23,6 +23,10 @@ function App() {
       <Link to="/tripDisplayCard">tripDisplayCard</Link> */}
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/planning/view/:trip_id" element={<Planning page="route" edit={"view"}/>} />
+        <Route path="/planning/equipment/view/:trip_id" element={<Planning page="equipment" edit={"view"} />}
+        />
+
         <Route path="/planning" element={<Planning page="route" />} />
         <Route path="/planning/route" element={<Planning page="route" />} />
         <Route
