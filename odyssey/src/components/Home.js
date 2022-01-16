@@ -12,6 +12,7 @@ const Home = () => {
   useEffect(() => {
     getTrips().then((res) => {
       setTripsArray(formatTripData(res.data));
+      console.log(res.data);
     });
   }, []);
   const displayedTrips = tripsArray.map((trip, i) => {
