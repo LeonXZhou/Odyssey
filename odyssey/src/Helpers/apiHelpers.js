@@ -3,7 +3,4 @@ export function getTrips() {
   return axios.get("/api/trips");
 }
 
-
-export function getMealsForTrip() {
-
-}
+export function getMealsForTrip() {}
