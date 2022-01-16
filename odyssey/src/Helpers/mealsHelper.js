@@ -1,15 +1,18 @@
 export function formatMealsData(allTripData) {
   const formatedData = {};
-  for (dataPoint of allTripData) {
+  for (const dataPoint of allTripData) {
     if (!formatedData[dataPoint.days_id]) {
-      formatedData[dataPoint.days_id] = {};
-    }
-    if (!formatedData[dataPoint.days_id]["day"]) {
-      formatedData[dataPoint.days_id]["day"] = dataPoint.days_id;
-    }
-    if (!formatedData[dataPoint.days_id]["meals"]) {
-      formatedData[dataPoint.days_id]["meals"] = [];
-    }
+        formatedData[dataPoint.days_id] = {};
+      }
+      if (!formatedData[dataPoint.days_id]["day"]) {
+        formatedData[dataPoint.days_id]["day"] = dataPoint.days_id;
+      }
+      if (!formatedData[dataPoint.days_id]["trip_id"]) {
+        formatedData[dataPoint.days_id]["trip_id"] = dataPoint.trip_id;
+      }
+      if (!formatedData[dataPoint.days_id]["meals"]) {
+        formatedData[dataPoint.days_id]["meals"] = [];
+      }
     formatedData[dataPoint.days_id]["meals"].push({
       mealID: dataPoint.meals_id,
       mealName: dataPoint.meal,

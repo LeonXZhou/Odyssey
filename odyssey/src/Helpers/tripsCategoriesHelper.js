@@ -1,6 +1,6 @@
 export function formatTripCategoriesData(allTripData) {
   const formatedData = {};
-  for (dataPoint of allTripData) {
+  for (const dataPoint of allTripData) {
     if (!formatedData[dataPoint.id]) {
       formatedData[dataPoint.id] = {};
     }
