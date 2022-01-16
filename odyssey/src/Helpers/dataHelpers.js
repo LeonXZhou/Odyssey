@@ -41,3 +41,30 @@ export function formatTripData(allTripData) {
   return formatedTripDataArray
 }
 
+
+export function formatTripEquipmentData(allTripData) {
+  const formatedData = {};
+  const formatedDataArray =[];
+  for (const dataPoint of allTripData) {
+    if (!formatedData[dataPoint.catergory]) {
+      formatedData[dataPoint.catergory] = {};
+    }
+    if (!formatedData[dataPoint.catergory]["tripID"]) {
+      formatedData[dataPoint.catergory]["tripID"] = dataPoint.id;
+    }
+    if (!formatedData[dataPoint.catergory]["items"]) {
+      formatedData[dataPoint.catergory]["items"] = [];
+    }
+    formatedData[dataPoint.catergory]["items"].push({
+      type: dataPoint.catergory,
+      gearName: dataPoint.gear_item,
+    });
+  }
+  for (const data in formatedData)
+  {
+    formatedData[data]["category"] = data;
+    formatedDataArray.push(formatedData[data])
+  }
+  return formatedDataArray;
+}
+
