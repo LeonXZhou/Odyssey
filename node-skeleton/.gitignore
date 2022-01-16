@@ -22,3 +22,6 @@ odyssey/package.json
 
 node-skeleton/.env
 node-skeleton/node_modules
+
+.env
+.editorconfig
