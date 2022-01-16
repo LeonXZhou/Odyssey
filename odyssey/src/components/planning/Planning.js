@@ -1,41 +1,51 @@
-import React, { useEffect } from "react";
+//react imports
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router";
+//leaflet imports
 import "../component-styles/Planning.scss";
+//local imports
 import Sidebar from "./Sidebar";
 import TripDisplayItem from "../TripDisplayItem";
 import Equipment from "./Equipment/Equipment";
 import Meals from "./Meal/Meals";
 import Emergency from "./Emergency";
+import { formatTripData, formatTripEquipmentData } from "../../Helpers/dataHelpers";
+import { getEquipmentForTrip, getMapForTrip } from "../../Helpers/apiHelpers";
+import { parseDBMap, parseDBMarkers } from "../../Helpers/mapHelper";
 
 const Planning = (props) => {
+  const { trip_id } = useParams();
+  const [tripsArray, setTripsArray] = useState([{}]);
+  const [equipmentArray, setEquipmentArray] = useState([{}]);
+  useEffect(() => {
+    getMapForTrip(trip_id)
+      .then((res) => {
+        setTripsArray(formatTripData(res.data));
+      });
+    getEquipmentForTrip(trip_id)
+      .then((res) => {
+        setEquipmentArray(formatTripEquipmentData(res.data));
+      })
+  }, []);
+
+  const trip = tripsArray[0];
+
   const checkPage = (props) => {
-    if (props.page === "route") {
+    if (props.page === "route" && Object.keys(trip).length > 0) {
       return (
         <TripDisplayItem
-          mapOptions={{
-            zoom: 10,
-            center: [49.246292, -123.116226],
-            themeAttribution: "TOPO",
-            themeURL: "TOPO",
-          }}
-          markers={[
-            { position: [49.246292, -123.116226], iconSize: [40, 40] },
-            {
-              position: [49.286292, -123.136226],
-              icon: "TENT",
-              iconSize: [20, 20],
-            },
-            {
-              position: [49.346292, -123.166226],
-              icon: "TENT",
-              iconSize: [20, 20],
-              popUp: { name: "First Night", description: "I <3 Camping" },
-            },
-          ]}
-        ></TripDisplayItem>
+          key={trip_id}
+          mapOptions={parseDBMap(trip.maps)}
+          markers={parseDBMarkers(trip.markers)}
+          name={"asdf"}
+          description={"ASDF"}
+          username={"asdf"}
+          trip_id={trip.trip_id}
+        />
       );
     }
     if (props.page === "equipment") {
-      return <Equipment />;
+      return <Equipment equipmentArray={equipmentArray}/>;
     }
     if (props.page === "meals") {
       return <Meals />;
@@ -43,6 +53,7 @@ const Planning = (props) => {
     if (props.page === "emergency") {
       return <Emergency />;
     }
+    return <></>;
   };
   // if (isLoggedIn) {
   //   return <UserGreeting />;
@@ -51,7 +62,7 @@ const Planning = (props) => {
 
   return (
     <main className="planning">
-      <Sidebar />
+      <Sidebar trip_id={trip_id} edit={props.edit} />
       {checkPage(props)}
     </main>
   );
