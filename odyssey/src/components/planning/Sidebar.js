@@ -2,18 +2,18 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../component-styles/Sidebar.scss";
 
-const Sidebar = () => {
+const Sidebar = (props) => {
   return (
     <section className="sidebar">
       <Link
-        to="/planning/route"
+        to={`/planning/${props.edit}/${props.trip_id}`}
         type="button"
         className="btn btn-default sidebar-item"
       >
         Route
       </Link>
       <Link
-        to="/planning/equipment"
+        to={`/planning/equipment/${props.edit}/${props.trip_id}`}
         type="button"
         className="btn btn-default sidebar-item"
       >
