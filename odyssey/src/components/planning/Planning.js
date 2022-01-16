@@ -9,7 +9,10 @@ import TripDisplayItem from "../TripDisplayItem";
 import Equipment from "./Equipment/Equipment";
 import Meals from "./Meal/Meals";
 import Emergency from "./Emergency";
-import { formatTripData, formatTripEquipmentData } from "../../Helpers/dataHelpers";
+import {
+  formatTripData,
+  formatTripEquipmentData,
+} from "../../Helpers/dataHelpers";
 import { getEquipmentForTrip, getMapForTrip } from "../../Helpers/apiHelpers";
 import { parseDBMap, parseDBMarkers } from "../../Helpers/mapHelper";
 
@@ -18,14 +21,12 @@ const Planning = (props) => {
   const [tripsArray, setTripsArray] = useState([{}]);
   const [equipmentArray, setEquipmentArray] = useState([{}]);
   useEffect(() => {
-    getMapForTrip(trip_id)
-      .then((res) => {
-        setTripsArray(formatTripData(res.data));
-      });
-    getEquipmentForTrip(trip_id)
-      .then((res) => {
-        setEquipmentArray(formatTripEquipmentData(res.data));
-      })
+    getMapForTrip(trip_id).then((res) => {
+      setTripsArray(formatTripData(res.data));
+    });
+    getEquipmentForTrip(trip_id).then((res) => {
+      setEquipmentArray(formatTripEquipmentData(res.data));
+    });
   }, []);
 
   const trip = tripsArray[0];
@@ -45,7 +46,7 @@ const Planning = (props) => {
       );
     }
     if (props.page === "equipment") {
-      return <Equipment equipmentArray={equipmentArray}/>;
+      return <Equipment equipmentArray={equipmentArray} />;
     }
     if (props.page === "meals") {
       return <Meals />;
