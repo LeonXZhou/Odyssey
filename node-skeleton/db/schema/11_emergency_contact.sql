@@ -5,5 +5,7 @@ CREATE TABLE emergency_contacts (
   name VARCHAR(255),
   phone_number VARCHAR(255),
   email VARCHAR(255),
+  time_date DATE,
+  message_sent BOOLEAN,
   send_date DATE
 );

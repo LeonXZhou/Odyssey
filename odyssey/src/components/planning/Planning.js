@@ -3,12 +3,12 @@ import "../component-styles/Planning.scss";
 import Sidebar from "./Sidebar";
 import TripDisplayItem from "../TripDisplayItem";
 import Equipment from "./Equipment";
-import Meals from "./Meals";
+import Meals from "./Meal/Meals";
 import Emergency from "./Emergency";
 
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 const Planning = (props) => {
+
   const checkPage = (props) => {
     if (props.page === "route") {
       return (
