@@ -1,15 +1,9 @@
 import "leaflet/dist/leaflet.css";
 import "./component-styles/TripDisplayItem.scss";
-import { generateMarkers } from "../Helpers/markerHelpers";
 import { themeAttributionFinder, themeURLFinder } from "../Helpers/mapHelper";
 
 import MapDisplay from "./MapComponents/MapDisplay";
 function TripDisplayItem(props) {
-  let markers = <></>;
-
-  if (props.markers) {
-    markers = generateMarkers(props.markers);
-  }
 
   //Defaulting Map Theme
   const mapThemeAttribution =
