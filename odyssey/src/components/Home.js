@@ -9,6 +9,7 @@ import { formatTripData } from "../Helpers/dataHelpers";
 import "./component-styles/home.scss";
 import TripDisplayItemLink from "./TripDisplayItemLink";
 import BeginJourney from "./BeginJourney";
+
 const Home = (props) => {
   const [tripsArray, setTripsArray] = useState([]);
 
