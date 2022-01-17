@@ -14,7 +14,6 @@ import { useState } from "react";
 
 function App() {
   const [userEmail, setUserEmail] = useState();
-  console.log(userEmail);
   return (
     <BrowserRouter>
       <Navigation userEmail={userEmail} setUserEmail={setUserEmail} />
@@ -43,7 +42,7 @@ function App() {
           element={<Register setUserEmail={setUserEmail} />}
         />
 
-        <Route path="/planning" element={<Planning page="route" />} />
+        <Route path="/planning/:trip_id" element={<Planning page="route" />} />
         <Route path="/planning/route" element={<Planning page="route" />} />
         <Route
           path="/planning/equipment"

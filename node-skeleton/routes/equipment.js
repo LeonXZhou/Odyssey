@@ -18,5 +18,13 @@ module.exports = (db) => {
       });
   });
 
+  router.put("/:trip_id/quantities", (req, res) => {
+    const query = `UPDATE gear_items SET quantity = $1 WHERE name = $2;`;
+    const values = [quantity, gear_name];
+    db.query(query, values).catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
+  });
+
   return router;
 };
