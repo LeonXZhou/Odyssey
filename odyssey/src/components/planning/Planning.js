@@ -30,6 +30,7 @@ const Planning = (props) => {
   }, []);
 
   const trip = tripsArray[0];
+  console.log("TRIPSARRAY", tripsArray);
 
   const checkPage = (props) => {
     if (props.page === "route" && Object.keys(trip).length > 0) {
@@ -50,6 +51,7 @@ const Planning = (props) => {
         <Equipment
           equipmentArray={equipmentArray}
           setEquipmentArray={setEquipmentArray}
+          trip_id={trip.trip_id}
         />
       );
     }

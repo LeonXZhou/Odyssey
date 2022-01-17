@@ -1,5 +1,5 @@
 import React from "react";
-
+import axios from "axios";
 import "../../component-styles/Equipment.scss";
 
 const EquipmentItems = (props) => {
@@ -13,30 +13,30 @@ const EquipmentItems = (props) => {
 
   const quantity = props.category.items.map((item) => {
     console.log("EQUIPMENT ARRAY", props.equipmentArray);
-    // const updateQuantity = (number) => {
-    //   const item = item.gear_item;
-    //   const newNumber = item.quantity + number;
-    //   return axios
-    //     .put(`/api/equipment/${trip_id}`, { item, newNumber })
-    //     .then(() => {
-    //       props.setEquipmentArray({
-    //         ...equipmentArray,
-    //         appointments,
-    //       });
-    //     });
-    // };
+    const updateQuantity = (number) => {
+      const gear = item.gear_item;
+      const newNumber = item.quantity + number;
+      return axios
+        .put(`/api/equipment/${props.trip_id}`, { gear, newNumber })
+        .then(() => {
+          props.setEquipmentArray({
+            ...props.equipmentArray,
+            newNumber,
+          });
+        });
+    };
     return (
       <div className="equipment-card-quantity">
         <button
           className="btn btn-default btn-sm equipment-card-quantity-buttons"
-          // onClick={() => updateQuantity(-1)}
+          onClick={() => updateQuantity(-1)}
         >
           <b>-</b>
         </button>
         <h6>{item.quantity}</h6>
         <button
           className="btn btn-default btn-sm equipment-card-quantity-buttons"
-          // onClick={() => updateQuantity(1)}
+          onClick={() => updateQuantity(1)}
         >
           <b>+</b>
         </button>
