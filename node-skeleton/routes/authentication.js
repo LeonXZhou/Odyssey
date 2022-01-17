@@ -19,18 +19,42 @@ const checkEmail = (db, email) => {
     return db.query(query, values)
 }
 
+const verifyEmail = (db, email) => {
+    const query = `SELECT password, id from users
+    where email = $1`;
+    const values = [email];
+    return db.query(query, values);
+}
+
+
 module.exports = (db) => {
     router.get("", (req, res) => {
-        res.send("i display here");
+        res.send(req.session.user_id);
     });
 
     router.post("/login", (req, res) => {
-        console.log(req.body);
-        res.send('asdf');
+        verifyEmail(db, req.body.email)
+            .then((data) => {
+                if (!data.rows[0]) {
+                    res.send('invalid login');
+                    return;
+                }
+                bcrypt.compare(req.body.password, data.rows[0].password)
+                    .then((result) => {
+                        if (!result) {
+                            res.send('invalid login');
+                            return;
+                        }
+                        req.session.user_id = data.rows[0].id;
+                        res.send('logged in!');
+                        return;
+
+                    })
+            });
     })
 
+
     router.post("/register", (req, res) => {
-        console.log('asdf',req.session.user_id);
         const email = req.body.email;
         checkEmail(db, email)
             .then(
@@ -49,9 +73,9 @@ module.exports = (db) => {
                                 insertUser(db, { email: email, password: hashedPassword })
                                     .then((data) => {
                                         req.session.user_id = data.rows[0].id;
-                                        console.log(req.session.user_id);
+                                        res.send('success');
                                         return;
-                                    });
+                                    })
                             })
                     }
                 }

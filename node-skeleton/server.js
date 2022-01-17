@@ -27,7 +27,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
 }));
-app.use(cors());
+app.use(cors({ credentials: true }));
 app.use(helmet());
 app.use(cookieSession({
   name: 'session',
