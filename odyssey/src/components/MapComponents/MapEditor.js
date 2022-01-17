@@ -4,7 +4,6 @@ import './MapEditor.css'
 
 import { useState } from 'react';
 
-import AddMarkers from './AddMarkers';
 import { themeAttributionFinder, themeURLFinder } from '../../Helpers/mapHelper';
 import Markers from './Markers';
 
@@ -33,8 +32,7 @@ function MapEditor(props) {
       <div>
         <MapContainer center={props.mapOptions.center} zoom={props.mapOptions.zoom} scrollWheelZoom={true} doubleClickZoom={false}>
           <TileLayer attribution={mapThemeAttribution} url={mapThemeURL} />
-          <AddMarkers icon={iconValue} markers={markers} setMarkers={setMarkers}></AddMarkers>
-          <Markers markers={markers}></Markers>
+          <Markers markers={markers} setMarkers={setMarkers} icon={iconValue}></Markers>
         </MapContainer>
       </div>
       <select value={iconValue} onChange={(e)=>{setIconValue(e.target.value)}}>

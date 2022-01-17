@@ -20,10 +20,10 @@ const Navigation = () => {
         </Link>
       </div>
       <div className="header-right">
-        <Link to="" type="button" className="btn btn-default">
+        <Link to="/login" type="button" className="btn btn-default">
           Login
         </Link>
-        <Link to="" type="button" className="btn btn-default">
+        <Link to="/register" type="button" className="btn btn-default">
           Register
         </Link>
       </div>

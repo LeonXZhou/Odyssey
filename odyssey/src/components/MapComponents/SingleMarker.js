@@ -10,7 +10,7 @@ function SingleMarker(props) {
             markerRef.current.openPopup();
         }
     }, [markerRef.current]);
-    
+
     return(<Marker
         position={props.markerPosition}
         icon={
@@ -24,13 +24,11 @@ function SingleMarker(props) {
 
         ref={markerRef}
 
-        eventHandlers={{
-            click: (e) => {
-                console.log('marker clicked', e.target);
-                console.log('marker clicked 2', e.target.testing);
-                console.log('marker ref', markerRef);
-            },
-        }}
+        // eventHandlers={{
+        //     click: (e) => {
+        //         e.target.remove()
+        //     },
+        // }}
     >
         {props.marker.popUp ? (
             <Popup >

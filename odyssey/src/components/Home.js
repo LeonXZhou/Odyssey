@@ -13,7 +13,6 @@ const Home = () => {
   useEffect(() => {
     getTrips().then((res) => {
       setTripsArray(formatTripData(res.data));
-      console.log(formatTripData(res.data));
     });
   }, []);
 
