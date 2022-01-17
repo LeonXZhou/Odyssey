@@ -8,6 +8,10 @@ export function getMapForTrip(trip_id) {
   return axios.get(`/api/trips/${trip_id}`)
 }
 
-export function getEquipmentForTrip(trip_id){
+export function getEquipmentForTrip(trip_id) {
   return axios.get(`/api/equipment/${trip_id}`)
+}
+
+export function authenticate() {
+  return axios.get(`/authenticate`)
 }

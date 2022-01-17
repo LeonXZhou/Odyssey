@@ -1,6 +1,9 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { latLng } from "leaflet";
+import { useState, useEffect } from "react";
+
+import { authenticate } from "./Helpers/apiHelpers";
 
 import MapEditor from "./components/MapComponents/MapEditor.js";
 import MapDisplay from "./components/MapComponents/MapDisplay";
@@ -10,14 +13,17 @@ import Home from "./components/Home";
 import Planning from "./components/planning/Planning";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import { useState } from "react";
-
+import LoginDev from "./components/LoginDev";
 function App() {
   const [userEmail, setUserEmail] = useState()
-  console.log(userEmail);
+  useEffect(() => {
+
+    authenticate()
+      .then((res) => {setUserEmail(res.data.email)})
+  }, [])
   return (
     <BrowserRouter>
-      <Navigation userEmail={userEmail} setUserEmail={setUserEmail}/>
+      <Navigation userEmail={userEmail} setUserEmail={setUserEmail} />
       {/* <h1>always here</h1>
       <Link to="/">home</Link>
       <br />
@@ -28,11 +34,12 @@ function App() {
       <Link to="/tripDisplayCard">tripDisplayCard</Link> */}
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/planning/view/:trip_id" element={<Planning page="route" edit={"view"}/>} />
-        <Route path="/planning/equipment/view/:trip_id" element={<Planning page="equipment" edit={"view"} />}/>
+        <Route path="/planning/view/:trip_id" element={<Planning page="route" edit={"view"} />} />
+        <Route path="/planning/equipment/view/:trip_id" element={<Planning page="equipment" edit={"view"} />} />
 
-        <Route path="/login" element={<Login setUserEmail={setUserEmail}/>}/>
-        <Route path="/Register" element={<Register setUserEmail={setUserEmail}/>}/>
+        <Route path="/login" element={<Login setUserEmail={setUserEmail} />} />
+        <Route path="/login/dev" element={<LoginDev setUserEmail={setUserEmail} />} />
+        <Route path="/Register" element={<Register setUserEmail={setUserEmail} />} />
 
         <Route path="/planning" element={<Planning page="route" />} />
         <Route path="/planning/route" element={<Planning page="route" />} />
