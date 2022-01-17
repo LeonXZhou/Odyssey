@@ -46,7 +46,12 @@ const Planning = (props) => {
       );
     }
     if (props.page === "equipment") {
-      return <Equipment equipmentArray={equipmentArray} />;
+      return (
+        <Equipment
+          equipmentArray={equipmentArray}
+          setEquipmentArray={setEquipmentArray}
+        />
+      );
     }
     if (props.page === "meals") {
       return <Meals />;
