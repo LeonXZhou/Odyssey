@@ -8,18 +8,18 @@ const router = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    // cron.schedule("* * * * *", function () {
-    //   client.messages
-    //     .create({
-    //       body: "hello its me",
-    //       messagingServiceSid: "MGa730aa4879224aa80c628f0499107330",
-    //       to: "+14039919017",
-    //     })
-    //     .then((message) => console.log(message.sid))
-    //     .done();
+    cron.schedule("* * * * *", function () {
+      client.messages
+        .create({
+          body: "hello its me",
+          messagingServiceSid: "MGa730aa4879224aa80c628f0499107330",
+          to: "+14039919017",
+        })
+        .then((message) => console.log(message.sid))
+        .done();
 
-    //   console.log("running a task every minute");
-    // });
+      console.log("running a task every minute");
+    });
 
     db.query(
       `SELECT  meals.id AS meals_id ,meals.name AS meal, meal_items.id AS meal_itemID,meal_items.name AS food_item, meal_items.quantity, days.date AS days_date , days.id AS days_id
