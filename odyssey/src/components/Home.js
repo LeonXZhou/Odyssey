@@ -1,15 +1,18 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
-import TripDisplayItemLink from "./TripDisplayItemLink";
-import "./component-styles/home.scss";
 import { useState } from "react";
+
+
+import { parseDBMap, parseDBMarkers } from "../Helpers/mapHelper";
 import { getTrips } from "../Helpers/apiHelpers";
 import { formatTripData } from "../Helpers/dataHelpers";
 
-import { parseDBMap, parseDBMarkers } from "../Helpers/mapHelper";
+import "./component-styles/home.scss";
+import TripDisplayItemLink from "./TripDisplayItemLink";
+import BeginJourney from "./BeginJourney";
 
-const Home = () => {
+const Home = (props) => {
   const [tripsArray, setTripsArray] = useState([]);
+
   useEffect(() => {
     getTrips().then((res) => {
       setTripsArray(formatTripData(res.data));
@@ -31,17 +34,7 @@ const Home = () => {
   });
   return (
     <main className="home-page">
-      <Link
-        to="/planning"
-        type="button"
-        className="add-button btn btn-default header-right-button"
-      >
-        Begin your journey now
-        <img
-          className="arrows"
-          src="https://www.pngall.com/wp-content/uploads/5/Black-Fast-Forward-Button-PNG-Clipart.png"
-        ></img>
-      </Link>
+      <BeginJourney userEmail ={props.userEmail}></BeginJourney>
       <section className="trip-cards">{displayedTrips}</section>
     </main>
   );
