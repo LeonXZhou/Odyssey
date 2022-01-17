@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import "../../component-styles/Equipment.scss";
+import { updateQuantity } from "../../../Helpers/apiHelpers";
 
 const EquipmentItems = (props) => {
   const items = props.category.items.map((item) => {
@@ -12,16 +13,17 @@ const EquipmentItems = (props) => {
   });
 
   const quantity = props.category.items.map((item) => {
-    console.log("EQUIPMENT ARRAY", props.equipmentArray);
-    const updateQuantity = (number) => {
-      const gear = item.gear_item;
-      const newNumber = item.quantity + number;
+    const newQuantity = (number) => {
+      const quantity = item.quantity + number;
+      const gear_name = item.gear_name;
       return axios
-        .put(`/api/equipment/${props.trip_id}`, { gear, newNumber })
+        .put(`/api/equipment/${trip_id}/quantities`, {
+          quantity,
+          gear_name,
+        })
         .then(() => {
           props.setEquipmentArray({
-            ...props.equipmentArray,
-            newNumber,
+            ...props.setEquipmentArray,
           });
         });
     };
@@ -29,14 +31,14 @@ const EquipmentItems = (props) => {
       <div className="equipment-card-quantity">
         <button
           className="btn btn-default btn-sm equipment-card-quantity-buttons"
-          onClick={() => updateQuantity(-1)}
+          onClick={console.log(newQuantity(-1))}
         >
           <b>-</b>
         </button>
         <h6>{item.quantity}</h6>
         <button
           className="btn btn-default btn-sm equipment-card-quantity-buttons"
-          onClick={() => updateQuantity(1)}
+          onClick={() => newQuantity(1)}
         >
           <b>+</b>
         </button>

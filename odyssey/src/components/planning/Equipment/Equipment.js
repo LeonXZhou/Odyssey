@@ -4,26 +4,35 @@ import EquipmentItems from "./EquipmentItems";
 import axios from "axios";
 
 const Equipment = (props) => {
-  const equipmentCards = props.equipmentArray.map((category, i) => {
+  if (props.equipmentArray) {
+    const equipmentCards = props.equipmentArray.map((category, i) => {
+      return (
+        <EquipmentItems
+          key={i}
+          category={category}
+          equipmentArray={props.equipmentArray}
+          setEquipmentArray={props.setEquipmentArray}
+          trip_id={props.trip_id}
+        />
+      );
+    });
     return (
-      <EquipmentItems
-        key={i}
-        category={category}
-        equipmentArray={props.equipmentArray}
-        setEquipmentArray={props.setEquipmentArray}
-        trip_id={props.trip_id}
-      />
+      <main className="equipment">
+        {equipmentCards}
+        <button className="add-equipment-card">
+          <i className="fa fa-plus" style={{ fontSize: "5em" }} />
+        </button>
+      </main>
     );
-  });
-  // console.log("EQUIPMENT ARRY", props.equipmentArray);
-  return (
-    <main className="equipment">
-      {equipmentCards}
-      <button className="add-equipment-card">
-        <i className="fa fa-plus" style={{ fontSize: "5em" }} />
-      </button>
-    </main>
-  );
+  } else {
+    return (
+      <main className="equipment">
+        <button className="add-equipment-card">
+          <i className="fa fa-plus" style={{ fontSize: "5em" }} />
+        </button>
+      </main>
+    );
+  }
 };
 
 export default Equipment;

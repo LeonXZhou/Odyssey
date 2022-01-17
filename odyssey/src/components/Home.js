@@ -10,6 +10,7 @@ import { parseDBMap, parseDBMarkers } from "../Helpers/mapHelper";
 
 const Home = () => {
   const [tripsArray, setTripsArray] = useState([]);
+  const [trip_id, setTripId] = useState();
   useEffect(() => {
     getTrips().then((res) => {
       setTripsArray(formatTripData(res.data));
@@ -36,6 +37,10 @@ const Home = () => {
         to="/planning"
         type="button"
         className="add-button btn btn-default header-right-button"
+        onClick={() => {
+          setTripId(Math.floor(Math.random() * 1000000));
+          console.log(trip_id);
+        }}
       >
         Begin your journey now
         <img
