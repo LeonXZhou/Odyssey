@@ -17,14 +17,12 @@ function MapEditor(props) {
   //the "marker" object passed in is converted to jsx by generateMarkers in markerHelpers function
   const [markers, setMarkers] = useState(props.markers);
 
-  const [refState, setRefState] = useState()
   const [iconValue,setIconValue] = useState('TENT');
 
   //Defaulting Map Themes (theme...Finder() converts theme string such as 'TOPO' to the random garbage string that theme actually needs)
   const mapThemeAttribution = props.mapOptions && themeAttributionFinder(props.mapOptions.themeAttribution);
   const mapThemeURL = props.mapOptions && themeURLFinder(props.mapOptions.themeAttribution);
 
-  console.log("this is ref state:", refState);
   return (
     // TileLayer Component: determines theme
 
@@ -36,7 +34,7 @@ function MapEditor(props) {
         <MapContainer center={props.mapOptions.center} zoom={props.mapOptions.zoom} scrollWheelZoom={true} doubleClickZoom={false}>
           <TileLayer attribution={mapThemeAttribution} url={mapThemeURL} />
           <AddMarkers icon={iconValue} markers={markers} setMarkers={setMarkers}></AddMarkers>
-          <Markers markers={markers} setRefState={setRefState}></Markers>
+          <Markers markers={markers}></Markers>
         </MapContainer>
       </div>
       <select value={iconValue} onChange={(e)=>{setIconValue(e.target.value)}}>
