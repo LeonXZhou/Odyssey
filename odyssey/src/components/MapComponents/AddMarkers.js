@@ -7,7 +7,6 @@ function AddMarkers(props) {
   useMapEvents({
     // when the map is clicked we update both the editable state and set markerstate
     click: (e) => {
-      console.log(e)
       props.setMarkers((prev) => {
         return [...prev, {
           position: [e.latlng.lat, e.latlng.lng], iconSize: [20, 20], icon: props.icon, popUp: {
