@@ -11,6 +11,7 @@ const Equipment = (props) => {
         category={category}
         equipmentArray={props.equipmentArray}
         setEquipmentArray={props.setEquipmentArray}
+        trip_id={props.trip_id}
       />
     );
   });
@@ -19,7 +20,7 @@ const Equipment = (props) => {
     <main className="equipment">
       {equipmentCards}
       <button className="add-equipment-card">
-        <i class="fa fa-plus" style={{ fontSize: "5em" }} />
+        <i className="fa fa-plus" style={{ fontSize: "5em" }} />
       </button>
     </main>
   );
