@@ -18,3 +18,7 @@ export function updateQuantity(trip_id, newQuantity, gear_name) {
     gear_name,
   });
 }
+
+export function authenticate() {
+  return axios.get(`/authenticate`);
+}
