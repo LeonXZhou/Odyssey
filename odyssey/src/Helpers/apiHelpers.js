@@ -9,5 +9,5 @@ export function getMapForTrip(trip_id) {
 }
 
 export function getEquipmentForTrip(trip_id) {
-  console.log(axios.get(`/api/equipment/${trip_id}`));
+  return axios.get(`/api/equipment/${trip_id}`);
 }

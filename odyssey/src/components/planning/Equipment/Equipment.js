@@ -1,20 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../../component-styles/Equipment.scss";
-import EquipmentItem from "./EquipmentItem";
+import EquipmentItems from "./EquipmentItems";
+import axios from "axios";
 
 const Equipment = (props) => {
-  console.log("EQUIPMENT ARRAY: ", props.equipmentArray);
-  // const EquipmentItems = equipmentArray.map((category, i) => {
-  //   return <EquipmentItem key={i} apparel={category.apparel} />;
-  // });
+  const equipmentCards = props.equipmentArray.map((category, i) => {
+    return (
+      <EquipmentItems
+        key={i}
+        category={category}
+        equipmentArray={props.equipmentArray}
+        setEquipmentArray={props.setEquipmentArray}
+      />
+    );
+  });
+  // console.log("EQUIPMENT ARRY", props.equipmentArray);
   return (
     <main className="equipment">
-      {/* {EquipmentItems} */}
-      <div className="equipment-card">
-        <div className="equipment-card-header">
-          <h3>Add</h3>
-        </div>
-      </div>
+      {equipmentCards}
+      <button className="add-equipment-card">
+        <i class="fa fa-plus" style={{ fontSize: "5em" }} />
+      </button>
     </main>
   );
 };

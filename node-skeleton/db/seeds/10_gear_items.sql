@@ -7,3 +7,13 @@
 INSERT INTO gear_items (name,gear_category_id,quantity) VALUES ('boots',1,1);
 INSERT INTO gear_items (name,gear_category_id,quantity) VALUES ('climbing gear',1,4);
 INSERT INTO gear_items (name,gear_category_id,quantity) VALUES ('gloves',1,2);
+INSERT INTO gear_items (name,gear_category_id,quantity) VALUES ('tent',2,2);
+INSERT INTO gear_items (name,gear_category_id,quantity) VALUES ('sleeping bag',2,2);
+INSERT INTO gear_items (name,gear_category_id,quantity) VALUES ('stove',3,2);
+INSERT INTO gear_items (name,gear_category_id,quantity) VALUES ('pot',3,2);
+INSERT INTO gear_items (name,gear_category_id,quantity) VALUES ('pan',3,2);
+INSERT INTO gear_items (name,gear_category_id,quantity) VALUES ('spatula',3,2);
+INSERT INTO gear_items (name,gear_category_id,quantity) VALUES ('stove',3,2);
+INSERT INTO gear_items (name,gear_category_id,quantity) VALUES ('pot',3,2);
+INSERT INTO gear_items (name,gear_category_id,quantity) VALUES ('pan',3,2);
+INSERT INTO gear_items (name,gear_category_id,quantity) VALUES ('spatula',3,2);
