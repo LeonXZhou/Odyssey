@@ -8,11 +8,16 @@ import TripDisplayItem from "./components/TripDisplayItem";
 import Navigation from "./components/Navigation";
 import Home from "./components/Home";
 import Planning from "./components/planning/Planning";
+import Login from "./components/Login";
+import Register from "./components/Register";
+import { useState } from "react";
 
 function App() {
+  const [userEmail, setUserEmail] = useState();
+  console.log(userEmail);
   return (
     <BrowserRouter>
-      <Navigation />
+      <Navigation userEmail={userEmail} setUserEmail={setUserEmail} />
       {/* <h1>always here</h1>
       <Link to="/">home</Link>
       <br />
@@ -30,6 +35,12 @@ function App() {
         <Route
           path="/planning/equipment/view/:trip_id"
           element={<Planning page="equipment" edit={"view"} />}
+        />
+
+        <Route path="/login" element={<Login setUserEmail={setUserEmail} />} />
+        <Route
+          path="/Register"
+          element={<Register setUserEmail={setUserEmail} />}
         />
 
         <Route path="/planning" element={<Planning page="route" />} />
