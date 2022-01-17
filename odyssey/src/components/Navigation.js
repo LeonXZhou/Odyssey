@@ -1,8 +1,9 @@
+
 import React from "react";
 import { Link } from "react-router-dom";
 import "./component-styles/navigation.scss";
 
-const Navigation = () => {
+const Navigation = (props) => {
   return (
     <main className="header-container">
       <div className="header-left">
@@ -19,14 +20,21 @@ const Navigation = () => {
           About
         </Link>
       </div>
-      <div className="header-right">
-        <Link to="/login" type="button" className="btn btn-default">
-          Login
-        </Link>
-        <Link to="/register" type="button" className="btn btn-default">
-          Register
-        </Link>
-      </div>
+      {props.userEmail ? <>
+        <div>{`logged in as ${props.userEmail}`}</div>
+        <Link to="/logout" type="button" className="btn btn-default">
+            logout
+          </Link>
+      </>
+        :
+        <div className="header-right">
+          <Link to="/login" type="button" className="btn btn-default">
+            Login
+          </Link>
+          <Link to="/register" type="button" className="btn btn-default">
+            Register
+          </Link>
+        </div>}
     </main>
   );
 };
