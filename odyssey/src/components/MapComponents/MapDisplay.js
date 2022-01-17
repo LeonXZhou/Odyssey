@@ -1,15 +1,15 @@
 import 'leaflet/dist/leaflet.css';
 import { MapContainer, TileLayer} from 'react-leaflet'
 
-import { generateMarkers} from '../../Helpers/markerHelpers';
+import Markers from './Markers';
 import { themeAttributionFinder, themeURLFinder } from '../../Helpers/mapHelper';
 
 function MapDisplay(props) {
-  let markers = <></>;
+  // let markers = <></>;
 
-  if (props.markers){
-    markers = generateMarkers(props.markers)
-  }
+  // if (props.markers){
+  //   markers = Markers(props.markers)
+  // }
 
   if (!props.mapOptions.zoom)
   {
@@ -28,7 +28,7 @@ function MapDisplay(props) {
         url= {mapThemeURL}
       />
 
-      {markers}
+      <Markers markers={props.markers}></Markers>
 
     </MapContainer>
   )
