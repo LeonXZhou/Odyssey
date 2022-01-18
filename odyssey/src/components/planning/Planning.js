@@ -19,18 +19,17 @@ import { parseDBMap, parseDBMarkers } from "../../Helpers/mapHelper";
 const Planning = (props) => {
   const { trip_id } = useParams();
   const [tripsArray, setTripsArray] = useState([{}]);
-  const [equipmentArray, setEquipmentArray] = useState([{}]);
+  const [equipmentState, setEquipmentState] = useState([{}]);
   useEffect(() => {
     getMapForTrip(trip_id).then((res) => {
       setTripsArray(formatTripData(res.data));
     });
     getEquipmentForTrip(trip_id).then((res) => {
-      setEquipmentArray(formatTripEquipmentData(res.data));
+      setEquipmentState(formatTripEquipmentData(res.data));
     });
   }, []);
-
+  console.log(equipmentState);
   const trip = tripsArray[0];
-
   const checkPage = (props) => {
     if (props.page === "route" && Object.keys(trip).length > 0) {
       return (
@@ -45,21 +44,12 @@ const Planning = (props) => {
         />
       );
     }
-    if (props.page === "equipment" && Object.keys(trip).length > 0) {
+    if (props.page === "equipment") {
       return (
         <Equipment
-          equipmentArray={equipmentArray}
-          setEquipmentArray={setEquipmentArray}
+          equipmentState={equipmentState}
+          setEquipmentState={setEquipmentState}
           trip_id={trip.trip_id}
-        />
-      );
-    }
-    if (props.page === "equipment" && Object.keys(trip).length === 0) {
-      return (
-        <Equipment
-          equipmentArray={[]}
-          setEquipmentArray={setEquipmentArray}
-          trip_id={trip_id}
         />
       );
     }

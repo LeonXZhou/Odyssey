@@ -17,18 +17,10 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
+  router.post("/:trip_id", (req, res) => {
+    console.log("this is the post request", req.body[1].items);
+    res.send("success");
+  });
 
   return router;
 };
-
-// router.put("/:trip_id/quantities", (req, res) => {
-//   const query = `UPDATE gear_items SET quantity = $1 WHERE name = $2;`;
-//   const values = [quantity, gear_name];
-//   db.query(query, values)
-//     .then((req) => {
-//       res.json(req.rows);
-//     })
-//     .catch((err) => {
-//       res.status(500).json({ error: err.message });
-//     });
-// });

@@ -6,15 +6,40 @@ import { useState } from "react";
 const EquipmentItems = (props) => {
   return (
     <tr>
-      <td>{props.item}</td>
       <td>
-        <button className="btn btn-default btn-sm equipment-card-quantity-buttons">
-          <b>-</b>
-        </button>
-        {props.quantity}
-        <button className="btn btn-default btn-sm equipment-card-quantity-buttons">
-          <b>+</b>
-        </button>
+        <input
+          value={props.itemName}
+          onChange={(e) => {
+            props.setEquipmentState((prev) => {
+              const newState = { ...prev };
+              newState[props.categoryId].items = {
+                ...newState[props.categoryId].items,
+              };
+              newState[props.categoryId].items[props.itemId].gearName =
+                e.target.value;
+              // newState = { ...prev };
+              return newState;
+            });
+          }}
+        ></input>
+      </td>
+      <td>
+        <input
+          type={"number"}
+          value={props.quantity}
+          onChange={(e) => {
+            props.setEquipmentState((prev) => {
+              const newState = { ...prev };
+              newState[props.categoryId].items = {
+                ...newState[props.categoryId].items,
+              };
+              newState[props.categoryId].items[props.itemId].quantity =
+                e.target.value;
+              // newState = { ...prev };
+              return newState;
+            });
+          }}
+        ></input>
       </td>
     </tr>
   );
