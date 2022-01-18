@@ -5,7 +5,7 @@ import './MapEditor.css'
 import { useState } from 'react';
 
 import { themeAttributionFinder, themeURLFinder } from '../../Helpers/mapHelper';
-import Markers from './Markers';
+import MarkersEdit from './MarkersEdit';
 
 //the MapEditor Component generates a map that can be edited
 
@@ -32,7 +32,7 @@ function MapEditor(props) {
       <div>
         <MapContainer center={props.mapOptions.center} zoom={props.mapOptions.zoom} scrollWheelZoom={true} doubleClickZoom={false}>
           <TileLayer attribution={mapThemeAttribution} url={mapThemeURL} />
-          <Markers markers={markers} setMarkers={setMarkers} icon={iconValue}></Markers>
+          <MarkersEdit markers={markers} setMarkers={setMarkers} icon={iconValue}></MarkersEdit>
         </MapContainer>
       </div>
       <select value={iconValue} onChange={(e)=>{setIconValue(e.target.value)}}>
