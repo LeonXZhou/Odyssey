@@ -75,3 +75,12 @@ export function newCategory(trip_id, name) {
 export function authenticate() {
   return axios.get(`/authenticate`);
 }
+
+export function insertNewTrip(user_id, name, startDate, endDate) {
+  return axios.post("/api/trips", {
+    user_id: user_id,
+    name: name,
+    startDate: startDate,
+    endDate: endDate,
+  });
+}
