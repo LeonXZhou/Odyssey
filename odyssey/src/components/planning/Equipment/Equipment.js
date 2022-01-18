@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from "react";
 import "../../component-styles/Equipment.scss";
+import EquipmentCategories from "./EquipmentCategories";
 import EquipmentItems from "./EquipmentItems";
-import axios from "axios";
 
 const Equipment = (props) => {
+  console.log("EQUIPMENTARRAY", props.equipmentArray);
   if (props.equipmentArray) {
     const equipmentCards = props.equipmentArray.map((category, i) => {
+      console.log("CATEGORYID", category.categoryID);
       return (
-        <EquipmentItems
+        <EquipmentCategories
           key={i}
           category={category}
-          equipmentArray={props.equipmentArray}
+          categoryItems={category.items}
           setEquipmentArray={props.setEquipmentArray}
           trip_id={props.trip_id}
         />

@@ -48,17 +48,21 @@ export function formatTripEquipmentData(allTripData) {
     if (!formatedData[dataPoint.catergory]) {
       formatedData[dataPoint.catergory] = {};
     }
+    if (!formatedData[dataPoint.catergory]["categoryID"]) {
+      formatedData[dataPoint.catergory]["categoryID"] = dataPoint.category_id;
+    }
     if (!formatedData[dataPoint.catergory]["tripID"]) {
       formatedData[dataPoint.catergory]["tripID"] = dataPoint.id;
     }
     if (!formatedData[dataPoint.catergory]["items"]) {
-      formatedData[dataPoint.catergory]["items"] = [];
+      formatedData[dataPoint.catergory]["items"] = {};
     }
-    formatedData[dataPoint.catergory]["items"].push({
-      type: dataPoint.catergory,
+    formatedData[dataPoint.catergory]["items"][dataPoint.item_id] = {
+      // type: dataPoint.catergory,
       gearName: dataPoint.gear_item,
       quantity: dataPoint.quantity,
-    });
+      itemId: dataPoint.item_id,
+    };
   }
   for (const data in formatedData) {
     formatedData[data]["category"] = data;
