@@ -1,7 +1,8 @@
-import { updateEquipment } from "../../../Helpers/apiHelpers";
+import { updateEquipment, newCategory } from "../../../Helpers/apiHelpers";
 import "../../component-styles/Equipment.scss";
 import EquipmentCategories from "./EquipmentCategories";
 import EquipmentItems from "./EquipmentItems";
+import AddButton from "../AddButton";
 // import { updateEquipment } from "../../../Helpers/apiHelpers";
 
 const Equipment = (props) => {
@@ -34,23 +35,7 @@ const Equipment = (props) => {
   return (
     <main className="equipment">
       {equipmentCategories}
-      <button
-        className="add-equipment-card"
-        onClick={(e) => {
-          props.setEquipmentState((prev) => {
-            const newKey = -Object.keys(prev).length;
-            const newState = { ...prev };
-            newState[newKey] = {
-              category: "",
-              items: {},
-              tripID: props.trip_id,
-            };
-            return newState;
-          });
-        }}
-      >
-        <i className="fa fa-plus" style={{ fontSize: "5em" }} />
-      </button>
+      <AddButton trip_id={props.trip_id} onSubmit={newCategory} />
       <button
         onClick={(e) => {
           updateEquipment(props.trip_id, props.equipmentState);
