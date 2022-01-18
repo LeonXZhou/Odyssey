@@ -26,7 +26,7 @@ function App() {
       <Navigation userEmail={userEmail} setUserEmail={setUserEmail} />
 
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home userEmail={userEmail} />} />
         <Route
           path="/planning/view/:trip_id"
           element={<Planning page="route" edit={"view"} />}
