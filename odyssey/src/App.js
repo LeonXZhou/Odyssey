@@ -24,14 +24,7 @@ function App() {
   return (
     <BrowserRouter>
       <Navigation userEmail={userEmail} setUserEmail={setUserEmail} />
-      {/* <h1>always here</h1>
-      <Link to="/">home</Link>
-      <br />
-      <Link to="/map-display">map-display</Link>
-      <br />
-      <Link to="/map-editor">map-editor</Link>
-      <br />
-      <Link to="/tripDisplayCard">tripDisplayCard</Link> */}
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route
@@ -57,7 +50,7 @@ function App() {
         <Route path="/planning/route" element={<Planning page="route" />} />
         <Route
           path="/planning/equipment"
-          element={<Planning page="equipment" />}
+          element={<Planning page="equipment" edit="edit" />}
         />
         <Route path="/planning/meals" element={<Planning page="meals" />} />
         <Route
