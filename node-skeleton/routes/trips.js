@@ -5,8 +5,29 @@
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
+const { create } = require("domain");
 const express = require("express");
 const router = express.Router();
+
+const createNewTripOwner = (db, user_id, trip_id) => {
+  const query = `INSERT INTO trip_owners (user_id,trip_id)
+  VALUES ($1,$2)
+  RETURNING *;`;
+  const values = [user_id, trip_id];
+  return db.query(query, values);
+}
+
+const createNewTrip = (db, tripInfo) => {
+  const query = `INSERT INTO trips (name,start_date,end_date)
+  VALUES ($1,$2,$3)
+  RETURNING *;`;
+  const values = [tripInfo.name, tripInfo.startDate, tripInfo.endDate];
+  return db.query(query, values);
+  // .then((data) => {
+  //   createNewTripOwner(db, tripInfo.user_id, data.rows[0].id)
+  //   .then((data)=>{return data.rows[0].trip_id});
+  // });
+};
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
@@ -47,5 +68,14 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
+
+
+  router.post("/", (req, res) => {
+    createNewTrip(db, req.body)
+      .then((data) => {
+        createNewTripOwner(db, req.body.user_id, data.rows[0].id)
+          .then((data) => {res.send({trip_id: data.rows[0].trip_id}) });
+      });
+  })
   return router;
 };

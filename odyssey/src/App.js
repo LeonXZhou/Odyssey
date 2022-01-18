@@ -17,7 +17,6 @@ import LoginDev from "./components/LoginDev";
 function App() {
   const [userEmail, setUserEmail] = useState()
   useEffect(() => {
-
     authenticate()
       .then((res) => {setUserEmail(res.data.email)})
   }, [])
@@ -33,7 +32,7 @@ function App() {
       <br />
       <Link to="/tripDisplayCard">tripDisplayCard</Link> */}
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home userEmail={userEmail}/>} />
         <Route path="/planning/view/:trip_id" element={<Planning page="route" edit={"view"} />} />
         <Route path="/planning/equipment/view/:trip_id" element={<Planning page="equipment" edit={"view"} />} />
 
