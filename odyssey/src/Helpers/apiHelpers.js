@@ -61,6 +61,17 @@ export function updateEquipment(trip_id, equipmentState) {
   return axios.post(`/api/equipment/${trip_id}`, equipmentState);
 }
 
+export function newCategory(trip_id, name) {
+  // console.log({
+  //   trip_id: trip_id,
+  //   name: name,
+  // });
+  return axios.post(`/api/equipment/${trip_id}/category`, {
+    trip_id: trip_id,
+    name: name,
+  });
+}
+
 export function authenticate() {
   return axios.get(`/authenticate`);
 }
