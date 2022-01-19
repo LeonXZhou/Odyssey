@@ -52,5 +52,26 @@ module.exports = (db) => {
       console.log(req.body);
     }) 
   });
+
+  router.post("/:trip_id", (req, res) => {
+    console.log("this is the post request", req.body[1].items);
+    res.send("success");
+  });
+
+  router.post("/:trip_id/category", (req, res) => {
+    const query = `INSERT INTO gear_categories (trip_id , name)
+                    VALUES($1,$2)`;
+    const values = [req.params.trip_id, req.body.name];
+    console.log(values);
+    db.query(query, values)
+      .then(() => {
+        res.send("success");
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+  return router;
+
   return router;
 };
