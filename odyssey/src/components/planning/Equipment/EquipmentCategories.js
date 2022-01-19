@@ -109,7 +109,7 @@ const EquipmentCategories = (props) => {
               const newState = { ...prev };
               const newKey =
                 -Object.keys(newState[props.categoryId].items).length - 1;
-              newState[props.categoryId].items[newKey] = {
+                newState[props.categoryId].items[newKey] = {
                 gearName: newItemState.name,
                 quantity: newItemState.quantity,
                 itemId: newKey,

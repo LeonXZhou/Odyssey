@@ -30,6 +30,7 @@ const Planning = (props) => {
       setEquipmentState(formatTripEquipmentData(res.data));
     });
     getMealsForTrip(trip_id).then((res)=>{setMealState(formatTripMealsData(res.data))});
+    console.log('ooops');
   }, [trip_id]);
   const trip = tripsArray[0];
 

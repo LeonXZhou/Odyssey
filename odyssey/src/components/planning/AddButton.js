@@ -41,7 +41,7 @@ export default function AddButton(props) {
                 e.preventDefault();
                 setButtonState(LOADING);
                 setInputState("");
-                if (props.addButtonTypeType === "equipment") {
+                if (props.addButtonType === "equipment") {
                   props.onSubmit(props.trip_id, inputState).then(() => {
                     getEquipmentForTrip(props.trip_id).then((res) => { //props.getNewState
                       setButtonState(PLUS);
