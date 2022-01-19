@@ -23,15 +23,12 @@ function formatUpdateItems(items) {
   return { itemsName, itemsId, itemsQuantity };
 }
 
-function insertNewItem (db ,itemName ,itemQuantity ,gearCategoryID){
-
-const query = `INSERT INTO gear_items (name,quantity,gear_category_id)
+function insertNewItem(db, itemName, itemQuantity, gearCategoryID) {
+  const query = `INSERT INTO gear_items (name,quantity,gear_category_id)
               VALUES ($1 ,$2 ,$3);
-`
-const values = [itemName,itemQuantity, gearCategoryID]
-return db.query(query,values)
-  
-  
+`;
+  const values = [itemName, itemQuantity, gearCategoryID];
+  return db.query(query, values);
 }
 
 function updateItems(db, itemName, itemId, itemQuantity) {
@@ -79,6 +76,36 @@ module.exports = (db) => {
     res.send("success");
   });
 
+  router.post("/delete/:trip_id/:category_id", (req, res) => {
+    console.log("this is the delete request");
+    const query = `DELETE FROM gear_categories
+                  WHERE(trip_id = $1 AND id = $2);`;
+    const values = [req.params.trip_id, req.params.category_id];
+    console.log(values);
+    db.query(query, values)
+      .then(() => {
+        res.send("success");
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
+  router.post("/delete/:item_id", (req, res) => {
+    console.log("this is the delete request");
+    const query = `DELETE FROM gear_items
+                  WHERE id=$1;`;
+    const values = [req.params.item_id];
+    console.log(values);
+    db.query(query, values)
+      .then(() => {
+        res.send("success");
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
   router.post("/:trip_id/category", (req, res) => {
     const query = `INSERT INTO gear_categories (trip_id , name)
                     VALUES($1,$2)`;
@@ -96,7 +123,7 @@ module.exports = (db) => {
   router.post("/:trip_id/:category_id", (req, res) => {
     const allQueryPromises = [];
     console.log(req.body);
-    
+
     const itemsToUpdate = req.body.updateItems;
 
     allQueryPromises.push(
@@ -104,7 +131,7 @@ module.exports = (db) => {
         () => {}
       )
     );
-    
+
     for (const updateItemKey in itemsToUpdate) {
       if (Number(itemsToUpdate[updateItemKey].quantity) !== 0) {
         allQueryPromises.push(
@@ -129,12 +156,12 @@ module.exports = (db) => {
             db,
             newItems[newItemKey].name,
             newItems[newItemKey].quantity,
-            req.params.category_id,
+            req.params.category_id
           )
         );
       }
     }
-  
+
     Promise.all(allQueryPromises).then(() => {
       console.log("all inserts worked");
       res.send("success");
