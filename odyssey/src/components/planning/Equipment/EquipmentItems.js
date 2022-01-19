@@ -7,8 +7,9 @@ const EquipmentItems = (props) => {
   return (
     <tr>
       <td>
-        <input
-          className="equipment-card-item"
+        <textarea
+          contenteditable="true"
+          className="equipment-card-items"
           type={"text"}
           value={props.itemName}
           onChange={(e) => {
@@ -23,7 +24,7 @@ const EquipmentItems = (props) => {
               return newState;
             });
           }}
-        ></input>
+        ></textarea>
       </td>
       <td className="equipment-card-quantity-column">
         <input

@@ -2,18 +2,17 @@ import React from "react";
 import "../../component-styles/Equipment.scss";
 import { useState } from "react";
 import EquipmentItems from "./EquipmentItems";
-import {
-  updateEquipmentCard,
-  getEquipmentForTrip,
-} from "../../../Helpers/apiHelpers";
 import { formatTripEquipmentData } from "../../../Helpers/dataHelpers";
+import {
+  getEquipmentForTrip,
+  updateEquipmentCard,
+} from "../../../Helpers/apiHelpers";
 
 const EquipmentCategories = (props) => {
   // const [categoryInfo, setCategoryInfo] = useState({
   //   categoryName: props.category.category,
   //   categoryId: props.category.id,
   // });
-  const [categoryState, setCategoryState] = useState({});
   const [newItemState, setNewItemState] = useState({
     name: "",
     quantity: "",
@@ -37,7 +36,6 @@ const EquipmentCategories = (props) => {
       <div className="equipment-card">
         <div className="equipment-card-title">
           <input
-            contentEditable="true"
             className="equipment-card-title-input"
             value={props.categoryName}
             onChange={(e) => {
@@ -51,6 +49,7 @@ const EquipmentCategories = (props) => {
               });
             }}
           ></input>
+          <button className="equipment-card-title-button">X</button>
         </div>
         <table>
           <thead>
@@ -112,36 +111,26 @@ const EquipmentCategories = (props) => {
         >
           <br />
           <button className="btn btn-default btn-sm equipment-card-button">
-            Add
+            Add Item
           </button>
         </form>
         <button
-          className="btn btn-default btn-sm equipment-card-button"
           onClick={(e) => {
             e.preventDefault();
-            props.setEquipmentState();
             updateEquipmentCard(
               props.trip_id,
               Number(props.categoryId),
               props.categoryName,
               props.categoryItems
-            );
-          }}
-        >
-          Save
-        </button>
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-
-            props.onSubmit(props.trip_id, inputState).then(() => {
+            ).then(() => {
               getEquipmentForTrip(props.trip_id).then((res) => {
                 props.setState(formatTripEquipmentData(res.data));
               });
             });
           }}
+          className="btn btn-default btn-sm equipment-card-button"
         >
-          Save
+          Save Card
         </button>
       </div>
     </main>
