@@ -1,19 +1,33 @@
 import React from "react";
-import axios from "axios";
 import "../../component-styles/Equipment.scss";
-import { updateQuantity } from "../../../Helpers/apiHelpers";
-import { useState } from "react";
+import { formatTripEquipmentData } from "../../../Helpers/dataHelpers";
+import {
+  getEquipmentForTrip,
+  deleteCategoryItem,
+} from "../../../Helpers/apiHelpers";
+
 const EquipmentItems = (props) => {
   return (
     <tr>
       <td>
-        <textarea
-          contenteditable="true"
+        <button
+          onClick={() => {
+            deleteCategoryItem(props.itemId).then(() => {
+              getEquipmentForTrip(props.trip_id).then((res) => {
+                props.setState(formatTripEquipmentData(res.data));
+              });
+            });
+          }}
+        >
+          x
+        </button>
+        <input
+          contentEditable="true"
           className="equipment-card-items"
           type={"text"}
           value={props.itemName}
           onChange={(e) => {
-            props.setEquipmentState((prev) => {
+            props.setState((prev) => {
               const newState = { ...prev };
               newState[props.categoryId].items = {
                 ...newState[props.categoryId].items,
@@ -24,7 +38,7 @@ const EquipmentItems = (props) => {
               return newState;
             });
           }}
-        ></textarea>
+        ></input>
       </td>
       <td className="equipment-card-quantity-column">
         <input
@@ -32,7 +46,7 @@ const EquipmentItems = (props) => {
           type={"number"}
           value={props.quantity}
           onChange={(e) => {
-            props.setEquipmentState((prev) => {
+            props.setState((prev) => {
               const newState = { ...prev };
               newState[props.categoryId].items = {
                 ...newState[props.categoryId].items,

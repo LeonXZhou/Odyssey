@@ -36,7 +36,36 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
-  return router;
+
+  router.post("/delete/:trip_id/:category_id", (req, res) => {
+    console.log("this is the delete request");
+    const query = `DELETE FROM gear_categories
+                  WHERE(trip_id = $1 AND id = $2);`;
+    const values = [req.params.trip_id, req.params.category_id];
+    console.log(values);
+    db.query(query, values)
+      .then(() => {
+        res.send("success");
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
+  router.post("/delete/:item_id", (req, res) => {
+    console.log("this is the delete request");
+    const query = `DELETE FROM gear_items
+                  WHERE id=$1;`;
+    const values = [req.params.item_id];
+    console.log(values);
+    db.query(query, values)
+      .then(() => {
+        res.send("success");
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
 
   return router;
 };

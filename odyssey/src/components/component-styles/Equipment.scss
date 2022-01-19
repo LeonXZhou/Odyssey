@@ -28,9 +28,12 @@
         width: 150%;
         border: none;
         border-radius: 9px;
-        background-color: rgb(205, 205, 176);
+        background-color: transparent;
         font-size: 23px;
         outline: none;
+      }
+      .equipment-card-title-input:hover {
+        background-color: rgb(205, 205, 176);
       }
       .equipment-card-title-button {
         display: flex;
@@ -46,11 +49,14 @@
     .equipment-card-items {
       display: flex;
       border: none;
-      border-bottom: 1.5px solid black;
+      border-radius: 7px;
       height: 1.9em;
       max-width: 8em;
-      background-color: rgb(216, 216, 185);
+      background-color: transparent;
       outline: none;
+    }
+    .equipment-card-items:hover {
+      background-color: rgb(205, 205, 176);
     }
 
     .equipment-card-quantity-column {
@@ -60,9 +66,13 @@
         display: flex;
         justify-content: flex-end;
         border: none;
-        width: 2em;
-        background-color: rgb(216, 216, 185);
+        border-radius: 7px;
+        width: 2.5em;
+        background-color: transparent;
         outline: none;
+      }
+      .equipment-card-quantities:hover {
+        background-color: rgb(205, 205, 176);
       }
     }
     .equipment-card-new {
@@ -82,6 +92,9 @@
       border-radius: 7px;
       width: 35%;
       margin: 0.25em;
+    }
+    .equipment-card-button:hover {
+      background-color: rgb(205, 205, 176);
     }
   }
 

@@ -17,6 +17,7 @@ const Equipment = (props) => {
         categoryItems={props.equipmentState[equipmentCategoryId].items}
         setEquipmentState={props.setEquipmentState}
         trip_id={props.equipmentState[equipmentCategoryId].tripID}
+        setState={props.setEquipmentState}
       />
     );
   }

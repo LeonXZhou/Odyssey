@@ -6,6 +6,7 @@ import { formatTripEquipmentData } from "../../../Helpers/dataHelpers";
 import {
   getEquipmentForTrip,
   updateEquipmentCard,
+  deleteCategory,
 } from "../../../Helpers/apiHelpers";
 
 const EquipmentCategories = (props) => {
@@ -26,7 +27,8 @@ const EquipmentCategories = (props) => {
         itemId={props.categoryItems[item].itemId}
         quantity={props.categoryItems[item].quantity}
         categoryId={Number(props.categoryId)}
-        setEquipmentState={props.setEquipmentState}
+        setState={props.setEquipmentState}
+        trip_id={props.trip_id}
       ></EquipmentItems>
     );
   }
@@ -49,7 +51,18 @@ const EquipmentCategories = (props) => {
               });
             }}
           ></input>
-          <button className="equipment-card-title-button">X</button>
+          <button
+            className="equipment-card-title-button"
+            onClick={() => {
+              deleteCategory(props.trip_id, props.categoryId).then(() => {
+                getEquipmentForTrip(props.trip_id).then((res) => {
+                  props.setState(formatTripEquipmentData(res.data));
+                });
+              });
+            }}
+          >
+            {props.categoryId}
+          </button>
         </div>
         <table>
           <thead>
