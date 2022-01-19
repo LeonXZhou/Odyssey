@@ -2,6 +2,7 @@ import React from "react";
 import "../../component-styles/MealDay.scss";
 import MealCard from "./MealCard";
 import AddButton from "../AddButton"
+import { newMealOnDay } from "../../../Helpers/apiHelpers";
 
 const MealDay = (props) => {
   const date = new Date(props.mealDayState.date)
@@ -15,7 +16,7 @@ const MealDay = (props) => {
     <div className={"mealDay"}>
       <div>{date.toDateString()}</div>
       {mealArray}
-      <AddButton/>
+      <AddButton addButtonType={'Meal'} day_id={props.mealDayState.dayId} onSubmit={newMealOnDay} setState={props.setMealState} />
     </div>);
 };
 

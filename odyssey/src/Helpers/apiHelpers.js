@@ -17,6 +17,16 @@ export function getMealsForTrip(trip_id){
 }
 
 
+export function newMealOnDay(day_id, name) {
+  // console.log({
+  //   trip_id: trip_id,
+  //   name: name,
+  // });
+  return axios.post(`/api/meals/${day_id}/meal`, {
+    name: name,
+  });
+}
+
 
 //Meal API END
 //Meal API END
