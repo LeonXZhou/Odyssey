@@ -1,33 +1,45 @@
-import React from "react";
+import { updateEquipment, newCategory } from "../../../Helpers/apiHelpers";
 import "../../component-styles/Equipment.scss";
-import EquipmentItem from "./EquipmentItem";
+import EquipmentCategories from "./EquipmentCategories";
+import EquipmentItems from "./EquipmentItems";
+import AddButton from "../AddButton";
+// import { updateEquipment } from "../../../Helpers/apiHelpers";
 
-const Equipment = () => {
-  const equipmentArray = [
-    {
-      apparel: {
-        item1: "jacket",
-        item2: "socks",
-      },
-    },
-    {
-      apparel: {
-        item1: "jacket",
-        item2: "socks",
-      },
-    },
-  ];
-  const EquipmentItems = equipmentArray.map((category, i) => {
-    return <EquipmentItem key={i} apparel={category.apparel} />;
-  });
+const Equipment = (props) => {
+  const equipmentCategories = [];
+
+  for (const equipmentCategoryId in props.equipmentState) {
+    equipmentCategories.push(
+      <EquipmentCategories
+        key={equipmentCategoryId}
+        categoryName={props.equipmentState[equipmentCategoryId].category}
+        categoryId={equipmentCategoryId}
+        categoryItems={props.equipmentState[equipmentCategoryId].items}
+        setEquipmentState={props.setEquipmentState}
+        trip_id={props.equipmentState[equipmentCategoryId].tripID}
+      />
+    );
+  }
+  // const equipmentCards = props.equipmentArray.map((category, i) => {
+  //   console.log("CATEGORYID", category.categoryID);
+  //   return (
+  //     <EquipmentCategories
+  //       key={i}
+  //       category={category}
+  //       categoryItems={category.items}
+  //       setEquipmentArray={props.setEquipmentArray}
+  //       trip_id={props.trip_id}
+  //     />
+  //   );
+  // });
   return (
     <main className="equipment">
-      {EquipmentItems}
-      <div className="equipment-card">
-        <div className="equipment-card-header">
-          <h3>Add</h3>
-        </div>
-      </div>
+      {equipmentCategories}
+      <AddButton
+        trip_id={props.trip_id}
+        onSubmit={newCategory}
+        setState={props.setEquipmentState}
+      />
     </main>
   );
 };
