@@ -1,8 +1,8 @@
 import React from "react";
-import axios from "axios";
 import "../../component-styles/Equipment.scss";
 import { useState } from "react";
 import EquipmentItems from "./EquipmentItems";
+import { updateEquipmentCard } from "../../../Helpers/apiHelpers";
 
 const EquipmentCategories = (props) => {
   // const [categoryInfo, setCategoryInfo] = useState({
@@ -54,21 +54,21 @@ const EquipmentCategories = (props) => {
           ></input>
         </div>
         <table>
-          <tbody>
+          <thead>
             <tr>
               <th>ITEM</th>
               <th>QUANTITY</th>
             </tr>
-            {lineItems}
-          </tbody>
+          </thead>
+          <tbody>{lineItems}</tbody>
         </table>
         <form
           onSubmit={(e) => {
             e.preventDefault();
             props.setEquipmentState((prev) => {
               const newState = { ...prev };
-              const newKey = -Object.keys(newState[props.categoryId].items)
-                .length;
+              const newKey =
+                -Object.keys(newState[props.categoryId].items).length - 1;
               newState[props.categoryId].items[newKey] = {
                 gearName: newItemState.name,
                 quantity: newItemState.quantity,
@@ -114,6 +114,19 @@ const EquipmentCategories = (props) => {
           ></input>
           <button>add</button>
         </form>
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            updateEquipmentCard(
+              props.trip_id,
+              Number(props.categoryId),
+              props.categoryName,
+              props.categoryItems
+            );
+          }}
+        >
+          SAVE
+        </button>
       </div>
     </main>
   );

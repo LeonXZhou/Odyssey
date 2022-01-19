@@ -57,12 +57,13 @@ export function formatTripEquipmentData(allTripData) {
     if (!formatedData[dataPoint.category_id]["items"]) {
       formatedData[dataPoint.category_id]["items"] = {};
     }
-    formatedData[dataPoint.category_id]["items"][dataPoint.item_id] = {
-      // type: dataPoint.catergory,
-      gearName: dataPoint.gear_item,
-      quantity: dataPoint.quantity,
-      itemId: dataPoint.item_id,
-    };
+    if (dataPoint.gear_item !== null) {
+      formatedData[dataPoint.category_id]["items"][dataPoint.item_id] = {
+        gearName: dataPoint.gear_item,
+        quantity: dataPoint.quantity,
+        itemId: dataPoint.item_id,
+      };
+    }
   }
   // for (const data in formatedData) {
   //   formatedData[data]["category"] = data;

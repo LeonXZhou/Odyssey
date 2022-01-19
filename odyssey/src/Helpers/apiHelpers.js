@@ -12,49 +12,50 @@ export function getEquipmentForTrip(trip_id) {
   return axios.get(`/api/equipment/${trip_id}`);
 }
 
-// export function sqlizeEquipmentState(equipmentState) {
-//   const newCategories = {};
-//   const updatedCategories = {};
-//   const newItems = {};
-//   const updatedItems = {};
-//   for (const categoryKey in equipmentState) {
-//     let newCategoryIndex = 0;
-//     let updatedCategoriesIndex = 0;
-//     let newItemsIndex = 0;
-//     let updatedItemsIndex = 0;
-//     if (Number(categoryKey) < 0) {
-//       const categoryName = equipmentState[categoryKey].category;
-//       const trip_id = equipmentState[categoryKey].tripID;
-//       newCategories[newCategoryIndex] = {};
-//       newCategories[newCategoryIndex]["name"] = categoryName;
-//       newCategories[newCategoryIndex]["trip_id"] = trip_id;
-//       newCategoryIndex++;
-//     }
-//     if (Number(categoryKey) >= 0) {
-//       const categoryName = equipmentState[categoryKey].category;
-//       const trip_id = equipmentState[categoryKey].tripID;
-//       updatedCategories[updatedCategoriesIndex] = {};
-//       updatedCategories[updatedCategoriesIndex]["name"] = categoryName;
-//       updatedCategories[updatedCategoriesIndex]["trip_id"] = trip_id;
-//       updatedCategoriesIndex++;
-//     }
-//     const items = equipmentState[categoryKey].items;
-//     for (const itemKey in items) {
-//       if (Number(itemKey) < 0) {
-//         //gear_category_id
-//         //name
-//         //quantity
-//         const gear_category_id =
-//         updatedItemsIndex++;
-//       }
-//       if (Number(itemKey) >= 0) {
-//         newItemsIndex++;
-//       }
-//     }
-//   }
-//   console.log(newCategories);
-//   return { newCategories, updatedCategories, newItems, updatedItems };
-// }
+export function sqlizeItems(items) {
+  const newItems = {};
+  const updatedItems = {};
+  let updatedItemsIndex = 0;
+  let newItemsIndex = 0;
+  for (const itemKey in items) {
+    const item = items[itemKey];
+    if (Number(itemKey) >= 0) {
+      updatedItems[updatedItemsIndex] = {
+        name: item.gearName,
+        quantity: item.quantity,
+      };
+      updatedItemsIndex++;
+    }
+    if (Number(itemKey) < 0) {
+      newItems[itemKey] = {
+        name: item.gearName,
+        quantity: item.quantity,
+        item_id: itemKey,
+      };
+      updatedItemsIndex++;
+    }
+  }
+  return { newItems, updatedItems };
+}
+
+export function updateEquipmentCard(
+  trip_id,
+  category_id,
+  category_name,
+  category_items
+) {
+  const { newItems, updatedItems } = sqlizeItems(category_items);
+  const postData = {
+    category: category_name,
+    updateItems: updatedItems,
+    newItems: newItems,
+  };
+  return axios.post(`/api/equipment/${trip_id}/${category_id}`, postData);
+  // endpoint: /api/equipment/:trip_id/:category_id
+  // req.body = {category:{name}, updatedItems{0:{name,quantity,itemId}} newItems={0:{name,quantity}}} items can have 0-N keys
+  // equipmentCard = {category:{name,trip_id}, items{0:{item},1:{item}}}
+}
+
 export function updateEquipment(trip_id, equipmentState) {
   // console.log("this is equipment state", equipmentState);
   // sqlizeEquipmentState(equipmentState);
@@ -67,7 +68,6 @@ export function newCategory(trip_id, name) {
   //   name: name,
   // });
   return axios.post(`/api/equipment/${trip_id}/category`, {
-    trip_id: trip_id,
     name: name,
   });
 }

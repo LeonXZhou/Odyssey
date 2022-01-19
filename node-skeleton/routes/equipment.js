@@ -5,7 +5,7 @@ module.exports = (db) => {
   router.get("/:trip_id", (req, res) => {
     const query = `SELECT gear_items.name AS gear_item, gear_items.quantity,gear_categories.name AS catergory, trips.id as id , trips.name, gear_categories.id as category_id, gear_items.id as item_id
     FROM gear_items
-    JOIN gear_categories on gear_items.gear_category_id=gear_categories.id
+    FULL OUTER JOIN gear_categories on gear_items.gear_category_id=gear_categories.id
     JOIN trips ON gear_categories.trip_id = trips.id
     WHERE trips.id = $1;`;
     const values = [req.params.trip_id];
@@ -17,10 +17,26 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
+
   router.post("/:trip_id", (req, res) => {
     console.log("this is the post request", req.body[1].items);
     res.send("success");
   });
+
+  router.post("/:trip_id/category", (req, res) => {
+    const query = `INSERT INTO gear_categories (trip_id , name)
+                    VALUES($1,$2)`;
+    const values = [req.params.trip_id, req.body.name];
+    console.log(values);
+    db.query(query, values)
+      .then(() => {
+        res.send("success");
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+  return router;
 
   return router;
 };
