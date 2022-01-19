@@ -29,6 +29,7 @@ const Equipment = (props) => {
         trip_id={props.trip_id}
         onSubmit={newCategory}
         setState={props.setEquipmentState}
+        addButtonType={"equipment"}
       />
     </main>
   );
