@@ -7,7 +7,7 @@ const express = require("express");
 const app = express();
 const morgan = require("morgan");
 
-const cookieSession = require('cookie-session');
+const cookieSession = require("cookie-session");
 const bodyParser = require("body-parser");
 const helmet = require("helmet");
 const cors = require("cors");
@@ -24,17 +24,20 @@ db.connect();
 app.use(morgan("dev"));
 app.set("view engine", "ejs");
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
 app.use(cors({ credentials: true }));
 app.use(helmet());
-app.use(cookieSession({
-  name: 'session',
-  keys: ['pi314', 'e278'],
-  maxAge: 24 * 60 * 60 * 1000,
-}))
-
+app.use(
+  cookieSession({
+    name: "session",
+    keys: ["pi314", "e278"],
+    maxAge: 24 * 60 * 60 * 1000,
+  })
+);
 
 // app.use(bodyParser.urlencoded({ extended: true }));
 // Separated Routes for each Resource
@@ -61,9 +64,6 @@ app.use("/", authentication(db));
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
-
-
-
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
