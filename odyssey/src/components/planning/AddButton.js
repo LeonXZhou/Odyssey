@@ -1,7 +1,7 @@
 import { useState } from "react";
-
-import { newCategory, getEquipmentForTrip } from "../../Helpers/apiHelpers";
-import { formatTripEquipmentData } from "../../Helpers/dataHelpers";
+import "../component-styles/Equipment.scss"
+import { newCategory, getEquipmentForTrip, getMealsForTrip } from "../../Helpers/apiHelpers";
+import { formatTripEquipmentData, formatTripMealsData } from "../../Helpers/dataHelpers";
 
 const PLUS = "PLUS";
 const FORM = "FORM";
@@ -41,12 +41,22 @@ export default function AddButton(props) {
                 e.preventDefault();
                 setButtonState(LOADING);
                 setInputState("");
-                props.onSubmit(props.trip_id, inputState).then(() => {
-                  getEquipmentForTrip(props.trip_id).then((res) => {
-                    setButtonState(PLUS);
-                    props.setState(formatTripEquipmentData(res.data));
+                if (props.addButtonType === "equipment") {
+                  props.onSubmit(props.trip_id, inputState).then(() => {
+                    getEquipmentForTrip(props.trip_id).then((res) => { //props.getNewState
+                      setButtonState(PLUS);
+                      props.setState(formatTripEquipmentData(res.data)); //props.formatStateData
+                    });
                   });
-                });
+                }
+                if (props.addButtonType === "meals") {
+                  props.onSubmit(props.day_id, inputState).then(() => {
+                    getMealsForTrip(props.day_id).then((res) => { //props.getNewState
+                      setButtonState(PLUS);
+                      props.setState(formatTripMealsData(res.data)); //props.formatStateData
+                    });
+                  });
+                }
               }}
             >
               Save
