@@ -5,12 +5,13 @@ export function formatTripData(allTripData) {
     if (!formatedTripData[dataPoint.trip_id]) {
       formatedTripData[dataPoint.trip_id] = {};
     }
-  
+
     if (!formatedTripData[dataPoint.trip_id]["title"]) {
       formatedTripData[dataPoint.trip_id]["title"] = dataPoint.trips_name;
     }
     if (!formatedTripData[dataPoint.trip_id]["description"]) {
-      formatedTripData[dataPoint.trip_id]["description"] = dataPoint.description;
+      formatedTripData[dataPoint.trip_id]["description"] =
+        dataPoint.description;
     }
     if (!formatedTripData[dataPoint.trip_id]["markers"]) {
       formatedTripData[dataPoint.trip_id]["markers"] = [];
@@ -33,40 +34,41 @@ export function formatTripData(allTripData) {
       };
     }
   }
-  for (const data in formatedTripData)
-  {
+  for (const data in formatedTripData) {
     formatedTripData[data]["trip_id"] = data;
-    formatedTripDataArray.push(formatedTripData[data])
+    formatedTripDataArray.push(formatedTripData[data]);
   }
-  return formatedTripDataArray
+  return formatedTripDataArray;
 }
-
 
 export function formatTripEquipmentData(allTripData) {
   const formatedData = {};
-  const formatedDataArray =[];
+  const formatedDataArray = [];
   for (const dataPoint of allTripData) {
-    if (!formatedData[dataPoint.catergory]) {
-      formatedData[dataPoint.catergory] = {};
+    if (!formatedData[dataPoint.category_id]) {
+      formatedData[dataPoint.category_id] = {};
     }
-    if (!formatedData[dataPoint.catergory]["tripID"]) {
-      formatedData[dataPoint.catergory]["tripID"] = dataPoint.id;
+    if (!formatedData[dataPoint.category_id]["category"]) {
+      formatedData[dataPoint.category_id]["category"] = dataPoint.catergory;
     }
-    if (!formatedData[dataPoint.catergory]["items"]) {
-      formatedData[dataPoint.catergory]["items"] = [];
+    if (!formatedData[dataPoint.category_id]["tripID"]) {
+      formatedData[dataPoint.category_id]["tripID"] = dataPoint.id;
     }
-    formatedData[dataPoint.catergory]["items"].push({
-      type: dataPoint.catergory,
-      gearName: dataPoint.gear_item,
-      quantity : dataPoint.quantity,
-    });
+    if (!formatedData[dataPoint.category_id]["items"]) {
+      formatedData[dataPoint.category_id]["items"] = {};
+    }
+    if (dataPoint.gear_item !== null) {
+      formatedData[dataPoint.category_id]["items"][dataPoint.item_id] = {
+        gearName: dataPoint.gear_item,
+        quantity: dataPoint.quantity,
+        itemId: dataPoint.item_id,
+      };
+    }
   }
-  for (const data in formatedData)
-  {
-    formatedData[data]["category"] = data;
-    formatedDataArray.push(formatedData[data])
-  }
-  console.log(formatedData,"here")
-  return formatedDataArray;
-}
+  // for (const data in formatedData) {
+  //   formatedData[data]["category"] = data;
+  //   formatedDataArray.push(formatedData[data]);
+  // }
 
+  return formatedData;
+}
