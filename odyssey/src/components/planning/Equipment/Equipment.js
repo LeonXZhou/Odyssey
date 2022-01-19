@@ -20,18 +20,7 @@ const Equipment = (props) => {
       />
     );
   }
-  // const equipmentCards = props.equipmentArray.map((category, i) => {
-  //   console.log("CATEGORYID", category.categoryID);
-  //   return (
-  //     <EquipmentCategories
-  //       key={i}
-  //       category={category}
-  //       categoryItems={category.items}
-  //       setEquipmentArray={props.setEquipmentArray}
-  //       trip_id={props.trip_id}
-  //     />
-  //   );
-  // });
+
   return (
     <main className="equipment">
       {equipmentCategories}

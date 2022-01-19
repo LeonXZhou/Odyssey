@@ -5,9 +5,10 @@ import { updateQuantity } from "../../../Helpers/apiHelpers";
 import { useState } from "react";
 const EquipmentItems = (props) => {
   return (
-    <tr className="equipment-card-items">
+    <tr>
       <td>
         <input
+          className="equipment-card-item"
           type={"text"}
           value={props.itemName}
           onChange={(e) => {
@@ -24,8 +25,9 @@ const EquipmentItems = (props) => {
           }}
         ></input>
       </td>
-      <td>
+      <td className="equipment-card-quantity-column">
         <input
+          className="equipment-card-quantities"
           type={"number"}
           value={props.quantity}
           onChange={(e) => {
@@ -47,40 +49,3 @@ const EquipmentItems = (props) => {
 };
 
 export default EquipmentItems;
-
-// const newQuantity = (number) => {
-//   const quantity = item.quantity + number;
-//   const gear_name = item.gear_name;
-//   return axios
-//     .put(`/api/equipment/${props.trip_id}/quantities`, {
-//       quantity,
-//       gear_name,
-//     })
-//     .then(() => {
-//       props.setEquipmentArray({
-//         ...props.setEquipmentArray,
-//       });
-//     });
-// };
-
-// const items = props.category.items.map((item) => {
-//   return (
-//     <div className="equipment-card-items">
-//       <h6>{item.gearName}</h6>
-//     </div>
-//   );
-// });
-
-// const quantity = props.category.items.map((item) => {
-//   return (
-//     <div className="equipment-card-quantity">
-//       <button className="btn btn-default btn-sm equipment-card-quantity-buttons">
-//         <b>-</b>
-//       </button>
-//       <h6>{item.quantity}</h6>
-//       <button className="btn btn-default btn-sm equipment-card-quantity-buttons">
-//         <b>+</b>
-//       </button>
-//     </div>
-//   );
-// });
