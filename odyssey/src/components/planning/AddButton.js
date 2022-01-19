@@ -1,6 +1,8 @@
 import { useState } from "react";
 
-import { newCategory } from "../../Helpers/apiHelpers";
+import { newCategory, getEquipmentForTrip } from "../../Helpers/apiHelpers";
+import { formatTripEquipmentData } from "../../Helpers/dataHelpers";
+
 const PLUS = "PLUS";
 const FORM = "FORM";
 const LOADING = "LOADING";
@@ -38,7 +40,13 @@ export default function AddButton(props) {
               onClick={(e) => {
                 e.preventDefault();
                 setButtonState(LOADING);
-                props.onSubmit(props.trip_id, inputState);
+                setInputState("");
+                props.onSubmit(props.trip_id, inputState).then(() => {
+                  getEquipmentForTrip(props.trip_id).then((res) => {
+                    setButtonState(PLUS);
+                    props.setState(formatTripEquipmentData(res.data));
+                  });
+                });
               }}
             >
               Save

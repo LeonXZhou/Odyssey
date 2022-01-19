@@ -5,9 +5,10 @@ import { updateQuantity } from "../../../Helpers/apiHelpers";
 import { useState } from "react";
 const EquipmentItems = (props) => {
   return (
-    <tr>
+    <tr className="equipment-card-items">
       <td>
         <input
+          type={"text"}
           value={props.itemName}
           onChange={(e) => {
             props.setEquipmentState((prev) => {

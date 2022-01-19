@@ -35,14 +35,11 @@ const Equipment = (props) => {
   return (
     <main className="equipment">
       {equipmentCategories}
-      <AddButton trip_id={props.trip_id} onSubmit={newCategory} />
-      <button
-        onClick={(e) => {
-          updateEquipment(props.trip_id, props.equipmentState);
-        }}
-      >
-        SAVE
-      </button>
+      <AddButton
+        trip_id={props.trip_id}
+        onSubmit={newCategory}
+        setState={props.setEquipmentState}
+      />
     </main>
   );
 };
