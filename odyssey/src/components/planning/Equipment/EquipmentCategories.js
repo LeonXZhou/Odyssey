@@ -2,13 +2,18 @@ import React from "react";
 import "../../component-styles/Equipment.scss";
 import { useState } from "react";
 import EquipmentItems from "./EquipmentItems";
-import { updateEquipmentCard } from "../../../Helpers/apiHelpers";
+import {
+  updateEquipmentCard,
+  getEquipmentForTrip,
+} from "../../../Helpers/apiHelpers";
+import { formatTripEquipmentData } from "../../../Helpers/dataHelpers";
 
 const EquipmentCategories = (props) => {
   // const [categoryInfo, setCategoryInfo] = useState({
   //   categoryName: props.category.category,
   //   categoryId: props.category.id,
   // });
+  const [categoryState, setCategoryState] = useState({});
   const [newItemState, setNewItemState] = useState({
     name: "",
     quantity: "",
@@ -26,20 +31,14 @@ const EquipmentCategories = (props) => {
       ></EquipmentItems>
     );
   }
-  // const lineItems = items.forEach((item) => {
-  //   console.log("ITEM", item);
-  //   return (
-  //     <EquipmentItems
-  //       item={item.gearName}
-  //       quantity={item.quantity}
-  //     ></EquipmentItems>
-  //   );
-  // });
+
   return (
     <main>
       <div className="equipment-card">
-        <div className="equipment-card-header">
+        <div className="equipment-card-title">
           <input
+            contentEditable="true"
+            className="equipment-card-title-input"
             value={props.categoryName}
             onChange={(e) => {
               props.setEquipmentState((prev) => {
@@ -61,6 +60,35 @@ const EquipmentCategories = (props) => {
             </tr>
           </thead>
           <tbody>{lineItems}</tbody>
+          <tbody>
+            <tr>
+              <td>
+                <input
+                  className="equipment-card-new"
+                  value={newItemState.name}
+                  placeholder="New Item"
+                  onChange={(e) => {
+                    setNewItemState((prev) => {
+                      return { ...prev, name: e.target.value };
+                    });
+                  }}
+                ></input>
+              </td>
+              <td>
+                <input
+                  className="equipment-card-new"
+                  value={newItemState.quantity}
+                  placeholder="Quantity"
+                  onChange={(e) => {
+                    setNewItemState((prev) => {
+                      return { ...prev, quantity: e.target.value };
+                    });
+                  }}
+                  type={"number"}
+                ></input>
+              </td>
+            </tr>
+          </tbody>
         </table>
         <form
           onSubmit={(e) => {
@@ -82,41 +110,16 @@ const EquipmentCategories = (props) => {
             });
           }}
         >
-          {" "}
-          <input
-            value={newItemState.name}
-            placeholder="New Item Name"
-            onChange={(e) => {
-              setNewItemState((prev) => {
-                return { ...prev, name: e.target.value };
-              });
-            }}
-            style={{
-              border: "none",
-              borderBottom: "1.5px solid black",
-              backgroundColor: "rgb(216, 216, 185)",
-            }}
-          ></input>
-          <input
-            value={newItemState.quantity}
-            placeholder="Quantity"
-            onChange={(e) => {
-              setNewItemState((prev) => {
-                return { ...prev, quantity: e.target.value };
-              });
-            }}
-            type={"number"}
-            style={{
-              border: "none",
-              borderBottom: "1.5px solid black",
-              backgroundColor: "rgb(216, 216, 185)",
-            }}
-          ></input>
-          <button>add</button>
+          <br />
+          <button className="btn btn-default btn-sm equipment-card-button">
+            Add
+          </button>
         </form>
         <button
+          className="btn btn-default btn-sm equipment-card-button"
           onClick={(e) => {
             e.preventDefault();
+            props.setEquipmentState();
             updateEquipmentCard(
               props.trip_id,
               Number(props.categoryId),
@@ -125,7 +128,20 @@ const EquipmentCategories = (props) => {
             );
           }}
         >
-          SAVE
+          Save
+        </button>
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+
+            props.onSubmit(props.trip_id, inputState).then(() => {
+              getEquipmentForTrip(props.trip_id).then((res) => {
+                props.setState(formatTripEquipmentData(res.data));
+              });
+            });
+          }}
+        >
+          Save
         </button>
       </div>
     </main>
