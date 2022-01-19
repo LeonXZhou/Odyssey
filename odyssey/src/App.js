@@ -24,7 +24,6 @@ function App() {
   return (
     <BrowserRouter>
       <Navigation userEmail={userEmail} setUserEmail={setUserEmail} />
-      <></>
       <Routes>
         <Route path="/" element={<Home userEmail={userEmail} />} />
         <Route

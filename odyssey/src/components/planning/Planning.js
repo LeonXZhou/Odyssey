@@ -27,7 +27,8 @@ const Planning = (props) => {
     getEquipmentForTrip(trip_id).then((res) => {
       setEquipmentState(formatTripEquipmentData(res.data));
     });
-  }, []);
+  }, [trip_id]);
+  console.log(equipmentState);
   const trip = tripsArray[0];
   const checkPage = (props) => {
     if (props.page === "route" && Object.keys(trip).length > 0) {
