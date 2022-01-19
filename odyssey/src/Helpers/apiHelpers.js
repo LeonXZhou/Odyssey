@@ -15,24 +15,22 @@ export function getEquipmentForTrip(trip_id) {
 export function sqlizeItems(items) {
   const newItems = {};
   const updatedItems = {};
-  let updatedItemsIndex = 0;
   let newItemsIndex = 0;
   for (const itemKey in items) {
     const item = items[itemKey];
     if (Number(itemKey) >= 0) {
-      updatedItems[updatedItemsIndex] = {
+      updatedItems[itemKey] = {
         name: item.gearName,
         quantity: item.quantity,
+        // item_id: itemKey,
       };
-      updatedItemsIndex++;
     }
     if (Number(itemKey) < 0) {
-      newItems[itemKey] = {
+      newItems[newItemsIndex] = {
         name: item.gearName,
         quantity: item.quantity,
-        item_id: itemKey,
       };
-      updatedItemsIndex++;
+      newItemsIndex++;
     }
   }
   return { newItems, updatedItems };
