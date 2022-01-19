@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import "../component-styles/Equipment.scss"
 import { newCategory, getEquipmentForTrip } from "../../Helpers/apiHelpers";
 import { formatTripEquipmentData } from "../../Helpers/dataHelpers";
 
@@ -42,9 +42,9 @@ export default function AddButton(props) {
                 setButtonState(LOADING);
                 setInputState("");
                 props.onSubmit(props.trip_id, inputState).then(() => {
-                  getEquipmentForTrip(props.trip_id).then((res) => {
+                  getEquipmentForTrip(props.trip_id).then((res) => { //props.getNewState
                     setButtonState(PLUS);
-                    props.setState(formatTripEquipmentData(res.data));
+                    props.setState(formatTripEquipmentData(res.data)); //props.formatStateData
                   });
                 });
               }}

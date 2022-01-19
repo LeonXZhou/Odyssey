@@ -2,11 +2,15 @@ import React from "react";
 import MealDay from "./MealDay";
 import "../../component-styles/Meals.scss";
 
-const Meals = () => {
+const Meals = (props) => {
+  const mealDayArray = [];
+  for (const dayKey in props.mealState)
+  {
+    mealDayArray.push(<MealDay setMealState={props.setMealState} key={dayKey} mealDayState={props.mealState[dayKey]}></MealDay>)
+  }
   return (
     <main className="meal">
-      <MealDay></MealDay>
-      <MealDay></MealDay>
+      {mealDayArray}
     </main>
   );
 };

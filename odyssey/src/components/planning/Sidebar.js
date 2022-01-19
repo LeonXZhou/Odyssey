@@ -20,7 +20,7 @@ const Sidebar = (props) => {
         Equipment
       </Link>
       <Link
-        to="/planning/meals"
+        to={`/planning/meals/${props.edit}/${props.trip_id}`}
         type="button"
         className="btn btn-default  sidebar-item"
       >
