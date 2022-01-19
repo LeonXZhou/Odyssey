@@ -23,6 +23,17 @@ function formatUpdateItems(items) {
   return { itemsName, itemsId, itemsQuantity };
 }
 
+function insertNewItem (db ,itemName ,itemQuantity ,gearCategoryID){
+
+const query = `INSERT INTO gear_items (name,quantity,gear_category_id)
+              VALUES ($1 ,$2 ,$3);
+`
+const values = [itemName,itemQuantity, gearCategoryID]
+return db.query(query,values)
+  
+  
+}
+
 function updateItems(db, itemName, itemId, itemQuantity) {
   console.log("ITEM NAME ITEM NAME", itemName);
   console.log("ITEM ID ITEM ID", itemId);
@@ -85,7 +96,15 @@ module.exports = (db) => {
   router.post("/:trip_id/:category_id", (req, res) => {
     const allQueryPromises = [];
     console.log(req.body);
+    
     const itemsToUpdate = req.body.updateItems;
+
+    allQueryPromises.push(
+      updateCategoryName(db, req.params.category_id, req.body.category).then(
+        () => {}
+      )
+    );
+    
     for (const updateItemKey in itemsToUpdate) {
       if (Number(itemsToUpdate[updateItemKey].quantity) !== 0) {
         allQueryPromises.push(
@@ -101,12 +120,21 @@ module.exports = (db) => {
       }
     }
 
-    allQueryPromises.push(
-      updateCategoryName(db, req.params.category_id, req.body.category).then(
-        () => {}
-      )
-    );
+    const newItems = req.body.newItems;
 
+    for (const newItemKey in newItems) {
+      if (Number(newItems[newItemKey].quantity) !== 0) {
+        allQueryPromises.push(
+          insertNewItem(
+            db,
+            newItems[newItemKey].name,
+            newItems[newItemKey].quantity,
+            req.params.category_id,
+          )
+        );
+      }
+    }
+  
     Promise.all(allQueryPromises).then(() => {
       console.log("all inserts worked");
       res.send("success");
