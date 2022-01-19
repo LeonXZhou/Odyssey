@@ -51,7 +51,6 @@ const Planning = (props) => {
       return (
         <Equipment
           equipmentState={equipmentState}
-          getEquipmentForTrip={getEquipmentForTrip}
           setEquipmentState={setEquipmentState}
           trip_id={trip.trip_id}
         />
