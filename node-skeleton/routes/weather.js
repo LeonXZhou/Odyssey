@@ -301,7 +301,7 @@ if(!formatingData["days"]["feels_like"]){
         morning: item.feels_like.morn
     }
 }
-
+//working on the formating ^^^^^^^^
 
 
     console.log(formatingData);
