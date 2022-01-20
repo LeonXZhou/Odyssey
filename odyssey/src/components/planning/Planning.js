@@ -12,14 +12,16 @@ import Emergency from "./Emergency";
 import {
   formatTripData,
   formatTripEquipmentData,
+  formatTripMealsData
 } from "../../Helpers/dataHelpers";
-import { getEquipmentForTrip, getMapForTrip } from "../../Helpers/apiHelpers";
+import { getEquipmentForTrip, getMapForTrip, getMealsForTrip } from "../../Helpers/apiHelpers";
 import { parseDBMap, parseDBMarkers } from "../../Helpers/mapHelper";
 
 const Planning = (props) => {
   const { trip_id } = useParams();
   const [tripsArray, setTripsArray] = useState([{}]);
-  const [equipmentState, setEquipmentState] = useState([{}]);
+  const [equipmentState, setEquipmentState] = useState({});
+  const [mealState, setMealState] = useState({});
   useEffect(() => {
     getMapForTrip(trip_id).then((res) => {
       setTripsArray(formatTripData(res.data));
@@ -27,9 +29,11 @@ const Planning = (props) => {
     getEquipmentForTrip(trip_id).then((res) => {
       setEquipmentState(formatTripEquipmentData(res.data));
     });
+    getMealsForTrip(trip_id).then((res)=>{setMealState(formatTripMealsData(res.data))});
+    console.log('ooops');
   }, [trip_id]);
-  console.log(equipmentState);
   const trip = tripsArray[0];
+
   const checkPage = (props) => {
     if (props.page === "route" && Object.keys(trip).length > 0) {
       return (
@@ -54,7 +58,7 @@ const Planning = (props) => {
       );
     }
     if (props.page === "meals") {
-      return <Meals />;
+      return <Meals setMealState={setMealState} mealState={mealState} />;
     }
     if (props.page === "emergency") {
       return <Emergency />;

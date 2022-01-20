@@ -34,6 +34,10 @@ function App() {
           path="/planning/equipment/view/:trip_id"
           element={<Planning page="equipment" edit={"view"} />}
         />
+        <Route
+          path="/planning/meals/view/:trip_id"
+          element={<Planning page="meals" edit={"view"} />}
+        />
 
         <Route path="/login" element={<Login setUserEmail={setUserEmail} />} />
         <Route
@@ -48,12 +52,15 @@ function App() {
         <Route path="/planning/:trip_id" element={<Planning page="route" />} />
         <Route path="/planning/route" element={<Planning page="route" />} />
         <Route
-          path="/planning/equipment"
-          element={<Planning page="equipment" edit="edit" />}
+          path="/planning/equipment/:trip_id"
+          element={<Planning page="equipment" />}
         />
-        <Route path="/planning/meals" element={<Planning page="meals" />} />
+        <Route 
+          path="/planning/meals/:trip_id" 
+          element={<Planning page="meals" />} 
+        />
         <Route
-          path="/planning/emergency"
+          path="/planning/emergency/:trip_id"
           element={<Planning page="emergency" />}
         />
         <Route

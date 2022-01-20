@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const format = require("pg-format");
 
 function updateCategoryName(db, categoryId, name) {
   const query = `UPDATE gear_categories
@@ -32,9 +31,6 @@ function insertNewItem(db, itemName, itemQuantity, gearCategoryID) {
 }
 
 function updateItems(db, itemName, itemId, itemQuantity) {
-  console.log("ITEM NAME ITEM NAME", itemName);
-  console.log("ITEM ID ITEM ID", itemId);
-  console.log("ITEM QUANTITY ITEM QUANTITY", itemQuantity);
   const query = `
   UPDATE gear_items
   SET name = $1,
