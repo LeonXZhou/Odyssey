@@ -49,11 +49,15 @@ export default function AddButton(props) {
                     });
                   });
                 }
-                if (props.addButtonType === "meals") {
+                if (props.addButtonType === "Meal") {
                   props.onSubmit(props.day_id, inputState).then(() => {
-                    getMealsForTrip(props.day_id).then((res) => { //props.getNewState
+                    console.log("2");
+                    getMealsForTrip(props.day_id).then((res) => {
+                      //props.getNewState
+                      console.log("3");
                       setButtonState(PLUS);
                       props.setState(formatTripMealsData(res.data)); //props.formatStateData
+                      console.log("4");
                     });
                   });
                 }

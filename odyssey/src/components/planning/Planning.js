@@ -26,14 +26,13 @@ const Planning = (props) => {
     getMapForTrip(trip_id).then((res) => {
       setTripsArray(formatTripData(res.data));
     });
-    getEquipmentForTrip(trip_id).then((res) => {
+    getEquipmentForTrip(trip_id).then((res) => {  
       setEquipmentState(formatTripEquipmentData(res.data));
     });
     getMealsForTrip(trip_id).then((res)=>{setMealState(formatTripMealsData(res.data))});
-    console.log('ooops');
   }, [trip_id]);
   const trip = tripsArray[0];
-
+  console.log(mealState);
   const checkPage = (props) => {
     if (props.page === "route" && Object.keys(trip).length > 0) {
       return (
