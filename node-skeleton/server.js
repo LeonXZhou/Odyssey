@@ -48,6 +48,7 @@ const equipmentRoutes = require("./routes/equipment");
 const mealsRoutes = require("./routes/meals");
 const testHelperRoutes = require("./routes/helper");
 const authentication = require("./routes/authentication");
+const weatherRoute = require("./routes/weather");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -57,6 +58,7 @@ app.use("/api/plan-trips-meals", mealsRoutes(db));
 app.use("/api/trips", tripsRoutes(db));
 app.use("/api/meals", mealsRoutes(db));
 app.use("/api/helper", testHelperRoutes(db));
+app.use("/api/weather", weatherRoute(db));
 app.use("/", authentication(db));
 // Note: mount other resources here, using the same pattern above
 
