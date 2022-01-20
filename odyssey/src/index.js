@@ -4,10 +4,13 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
+import AuthenticationProvider from "./components/providers/AuthenticationProvider";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <AuthenticationProvider>
+      <App />
+    </AuthenticationProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

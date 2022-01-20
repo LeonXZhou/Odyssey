@@ -1,6 +1,13 @@
-.newTrip {
-    display:flex;
-    flex-direction:row;
-    justify-content: space-between;
-    width: 100%;
+.banner {
+  border: 2px solid blue;
+  display: flex;
+  height: 10em;
+  width: 100%;
+  .arrows {
+    display: flex;
+    justify-content: center;
+    height: 25%;
+    position: relative;
+    top: 2px;
+  }
 }

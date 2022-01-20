@@ -4,6 +4,11 @@ export function getTrips() {
   return axios.get("/api/trips");
 }
 
+export function getTripsByUser(user_id) {
+  console.log("this is userId in apid helpers", user_id);
+  return axios.get(`/api/trips/user/${user_id}`);
+}
+
 export function getMapForTrip(trip_id) {
   return axios.get(`/api/trips/${trip_id}`);
 }
