@@ -15,6 +15,7 @@ const MealCard = (props) => {
       <MealItem
         key={mealItemKey}
         itemState={props.mealState.mealItems[mealItemKey]}
+        edit={props.edit}
         setMealState={props.setMealState}
         mealId={props.mealState.mealId}
         dayId={props.dayId}
@@ -24,22 +25,26 @@ const MealCard = (props) => {
   return (
     <div className={"mealCard"}>
       <div className={"mealName"}>
-        <input
-          className="equipment-card-title-input"
-          value={props.mealState.mealName}
-          onChange={(e) => {
-            props.setMealState((prev) => {
-              const newState = { ...prev };
-              console.log("lool at me please", props);
-              newState[props.dayId].meals[props.mealState.mealId] = {
-                ...newState[props.dayId].meals[props.mealState.mealId],
-                mealName: e.target.value,
-              };
+        {props.edit === "edit" ? (
+          <input
+            className="equipment-card-title-input"
+            value={props.mealState.mealName}
+            onChange={(e) => {
+              props.setMealState((prev) => {
+                const newState = { ...prev };
+                console.log("lool at me please", props);
+                newState[props.dayId].meals[props.mealState.mealId] = {
+                  ...newState[props.dayId].meals[props.mealState.mealId],
+                  mealName: e.target.value,
+                };
 
-              return newState;
-            });
-          }}
-        ></input>
+                return newState;
+              });
+            }}
+          ></input>
+        ) : (
+          <p1>{props.mealState.mealName}</p1>
+        )}
       </div>
       <table>
         <tbody>
@@ -50,105 +55,92 @@ const MealCard = (props) => {
           {mealItemArray}
           <tr>
             <td>
-              <input
-                className="equipment-card-new"
-                placeholder="New Item"
-                value={newItemState.name}
-                onChange={(e) => {
-                  setNewItemState((prev) => {
-                    return { ...prev, name: e.target.value };
-                  });
-                }}
-              ></input>
+              {props.edit === "edit" && (
+                <input
+                  className="equipment-card-new"
+                  placeholder="New Item"
+                  value={newItemState.name}
+                  onChange={(e) => {
+                    setNewItemState((prev) => {
+                      return { ...prev, name: e.target.value };
+                    });
+                  }}
+                ></input>
+              )}
             </td>
             <td>
-              <input
-                className="equipment-card-new"
-                placeholder="Quantity"
-                value={newItemState.quantity}
-                onChange={(e) => {
-                  setNewItemState((prev) => {
-                    return { ...prev, quantity: e.target.value };
-                  });
-                }}
-                type={"number"}
-              ></input>
+              {props.edit === "edit" && (
+                <input
+                  className="equipment-card-new"
+                  placeholder="Quantity"
+                  value={newItemState.quantity}
+                  onChange={(e) => {
+                    setNewItemState((prev) => {
+                      return { ...prev, quantity: e.target.value };
+                    });
+                  }}
+                  type={"number"}
+                ></input>
+              )}
             </td>
           </tr>
         </tbody>
       </table>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          props.setMealState((prev) => {
-            console.log(prev);
-            const newState = { ...prev };
-            newState[props.dayId].meals[props.mealState.mealId].mealItems = {
-              ...newState[props.dayId].meals[props.mealState.mealId].mealItems,
-            };
-            const newKey =
-              -Object.keys(
-                newState[props.dayId].meals[props.mealState.mealId].mealItems
-              ).length - 1;
-            newState[props.dayId].meals[props.mealState.mealId].mealItems[
-              newKey
-            ] = {
-              mealItemName: newItemState.name,
-              mealItemQuantity: newItemState.quantity,
-              mealItemId: newKey,
-            };
-            console.log(newState);
-            return newState;
-          });
-          setNewItemState({
-            name: "",
-            quantity: "",
-          });
-          // props.setEquipmentState((prev) => {
-          //   const newState = { ...prev };
-          //   const newKey =
-          //     -Object.keys(newState[props.categoryId].items).length - 1;
-          //   newState[props.categoryId].items[newKey] = {
-          //     gearName: newItemState.name,
-          //     quantity: newItemState.quantity,
-          //     itemId: newKey,
-          //   };
-          //   return newState;
-          // });
-          // setNewItemState({
-          //   name: "",
-          //   quantity: "",
-          // });
-        }}
-      >
-        <button className="btn btn-default btn-sm equipment-card-button">
-          Add Item
-        </button>
-      </form>
-      <button
-        className="btn btn-default btn-sm equipment-card-button"
-        onClick={(e) => {
-          e.preventDefault();
-          updateMealCard(
-            props.dayId,
-            props.mealState.mealId,
-            props.mealState.mealName,
-            props.mealState.mealItems
-          );
-          // updateEquipmentCard(
-          //   props.trip_id,
-          //   Number(props.categoryId),
-          //   props.categoryName,
-          //   props.categoryItems
-          // ).then(() => {
-          //   getMealsForTrip(props.trip_id).then((res) => {
-          //     props.setState(formatTripMealsData(res.data));
-          //   });
-          // });
-        }}
-      >
-        Save Card
-      </button>
+      {props.edit === "edit" && (
+        <>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              props.setMealState((prev) => {
+                console.log(prev);
+                const newState = { ...prev };
+                newState[props.dayId].meals[props.mealState.mealId].mealItems =
+                  {
+                    ...newState[props.dayId].meals[props.mealState.mealId]
+                      .mealItems,
+                  };
+                const newKey =
+                  -Object.keys(
+                    newState[props.dayId].meals[props.mealState.mealId]
+                      .mealItems
+                  ).length - 1;
+                newState[props.dayId].meals[props.mealState.mealId].mealItems[
+                  newKey
+                ] = {
+                  mealItemName: newItemState.name,
+                  mealItemQuantity: newItemState.quantity,
+                  mealItemId: newKey,
+                };
+                console.log(newState);
+                return newState;
+              });
+              setNewItemState({
+                name: "",
+                quantity: "",
+              });
+            }}
+          >
+            <button className="btn btn-default btn-sm equipment-card-button">
+              Add Item
+            </button>
+          </form>
+
+          <button
+            className="btn btn-default btn-sm equipment-card-button"
+            onClick={(e) => {
+              e.preventDefault();
+              updateMealCard(
+                props.dayId,
+                props.mealState.mealId,
+                props.mealState.mealName,
+                props.mealState.mealItems
+              );
+            }}
+          >
+            Save Card
+          </button>
+        </>
+      )}
     </div>
   );
 };
