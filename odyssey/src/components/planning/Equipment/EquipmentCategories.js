@@ -61,12 +61,13 @@ const EquipmentCategories = (props) => {
               });
             }}
           >
-            {props.categoryId}
+            X
           </button>
         </div>
         <table>
           <thead>
             <tr>
+              <th className="equipment-card-delete-title"></th>
               <th>ITEM</th>
               <th>QUANTITY</th>
             </tr>
@@ -74,6 +75,7 @@ const EquipmentCategories = (props) => {
           <tbody>{lineItems}</tbody>
           <tbody>
             <tr>
+              <td></td>
               <td>
                 <input
                   className="equipment-card-new"
@@ -109,7 +111,7 @@ const EquipmentCategories = (props) => {
               const newState = { ...prev };
               const newKey =
                 -Object.keys(newState[props.categoryId].items).length - 1;
-                newState[props.categoryId].items[newKey] = {
+              newState[props.categoryId].items[newKey] = {
                 gearName: newItemState.name,
                 quantity: newItemState.quantity,
                 itemId: newKey,

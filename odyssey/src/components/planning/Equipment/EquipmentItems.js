@@ -9,8 +9,9 @@ import {
 const EquipmentItems = (props) => {
   return (
     <tr>
-      <td>
+      <td className="equipment-card-delete">
         <button
+          className="btn equipment-card-items-delete"
           onClick={() => {
             deleteCategoryItem(props.itemId).then(() => {
               getEquipmentForTrip(props.trip_id).then((res) => {
@@ -21,6 +22,8 @@ const EquipmentItems = (props) => {
         >
           x
         </button>
+      </td>
+      <td>
         <input
           contentEditable="true"
           className="equipment-card-items"
@@ -41,6 +44,7 @@ const EquipmentItems = (props) => {
         ></input>
       </td>
       <td className="equipment-card-quantity-column">
+        <i>-</i>
         <input
           className="equipment-card-quantities"
           type={"number"}
@@ -58,6 +62,7 @@ const EquipmentItems = (props) => {
             });
           }}
         ></input>
+        <i>+</i>
       </td>
     </tr>
   );

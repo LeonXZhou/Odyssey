@@ -1,7 +1,14 @@
 import { useState } from "react";
-import "../component-styles/Equipment.scss"
-import { newCategory, getEquipmentForTrip, getMealsForTrip } from "../../Helpers/apiHelpers";
-import { formatTripEquipmentData, formatTripMealsData } from "../../Helpers/dataHelpers";
+import "../component-styles/Equipment.scss";
+import {
+  newCategory,
+  getEquipmentForTrip,
+  getMealsForTrip,
+} from "../../Helpers/apiHelpers";
+import {
+  formatTripEquipmentData,
+  formatTripMealsData,
+} from "../../Helpers/dataHelpers";
 
 const PLUS = "PLUS";
 const FORM = "FORM";
@@ -43,7 +50,8 @@ export default function AddButton(props) {
                 setInputState("");
                 if (props.addButtonType === "equipment") {
                   props.onSubmit(props.trip_id, inputState).then(() => {
-                    getEquipmentForTrip(props.trip_id).then((res) => { //props.getNewState
+                    getEquipmentForTrip(props.trip_id).then((res) => {
+                      //props.getNewState
                       setButtonState(PLUS);
                       props.setState(formatTripEquipmentData(res.data)); //props.formatStateData
                     });

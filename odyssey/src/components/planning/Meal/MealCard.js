@@ -3,7 +3,6 @@ import "../../component-styles/MealCard.scss";
 import MealItem from "./MealItem";
 import { useState } from "react";
 
-
 const MealCard = (props) => {
   const mealItemArray = [];
   const [newItemState, setNewItemState] = useState({
