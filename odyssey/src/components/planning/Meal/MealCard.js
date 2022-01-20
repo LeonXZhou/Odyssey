@@ -2,6 +2,7 @@ import React from "react";
 import "../../component-styles/MealCard.scss";
 import MealItem from "./MealItem";
 import { useState } from "react";
+import { updateMealCard } from "../../../Helpers/apiHelpers";
 
 const MealCard = (props) => {
   const mealItemArray = [];
@@ -20,6 +21,7 @@ const MealCard = (props) => {
         onChange={(e) => {
           props.setMealState((prev) => {
             const newState = { ...prev };
+            console.log('lool at me please',props)
             newState[props.dayId].meals[props.mealState.mealId] = { ...newState[props.dayId].meals[props.mealState.mealId], mealName: e.target.value }
 
             return newState;
@@ -109,6 +111,7 @@ const MealCard = (props) => {
         className="btn btn-default btn-sm equipment-card-button"
         onClick={(e) => {
           e.preventDefault();
+          updateMealCard(props.dayId,props.mealState.mealId,props.mealState.mealName,props.mealState.mealItems);
           // updateEquipmentCard(
           //   props.trip_id,
           //   Number(props.categoryId),

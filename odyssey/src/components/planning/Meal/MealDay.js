@@ -13,6 +13,8 @@ const MealDay = (props) => {
       <MealCard
         key={mealKey}
         mealState={props.mealDayState.meals[mealKey]}
+        setMealState={props.setMealState}
+        dayId ={props.mealDayState.dayId}
       ></MealCard>
     );
   }
