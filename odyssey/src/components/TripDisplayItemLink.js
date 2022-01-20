@@ -4,7 +4,6 @@ import { themeAttributionFinder, themeURLFinder } from "../Helpers/mapHelper";
 import { Link } from "react-router-dom";
 import MapDisplay from "./MapComponents/MapDisplay";
 function TripDisplayItemLink(props) {
-
   //Defaulting Map Theme
   const mapThemeAttribution =
     props.mapOptions &&
@@ -13,7 +12,10 @@ function TripDisplayItemLink(props) {
     props.mapOptions && themeURLFinder(props.mapOptions.themeAttribution);
 
   return (
-    <Link className={"tripDisplayCard"} to={`/planning/view/${props.trip_id}`}>
+    <Link
+      className={"tripDisplayCard"}
+      to={`/planning/${props.edit}/${props.trip_id}`}
+    >
       <MapDisplay
         mapOptions={props.mapOptions}
         markers={props.markers}
