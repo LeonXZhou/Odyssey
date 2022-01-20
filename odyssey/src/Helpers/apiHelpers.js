@@ -12,38 +12,24 @@ export function getMapForTrip(trip_id) {
 //Meal API START
 //Meal API START
 //Meal API START
-export function getMealsForTrip(trip_id){
-  return axios.get(`/api/meals/${trip_id}`)
+export function getMealsForTrip(trip_id) {
+  return axios.get(`/api/meals/${trip_id}`);
 }
 
-
 export function newMealOnDay(day_id, name) {
-  // console.log({
-  //   trip_id: trip_id,
-  //   name: name,
-  // });
-  return axios.post(`/api/meals/${day_id}/meal`, {
+  console.log("TEST", {
+    day_id: day_id,
+    name: name,
+  });
+  return axios.post(`/api/meals/${day_id}/meals`, {
     name: name,
   });
 }
 
-
 //Meal API END
 //Meal API END
 //Meal API END
 //Meal API END
-
-
-
-
-
-
-
-
-
-
-
-
 
 // Equipment API START
 // Equipment API START
