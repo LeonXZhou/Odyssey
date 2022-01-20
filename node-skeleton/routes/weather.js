@@ -286,12 +286,25 @@ for (const item of weatherData.daily){
     const formatingData = {}
     const unixTime = item.dt;
 const date = new Date(unixTime*1000);
-console.log("DATE",date.toLocaleDateString("en-US"));
-if (!formatingData["date"]){
-    formatingData["date"]
-
+// console.log("DATE",date.toLocaleDateString("en-US"));
+if (!formatingData["days"]){
+    formatingData["days"] ={}
 }
-    // console.log("weather data:", item);
+if(!formatingData["days"]["date"]){
+    formatingData["days"]["date"] = date.toLocaleDateString("en-US")
+}
+if(!formatingData["days"]["feels_like"]){
+    formatingData["days"]["feels_like"]={
+        day : item.feels_like.day,
+        night : item.feels_like.day,
+        evening : item.feels_like.eve,
+        morning: item.feels_like.morn
+    }
+}
+
+
+
+    console.log(formatingData);
     
    
 }
