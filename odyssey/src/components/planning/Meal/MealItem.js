@@ -10,22 +10,28 @@ const MealItem = (props) => {
             contentEditable="true"
             className="mealQuantity"
             type={"text"}
-            value={props.itemState.mealItemQuantity}
-            // onChange={(e) => {
-            //   props.setState((prev) => {
-            //     const newState = { ...prev };
-            //     newState[props.categoryId].items = {
-            //       ...newState[props.categoryId].items,
-            //     };
-            //     newState[props.categoryId].items[props.itemId].gearName =
-            //       e.target.value;
-            //     // newState = { ...prev };
-            //     return newState;
-            //   });
-            // }}
+            value={props.itemState.mealItemName}
+            onChange={(e) => {
+              props.setMealState((prev) => {
+                console.log(prev);
+                const newState = { ...prev };
+                newState[props.dayId].mealItems = {
+                  ...newState[props.dayId].mealItems,
+                };
+                newState[props.dayId].meals[props.mealId].mealItems[
+                  props.itemState.mealItemId
+                ] = {
+                  ...newState[props.dayId].meals[props.mealId].mealItems[
+                    props.itemState.mealItemId
+                  ],
+                  mealItemName: e.target.value,
+                };
+                return newState;
+              });
+            }}
           />
         ) : (
-          <p1>{props.itemState.mealItemQuantity}</p1>
+          <p1>{props.itemState.mealItemName}</p1>
         )}
       </td>
       <td>
@@ -34,22 +40,28 @@ const MealItem = (props) => {
             contentEditable="true"
             className="mealItem"
             type={"text"}
-            value={props.itemState.mealItemName}
-            // onChange={(e) => {
-            //   props.setState((prev) => {
-            //     const newState = { ...prev };
-            //     newState[props.categoryId].items = {
-            //       ...newState[props.categoryId].items,
-            //     };
-            //     newState[props.categoryId].items[props.itemId].gearName =
-            //       e.target.value;
-            //     // newState = { ...prev };
-            //     return newState;
-            //   });
-            // }}
+            value={props.itemState.mealItemQuantity}
+            onChange={(e) => {
+              props.setMealState((prev) => {
+                console.log(prev);
+                const newState = { ...prev };
+                newState[props.dayId].mealItems = {
+                  ...newState[props.dayId].mealItems,
+                };
+                newState[props.dayId].meals[props.mealId].mealItems[
+                  props.itemState.mealItemId
+                ] = {
+                  ...newState[props.dayId].meals[props.mealId].mealItems[
+                    props.itemState.mealItemId
+                  ],
+                  mealItemQuantity: e.target.value,
+                };
+                return newState;
+              });
+            }}
           />
         ) : (
-          <p1>{props.itemState.mealItemName}</p1>
+          <p1>{props.itemState.mealItemQuantity}</p1>
         )}
       </td>
       <td>{props.edit === "edit" && <button>x</button>}</td>
