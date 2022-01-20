@@ -58,7 +58,6 @@ export default function AddButton(props) {
                   });
                 }
                 if (props.addButtonType === "Meal") {
-                  console.log(inputState);
                   props.onSubmit(props.day_id, inputState).then(() => {
                     console.log("2");
                     getMealsForTrip(props.day_id).then((res) => {
