@@ -4,23 +4,28 @@ import MealItem from "./MealItem";
 // import getMealsForTrip from "../../../Helpers/apiHelpers"
 // import formatTripMealsData from ""
 
-
 const MealCard = (props) => {
-  const mealItemArray =[];
-  for (const mealItemKey in props.mealState.mealItems)
-  {
-    mealItemArray.push(<MealItem key={mealItemKey} itemState={props.mealState.mealItems[mealItemKey]}></MealItem>)
+  const mealItemArray = [];
+  for (const mealItemKey in props.mealState.mealItems) {
+    mealItemArray.push(
+      <MealItem
+        key={mealItemKey}
+        itemState={props.mealState.mealItems[mealItemKey]}
+      ></MealItem>
+    );
   }
   return (
     <div className={"mealCard"}>
-      <div className={"mealName"}><h1>{props.mealState.mealName}</h1></div>
+      <div className={"mealName"}>
+        <h1>{props.mealState.mealName}</h1>
+      </div>
       <table>
         <tbody>
           <tr>
             <th>Quantity</th>
             <th className={"foodName"}>Item Name</th>
           </tr>
-            {mealItemArray}
+          {mealItemArray}
         </tbody>
       </table>
       <button className="btn btn-default btn-sm equipment-card-button">
