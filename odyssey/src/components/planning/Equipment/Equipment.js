@@ -18,6 +18,7 @@ const Equipment = (props) => {
         setEquipmentState={props.setEquipmentState}
         trip_id={props.equipmentState[equipmentCategoryId].tripID}
         setState={props.setEquipmentState}
+        edit={props.edit}
       />
     );
   }
@@ -25,12 +26,14 @@ const Equipment = (props) => {
   return (
     <main className="equipment">
       {equipmentCategories}
-      <AddButton
-        trip_id={props.trip_id}
-        onSubmit={newCategory}
-        setState={props.setEquipmentState}
-        addButtonType={"equipment"}
-      />
+      {props.edit === "edit" && (
+        <AddButton
+          trip_id={props.trip_id}
+          onSubmit={newCategory}
+          setState={props.setEquipmentState}
+          addButtonType={"equipment"}
+        />
+      )}
     </main>
   );
 };

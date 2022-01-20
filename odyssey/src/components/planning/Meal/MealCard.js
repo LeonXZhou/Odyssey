@@ -11,6 +11,7 @@ const MealCard = (props) => {
       <MealItem
         key={mealItemKey}
         itemState={props.mealState.mealItems[mealItemKey]}
+        edit={props.edit}
       ></MealItem>
     );
   }
@@ -28,27 +29,31 @@ const MealCard = (props) => {
           {mealItemArray}
         </tbody>
       </table>
-      <button className="btn btn-default btn-sm equipment-card-button">
-        Add Item
-      </button>
-      <button
-        className="btn btn-default btn-sm equipment-card-button"
-        onClick={(e) => {
-          e.preventDefault();
-          // updateEquipmentCard(
-          //   props.trip_id,
-          //   Number(props.categoryId),
-          //   props.categoryName,
-          //   props.categoryItems
-          // ).then(() => {
-          //   getMealsForTrip(props.trip_id).then((res) => {
-          //     props.setState(formatTripEquipmentData(res.data));
-          //   });
-          // });
-        }}
-      >
-        Save Card
-      </button>
+      {props.edit === "edit" && (
+        <>
+          <button className="btn btn-default btn-sm equipment-card-button">
+            Add Item
+          </button>
+          <button
+            className="btn btn-default btn-sm equipment-card-button"
+            onClick={(e) => {
+              e.preventDefault();
+              // updateEquipmentCard(
+              //   props.trip_id,
+              //   Number(props.categoryId),
+              //   props.categoryName,
+              //   props.categoryItems
+              // ).then(() => {
+              //   getMealsForTrip(props.trip_id).then((res) => {
+              //     props.setState(formatTripEquipmentData(res.data));
+              //   });
+              // });
+            }}
+          >
+            Save Card
+          </button>
+        </>
+      )}
     </div>
   );
 };

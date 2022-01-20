@@ -10,59 +10,71 @@ const EquipmentItems = (props) => {
   return (
     <tr>
       <td className="equipment-card-delete">
-        <button
-          className="btn equipment-card-items-delete"
-          onClick={() => {
-            deleteCategoryItem(props.itemId).then(() => {
-              getEquipmentForTrip(props.trip_id).then((res) => {
-                props.setState(formatTripEquipmentData(res.data));
+        {props.edit === "edit" && (
+          <button
+            className="btn equipment-card-items-delete"
+            onClick={() => {
+              deleteCategoryItem(props.itemId).then(() => {
+                getEquipmentForTrip(props.trip_id).then((res) => {
+                  props.setState(formatTripEquipmentData(res.data));
+                });
               });
-            });
-          }}
-        >
-          x
-        </button>
+            }}
+          >
+            x
+          </button>
+        )}
       </td>
       <td>
-        <input
-          contentEditable="true"
-          className="equipment-card-items"
-          type={"text"}
-          value={props.itemName}
-          onChange={(e) => {
-            props.setState((prev) => {
-              const newState = { ...prev };
-              newState[props.categoryId].items = {
-                ...newState[props.categoryId].items,
-              };
-              newState[props.categoryId].items[props.itemId].gearName =
-                e.target.value;
-              // newState = { ...prev };
-              return newState;
-            });
-          }}
-        ></input>
+        {props.edit === "edit" ? (
+          <input
+            contentEditable="true"
+            className="equipment-card-items"
+            type={"text"}
+            value={props.itemName}
+            onChange={(e) => {
+              props.setState((prev) => {
+                const newState = { ...prev };
+                newState[props.categoryId].items = {
+                  ...newState[props.categoryId].items,
+                };
+                newState[props.categoryId].items[props.itemId].gearName =
+                  e.target.value;
+                // newState = { ...prev };
+                return newState;
+              });
+            }}
+          ></input>
+        ) : (
+          <p1>{props.itemName}</p1>
+        )}
       </td>
       <td className="equipment-card-quantity-column">
-        <i>-</i>
-        <input
-          className="equipment-card-quantities"
-          type={"number"}
-          value={props.quantity}
-          onChange={(e) => {
-            props.setState((prev) => {
-              const newState = { ...prev };
-              newState[props.categoryId].items = {
-                ...newState[props.categoryId].items,
-              };
-              newState[props.categoryId].items[props.itemId].quantity =
-                e.target.value;
-              // newState = { ...prev };
-              return newState;
-            });
-          }}
-        ></input>
-        <i>+</i>
+        {props.edit === "edit" ? (
+          <>
+            <i>-</i>
+            <input
+              className="equipment-card-quantities"
+              type={"number"}
+              value={props.quantity}
+              onChange={(e) => {
+                props.setState((prev) => {
+                  const newState = { ...prev };
+                  newState[props.categoryId].items = {
+                    ...newState[props.categoryId].items,
+                  };
+                  newState[props.categoryId].items[props.itemId].quantity =
+                    e.target.value;
+                  // newState = { ...prev };
+                  return newState;
+                });
+              }}
+            ></input>
+            <i>+</i>
+          </>
+        ) : (
+          <p1>{props.quantity}</p1>
+        )}
       </td>
     </tr>
   );

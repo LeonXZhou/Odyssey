@@ -1,7 +1,9 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { latLng } from "leaflet";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+
+import { authContext } from "./components/providers/AuthenticationProvider";
 
 import { authenticate } from "./Helpers/apiHelpers";
 
@@ -14,30 +16,61 @@ import Planning from "./components/planning/Planning";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import LoginDev from "./components/LoginDev";
+import MyTrips from "./components/MyTrips";
 function App() {
   const [userEmail, setUserEmail] = useState();
+  const { setAuth, setUser, user } = useContext(authContext);
   useEffect(() => {
     authenticate().then((res) => {
-      setUserEmail(res.data.email);
+      console.log("look atme", res.data);
+      if (res.data.userId) {
+        setUser(res.data);
+        setAuth(true);
+      }
+      console.log("wtf?");
     });
   }, []);
+  console.log("This is the user state", user);
   return (
     <BrowserRouter>
       <Navigation userEmail={userEmail} setUserEmail={setUserEmail} />
       <Routes>
-        <Route path="/" element={<Home userEmail={userEmail} />} />
+        <Route path="/" element={<Home />} />
+        {/* start of planning view routes */}
         <Route
           path="/planning/view/:trip_id"
           element={<Planning page="route" edit={"view"} />}
         />
+
         <Route
           path="/planning/equipment/view/:trip_id"
           element={<Planning page="equipment" edit={"view"} />}
         />
+
         <Route
           path="/planning/meals/view/:trip_id"
           element={<Planning page="meals" edit={"view"} />}
         />
+        {/* end of planning view routes */}
+
+        {/* start of planning edit routes */}
+        <Route
+          path="/planning/edit/:trip_id"
+          element={<Planning page="route" edit={"edit"} />}
+        />
+
+        <Route
+          path="/planning/equipment/edit/:trip_id"
+          element={<Planning page="equipment" edit={"edit"} />}
+        />
+
+        <Route
+          path="/planning/meals/edit/:trip_id"
+          element={<Planning page="meals" edit={"edit"} />}
+        />
+        {/* end of planning edit routes */}
+
+        <Route path="/myTrips/:user_id" element={<MyTrips />} />
 
         <Route path="/login" element={<Login setUserEmail={setUserEmail} />} />
         <Route
@@ -49,15 +82,16 @@ function App() {
           element={<Register setUserEmail={setUserEmail} />}
         />
 
+        {/* START OF PLANNING ROUTES */}
         <Route path="/planning/:trip_id" element={<Planning page="route" />} />
         <Route path="/planning/route" element={<Planning page="route" />} />
         <Route
           path="/planning/equipment/:trip_id"
           element={<Planning page="equipment" />}
         />
-        <Route 
-          path="/planning/meals/:trip_id" 
-          element={<Planning page="meals" />} 
+        <Route
+          path="/planning/meals/:trip_id"
+          element={<Planning page="meals" />}
         />
         <Route
           path="/planning/emergency/:trip_id"

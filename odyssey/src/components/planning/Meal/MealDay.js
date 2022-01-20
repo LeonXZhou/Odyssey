@@ -13,6 +13,7 @@ const MealDay = (props) => {
       <MealCard
         key={mealKey}
         mealState={props.mealDayState.meals[mealKey]}
+        edit={props.edit}
       ></MealCard>
     );
   }
@@ -21,12 +22,14 @@ const MealDay = (props) => {
     <div className={"mealDay"}>
       <div>{date.toDateString()}</div>
       {mealArray}
-      <AddButton
-        addButtonType={"Meal"}
-        day_id={props.mealDayState.dayId}
-        onSubmit={newMealOnDay}
-        setState={props.setMealState}
-      />
+      {props.edit === "edit" && (
+        <AddButton
+          addButtonType={"Meal"}
+          day_id={props.mealDayState.dayId}
+          onSubmit={newMealOnDay}
+          setState={props.setMealState}
+        />
+      )}
     </div>
   );
 };

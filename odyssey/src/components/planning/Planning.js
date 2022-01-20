@@ -12,39 +12,46 @@ import Emergency from "./Emergency";
 import {
   formatTripData,
   formatTripEquipmentData,
-  formatTripMealsData
+  formatTripMealsData,
 } from "../../Helpers/dataHelpers";
-import { getEquipmentForTrip, getMapForTrip, getMealsForTrip } from "../../Helpers/apiHelpers";
+import {
+  getEquipmentForTrip,
+  getMapForTrip,
+  getMealsForTrip,
+} from "../../Helpers/apiHelpers";
 import { parseDBMap, parseDBMarkers } from "../../Helpers/mapHelper";
 
 const Planning = (props) => {
   const { trip_id } = useParams();
-  const [tripsArray, setTripsArray] = useState([{}]);
+  const [routeArray, setRouteArray] = useState([{}]);
   const [equipmentState, setEquipmentState] = useState({});
   const [mealState, setMealState] = useState({});
   useEffect(() => {
     getMapForTrip(trip_id).then((res) => {
-      setTripsArray(formatTripData(res.data));
+      setRouteArray(formatTripData(res.data));
     });
     getEquipmentForTrip(trip_id).then((res) => {
       setEquipmentState(formatTripEquipmentData(res.data));
     });
-    getMealsForTrip(trip_id).then((res)=>{setMealState(formatTripMealsData(res.data))});
-    console.log('ooops');
+    getMealsForTrip(trip_id).then((res) => {
+      setMealState(formatTripMealsData(res.data));
+    });
+    console.log("ooops");
   }, [trip_id]);
-  const trip = tripsArray[0];
+  console.log("this is tripsArray");
 
   const checkPage = (props) => {
-    if (props.page === "route" && Object.keys(trip).length > 0) {
+    const route = routeArray[0];
+    if (props.page === "route" && Object.keys(route).length > 0) {
       return (
         <TripDisplayItem
           key={trip_id}
-          mapOptions={parseDBMap(trip.maps)}
-          markers={parseDBMarkers(trip.markers)}
+          mapOptions={parseDBMap(route.maps)}
+          markers={parseDBMarkers(route.markers)}
           name={"asdf"}
           description={"ASDF"}
           username={"asdf"}
-          trip_id={trip.trip_id}
+          trip_id={route.trip_id}
         />
       );
     }
@@ -53,12 +60,19 @@ const Planning = (props) => {
         <Equipment
           equipmentState={equipmentState}
           setEquipmentState={setEquipmentState}
-          trip_id={trip.trip_id}
+          trip_id={route.trip_id}
+          edit={props.edit}
         />
       );
     }
     if (props.page === "meals") {
-      return <Meals setMealState={setMealState} mealState={mealState} />;
+      return (
+        <Meals
+          setMealState={setMealState}
+          mealState={mealState}
+          edit={props.edit}
+        />
+      );
     }
     if (props.page === "emergency") {
       return <Emergency />;
