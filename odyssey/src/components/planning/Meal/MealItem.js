@@ -7,7 +7,7 @@ const MealItem = (props) => {
       <td>
         <input
           contentEditable="true"
-          className="equipment-card-items"
+          className="mealQuantity"
           type={"text"}
           value={props.itemState.mealItemName}
           onChange={(e) => {
@@ -26,7 +26,7 @@ const MealItem = (props) => {
       <td>
         <input
           contentEditable="true"
-          className="equipment-card-items"
+          className="mealItem"
           type={"text"}
           value={props.itemState.mealItemQuantity}
           onChange={(e) => {
@@ -42,7 +42,9 @@ const MealItem = (props) => {
           }}
         />
       </td>
-      <td><button>x</button></td>
+      <td>
+        <button>x</button>
+      </td>
     </tr>
   );
 };

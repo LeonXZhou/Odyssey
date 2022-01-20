@@ -12,10 +12,9 @@ export function getMapForTrip(trip_id) {
 //Meal API START
 //Meal API START
 //Meal API START
-export function getMealsForTrip(trip_id){
-  return axios.get(`/api/meals/${trip_id}`)
+export function getMealsForTrip(trip_id) {
+  return axios.get(`/api/meals/${trip_id}`);
 }
-
 
 export function newMealOnDay(day_id, name) {
   return axios.post(`/api/meals/${day_id}/meals`, {
@@ -23,23 +22,10 @@ export function newMealOnDay(day_id, name) {
   });
 }
 
-
 //Meal API END
 //Meal API END
 //Meal API END
 //Meal API END
-
-
-
-
-
-
-
-
-
-
-
-
 
 // Equipment API START
 // Equipment API START

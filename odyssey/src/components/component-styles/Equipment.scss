@@ -13,7 +13,8 @@
     border: 1.5px solid grey;
     border-radius: 7px;
     margin: 1em;
-    padding: 0.5em;
+    padding: 0.25em;
+    padding-right: 0.5em;
     background-color: rgb(216, 216, 185);
 
     /* On mouse-over, add a deeper shadow */
@@ -46,6 +47,22 @@
       }
     }
 
+    .equipment-card-delete {
+      display: flex;
+      justify-content: center;
+      align-content: center;
+      align-items: center;
+      width: 50%;
+      // border: 2px solid black;
+      .equipment-card-items-delete {
+        display: flex;
+        padding: 0;
+        margin-top: 2px;
+        margin-left: 3px;
+        background-color: transparent;
+      }
+    }
+
     .equipment-card-items {
       display: flex;
       border: none;
@@ -55,21 +72,26 @@
       background-color: transparent;
       outline: none;
     }
+
     .equipment-card-items:hover {
       background-color: rgb(205, 205, 176);
     }
 
     .equipment-card-quantity-column {
       display: flex;
-      justify-content: flex-end;
+      justify-content: center;
       .equipment-card-quantities {
         display: flex;
-        justify-content: flex-end;
         border: none;
         border-radius: 7px;
-        width: 2.5em;
+        width: 1.75em;
+        margin-left: 0.6em;
         background-color: transparent;
         outline: none;
+        appearance: none;
+        input:-webkit-inner-spin-button {
+          -webkit-appearance: none;
+        }
       }
       .equipment-card-quantities:hover {
         background-color: rgb(205, 205, 176);
