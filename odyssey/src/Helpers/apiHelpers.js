@@ -8,6 +8,47 @@ export function getMapForTrip(trip_id) {
   return axios.get(`/api/trips/${trip_id}`);
 }
 
+//Meal API START
+//Meal API START
+//Meal API START
+//Meal API START
+export function getMealsForTrip(trip_id){
+  return axios.get(`/api/meals/${trip_id}`)
+}
+
+
+export function newMealOnDay(day_id, name) {
+  // console.log({
+  //   trip_id: trip_id,
+  //   name: name,
+  // });
+  return axios.post(`/api/meals/${day_id}/meal`, {
+    name: name,
+  });
+}
+
+
+//Meal API END
+//Meal API END
+//Meal API END
+//Meal API END
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Equipment API START
+// Equipment API START
+// Equipment API START
+// Equipment API START
 export function getEquipmentForTrip(trip_id) {
   return axios.get(`/api/equipment/${trip_id}`);
 }
@@ -71,12 +112,10 @@ export function newCategory(trip_id, name) {
 }
 
 export function deleteCategory(trip_id, category_id) {
-  console.log("DELETE CATEGORY");
   return axios.post(`/api/equipment/delete/${trip_id}/${category_id}`);
 }
 
 export function deleteCategoryItem(item_id) {
-  console.log("DELETE ITEM", item_id);
   return axios.post(`/api/equipment/delete/${item_id}`);
 }
 
@@ -92,3 +131,8 @@ export function insertNewTrip(user_id, name, startDate, endDate) {
     endDate: endDate,
   });
 }
+
+//EQUIPMENT API END
+//EQUIPMENT API END
+//EQUIPMENT API END
+//EQUIPMENT API END

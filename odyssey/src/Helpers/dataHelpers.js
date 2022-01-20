@@ -65,10 +65,51 @@ export function formatTripEquipmentData(allTripData) {
       };
     }
   }
-  // for (const data in formatedData) {
-  //   formatedData[data]["category"] = data;
-  //   formatedDataArray.push(formatedData[data]);
-  // }
 
   return formatedData;
 }
+
+
+export function formatTripMealsData(allMealData) {
+  const formattedMealData = {};
+  for (const mealRow of allMealData) {
+    if (!formattedMealData[mealRow.days_id]) {
+      formattedMealData[mealRow.days_id] = {};
+    }
+    if (!formattedMealData[mealRow.days_id]["dayId"]) {
+      formattedMealData[mealRow.days_id]["dayId"] = mealRow.days_id;
+    }
+    if (!formattedMealData[mealRow.days_id]["date"]) {
+      formattedMealData[mealRow.days_id]["date"] = mealRow.days_date;
+    }
+    if (!formattedMealData[mealRow.days_id]["meals"]) {
+      formattedMealData[mealRow.days_id]["meals"] = {};
+    }
+
+    if (!formattedMealData[mealRow.days_id]["meals"][mealRow.meals_id]) {
+      formattedMealData[mealRow.days_id]["meals"][mealRow.meals_id] = {}
+    }
+
+    formattedMealData[mealRow.days_id]["meals"][mealRow.meals_id]["mealId"] = mealRow.meals_id
+    formattedMealData[mealRow.days_id]["meals"][mealRow.meals_id]["mealName"] = mealRow.meal
+
+    if (!formattedMealData[mealRow.days_id]["meals"][mealRow.meals_id]["mealItems"]) {
+      formattedMealData[mealRow.days_id]["meals"][mealRow.meals_id]["mealItems"] = {}
+    }
+
+    if (!formattedMealData[mealRow.days_id]["meals"][mealRow.meals_id]["mealItems"][mealRow.meal_itemid]) {
+      formattedMealData[mealRow.days_id]["meals"][mealRow.meals_id]["mealItems"][mealRow.meal_itemid] = {};
+    }
+
+    if (mealRow.meal_itemid)
+    {
+      formattedMealData[mealRow.days_id]["meals"][mealRow.meals_id]["mealItems"][mealRow.meal_itemid]["mealItemName"] = mealRow.food_item;
+      formattedMealData[mealRow.days_id]["meals"][mealRow.meals_id]["mealItems"][mealRow.meal_itemid]["mealItemQuantity"] = mealRow.quantity;
+      formattedMealData[mealRow.days_id]["meals"][mealRow.meals_id]["mealItems"][mealRow.meal_itemid]["mealItemId"] = mealRow.meal_itemid;
+    }
+  }
+
+  return formattedMealData
+}
+
+
