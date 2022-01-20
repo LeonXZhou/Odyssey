@@ -12,10 +12,12 @@ JOIN days on meals.day_id=days.id
   return db.query(query);
 }
 function insertNewMeal(db, day_id, name) {
-  const query = `INSERT INTO gear_categories (trip_id , name)
-  VALUES($1,$2)`;
-  const values = [day_id, name]
+  const query = `INSERT INTO meals (day_id , name)
+  VALUES($1, $2);`;
+  const values = [day_id, name];
+  return db.query(query, values);
 }
+
 function updateMealItems(db, mealName, mealId, mealQuantity) {
   console.log("ITEM NAME ITEM NAME", mealName);
   console.log("ITEM ID ITEM ID", mealId);
@@ -92,13 +94,17 @@ module.exports = (db) => {
     console.log("this is the post request", req.body);
     res.send("success");
   });
+  
   router.post("/:day_id/meals", (req, res) => {
-    insertNewMeal(db, req.params.day_id, req.params.name)
-
-    console.log(req.body);
-
-
+    insertNewMeal(db, req.params.day_id, req.body.name)
+      .then(() => {
+        res.send("success");
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
   });
+
   router.post("/:day_id/meals/:meals_id", (req, res) => {
     insertNewMealItem(db, req.params.meal_id, req.params.name, req.params.quantity)
 
