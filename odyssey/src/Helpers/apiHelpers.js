@@ -17,18 +17,48 @@ export function getMapForTrip(trip_id) {
 //Meal API START
 //Meal API START
 //Meal API START
+export function sqlizeMealItems(items) {
+  const newItems = {};
+  const updatedItems = {};
+  let newItemsIndex = 0;
+  for (const itemKey in items) {
+    const item = items[itemKey];
+    if (Number(itemKey) >= 0) {
+      updatedItems[itemKey] = {
+        name: item.mealItemName,
+        quantity: item.mealItemQuantity,
+        // item_id: itemKey,
+      };
+    }
+    if (Number(itemKey) < 0) {
+      newItems[newItemsIndex] = {
+        name: item.mealItemName,
+        quantity: item.mealItemQuantity,
+      };
+      newItemsIndex++;
+    }
+  }
+  return { newItems, updatedItems };
+}
 export function getMealsForTrip(trip_id) {
   return axios.get(`/api/meals/${trip_id}`);
 }
 
 export function newMealOnDay(day_id, name) {
-  console.log("TEST", {
-    day_id: day_id,
-    name: name,
-  });
   return axios.post(`/api/meals/${day_id}/meals`, {
     name: name,
   });
+}
+
+export function updateMealCard(day_id,meal_id,meal_name,meal_items)
+{
+  const { newItems, updatedItems } = sqlizeMealItems(meal_items);
+  const postData = {
+    meal_name: meal_name,
+    updateItems: updatedItems,
+    newItems: newItems,
+  };
+  return axios.post(`/api/meals/${day_id}/${meal_id}`, postData);
 }
 
 //Meal API END
@@ -44,7 +74,7 @@ export function getEquipmentForTrip(trip_id) {
   return axios.get(`/api/equipment/${trip_id}`);
 }
 
-export function sqlizeItems(items) {
+export function sqlizeGearItems(items) {
   const newItems = {};
   const updatedItems = {};
   let newItemsIndex = 0;
@@ -74,7 +104,7 @@ export function updateEquipmentCard(
   category_name,
   category_items
 ) {
-  const { newItems, updatedItems } = sqlizeItems(category_items);
+  const { newItems, updatedItems } = sqlizeGearItems(category_items);
   const postData = {
     category: category_name,
     updateItems: updatedItems,
