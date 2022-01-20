@@ -120,14 +120,13 @@ module.exports = (db) => {
     const allQueryPromises = [];
     console.log(req.body);
 
-    const itemsToUpdate = req.body.updateItems;
-
     allQueryPromises.push(
       updateCategoryName(db, req.params.category_id, req.body.category).then(
         () => {}
       )
     );
 
+    const itemsToUpdate = req.body.updateItems;
     for (const updateItemKey in itemsToUpdate) {
       if (Number(itemsToUpdate[updateItemKey].quantity) !== 0) {
         allQueryPromises.push(
