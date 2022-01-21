@@ -5,10 +5,15 @@ const MealItem = (props) => {
   return (
     <tr>
       <td>
+        {props.edit === "edit" && (
+          <button className="meal-item-delete">x</button>
+        )}
+      </td>
+      <td>
         {props.edit === "edit" ? (
           <input
             contentEditable="true"
-            className="mealQuantity"
+            className="meal-items"
             type={"text"}
             value={props.itemState.mealItemName}
             onChange={(e) => {
@@ -38,7 +43,7 @@ const MealItem = (props) => {
         {props.edit === "edit" ? (
           <input
             contentEditable="true"
-            className="mealItem"
+            className="meal-quantities"
             type={"text"}
             value={props.itemState.mealItemQuantity}
             onChange={(e) => {
@@ -64,7 +69,6 @@ const MealItem = (props) => {
           <p1>{props.itemState.mealItemQuantity}</p1>
         )}
       </td>
-      <td>{props.edit === "edit" && <button>x</button>}</td>
     </tr>
   );
 };

@@ -14,7 +14,7 @@ const Meals = (props) => {
       ></MealDay>
     );
   }
-  return <main className="meal">{mealDayArray}</main>;
+  return <main className="meals">{mealDayArray}</main>;
 };
 
 export default Meals;
