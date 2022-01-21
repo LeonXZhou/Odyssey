@@ -9,5 +9,6 @@ CREATE TABLE stops (
   name VARCHAR(255) NOT NULL,
   latitude DECIMAL(19,15) NOT NULL,
   longitude DECIMAL(19,15) NOT NULL,
-  type TEXT
+  type TEXT,
+  description TEXT 
 )

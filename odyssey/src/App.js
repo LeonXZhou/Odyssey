@@ -22,15 +22,12 @@ function App() {
   const { setAuth, setUser, user } = useContext(authContext);
   useEffect(() => {
     authenticate().then((res) => {
-      console.log("look atme", res.data);
       if (res.data.userId) {
         setUser(res.data);
         setAuth(true);
       }
-      console.log("wtf?");
     });
   }, []);
-  console.log("This is the user state", user);
   return (
     <BrowserRouter>
       <Navigation userEmail={userEmail} setUserEmail={setUserEmail} />
