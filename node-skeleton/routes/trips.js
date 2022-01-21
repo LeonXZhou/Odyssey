@@ -50,7 +50,25 @@ module.exports = (db) => {
       });
   });
   router.get("/:trip_id", (req, res) => {
-    const query = `SELECT users.id AS user_id ,users.first_name , users.last_name  , users.email, trips.id AS trip_id,trips.name AS trips_name, trips.description , stops.id AS stops_id,stops.day AS stop_days, stops.name AS stop_names,stops.type AS stop_types, stops.latitude AS stops_LAT , stops.longitude AS stops_LONG, routes.id AS routes_id,routes.latitude AS routes_LAT,routes.longitude AS routes_LONG,trips.start_date AS trip_start, trips.end_date AS trip_end
+    const query = `SELECT users.id AS user_id ,
+      users.first_name , 
+      users.last_name  , 
+      users.email, 
+      trips.id AS trip_id,
+      trips.name AS trips_name,
+      trips.description ,
+      stops.id AS stops_id,
+      stops.day AS stop_day, 
+      stops.name AS stop_name,
+      stops.type AS stop_types, 
+      stops.latitude AS stops_LAT , 
+      stops.longitude AS stops_LONG, 
+      stops.description as stop_description,
+      routes.id AS routes_id,
+      routes.latitude AS routes_LAT,
+      routes.longitude AS routes_LONG,
+      trips.start_date AS trip_start, 
+      trips.end_date AS trip_end
     FROM trip_owners
     JOIN trips ON trip_owners.trip_id=trips.id
     JOIN routes ON trip_owners.trip_id=routes.trip_id

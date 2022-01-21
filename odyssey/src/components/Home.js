@@ -5,7 +5,7 @@ import { parseDBMap, parseDBMarkers } from "../Helpers/mapHelper";
 import { getTrips } from "../Helpers/apiHelpers";
 import { formatTripData } from "../Helpers/dataHelpers";
 
-import "./component-styles/Home.scss";
+import "./component-styles/home.scss";
 import TripDisplayItemLink from "./TripDisplayItemLink";
 import BeginJourney from "./BeginJourney";
 
