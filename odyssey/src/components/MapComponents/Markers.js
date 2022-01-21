@@ -1,6 +1,5 @@
-import { useMapEvents } from "react-leaflet";
+
 import SingleMarker from "./SingleMarker";
-import MarkerForm from "./MarkerForm";
 
 function Markers(props) {
 
@@ -11,7 +10,6 @@ function Markers(props) {
     const icon = marker.icon ? marker.icon : "DEFAULT";
     const markerPosition = marker.position ? marker.position : [0, 0];
     // const iconAnchor = [markerWidth/2, markerHeight];
-
     return (
       <SingleMarker markerPosition={markerPosition}
         icon={icon}
