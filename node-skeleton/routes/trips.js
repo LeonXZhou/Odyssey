@@ -28,11 +28,38 @@ const createNewTrip = (db, tripInfo) => {
   //   .then((data)=>{return data.rows[0].trip_id});
   // });
 };
+function updateRoute(db, lat, lon, zoom,id) {
+  const query = `UPDATE routes
+    SET latitude  = $1,
+    longitude   = $2,
+    zoom = $3
+    WHERE id = $4;`;
+  const values = [lat ,lon, zoom,id];
+  return db.query(query, values);
+}
+function updateStops(db, day, name, lat , long ,type ,id) {
+  const query = `UPDATE stops
+    SET day  = $1,
+    name   = $2,
+    latitude  = $3,
+    longitude = $4,
+    type = $5
+    WHERE id = $6;`;
+  const values = [day ,name,lat,lon,type,id];
+  return db.query(query, values);
+}
+function insertNewStop(db, day, name, lat , long ,type ,id,route_id)  {
+  const query = `INSERT INTO stops (day, name, latitude, longitude ,type,id,route_id)
+  VALUES($1,$2,$3,$4,$5,$6,$7);`;
+  const values = [day ,name ,lat ,long ,type ,id ,route_id];
+
+  return db.query(query, values);
+}
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
     db.query(
-      `SELECT users.id AS user_id ,users.first_name , users.last_name  , users.email, trips.id AS trip_id,trips.name AS trips_name, trips.description , stops.id AS stops_id,stops.day AS stop_days, stops.name AS stop_names,stops.type AS stop_types, stops.latitude AS stops_LAT , stops.longitude AS stops_LONG, routes.id AS routes_id,routes.latitude AS routes_LAT,routes.longitude AS routes_LONG,trips.start_date AS trip_start, trips.end_date AS trip_end
+      `SELECT users.id AS user_id ,users.first_name , users.last_name  , users.email, trips.id AS trip_id,trips.name AS trips_name, trips.description , stops.id AS stops_id,stops.day AS stop_days, stops.name AS stop_names,stops.type AS stop_types, stops.latitude AS stops_LAT , stops.longitude AS stops_LONG, routes.id AS routes_id,routes.latitude AS routes_LAT,routes.longitude AS routes_LONG,trips.start_date AS trip_start, trips.end_date AS trip_end,routes.zoom AS routes_zoom
     FROM trips
     JOIN routes ON trips.id=routes.trip_id
     JOIN stops ON trips.id=stops.route_id
@@ -67,6 +94,7 @@ module.exports = (db) => {
       routes.id AS routes_id,
       routes.latitude AS routes_LAT,
       routes.longitude AS routes_LONG,
+      routes.zoom AS routes_zoom,
       trips.start_date AS trip_start, 
       trips.end_date AS trip_end
     FROM trip_owners
@@ -88,7 +116,7 @@ module.exports = (db) => {
   });
 
   router.get("/user/:user_id", (req, res) => {
-    const query = `SELECT users.id AS user_id ,users.first_name , users.last_name  , users.email, trips.id AS trip_id,trips.name AS trips_name, trips.description , stops.id AS stops_id,stops.day AS stop_days, stops.name AS stop_names,stops.type AS stop_types, stops.latitude AS stops_LAT , stops.longitude AS stops_LONG, routes.id AS routes_id,routes.latitude AS routes_LAT,routes.longitude AS routes_LONG,trips.start_date AS trip_start, trips.end_date AS trip_end
+    const query = `SELECT users.id AS user_id ,users.first_name , users.last_name  , users.email, trips.id AS trip_id,trips.name AS trips_name, trips.description , stops.id AS stops_id,stops.day AS stop_days, stops.name AS stop_names,stops.type AS stop_types, stops.latitude AS stops_LAT , stops.longitude AS stops_LONG, routes.id AS routes_id,routes.latitude AS routes_LAT,routes.longitude AS routes_LONG,trips.start_date AS trip_start, trips.end_date AS trip_end, routes.zoom AS routes_zoom
     FROM trip_owners
     JOIN trips ON trip_owners.trip_id=trips.id
     JOIN routes ON trip_owners.trip_id=routes.trip_id
@@ -114,5 +142,40 @@ module.exports = (db) => {
       });
     });
   });
+
+  router.post("/map/:map_id", (req,res)=>{
+
+    //{lat:lat,long:long,zoom:zoom})
+
+    console.log(req.body);
+        updateRoute(db,req.body.lat,req.body.long,req.body.zoom,req.params.map_id)
+        .then(() => {
+          res.send("success");
+        })
+        .catch((err) => {
+          res.status(500).json({ error: err.message });
+        });
+  });
+
+  router.post("/stop/stop_id", (req,res)=>{
+      updateStops(db, req.body.day, req.body.name, req.body.lat , req.body.long ,req.body.type ,req.params.stop_id)
+      .then(() => {
+        res.send("successfully updated stops");
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  })
+  router.post("/stops",(req,res)=>{
+    insertNewStop(db, req.body.day, req.body.name, req.body.lat , req.body.long ,req.body.type ,req.body.id,req.body.route_id)
+    .then(() => {
+      res.send("successfully inserted new stops");
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
+  })
+
+  
   return router;
 };
