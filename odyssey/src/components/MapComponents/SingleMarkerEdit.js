@@ -1,12 +1,19 @@
 import { Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 import { iconFinder } from "../../Helpers/markerHelpers";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import PopUpEdit from "./PopUpEdit";
 
 function SingleMarkerEdit(props) {
     const markerRef = useRef();
-
+    useEffect(()=>{     
+        if (!props.marker.stopId && markerRef.current)
+        {
+            markerRef.current.openPopup();
+            console.log('asdf wowpwowpwopw wop wop')
+        }
+    },[markerRef.current])
+    
     return (<Marker
         position={props.markerPosition}
         icon={
@@ -31,6 +38,9 @@ function SingleMarkerEdit(props) {
                     setRouteArray={props.setRouteArray}
                     stopId={props.marker.stopId}
                     mapId={props.marker.mapId}
+                    tripId={props.marker.tripId}
+                    type={props.marker.type}
+                    position={props.markerPosition}
                 />
             </Popup>
         ) : (

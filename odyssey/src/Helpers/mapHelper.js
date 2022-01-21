@@ -21,7 +21,7 @@ export function themeURLFinder(themeString) {
 
 // paseDBinput {lat: number, long number}
 export function parseDBMap(tripMaps) {
-  return { center: [tripMaps.lat, tripMaps.long], mapId: tripMaps.mapId, zoom:tripMaps.zoom }
+  return { center: [tripMaps.lat, tripMaps.long], mapId: tripMaps.mapId, zoom: tripMaps.zoom }
 }
 // parseDBMap options
 // mapOptions={
@@ -35,6 +35,10 @@ export function parseDBMap(tripMaps) {
 
 // parseDBinput [{type:"string",lat: number, long number}]
 export function parseDBMarkers(tripMarkers) {
+  console.log(tripMarkers)
+  if (tripMarkers.length < 1) {
+    return [];
+  }
   return tripMarkers.map((serverMarker) => {
     return {
       position: [serverMarker.lat, serverMarker.long],
@@ -44,8 +48,10 @@ export function parseDBMarkers(tripMarkers) {
         description: serverMarker.description,
         date: serverMarker.date,
       },
-      mapId:serverMarker.mapId,
-      stopId:serverMarker.stopId,
+      mapId: serverMarker.mapId,
+      stopId: serverMarker.stopId,
+      tripId: serverMarker.tripId,
+      type: serverMarker.type
     }
   })
 }

@@ -45,6 +45,7 @@ const Planning = (props) => {
 
   const checkPage = (props) => {
     const route = routeArray[0];
+    console.log(routeArray);
     if (props.page === "route" && Object.keys(route).length > 0 && props.edit === 'view') {
       return (
         <MapDisplay
@@ -57,7 +58,6 @@ const Planning = (props) => {
     if (props.page === "route" && Object.keys(route).length > 0 && props.edit === 'edit') {
       return (
         <MapProvider>
-
           <MapEditor
             //same map options as Mapdisplay
             mapOptions={parseDBMap(route.maps)}

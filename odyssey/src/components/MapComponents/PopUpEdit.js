@@ -1,3 +1,5 @@
+import { updateMarkerById, deleteMarker, getMapForTrip, addMarker } from "../../Helpers/apiHelpers";
+import { formatTripData } from "../../Helpers/dataHelpers";
 const findMarkerIndexByStopId = function (markers, stopId) {
     for (const i in markers) {
         if (stopId === markers[i].stopId) {
@@ -46,7 +48,7 @@ export default function PopUpEdit(props) {
                         })
                     }}></input>
                 <input type={'date'}
-                    onKeyDown={(e)=>{e.preventDefault()}}
+                    onKeyDown={(e) => { e.preventDefault() }}
                     min={start}
                     max={end}
                     value={stopDate}
@@ -69,8 +71,24 @@ export default function PopUpEdit(props) {
                             return newState
                         })
                     }}></input>
-                <button onClick={(e) => { console.log(props) }}>save</button>
-                <button>remove</button>
+                <button onClick={(e) => {
+                    e.preventDefault();
+                    if (props.stopId) {
+                        updateMarkerById(props.stopId, props.name, props.date, props.description, props.position[0], props.position[1], props.type)
+                    }
+                    if (!props.stopId) {
+                        addMarker(props.mapId, props.name, props.date, props.description, props.position[0], props.position[1], props.type)
+                    }
+                }}>save</button>
+                <button onClick={(e) => {
+                    e.preventDefault();
+                    deleteMarker(props.stopId)
+                        .then(() => {
+                            getMapForTrip(props.tripId).then((res) => {
+                                props.setRouteArray(formatTripData(res.data));
+                            })
+                        })
+                }}>remove</button>
             </form>
         </>
     )
