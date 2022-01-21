@@ -16,24 +16,24 @@ const Navigation = (props) => {
         <Link
           to={`/myTrips/${user.userId}`}
           type="button"
-          className="btn btn-default"
+          className="nav-button"
         >
           My Trips
         </Link>
-        <Link to="/" type="button" className="btn btn-default">
+        <Link to="/" type="button" className="nav-button">
           About
         </Link>
       </div>
       <div className="header-middle">
-        <Link to="/" type="button" className="btn btn-default">
+        <Link to="/" type="button" className="nav-button">
           <img className="logo" src={odyssey_logo} />
           Odyssey
         </Link>
       </div>
       {auth ? (
         <div className="header-right">
-          <div>{`${user.firstName}`}</div>
-          <Link to="/logout" type="button" className="btn btn-default">
+          <div className="nav-button">{`${user.firstName}`}</div>
+          <Link to="/logout" type="button" className="nav-button">
             Logout
           </Link>
         </div>

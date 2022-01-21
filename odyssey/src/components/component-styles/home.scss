@@ -1,17 +1,17 @@
 .home-page {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   flex-wrap: wrap;
   background-color: beige;
+  padding-bottom: 15%;
+
   .banner {
     display: flex;
     justify-content: center;
     align-items: center;
     display: flex;
-    height: 35em;
+    height: 40em;
     width: 100%;
-    zoom: 70%;
     background-image: url("../images/image1.jpeg");
     color: white;
     text-decoration: none;
@@ -20,23 +20,16 @@
     .begin-journey {
       background-color: transparent;
       border: none;
-      height: 6em;
+      height: 5em;
       width: 100%;
-      font-size: 100px;
+      font-size: 120px;
       color: white;
       text-decoration: none;
       text-shadow: 4px 4px black;
+      transition: 0.3s;
     }
-
-    .begin-journey-slideout {
-      background-color: transparent;
-      border: none;
-      height: 6em;
-
-      font-size: 100px;
-      color: white;
-      text-decoration: none;
-      text-shadow: 4px 4px black;
+    .begin-journey:hover {
+      transform: scale(1.02);
     }
 
     @keyframes fadein {
@@ -54,7 +47,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      zoom: 150%;
+      zoom: 160%;
       animation-duration: 1s;
       animation-name: fadein;
 
@@ -66,14 +59,17 @@
         margin: 0.25em;
         border: none;
         border-radius: 12px;
-        opacity: 85%;
         text-align: center;
+        outline: none;
+        transition: 0.3s;
+      }
+      .trip-title:hover {
+        transform: scale(1.05);
       }
       .date {
         display: flex;
         flex-direction: column;
         align-items: center;
-
         margin: 0.25em;
         border-radius: 12px;
         .date-text {
@@ -81,45 +77,61 @@
           font-size: 150%;
         }
         .date-input {
-          opacity: 85%;
           border: none;
           border-radius: 6px;
           text-align: center;
+          outline: none;
+          transition: 0.3s;
+        }
+        .date-input:hover {
+          transform: scale(1.05);
         }
       }
       .create-trip {
         display: flex;
         flex-direction: column;
         align-items: center;
-
+        border: none;
         margin: 0.25em;
         margin-top: 1.5em;
         border-radius: 12px;
         width: 10em;
-        opacity: 90%;
+        transition: 0.3s;
+      }
+      .create-trip:hover {
+        transform: scale(1.05);
       }
     }
   }
-  .add-button {
+
+  .home-discover {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    height: 3em;
-    width: 100%;
-    border-radius: 0;
-    background-color: rgb(194, 142, 142);
-    font-size: 20px;
+    height: 2em;
+    font-size: 40px;
+    margin-top: 1em;
+    .down-arrow {
+      animation-duration: 1.25s;
+      animation-name: bounce;
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
+    }
+
+    @keyframes bounce {
+      from {
+        margin-top: -3%;
+      }
+
+      to {
+        margin-top: -5%;
+      }
+    }
   }
+
   .trip-cards {
     display: flex;
     justify-content: space-around;
     width: 100%;
-  }
-  .arrows {
-    display: flex;
-    justify-content: center;
-    height: 25%;
-    position: relative;
-    top: 2px;
   }
 }

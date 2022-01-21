@@ -2,10 +2,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 3em;
+
   background-color: #f3f2ef;
-  border-bottom: 1.5px solid grey;
+  border-bottom: 2px solid grey;
   font-family: Helvetica;
+  font-size: 175%;
   .header-left {
     display: flex;
     justify-content: space-around;
@@ -14,9 +15,9 @@
   }
   .header-middle {
     display: flex;
-    margin-right: 15%;
+    margin-right: 12.5%;
     .logo {
-      height: 2.5em;
+      height: 3em;
       position: relative;
       bottom: 2px;
     }
@@ -24,7 +25,8 @@
   .header-right {
     display: flex;
     justify-content: space-around;
-    width: 9em;
+    align-items: center;
+    width: 11em;
 
     .signup {
       color: #f3f2ef;
