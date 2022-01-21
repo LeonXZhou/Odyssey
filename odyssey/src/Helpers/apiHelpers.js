@@ -50,8 +50,7 @@ export function newMealOnDay(day_id, name) {
   });
 }
 
-export function updateMealCard(day_id,meal_id,meal_name,meal_items)
-{
+export function updateMealCard(day_id, meal_id, meal_name, meal_items) {
   const { newItems, updatedItems } = sqlizeMealItems(meal_items);
   const postData = {
     meal_name: meal_name,
@@ -139,9 +138,24 @@ export function deleteCategory(trip_id, category_id) {
 export function deleteCategoryItem(item_id) {
   return axios.post(`/api/equipment/delete/${item_id}`);
 }
+//EQUIPMENT API END
+//EQUIPMENT API END
+//EQUIPMENT API END
+//EQUIPMENT API END
 
 export function authenticate() {
   return axios.get(`/authenticate`);
+}
+
+
+
+//General Trip API Start
+//General Trip API Start
+//General Trip API Start
+//General Trip API Start
+export function getAboutForTrip(trip_id) {
+  return axios.get("/api/trips/:trip_id"
+  )
 }
 
 export function insertNewTrip(user_id, name, startDate, endDate) {
@@ -152,8 +166,7 @@ export function insertNewTrip(user_id, name, startDate, endDate) {
     endDate: endDate,
   });
 }
-
-//EQUIPMENT API END
-//EQUIPMENT API END
-//EQUIPMENT API END
-//EQUIPMENT API END
+//General Trip API End
+//General Trip API End
+//General Trip API End
+//General Trip API End

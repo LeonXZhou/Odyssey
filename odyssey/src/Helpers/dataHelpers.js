@@ -20,11 +20,15 @@ export function formatTripData(allTripData) {
       type: dataPoint.stop_types,
       lat: dataPoint.stops_lat,
       long: dataPoint.stops_long,
+      name: dataPoint.stop_name,
+      date: dataPoint.stop_day,
+      description: dataPoint.stop_description
     });
     if (!formatedTripData[dataPoint.trip_id]["maps"]) {
       formatedTripData[dataPoint.trip_id]["maps"] = {
         lat: dataPoint.routes_lat,
         long: dataPoint.routes_long,
+        mapId: dataPoint.routes_id
       };
     }
     if (!formatedTripData[dataPoint.trip_id]["users"]) {
@@ -33,6 +37,8 @@ export function formatTripData(allTripData) {
         LastName: dataPoint.last_name,
       };
     }
+    formatedTripData[dataPoint.trip_id].startDate = dataPoint.trip_start;
+    formatedTripData[dataPoint.trip_id].endDate = dataPoint.trip_end
   }
   for (const data in formatedTripData) {
     formatedTripData[data]["trip_id"] = data;

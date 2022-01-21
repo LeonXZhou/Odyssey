@@ -1,19 +1,29 @@
 import { useMapEvents } from "react-leaflet";
-import SingleMarker from "./SingleMarker";
+import { useContext } from "react";
+import { mapContext } from "../providers/MapProvider";
+import { useEffect } from "react";
+import SingleMarkerEdit from "./SingleMarkerEdit";
 import MarkerForm from "./MarkerForm";
 
-function Markers(props) {
+function MarkersEdit(props) {
 
-  useMapEvents({
+  const thisMap = useMapEvents({
     click: (e) => {
-      props.setMarkers((prev) => {
-        return [...prev, {
-          position: [e.latlng.lat, e.latlng.lng], iconSize: [20, 20], icon: props.icon, popUp: {
-            content: <MarkerForm/>  }
-        }]
-      })
+      if (props.editable) {
+        props.setMarkers((prev) => {
+          return [...prev, {
+            position: [e.latlng.lat, e.latlng.lng], iconSize: [20, 20], icon: props.icon, popUp: {
+              content: <MarkerForm />
+            }
+          }]
+        })
+        props.setEditable(false);
+      }
     },
   })
+  const { map,setMap } = useContext(mapContext);
+  useEffect(() => { setMap(thisMap)}, [])
+
 
   const markersJSX = props.markers.map((marker, i) => {
     //setting default options for markers
@@ -24,15 +34,18 @@ function Markers(props) {
     // const iconAnchor = [markerWidth/2, markerHeight];
 
     return (
-      <SingleMarker markerPosition={markerPosition}
+      <SingleMarkerEdit markerPosition={markerPosition}
         icon={icon}
         markerWidth={markerWidth}
         markerHeight={markerHeight}
-        marker={marker} 
-        key={i}/>
+        marker={marker}
+        key={i}
+        startDate={props.startDate}
+        endDate={props.endDate}
+        setRouteArray={props.setRouteArray} />
     );
   });
   return markersJSX;
 }
 
-export default Markers;
+export default MarkersEdit;
