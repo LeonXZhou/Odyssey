@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { useContext } from "react";
 import { mapContext } from "../providers/MapProvider";
 
+import { updateMapById } from "../../Helpers/apiHelpers"
 import { themeAttributionFinder, themeURLFinder } from '../../Helpers/mapHelper';
 import MarkersEdit from './MarkersEdit';
 
@@ -16,7 +17,7 @@ function MapEditor(props) {
   const [editable, setEditable] = useState(false);
   //markers state represents the markers on this map. defaults to the props passed in.
   //the "marker" object passed in is converted to jsx by generateMarkers in markerHelpers function
-  const [markers, setMarkers] = useState(props.markers);
+  // const [markers, setMarkers] = useState(props.markers);
   const [iconValue, setIconValue] = useState('TENT');
   //Defaulting Map Themes (theme...Finder() converts theme string such as 'TOPO' to the random garbage string that theme actually needs)
   const mapThemeAttribution = props.mapOptions && themeAttributionFinder(props.mapOptions.themeAttribution);
@@ -39,8 +40,8 @@ function MapEditor(props) {
         <MapContainer center={props.mapOptions.center} zoom={props.mapOptions.zoom} scrollWheelZoom={true} doubleClickZoom={false}>
           <TileLayer attribution={mapThemeAttribution} url={mapThemeURL} />
           <MarkersEdit
-            markers={markers}
-            setMarkers={setMarkers}
+            markers={props.markers}
+            // setMarkers={setMarkers}
             icon={iconValue}
             editable={editable}
             setEditable={setEditable}
@@ -63,7 +64,7 @@ function MapEditor(props) {
       </button>
       <button onClick={(e) => {
         e.preventDefault();
-        map.flyTo([50, 30]);
+        updateMapById(props.mapOptions.mapId,map.getCenter().lat,map.getCenter().lng,map.getZoom())
       }} className={"add mapButton"}>
         Save Map
       </button>

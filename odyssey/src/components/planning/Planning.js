@@ -48,8 +48,6 @@ const Planning = (props) => {
     if (props.page === "route" && Object.keys(route).length > 0 && props.edit === 'view') {
       return (
         <MapDisplay
-        mapOptions={props.mapOptions}
-        markers={props.markers}
         mapOptions={parseDBMap(route.maps)}
         markers={parseDBMarkers(route.markers)}
       ></MapDisplay>

@@ -9,9 +9,23 @@ export function getTripsByUser(user_id) {
   return axios.get(`/api/trips/user/${user_id}`);
 }
 
+
+//Map API Start
+//Map API Start
+//Map API Start
+//Map API Start
 export function getMapForTrip(trip_id) {
   return axios.get(`/api/trips/${trip_id}`);
 }
+
+export function updateMapById(map_id,lat,long,zoom){
+  console.log({lat:lat,long:long,zoom:zoom})
+  return axios.post(`/api/trips/map/${map_id}`,{lat:lat,long:long,zoom:zoom})
+}
+//Map API end
+//Map API end
+//Map API end
+//Map API end
 
 //Meal API START
 //Meal API START
@@ -154,8 +168,7 @@ export function authenticate() {
 //General Trip API Start
 //General Trip API Start
 export function getAboutForTrip(trip_id) {
-  return axios.get("/api/trips/:trip_id"
-  )
+  return axios.get("/api/trips/:trip_id")
 }
 
 export function insertNewTrip(user_id, name, startDate, endDate) {
@@ -170,3 +183,4 @@ export function insertNewTrip(user_id, name, startDate, endDate) {
 //General Trip API End
 //General Trip API End
 //General Trip API End
+

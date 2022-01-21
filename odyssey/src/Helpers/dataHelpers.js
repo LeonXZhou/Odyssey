@@ -22,14 +22,18 @@ export function formatTripData(allTripData) {
       long: dataPoint.stops_long,
       name: dataPoint.stop_name,
       date: dataPoint.stop_day,
+      mapId: dataPoint.routes_id,
+      stopId: dataPoint.stops_id,
       description: dataPoint.stop_description
     });
     if (!formatedTripData[dataPoint.trip_id]["maps"]) {
       formatedTripData[dataPoint.trip_id]["maps"] = {
         lat: dataPoint.routes_lat,
         long: dataPoint.routes_long,
-        mapId: dataPoint.routes_id
+        mapId: dataPoint.routes_id,
+        zoom: dataPoint.routes_zoom
       };
+      console.log("I promise i will re move this one",dataPoint.routes_zoom)
     }
     if (!formatedTripData[dataPoint.trip_id]["users"]) {
       formatedTripData[dataPoint.trip_id]["users"] = {
