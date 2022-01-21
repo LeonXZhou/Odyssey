@@ -16,16 +16,19 @@ export function formatTripData(allTripData) {
     if (!formatedTripData[dataPoint.trip_id]["markers"]) {
       formatedTripData[dataPoint.trip_id]["markers"] = [];
     }
-    formatedTripData[dataPoint.trip_id]["markers"].push({
-      type: dataPoint.stop_types,
-      lat: dataPoint.stops_lat,
-      long: dataPoint.stops_long,
-      name: dataPoint.stop_name,
-      date: dataPoint.stop_day,
-      mapId: dataPoint.routes_id,
-      stopId: dataPoint.stops_id,
-      description: dataPoint.stop_description
-    });
+    if (dataPoint.stops_id) {
+      formatedTripData[dataPoint.trip_id]["markers"].push({
+        type: dataPoint.stop_types,
+        lat: dataPoint.stops_lat,
+        long: dataPoint.stops_long,
+        name: dataPoint.stop_name,
+        date: dataPoint.stop_day,
+        mapId: dataPoint.routes_id,
+        stopId: dataPoint.stops_id,
+        tripId: dataPoint.trip_id,
+        description: dataPoint.stop_description
+      });
+    }
     if (!formatedTripData[dataPoint.trip_id]["maps"]) {
       formatedTripData[dataPoint.trip_id]["maps"] = {
         lat: dataPoint.routes_lat,
@@ -33,7 +36,6 @@ export function formatTripData(allTripData) {
         mapId: dataPoint.routes_id,
         zoom: dataPoint.routes_zoom
       };
-      console.log("I promise i will re move this one",dataPoint.routes_zoom)
     }
     if (!formatedTripData[dataPoint.trip_id]["users"]) {
       formatedTripData[dataPoint.trip_id]["users"] = {
@@ -111,8 +113,7 @@ export function formatTripMealsData(allMealData) {
       formattedMealData[mealRow.days_id]["meals"][mealRow.meals_id]["mealItems"][mealRow.meal_itemid] = {};
     }
 
-    if (mealRow.meal_itemid)
-    {
+    if (mealRow.meal_itemid) {
       formattedMealData[mealRow.days_id]["meals"][mealRow.meals_id]["mealItems"][mealRow.meal_itemid]["mealItemName"] = mealRow.food_item;
       formattedMealData[mealRow.days_id]["meals"][mealRow.meals_id]["mealItems"][mealRow.meal_itemid]["mealItemQuantity"] = mealRow.quantity;
       formattedMealData[mealRow.days_id]["meals"][mealRow.meals_id]["mealItems"][mealRow.meal_itemid]["mealItemId"] = mealRow.meal_itemid;

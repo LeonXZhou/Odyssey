@@ -18,9 +18,22 @@ export function getMapForTrip(trip_id) {
   return axios.get(`/api/trips/${trip_id}`);
 }
 
-export function updateMapById(map_id,lat,long,zoom){
-  console.log({lat:lat,long:long,zoom:zoom})
-  return axios.post(`/api/trips/map/${map_id}`,{lat:lat,long:long,zoom:zoom})
+export function updateMapById(map_id, lat, long, zoom) {
+  console.log({ lat: lat, long: long, zoom: zoom })
+  return axios.post(`/api/trips/map/${map_id}`, { lat: lat, long: long, zoom: zoom })
+}
+
+export function updateMarkerById(marker_id, name, date, description,lat,lng,type) {
+  // console.log(marker_id,name,date,description,lat,lng);
+  return axios.post(`/api/trips/stop/${marker_id}`,{name:name,date:date,description,lat,lng,type})
+}
+
+export function addMarker(route_id, name, date, description,lat,lng,type){
+  return axios.post(`/api/trips/stop`,{route_id,name:name,date:date,description,lat,lng,type})
+}
+export function deleteMarker(marker_id)
+{
+  return axios.delete(`/api/trips/stop/${marker_id}`);
 }
 //Map API end
 //Map API end

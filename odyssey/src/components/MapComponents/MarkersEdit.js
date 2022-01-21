@@ -11,18 +11,26 @@ function MarkersEdit(props) {
     click: (e) => {
       if (props.editable) {
         props.setRouteArray((prev) => {
-          return [...prev, {
-            position: [e.latlng.lat, e.latlng.lng], iconSize: [20, 20], icon: props.icon, popUp: {
-              content: <MarkerForm />
-            }
+          const newState = [...prev];
+          newState[0].markers = [...newState[0].markers, {
+            date:props.startDate,
+            description:"",
+            lat:e.latlng.lat,
+            long:e.latlng.lng,
+            mapId:props.markers[0].mapId,
+            name:"",
+            type:props.icon,
+            stopId: null,
+            tripId:props.markers[0].tripId
           }]
+          return newState;
         })
         props.setEditable(false);
       }
     },
   })
-  const { map,setMap } = useContext(mapContext);
-  useEffect(() => { setMap(thisMap)}, [])
+  const { map, setMap } = useContext(mapContext);
+  useEffect(() => { setMap(thisMap) }, [])
 
 
   const markersJSX = props.markers.map((marker, i) => {

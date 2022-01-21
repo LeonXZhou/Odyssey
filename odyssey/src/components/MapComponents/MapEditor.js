@@ -22,7 +22,6 @@ function MapEditor(props) {
   //Defaulting Map Themes (theme...Finder() converts theme string such as 'TOPO' to the random garbage string that theme actually needs)
   const mapThemeAttribution = props.mapOptions && themeAttributionFinder(props.mapOptions.themeAttribution);
   const mapThemeURL = props.mapOptions && themeURLFinder(props.mapOptions.themeAttribution);
-  console.log('how many more console logs will i have to write', props);
   if (!props.mapOptions.zoom) {
     props.mapOptions.zoom = 12;
   }
