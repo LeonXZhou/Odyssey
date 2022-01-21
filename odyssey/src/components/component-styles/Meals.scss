@@ -1,9 +1,6 @@
 .meals {
   display: flex;
-  width: 100%;
-  flex-wrap: wrap;
-  overflow: auto;
-  div {
-    width: 100%;
-  }
+  flex-direction: column;
+  width: 80%;
+  background-image: url("../images/image7.jpeg");
 }
