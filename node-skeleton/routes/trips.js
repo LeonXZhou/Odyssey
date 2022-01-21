@@ -49,10 +49,10 @@ function updateStops(db, day, name, lat, lng, type, id, description) {
   const values = [day, name, lat, lng, type, description, id];
   return db.query(query, values);
 }
-function insertNewStop(db, day, name, lat, long, type, route_id) {
-  const query = `INSERT INTO stops (day, name, latitude, longitude ,type,route_id)
-  VALUES($1,$2,$3,$4,$5,$6);`;
-  const values = [day, name, lat, long, type, route_id];
+function insertNewStop(db, day, name, lat, long, type, route_id,description) {
+  const query = `INSERT INTO stops (day, name, latitude, longitude ,type,route_id, description)
+  VALUES($1,$2,$3,$4,$5,$6,$7);`;
+  const values = [day, name, lat, long, type, route_id,description];
 
   return db.query(query, values);
 }
@@ -188,7 +188,7 @@ module.exports = (db) => {
 
 
   router.post("/stop", (req, res) => {
-    insertNewStop(db, req.body.date, req.body.name, req.body.lat, req.body.lng, req.body.type, req.body.route_id)
+    insertNewStop(db, req.body.date, req.body.name, req.body.lat, req.body.lng, req.body.type, req.body.route_id,req.body.description)
       .then(() => {
         res.send("successfully inserted new stops");
       })

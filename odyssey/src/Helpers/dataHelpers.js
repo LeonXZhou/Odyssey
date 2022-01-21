@@ -36,7 +36,6 @@ export function formatTripData(allTripData) {
         mapId: dataPoint.routes_id,
         zoom: dataPoint.routes_zoom
       };
-      console.log("I promise i will re move this one", dataPoint.routes_zoom)
     }
     if (!formatedTripData[dataPoint.trip_id]["users"]) {
       formatedTripData[dataPoint.trip_id]["users"] = {
