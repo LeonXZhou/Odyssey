@@ -6,12 +6,6 @@ import PopUpDisplay from "./PopUpDisplay";
 
 function SingleMarker(props) {
     const markerRef = useRef();
-    // useEffect(() => {
-    //     if (markerRef.current) {
-    //         markerRef.current.openPopup();
-    //     }
-    // }, [markerRef.current]);
-    console.log(props);
 
     return(<Marker
         position={props.markerPosition}

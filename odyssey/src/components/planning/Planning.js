@@ -39,9 +39,7 @@ const Planning = (props) => {
       setMealState(formatTripMealsData(res.data));
     });
     
-    console.log("ooops");
   }, [trip_id]);
-  console.log("this is tripsArray",routeArray);
 
   const checkPage = (props) => {
     const route = routeArray[0];
@@ -57,7 +55,6 @@ const Planning = (props) => {
     if (props.page === "route" && Object.keys(route).length > 0 && props.edit === 'edit') {
       return (
         <MapProvider>
-
           <MapEditor
             //same map options as Mapdisplay
             mapOptions={parseDBMap(route.maps)}
