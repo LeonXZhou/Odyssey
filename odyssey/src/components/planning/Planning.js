@@ -39,13 +39,10 @@ const Planning = (props) => {
       setMealState(formatTripMealsData(res.data));
     });
     
-    console.log("ooops");
   }, [trip_id]);
-  console.log("this is tripsArray",routeArray);
 
   const checkPage = (props) => {
     const route = routeArray[0];
-    console.log(routeArray);
     if (props.page === "route" && Object.keys(route).length > 0 && props.edit === 'view') {
       return (
         <MapDisplay

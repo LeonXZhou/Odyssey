@@ -24,7 +24,6 @@ export default function PopUpEdit(props) {
 
         stopDate = new Date(props.date).toISOString().split('T')[0];
     }
-    console.log("psdfasdfasdfasdfasdfowerowoeruiocvoibuofjflowerspe", props)
     // start.toISOString().split('T')[0]
     // const [startMonth, startDay, startYear] = [start.getMonth()+1, start.getDate(), start.getFullYear()];
     // const end = new Date(props.endDate);
@@ -61,7 +60,7 @@ export default function PopUpEdit(props) {
                             return newState
                         })
                     }}></input>
-                <input type={'description'} placeholder="description" value={props.description}
+                <input type={'text'} placeholder="description" value={props.description}
                     onChange={(e) => {
                         props.setRouteArray((prev) => {
                             const newState = [...prev];
@@ -71,13 +70,41 @@ export default function PopUpEdit(props) {
                             return newState
                         })
                     }}></input>
+                <input type={'number'} placeholder="lat" value={props.position[0]}
+                    onChange={(e) => {
+                        props.setRouteArray((prev) => {
+                            const newState = [...prev];
+                            const markerIndex = findMarkerIndexByStopId(newState[0].markers, props.stopId);
+                            newState[0].markers = [...newState[0].markers];
+                            newState[0].markers[markerIndex] = { ...newState[0].markers[markerIndex], lat: e.target.value }
+                            console.log(newState)
+                            return newState
+                        })
+                    }}></input>
+                <input type={'number'} placeholder="lng" value={props.position[1]}
+                    onChange={(e) => {
+                        props.setRouteArray((prev) => {
+                            const newState = [...prev];
+                            const markerIndex = findMarkerIndexByStopId(newState[0].markers, props.stopId);
+                            newState[0].markers = [...newState[0].markers];
+                            newState[0].markers[markerIndex] = { ...newState[0].markers[markerIndex], long: e.target.value }
+                            return newState
+                        })
+                    }}></input>
                 <button onClick={(e) => {
                     e.preventDefault();
                     if (props.stopId) {
                         updateMarkerById(props.stopId, props.name, props.date, props.description, props.position[0], props.position[1], props.type)
+                            .then(() => { props.markerRef.current.closePopup(); })
                     }
                     if (!props.stopId) {
                         addMarker(props.mapId, props.name, props.date, props.description, props.position[0], props.position[1], props.type)
+                            .then(() => {
+                                getMapForTrip(props.tripId).then((res) => {
+                                    props.markerRef.current.closePopup();
+                                    props.setRouteArray(formatTripData(res.data));
+                                })
+                            })
                     }
                 }}>save</button>
                 <button onClick={(e) => {
@@ -85,6 +112,7 @@ export default function PopUpEdit(props) {
                     deleteMarker(props.stopId)
                         .then(() => {
                             getMapForTrip(props.tripId).then((res) => {
+                                props.markerRef.current.closePopup();
                                 props.setRouteArray(formatTripData(res.data));
                             })
                         })

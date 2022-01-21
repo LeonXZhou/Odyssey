@@ -35,7 +35,6 @@ export function parseDBMap(tripMaps) {
 
 // parseDBinput [{type:"string",lat: number, long number}]
 export function parseDBMarkers(tripMarkers) {
-  console.log(tripMarkers)
   if (tripMarkers.length < 1) {
     return [];
   }

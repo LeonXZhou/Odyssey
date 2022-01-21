@@ -6,14 +6,15 @@ import PopUpEdit from "./PopUpEdit";
 
 function SingleMarkerEdit(props) {
     const markerRef = useRef();
-    useEffect(()=>{     
-        if (!props.marker.stopId && markerRef.current)
-        {
+
+    useEffect(() => {
+        if (props.marker.stopId === null && markerRef.current && props.marker.tripId) {
+            console.log("this is stopid", props.stopId)
             markerRef.current.openPopup();
-            console.log('asdf wowpwowpwopw wop wop')
         }
-    },[markerRef.current])
+    }, [markerRef.current])
     
+
     return (<Marker
         position={props.markerPosition}
         icon={
@@ -41,6 +42,7 @@ function SingleMarkerEdit(props) {
                     tripId={props.marker.tripId}
                     type={props.marker.type}
                     position={props.markerPosition}
+                    markerRef={markerRef}
                 />
             </Popup>
         ) : (
