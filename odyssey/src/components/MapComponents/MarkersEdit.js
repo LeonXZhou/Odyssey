@@ -10,7 +10,7 @@ function MarkersEdit(props) {
   const thisMap = useMapEvents({
     click: (e) => {
       if (props.editable) {
-        props.setMarkers((prev) => {
+        props.setRouteArray((prev) => {
           return [...prev, {
             position: [e.latlng.lat, e.latlng.lng], iconSize: [20, 20], icon: props.icon, popUp: {
               content: <MarkerForm />
