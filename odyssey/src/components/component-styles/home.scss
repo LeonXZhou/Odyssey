@@ -3,8 +3,103 @@
   flex-direction: row;
   justify-content: space-between;
   flex-wrap: wrap;
-  width: 100%;
   background-color: beige;
+  .banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    height: 35em;
+    width: 100%;
+    zoom: 70%;
+    background-image: url("../images/image1.jpeg");
+    color: white;
+    text-decoration: none;
+    text-shadow: 3px 3px black;
+
+    .begin-journey {
+      background-color: transparent;
+      border: none;
+      height: 6em;
+      width: 100%;
+      font-size: 100px;
+      color: white;
+      text-decoration: none;
+      text-shadow: 4px 4px black;
+    }
+
+    .begin-journey-slideout {
+      background-color: transparent;
+      border: none;
+      height: 6em;
+
+      font-size: 100px;
+      color: white;
+      text-decoration: none;
+      text-shadow: 4px 4px black;
+    }
+
+    @keyframes fadein {
+      from {
+        opacity: 0%;
+      }
+
+      to {
+        opacity: 100%;
+      }
+    }
+
+    .details {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      zoom: 150%;
+      animation-duration: 1s;
+      animation-name: fadein;
+
+      .trip-title {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        zoom: 110%;
+        margin: 0.25em;
+        border: none;
+        border-radius: 12px;
+        opacity: 85%;
+        text-align: center;
+      }
+      .date {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        margin: 0.25em;
+        border-radius: 12px;
+        .date-text {
+          display: flex;
+          font-size: 150%;
+        }
+        .date-input {
+          opacity: 85%;
+          border: none;
+          border-radius: 6px;
+          text-align: center;
+        }
+      }
+      .create-trip {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        margin: 0.25em;
+        margin-top: 1.5em;
+        border-radius: 12px;
+        width: 10em;
+        opacity: 90%;
+      }
+    }
+  }
   .add-button {
     display: flex;
     justify-content: center;

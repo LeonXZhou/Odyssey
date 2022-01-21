@@ -41,7 +41,7 @@ const MyTrips = (props) => {
   });
   return (
     <main className="home-page">
-      <BeginJourney userEmail={props.userEmail}></BeginJourney>
+      {/* <BeginJourney userEmail={props.userEmail}></BeginJourney> */}
       <section className="trip-cards">{displayedTrips}</section>
     </main>
   );
