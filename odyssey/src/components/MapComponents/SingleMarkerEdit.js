@@ -6,12 +6,6 @@ import PopUpEdit from "./PopUpEdit";
 
 function SingleMarkerEdit(props) {
     const markerRef = useRef();
-    // useEffect(() => {
-    //     if (markerRef.current) {
-    //         markerRef.current.openPopup();
-    //     }
-    // }, [markerRef.current]);
-    console.log('asdfasdfasdfasdf', props);
 
     return (<Marker
         position={props.markerPosition}
@@ -25,12 +19,6 @@ function SingleMarkerEdit(props) {
         }
 
         ref={markerRef}
-
-    // eventHandlers={{
-    //     click: (e) => {
-    //         e.target.remove()
-    //     },
-    // }}
     >
         {props.marker.popUp ? (
             <Popup >
@@ -41,6 +29,8 @@ function SingleMarkerEdit(props) {
                     endDate={props.endDate}
                     startDate={props.startDate}
                     setRouteArray={props.setRouteArray}
+                    stopId={props.marker.stopId}
+                    mapId={props.marker.mapId}
                 />
             </Popup>
         ) : (
