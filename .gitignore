@@ -22,3 +22,4 @@ odyssey/package.json
 
 node-skeleton/.env
 node-skeleton/node_modules
+node-skeleton/package-lock.json

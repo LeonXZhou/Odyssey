@@ -5,7 +5,7 @@ import { parseDBMap, parseDBMarkers } from "../Helpers/mapHelper";
 import { getTrips } from "../Helpers/apiHelpers";
 import { formatTripData } from "../Helpers/dataHelpers";
 
-import "./component-styles/Home.scss";
+import "./component-styles/home.scss";
 import TripDisplayItemLink from "./TripDisplayItemLink";
 import BeginJourney from "./BeginJourney";
 
@@ -14,12 +14,13 @@ const Home = (props) => {
 
   useEffect(() => {
     getTrips().then((res) => {
+      console.log(res.data);
       setTripsArray(formatTripData(res.data));
     });
   }, []);
 
   const displayedTrips = tripsArray.map((trip, i) => {
-    console.log(trip);
+    console.log('big bad console log here to get you',trip.maps)
     return (
       <TripDisplayItemLink
         key={i}
