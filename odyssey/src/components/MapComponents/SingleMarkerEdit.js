@@ -1,19 +1,13 @@
 import { Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 import { iconFinder } from "../../Helpers/markerHelpers";
-import { useRef} from "react";
-import PopUpDisplay from "./PopUpDisplay";
+import { useRef } from "react";
+import PopUpEdit from "./PopUpEdit";
 
-function SingleMarker(props) {
+function SingleMarkerEdit(props) {
     const markerRef = useRef();
-    // useEffect(() => {
-    //     if (markerRef.current) {
-    //         markerRef.current.openPopup();
-    //     }
-    // }, [markerRef.current]);
-    console.log(props);
 
-    return(<Marker
+    return (<Marker
         position={props.markerPosition}
         icon={
             new L.Icon({
@@ -25,16 +19,19 @@ function SingleMarker(props) {
         }
 
         ref={markerRef}
-
-        // eventHandlers={{
-        //     click: (e) => {
-        //         e.target.remove()
-        //     },
-        // }}
     >
         {props.marker.popUp ? (
             <Popup >
-                <PopUpDisplay name={props.marker.popUp.name} date={props.marker.popUp.date} description={props.marker.popUp.description}></PopUpDisplay>
+                <PopUpEdit
+                    name={props.marker.popUp.name}
+                    date={props.marker.popUp.date}
+                    description={props.marker.popUp.description}
+                    endDate={props.endDate}
+                    startDate={props.startDate}
+                    setRouteArray={props.setRouteArray}
+                    stopId={props.marker.stopId}
+                    mapId={props.marker.mapId}
+                />
             </Popup>
         ) : (
             <></>
@@ -43,4 +40,4 @@ function SingleMarker(props) {
 
 }
 
-export default SingleMarker;
+export default SingleMarkerEdit;

@@ -1,14 +1,16 @@
 //react imports
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router";
+import { Route, useParams } from "react-router";
 //leaflet imports
 import "../component-styles/Planning.scss";
 //local imports
 import Sidebar from "./Sidebar";
-import TripDisplayItem from "../TripDisplayItem";
+import MapDisplay from "../MapComponents/MapDisplay";
 import Equipment from "./Equipment/Equipment";
 import Meals from "./Meal/Meals";
 import Emergency from "./Emergency";
+import MapEditor from "../MapComponents/MapEditor";
+import MapProvider from '../providers/MapProvider';
 import {
   formatTripData,
   formatTripEquipmentData,
@@ -36,23 +38,35 @@ const Planning = (props) => {
     getMealsForTrip(trip_id).then((res) => {
       setMealState(formatTripMealsData(res.data));
     });
+    
     console.log("ooops");
   }, [trip_id]);
-  console.log("this is tripsArray");
+  console.log("this is tripsArray",routeArray);
 
   const checkPage = (props) => {
     const route = routeArray[0];
-    if (props.page === "route" && Object.keys(route).length > 0) {
+    if (props.page === "route" && Object.keys(route).length > 0 && props.edit === 'view') {
       return (
-        <TripDisplayItem
-          key={trip_id}
-          mapOptions={parseDBMap(route.maps)}
-          markers={parseDBMarkers(route.markers)}
-          name={"asdf"}
-          description={"ASDF"}
-          username={"asdf"}
-          trip_id={route.trip_id}
-        />
+        <MapDisplay
+        mapOptions={parseDBMap(route.maps)}
+        markers={parseDBMarkers(route.markers)}
+      ></MapDisplay>
+
+      );
+    }
+    if (props.page === "route" && Object.keys(route).length > 0 && props.edit === 'edit') {
+      return (
+        <MapProvider>
+
+          <MapEditor
+            //same map options as Mapdisplay
+            mapOptions={parseDBMap(route.maps)}
+            markers={parseDBMarkers(route.markers)}
+            startDate={route.startDate}
+            endDate={route.endDate}
+            setRouteArray={setRouteArray}
+          ></MapEditor>
+        </MapProvider>
       );
     }
     if (props.page === "equipment") {
