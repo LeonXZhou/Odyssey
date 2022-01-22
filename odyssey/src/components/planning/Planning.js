@@ -92,7 +92,7 @@ const Planning = (props) => {
       );
     }
     if (props.page === "emergency") {
-      return <Emergency trip_id={trip_id} />;
+      return <Emergency />;
     }
     return <></>;
   };
