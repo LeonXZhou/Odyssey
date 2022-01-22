@@ -223,11 +223,23 @@ export function insertNewTrip(user_id, name, startDate, endDate) {
 //General Trip API End
 //General Trip API End
 
+//EQUIPMENT API END
+//EQUIPMENT API END
+//EQUIPMENT API END
+//EQUIPMENT API END
+
+export function emergencyContacts() {
+  return axios.get(`/api/emergency-contact`)
+}
+//EMERGENCY API SART
+//EMERGENCY API SART
+//EMERGENCY API SART
+
 // EMERGENCY CONTACT API START
 // EMERGENCY CONTACT API START
 // EMERGENCY CONTACT API START
 
-export default function updateEmergencyContact(
+export  function updateEmergencyContact(
   trip_id,
   name,
   phone_number,
@@ -236,9 +248,16 @@ export default function updateEmergencyContact(
   message_sent,
   send_date
 ) {
-  console.log("EMERGENCY", trip_id);
+  return axios.post(`/:user_id/update_contact`)
+}
+export function  deleteEmergencyContact(id) {
+  return axios.post(`/:user_id/delete_contact`)
+}
+export function  insertEmergencyContact(name , phone_number,email) {
+  return axios.post(`/:user_id/new_contact`)
 }
 
 // EMERGENCY CONTACT API END
 // EMERGENCY CONTACT API END
 // EMERGENCY CONTACT API END
+
