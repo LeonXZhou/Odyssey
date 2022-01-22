@@ -8,9 +8,9 @@ import Sidebar from "./Sidebar";
 import MapDisplay from "../MapComponents/MapDisplay";
 import Equipment from "./Equipment/Equipment";
 import Meals from "./Meal/Meals";
-import Emergency from "./Emergency";
+import Emergency from "./Emergency/Emergency";
 import MapEditor from "../MapComponents/MapEditor";
-import MapProvider from '../providers/MapProvider';
+import MapProvider from "../providers/MapProvider";
 import {
   formatTripData,
   formatTripEquipmentData,
@@ -38,21 +38,27 @@ const Planning = (props) => {
     getMealsForTrip(trip_id).then((res) => {
       setMealState(formatTripMealsData(res.data));
     });
-    
   }, [trip_id]);
 
   const checkPage = (props) => {
     const route = routeArray[0];
-    if (props.page === "route" && Object.keys(route).length > 0 && props.edit === 'view') {
+    if (
+      props.page === "route" &&
+      Object.keys(route).length > 0 &&
+      props.edit === "view"
+    ) {
       return (
         <MapDisplay
-        mapOptions={parseDBMap(route.maps)}
-        markers={parseDBMarkers(route.markers)}
-      ></MapDisplay>
-
+          mapOptions={parseDBMap(route.maps)}
+          markers={parseDBMarkers(route.markers)}
+        ></MapDisplay>
       );
     }
-    if (props.page === "route" && Object.keys(route).length > 0 && props.edit === 'edit') {
+    if (
+      props.page === "route" &&
+      Object.keys(route).length > 0 &&
+      props.edit === "edit"
+    ) {
       return (
         <MapProvider>
           <MapEditor
@@ -86,7 +92,7 @@ const Planning = (props) => {
       );
     }
     if (props.page === "emergency") {
-      return <Emergency />;
+      return <Emergency trip_id={route.trip_id} />;
     }
     return <></>;
   };

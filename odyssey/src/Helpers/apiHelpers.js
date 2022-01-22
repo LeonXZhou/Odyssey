@@ -9,7 +9,6 @@ export function getTripsByUser(user_id) {
   return axios.get(`/api/trips/user/${user_id}`);
 }
 
-
 //Map API Start
 //Map API Start
 //Map API Start
@@ -19,20 +18,46 @@ export function getMapForTrip(trip_id) {
 }
 
 export function updateMapById(map_id, lat, long, zoom) {
-  console.log({ lat: lat, long: long, zoom: zoom })
-  return axios.post(`/api/trips/map/${map_id}`, { lat: lat, long: long, zoom: zoom })
+  console.log({ lat: lat, long: long, zoom: zoom });
+  return axios.post(`/api/trips/map/${map_id}`, {
+    lat: lat,
+    long: long,
+    zoom: zoom,
+  });
 }
 
-export function updateMarkerById(marker_id, name, date, description,lat,lng,type) {
+export function updateMarkerById(
+  marker_id,
+  name,
+  date,
+  description,
+  lat,
+  lng,
+  type
+) {
   // console.log(marker_id,name,date,description,lat,lng);
-  return axios.post(`/api/trips/stop/${marker_id}`,{name:name,date:date,description,lat,lng,type})
+  return axios.post(`/api/trips/stop/${marker_id}`, {
+    name: name,
+    date: date,
+    description,
+    lat,
+    lng,
+    type,
+  });
 }
 
-export function addMarker(route_id, name, date, description,lat,lng,type){
-  return axios.post(`/api/trips/stop`,{route_id,name:name,date:date,description,lat,lng,type})
+export function addMarker(route_id, name, date, description, lat, lng, type) {
+  return axios.post(`/api/trips/stop`, {
+    route_id,
+    name: name,
+    date: date,
+    description,
+    lat,
+    lng,
+    type,
+  });
 }
-export function deleteMarker(marker_id)
-{
+export function deleteMarker(marker_id) {
   return axios.delete(`/api/trips/stop/${marker_id}`);
 }
 //Map API end
@@ -174,14 +199,12 @@ export function authenticate() {
   return axios.get(`/authenticate`);
 }
 
-
-
 //General Trip API Start
 //General Trip API Start
 //General Trip API Start
 //General Trip API Start
 export function getAboutForTrip(trip_id) {
-  return axios.get("/api/trips/:trip_id")
+  return axios.get("/api/trips/:trip_id");
 }
 
 export function insertNewTrip(user_id, name, startDate, endDate) {
@@ -197,3 +220,22 @@ export function insertNewTrip(user_id, name, startDate, endDate) {
 //General Trip API End
 //General Trip API End
 
+// EMERGENCY CONTACT API START
+// EMERGENCY CONTACT API START
+// EMERGENCY CONTACT API START
+
+export default function updateEmergencyContact(
+  trip_id,
+  name,
+  phone_number,
+  email,
+  time_date,
+  message_sent,
+  send_date
+) {
+  console.log("EMERGENCY", trip_id);
+}
+
+// EMERGENCY CONTACT API END
+// EMERGENCY CONTACT API END
+// EMERGENCY CONTACT API END

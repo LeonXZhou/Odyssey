@@ -65,6 +65,11 @@ function App() {
           path="/planning/meals/edit/:trip_id"
           element={<Planning page="meals" edit={"edit"} />}
         />
+
+        <Route
+          path="/planning/emergency/edit/:trip_id"
+          element={<Planning page="emergency" edit={"edit"} />}
+        />
         {/* end of planning edit routes */}
 
         <Route path="/myTrips/:user_id" element={<MyTrips />} />
