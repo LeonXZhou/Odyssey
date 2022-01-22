@@ -5,7 +5,7 @@ import { parseDBMap, parseDBMarkers } from "../Helpers/mapHelper";
 import { getTrips } from "../Helpers/apiHelpers";
 import { formatTripData } from "../Helpers/dataHelpers";
 
-import "./component-styles/home.scss";
+import "./component-styles/Home.scss";
 import TripDisplayItemLink from "./TripDisplayItemLink";
 import BeginJourney from "./BeginJourney";
 import { process_params } from "express/lib/router";
@@ -21,7 +21,7 @@ const Home = (props) => {
   }, []);
 
   const displayedTrips = tripsArray.map((trip, i) => {
-    console.log('big bad console log here to get you',trip.maps)
+    console.log("big bad console log here to get you", trip.maps);
     return (
       <TripDisplayItemLink
         key={i}
