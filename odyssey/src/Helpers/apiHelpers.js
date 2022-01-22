@@ -111,6 +111,10 @@ export function updateMealCard(day_id, meal_id, meal_name, meal_items) {
   return axios.post(`/api/meals/${day_id}/${meal_id}`, postData);
 }
 
+export function deleteMealItem(meal_item_id) {
+  return axios.delete(`/api/meals/meal_items/${meal_item_id}`)
+}
+
 //Meal API END
 //Meal API END
 //Meal API END

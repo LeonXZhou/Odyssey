@@ -4,6 +4,7 @@ import "../../component-styles/Meals.scss";
 
 const Meals = (props) => {
   const mealDayArray = [];
+  console.log(props);
   for (const dayKey in props.mealState) {
     mealDayArray.push(
       <MealDay
