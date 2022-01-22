@@ -229,11 +229,20 @@ export default function updateEmergencyContact(
   name,
   phone_number,
   email,
-  time_date,
+  send_time,
   message_sent,
   send_date
 ) {
-  console.log("EMERGENCY", trip_id);
+  console.log(
+    "EMERGENCY",
+    trip_id,
+    name,
+    phone_number,
+    email,
+    send_time,
+    message_sent,
+    send_date
+  );
 }
 
 // EMERGENCY CONTACT API END
