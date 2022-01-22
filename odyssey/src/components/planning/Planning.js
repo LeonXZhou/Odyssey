@@ -63,6 +63,7 @@ const Planning = (props) => {
         <MapProvider>
           <MapEditor
             //same map options as Mapdisplay
+            trip_id={route.trip_id}
             mapOptions={parseDBMap(route.maps)}
             markers={parseDBMarkers(route.markers)}
             startDate={route.startDate}

@@ -27,7 +27,7 @@ function MapEditor(props) {
   }
 
   const { map,setMap } = useContext(mapContext);
-
+  console.log('omg', props)
   return (
     // TileLayer Component: determines theme
 
@@ -46,7 +46,9 @@ function MapEditor(props) {
             setEditable={setEditable}
             startDate={props.startDate}
             endDate={props.endDate}
-            setRouteArray={props.setRouteArray}></MarkersEdit>
+            setRouteArray={props.setRouteArray}
+            mapId={props.mapOptions.mapId}
+            tripId={props.trip_id}></MarkersEdit>
         </MapContainer>
       </div>
       <select value={iconValue} onChange={(e) => { setIconValue(e.target.value) }}>
