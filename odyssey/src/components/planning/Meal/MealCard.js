@@ -11,6 +11,7 @@ const MealCard = (props) => {
     quantity: "",
   });
   for (const mealItemKey in props.mealState.mealItems) {
+    console.log("what the actuall fuck is going on here")
     mealItemArray.push(
       <MealItem
         key={mealItemKey}
@@ -19,6 +20,7 @@ const MealCard = (props) => {
         setMealState={props.setMealState}
         mealId={props.mealState.mealId}
         dayId={props.dayId}
+        tripId={props.tripId}
       ></MealItem>
     );
   }

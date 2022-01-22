@@ -39,7 +39,7 @@ const Planning = (props) => {
       setMealState(formatTripMealsData(res.data));
     });
   }, [trip_id]);
-  console.log(mealState);
+
   const checkPage = (props) => {
     const route = routeArray[0];
     if (
