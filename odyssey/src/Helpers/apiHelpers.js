@@ -122,3 +122,11 @@ export function insertNewTrip(user_id, name, startDate, endDate) {
 //EQUIPMENT API END
 //EQUIPMENT API END
 //EQUIPMENT API END
+
+export function emergencyContacts() {
+  return axios.get(`/api/emergency-contact`)
+}
+//EMERGENCY API SART
+//EMERGENCY API SART
+//EMERGENCY API SART
+
