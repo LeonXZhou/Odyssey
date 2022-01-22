@@ -10,7 +10,7 @@ const Sidebar = (props) => {
         type="button"
         className="btn btn-default sidebar-item"
       >
-        <i className="fa fa-map" aria-hidden="true"></i>
+        <i className="fa fa-map sidebar-icon" aria-hidden="true"></i>
         Route
       </Link>
       <Link
@@ -18,7 +18,7 @@ const Sidebar = (props) => {
         type="button"
         className="btn btn-default sidebar-item"
       >
-        <i className="fa fa-archive" aria-hidden="true"></i>
+        <i className="fa fa-archive sidebar-icon" aria-hidden="true"></i>
         Equipment
       </Link>
       <Link
@@ -26,7 +26,7 @@ const Sidebar = (props) => {
         type="button"
         className="btn btn-default  sidebar-item"
       >
-        <i className="fa fa-cutlery" aria-hidden="true"></i>
+        <i className="fa fa-cutlery sidebar-icon" aria-hidden="true"></i>
         Meals
       </Link>
       <Link
@@ -34,7 +34,7 @@ const Sidebar = (props) => {
         type="button"
         className="btn btn-default  sidebar-item"
       >
-        <i className="fa fa-phone" aria-hidden="true"></i>
+        <i className="fa fa-phone sidebar-icon" aria-hidden="true"></i>
         Emergency Contact
       </Link>
     </section>

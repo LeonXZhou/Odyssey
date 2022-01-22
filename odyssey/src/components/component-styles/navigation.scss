@@ -2,17 +2,63 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 3em;
-  background-color: rgb(155, 192, 155);
-  border-bottom: 1.5px solid grey;
+
+  background-color: #f3f2ef;
+  border-bottom: 2px solid grey;
+  font-family: Helvetica;
+  font-size: 175%;
   .header-left {
     display: flex;
-    justify-content: space-between;
-    width: 27.5em;
+    justify-content: space-around;
+    width: 19em;
+    font-family: Helvetica;
   }
-
+  .header-middle {
+    display: flex;
+    margin-right: 12.5%;
+    .logo {
+      height: 3em;
+      position: relative;
+      bottom: 2px;
+    }
+  }
   .header-right {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-around;
+    align-items: center;
+    width: 11em;
+
+    .signup {
+      color: #f3f2ef;
+      text-decoration: none;
+      border: 2px solid rgb(34, 106, 51);
+      border-radius: 8px;
+      background-color: rgb(34, 106, 51);
+      padding: 2px;
+      margin: 4px;
+    }
+
+    .login {
+      color: rgb(34, 106, 51);
+      text-decoration: none;
+      border: 2px solid rgb(34, 106, 51);
+      border-radius: 8px;
+      background-color: transparent;
+      padding: 2px;
+      margin: 4px;
+    }
+  }
+}
+
+.nav-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background-color: transparent;
+  color: black;
+  text-decoration: none;
+  .nav-button:hover {
+    color: grey;
   }
 }

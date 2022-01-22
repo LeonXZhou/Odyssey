@@ -1,13 +1,26 @@
 .sidebar {
   display: flex;
   flex-direction: column;
-  width: 13em;
-  background-color: rgb(177, 124, 124);
+  width: 23em;
+  background-color: #588fa7;
   border-right: 1.5px solid grey;
+  height: auto;
   .sidebar-item {
     display: flex;
-    width: 13em;
-    font-size: 20px;
+    width: 12.25em;
+    height: 2em;
+    font-size: 30px;
     font-weight: 450;
+    margin-top: 0.3em;
+    border-radius: 20px;
+  }
+  .sidebar-item:hover {
+    background-color: #438399;
+  }
+  .sidebar-icon {
+    display: flex;
+    position: relative;
+    top: 0.3em;
+    margin-right: 5px;
   }
 }

@@ -1,51 +1,75 @@
 //react imports
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router";
+import { Route, useParams } from "react-router";
 //leaflet imports
 import "../component-styles/Planning.scss";
 //local imports
 import Sidebar from "./Sidebar";
-import TripDisplayItem from "../TripDisplayItem";
+import MapDisplay from "../MapComponents/MapDisplay";
 import Equipment from "./Equipment/Equipment";
 import Meals from "./Meal/Meals";
-import Emergency from "./Emergency";
+import Emergency from "./Emergency/Emergency";
+import MapEditor from "../MapComponents/MapEditor";
+import MapProvider from "../providers/MapProvider";
 import {
   formatTripData,
   formatTripEquipmentData,
-  formatTripMealsData
+  formatTripMealsData,
 } from "../../Helpers/dataHelpers";
-import { getEquipmentForTrip, getMapForTrip, getMealsForTrip } from "../../Helpers/apiHelpers";
+import {
+  getEquipmentForTrip,
+  getMapForTrip,
+  getMealsForTrip,
+} from "../../Helpers/apiHelpers";
 import { parseDBMap, parseDBMarkers } from "../../Helpers/mapHelper";
 
 const Planning = (props) => {
   const { trip_id } = useParams();
-  const [tripsArray, setTripsArray] = useState([{}]);
+  const [routeArray, setRouteArray] = useState([{}]);
   const [equipmentState, setEquipmentState] = useState({});
   const [mealState, setMealState] = useState({});
   useEffect(() => {
     getMapForTrip(trip_id).then((res) => {
-      setTripsArray(formatTripData(res.data));
+      setRouteArray(formatTripData(res.data));
     });
     getEquipmentForTrip(trip_id).then((res) => {
       setEquipmentState(formatTripEquipmentData(res.data));
     });
-    getMealsForTrip(trip_id).then((res)=>{setMealState(formatTripMealsData(res.data))});
-    console.log('ooops');
+    getMealsForTrip(trip_id).then((res) => {
+      setMealState(formatTripMealsData(res.data));
+    });
   }, [trip_id]);
-  const trip = tripsArray[0];
 
   const checkPage = (props) => {
-    if (props.page === "route" && Object.keys(trip).length > 0) {
+    const route = routeArray[0];
+    if (
+      props.page === "route" &&
+      Object.keys(route).length > 0 &&
+      props.edit === "view"
+    ) {
       return (
-        <TripDisplayItem
-          key={trip_id}
-          mapOptions={parseDBMap(trip.maps)}
-          markers={parseDBMarkers(trip.markers)}
-          name={"asdf"}
-          description={"ASDF"}
-          username={"asdf"}
-          trip_id={trip.trip_id}
-        />
+        <MapDisplay
+          mapOptions={parseDBMap(route.maps)}
+          markers={parseDBMarkers(route.markers)}
+        ></MapDisplay>
+      );
+    }
+    if (
+      props.page === "route" &&
+      Object.keys(route).length > 0 &&
+      props.edit === "edit"
+    ) {
+      return (
+        <MapProvider>
+          <MapEditor
+            //same map options as Mapdisplay
+            mapOptions={parseDBMap(route.maps)}
+            markers={parseDBMarkers(route.markers)}
+            startDate={route.startDate}
+            endDate={route.endDate}
+            setRouteArray={setRouteArray}
+          ></MapEditor>
+        </MapProvider>
       );
     }
     if (props.page === "equipment") {
@@ -53,15 +77,22 @@ const Planning = (props) => {
         <Equipment
           equipmentState={equipmentState}
           setEquipmentState={setEquipmentState}
-          trip_id={trip.trip_id}
+          trip_id={route.trip_id}
+          edit={props.edit}
         />
       );
     }
     if (props.page === "meals") {
-      return <Meals setMealState={setMealState} mealState={mealState} />;
+      return (
+        <Meals
+          setMealState={setMealState}
+          mealState={mealState}
+          edit={props.edit}
+        />
+      );
     }
     if (props.page === "emergency") {
-      return <Emergency />;
+      return <Emergency trip_id={route.trip_id} />;
     }
     return <></>;
   };

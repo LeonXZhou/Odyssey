@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "../component-styles/Equipment.scss";
+import "../component-styles/AddButton.scss";
 import {
   newCategory,
   getEquipmentForTrip,
@@ -23,19 +24,20 @@ export default function AddButton(props) {
           onClick={() => {
             setButtonState(FORM);
           }}
-          className="add-equipment-card"
+          className="add-button-card"
         >
           <i className="fa fa-plus" style={{ fontSize: "5em" }} />
         </button>
       )}
       {buttonState === FORM && (
-        <div className="add-equipment-card">
+        <div className="add-button-card">
           <form
             onSubmit={(e) => {
               e.preventDefault();
             }}
           >
             <input
+              className="add-button-title"
               type={"text"}
               placeholder="Title"
               value={inputState}
@@ -44,6 +46,7 @@ export default function AddButton(props) {
               }}
             ></input>
             <button
+              className="add-button-button"
               onClick={(e) => {
                 e.preventDefault();
                 setButtonState(LOADING);
@@ -58,7 +61,6 @@ export default function AddButton(props) {
                   });
                 }
                 if (props.addButtonType === "Meal") {
-                  console.log(inputState);
                   props.onSubmit(props.day_id, inputState).then(() => {
                     console.log("2");
                     getMealsForTrip(props.day_id).then((res) => {
