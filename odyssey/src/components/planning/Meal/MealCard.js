@@ -24,40 +24,39 @@ const MealCard = (props) => {
   }
   return (
     <div className={"mealCard"}>
-      <div className={"mealName"}>
-        {props.edit === "edit" ? (
-          <input
-            className="equipment-card-title-input"
-            value={props.mealState.mealName}
-            onChange={(e) => {
-              props.setMealState((prev) => {
-                const newState = { ...prev };
-                console.log("lool at me please", props);
-                newState[props.dayId].meals[props.mealState.mealId] = {
-                  ...newState[props.dayId].meals[props.mealState.mealId],
-                  mealName: e.target.value,
-                };
+      {props.edit === "edit" ? (
+        <input
+          className="meal-card-title"
+          value={props.mealState.mealName}
+          onChange={(e) => {
+            props.setMealState((prev) => {
+              const newState = { ...prev };
+              console.log("lool at me please", props);
+              newState[props.dayId].meals[props.mealState.mealId] = {
+                ...newState[props.dayId].meals[props.mealState.mealId],
+                mealName: e.target.value,
+              };
 
-                return newState;
-              });
-            }}
-          ></input>
-        ) : (
-          <p1>{props.mealState.mealName}</p1>
-        )}
-      </div>
+              return newState;
+            });
+          }}
+        ></input>
+      ) : (
+        <p1>{props.mealState.mealName}</p1>
+      )}
+
       <table>
-        <tbody>
-          <tr>
-            <th className={"foodName"}>Item Name</th>
-            <th>Quantity</th>
+        <tbody className="meal-table">
+          <tr className="meal-table-titles">
+            <th className="meal-item-title">Items</th>
+            <th className="meal-quantity-title">Quantity</th>
           </tr>
           {mealItemArray}
-          <tr>
+          <tr className="meal-table-items">
             <td>
               {props.edit === "edit" && (
                 <input
-                  className="equipment-card-new"
+                  className="meal-card-new-item"
                   placeholder="New Item"
                   value={newItemState.name}
                   onChange={(e) => {
@@ -71,7 +70,7 @@ const MealCard = (props) => {
             <td>
               {props.edit === "edit" && (
                 <input
-                  className="equipment-card-new"
+                  className="meal-card-new-quantity"
                   placeholder="Quantity"
                   value={newItemState.quantity}
                   onChange={(e) => {
@@ -120,13 +119,11 @@ const MealCard = (props) => {
               });
             }}
           >
-            <button className="btn btn-default btn-sm equipment-card-button">
-              Add Item
-            </button>
+            <button className="meal-card-add-save">Add Item</button>
           </form>
 
           <button
-            className="btn btn-default btn-sm equipment-card-button"
+            className="meal-card-add-save"
             onClick={(e) => {
               e.preventDefault();
               updateMealCard(

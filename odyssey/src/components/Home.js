@@ -5,9 +5,10 @@ import { parseDBMap, parseDBMarkers } from "../Helpers/mapHelper";
 import { getTrips } from "../Helpers/apiHelpers";
 import { formatTripData } from "../Helpers/dataHelpers";
 
-import "./component-styles/home.scss";
+import "./component-styles/Home.scss";
 import TripDisplayItemLink from "./TripDisplayItemLink";
 import BeginJourney from "./BeginJourney";
+import { process_params } from "express/lib/router";
 
 const Home = (props) => {
   const [tripsArray, setTripsArray] = useState([]);
@@ -20,7 +21,7 @@ const Home = (props) => {
   }, []);
 
   const displayedTrips = tripsArray.map((trip, i) => {
-    console.log('big bad console log here to get you',trip.maps)
+    console.log("big bad console log here to get you", trip.maps);
     return (
       <TripDisplayItemLink
         key={i}
@@ -37,6 +38,10 @@ const Home = (props) => {
   return (
     <main className="home-page">
       <BeginJourney userEmail={props.userEmail}></BeginJourney>
+      <section className="home-discover">
+        Other Journeys
+        <i className="fa fa-arrow-down down-arrow" aria-hidden="true"></i>
+      </section>
       <section className="trip-cards">{displayedTrips}</section>
     </main>
   );
