@@ -1,40 +1,52 @@
-
 import React from "react";
+import { useContext } from "react";
+import { authContext } from "./providers/AuthenticationProvider";
 import { Link } from "react-router-dom";
-import "./component-styles/navigation.scss";
+import "./component-styles/Navigation.scss";
+import odyssey_logo from "./images/odyssey_logo.png";
 
 const Navigation = (props) => {
+  const { user, auth } = useContext(authContext);
   return (
     <main className="header-container">
       <div className="header-left">
-        <Link to="/" type="button" className="btn btn-default">
-          Home
-        </Link>
-        <Link to="/planning" type="button" className="btn btn-default">
+        <Link to="/planning" type="button" className="nav-button">
           Discover
         </Link>
-        <Link to="/" type="button" className="btn btn-default">
+        <Link
+          to={`/myTrips/${user.userId}`}
+          type="button"
+          className="nav-button"
+        >
           My Trips
         </Link>
-        <Link to="/" type="button" className="btn btn-default">
+        <Link to="/" type="button" className="nav-button">
           About
         </Link>
       </div>
-      {props.userEmail ? <>
-        <div>{`logged in as ${props.userEmail}`}</div>
-        <Link to="/logout" type="button" className="btn btn-default">
-            logout
-          </Link>
-      </>
-        :
+      <div className="header-middle">
+        <Link to="/" type="button" className="nav-button">
+          <img className="logo" src={odyssey_logo} />
+          Odyssey
+        </Link>
+      </div>
+      {auth ? (
         <div className="header-right">
-          <Link to="/login" type="button" className="btn btn-default">
-            Login
+          <div className="nav-button">{`${user.firstName}`}</div>
+          <Link to="/logout" type="button" className="nav-button">
+            Logout
           </Link>
-          <Link to="/register" type="button" className="btn btn-default">
-            Register
+        </div>
+      ) : (
+        <div className="header-right">
+          <Link to="/register" type="button" className="signup">
+            Sign Up
           </Link>
-        </div>}
+          <Link to="/login" type="button" className="login">
+            Log In
+          </Link>
+        </div>
+      )}
     </main>
   );
 };

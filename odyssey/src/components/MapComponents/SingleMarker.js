@@ -1,15 +1,11 @@
 import { Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 import { iconFinder } from "../../Helpers/markerHelpers";
-import { useRef, useEffect } from "react";
+import { useRef} from "react";
+import PopUpDisplay from "./PopUpDisplay";
 
 function SingleMarker(props) {
     const markerRef = useRef();
-    useEffect(() => {
-        if (markerRef.current) {
-            markerRef.current.openPopup();
-        }
-    }, [markerRef.current]);
 
     return(<Marker
         position={props.markerPosition}
@@ -32,7 +28,7 @@ function SingleMarker(props) {
     >
         {props.marker.popUp ? (
             <Popup >
-                {props.marker.popUp.content}
+                <PopUpDisplay name={props.marker.popUp.name} date={props.marker.popUp.date} description={props.marker.popUp.description}></PopUpDisplay>
             </Popup>
         ) : (
             <></>
