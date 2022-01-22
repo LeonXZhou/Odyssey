@@ -6,7 +6,6 @@ import SingleMarkerEdit from "./SingleMarkerEdit";
 import MarkerForm from "./MarkerForm";
 
 function MarkersEdit(props) {
-  console.log(props);
   const thisMap = useMapEvents({
     click: (e) => {
       if (props.editable) {

@@ -128,7 +128,7 @@ export function formatTripMealsData(allMealData) {
   return formattedMealData
 }
 
-export function formatEmergencyData(userData) {
+export function formatEmergencyData(user) {
   const formatedData = {}
     if(!formatedData["user_info"]){
       formatedData["user_info"] = {

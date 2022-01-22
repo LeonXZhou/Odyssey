@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../../component-styles/Emergency.scss";
-import updateEmergencyContact from "../../../Helpers/apiHelpers.js";
+import {updateEmergencyContact} from "../../../Helpers/apiHelpers.js";
 
 const Emergency = (props) => {
   console.log(props);

@@ -14,7 +14,7 @@ function TripDisplayItemLink(props) {
   return (
     <Link className={"tripDisplayCard"} to={`/planning/${props.edit}/${props.trip_id}`}>
       <MapDisplay
-        mapOptions={props.mapOptions}
+        mapOptions={{...props.mapOptions,scrollWheelZoom:false}}
         markers={props.markers}
       ></MapDisplay>
       <div className="descriptionContainer">
