@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { authContext } from "./providers/AuthenticationProvider";
 import { Link, useNavigate } from "react-router-dom";
-import "./component-styles/BeginJourney.scss";
+import "./component-styles/Home.scss";
 import { insertNewTrip } from "../Helpers/apiHelpers";
 
 const BEGIN = "BEGIN";
@@ -18,41 +18,37 @@ function BeginJourney(props) {
     startDate: "",
     endDate: "",
   });
+  const [showBanner, setShowBanner] = useState(false);
   let navigate = useNavigate();
   return (
     <>
       {journeyRenderState === BEGIN && !auth && (
         <Link to="/register" type="button" className="banner">
-          Begin your journey now
-          <img
-            className="arrows"
-            src="https://www.pngall.com/wp-content/uploads/5/Black-Fast-Forward-Button-PNG-Clipart.png"
-          ></img>
+          Your journey begins here
         </Link>
       )}
 
       {journeyRenderState === BEGIN && auth && (
-        <div
-          type="button"
-          className="add-button btn btn-default header-right-button"
-          onClick={() => {
-            setJourneyRenderState(NEWTRIP);
-          }}
-        >
-          Begin your journey now
-          <img
-            className="arrows"
-            src="https://www.pngall.com/wp-content/uploads/5/Black-Fast-Forward-Button-PNG-Clipart.png"
-          ></img>
+        <div className="banner">
+          <button
+            type="button"
+            className="begin-journey"
+            onClick={() => {
+              setJourneyRenderState(NEWTRIP);
+            }}
+          >
+            Begin your journey now
+          </button>
         </div>
       )}
 
       {journeyRenderState === NEWTRIP && (
-        <div className="newTrip">
-          <div>
-            <label>Trip Name</label>
+        <div className="banner">
+          <div className="details">
             <input
+              className="trip-title"
               type={"text"}
+              placeholder="Odyssey Name"
               value={newJourneyState.name}
               onChange={(e) => {
                 setNewJourneyState((prev) => {
@@ -60,46 +56,50 @@ function BeginJourney(props) {
                 });
               }}
             ></input>
-          </div>
-          <div>
-            <label>Start Date</label>
-            <input
-              type={"date"}
-              value={newJourneyState.startDate}
-              onChange={(e) => {
-                setNewJourneyState((prev) => {
-                  return { ...prev, startDate: e.target.value };
+
+            <div className="date">
+              <label className="date-text">Start Date</label>
+              <input
+                className="date-input"
+                type={"date"}
+                value={newJourneyState.startDate}
+                onChange={(e) => {
+                  setNewJourneyState((prev) => {
+                    return { ...prev, startDate: e.target.value };
+                  });
+                }}
+              ></input>
+            </div>
+            <div className="date">
+              <label className="date-text">End Date</label>
+              <input
+                className="date-input"
+                type={"date"}
+                value={newJourneyState.endDate}
+                onChange={(e) => {
+                  setNewJourneyState((prev) => {
+                    return { ...prev, endDate: e.target.value };
+                  });
+                }}
+              ></input>
+            </div>
+            <button
+              className="create-trip"
+              onClick={() => {
+                setJourneyRenderState(LOADING);
+                insertNewTrip(
+                  USER_ID,
+                  newJourneyState.name,
+                  newJourneyState.startDate,
+                  newJourneyState.endDate
+                ).then((res) => {
+                  console.log(res);
                 });
               }}
-            ></input>
+            >
+              Create New Trip
+            </button>
           </div>
-          <div>
-            <label>End Date</label>
-            <input
-              type={"date"}
-              value={newJourneyState.endDate}
-              onChange={(e) => {
-                setNewJourneyState((prev) => {
-                  return { ...prev, endDate: e.target.value };
-                });
-              }}
-            ></input>
-          </div>
-          <button
-            onClick={() => {
-              setJourneyRenderState(LOADING);
-              insertNewTrip(
-                USER_ID,
-                newJourneyState.name,
-                newJourneyState.startDate,
-                newJourneyState.endDate
-              ).then((res) => {
-                console.log(res);
-              });
-            }}
-          >
-            Create New Trip
-          </button>
         </div>
       )}
 

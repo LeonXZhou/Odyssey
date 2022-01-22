@@ -7,7 +7,7 @@ import { parseDBMap, parseDBMarkers } from "../Helpers/mapHelper";
 import { getTripsByUser } from "../Helpers/apiHelpers";
 import { formatTripData } from "../Helpers/dataHelpers";
 
-import "./component-styles/home.scss";
+import "./component-styles/Home.scss";
 import TripDisplayItemLink from "./TripDisplayItemLink";
 import BeginJourney from "./BeginJourney";
 
@@ -41,7 +41,7 @@ const MyTrips = (props) => {
   });
   return (
     <main className="home-page">
-      <BeginJourney userEmail={props.userEmail}></BeginJourney>
+      {/* <BeginJourney userEmail={props.userEmail}></BeginJourney> */}
       <section className="trip-cards">{displayedTrips}</section>
     </main>
   );

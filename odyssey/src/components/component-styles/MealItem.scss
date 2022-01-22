@@ -1,9 +1,32 @@
-.mealItem {
+.meal-item-delete {
   display: flex;
-  width: 8em;
+  margin-left: -8px;
+  margin-right: -5px;
+  width: 1em;
+  border: none;
+  background-color: transparent;
 }
 
-.mealQuantity {
+.meal-items {
   display: flex;
-  width: 8em;
+  width: 7em;
+  background-color: transparent;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+}
+.meal-items:hover {
+  background-color: rgb(205, 205, 176);
+}
+
+.meal-quantities {
+  display: flex;
+  width: 4.5em;
+  background-color: transparent;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+}
+.meal-quantities:hover {
+  background-color: rgb(205, 205, 176);
 }

@@ -52,7 +52,6 @@ const EquipmentItems = (props) => {
       <td className="equipment-card-quantity-column">
         {props.edit === "edit" ? (
           <>
-            <i>-</i>
             <input
               className="equipment-card-quantities"
               type={"number"}
@@ -70,7 +69,6 @@ const EquipmentItems = (props) => {
                 });
               }}
             ></input>
-            <i>+</i>
           </>
         ) : (
           <p1>{props.quantity}</p1>
