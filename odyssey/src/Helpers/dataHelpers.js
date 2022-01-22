@@ -112,4 +112,26 @@ export function formatTripMealsData(allMealData) {
   return formattedMealData
 }
 
+export function formatEmergencyData(userData) {
+  const formatedData = {}
+    if(!formatedData["user_info"]){
+      formatedData["user_info"] = {
+          first_name : user.first_name,
+          last_name : user.last_name,
+          trip_name : user.name,
+          trip_description : user.description,
+          trip_start_date : user.start_date,
+          trip_end_date : user.end_date
+      }
+    }
+    if(!formatedData["user_info"]["emergency_contact"]){
 
+      formatedData["user_info"]["emergency_contact"] = {
+          emergency_contact : user.emergency_contact,
+          phone_number :user.emergency_contact_phone,
+          email : user.emergency_contact_email,
+          send_message_by : user.send_date
+      }
+    }
+      return formatedData
+}
