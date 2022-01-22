@@ -49,7 +49,7 @@ const mealsRoutes = require("./routes/meals");
 const testHelperRoutes = require("./routes/helper");
 const authentication = require("./routes/authentication");
 const emergencyContactRoutes = require("./routes/emergencyContact");
-const weatherRoute = require("./routes/weather");
+// const weatherRoute = require("./routes/weather");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -60,7 +60,7 @@ app.use("/api/trips", tripsRoutes(db));
 app.use("/api/meals", mealsRoutes(db));
 app.use("/api/helper", testHelperRoutes(db));
 app.use("/api/emergency-contact", emergencyContactRoutes(db));
-app.use("/api/weather-info", weatherRoute(db));
+// app.use("/api/weather-info", weatherRoute(db));
 app.use("/", authentication(db));
 // Note: mount other resources here, using the same pattern above
 

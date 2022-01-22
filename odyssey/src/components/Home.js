@@ -38,6 +38,7 @@ const Home = (props) => {
     <main className="home-page">
       <BeginJourney userEmail={props.userEmail}></BeginJourney>
       <section className="home-discover">
+        <div>asdefrasdf</div>
         Other Journeys
         <i className="fa fa-arrow-down down-arrow" aria-hidden="true"></i>
       </section>

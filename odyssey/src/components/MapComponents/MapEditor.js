@@ -27,7 +27,6 @@ function MapEditor(props) {
   }
 
   const { map,setMap } = useContext(mapContext);
-  console.log('omg', props)
   return (
     // TileLayer Component: determines theme
 
