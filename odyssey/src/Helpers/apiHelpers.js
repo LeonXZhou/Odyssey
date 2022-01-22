@@ -5,7 +5,6 @@ export function getTrips() {
 }
 
 export function getTripsByUser(user_id) {
-  console.log("this is userId in apid helpers", user_id);
   return axios.get(`/api/trips/user/${user_id}`);
 }
 

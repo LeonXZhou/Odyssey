@@ -21,7 +21,6 @@ const Home = (props) => {
   }, []);
 
   const displayedTrips = tripsArray.map((trip, i) => {
-    console.log("big bad console log here to get you", trip.maps);
     return (
       <TripDisplayItemLink
         key={i}
