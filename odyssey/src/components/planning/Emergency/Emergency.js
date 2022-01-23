@@ -1,15 +1,11 @@
 import React from "react";
 import "../../component-styles/Emergency.scss";
-<<<<<<< HEAD
-import {updateEmergencyContact} from "../../../Helpers/apiHelpers.js";
-=======
 import {
   getEmergencyContactByTripId,
   insertEmergencyContact,
   updateEmergencyContact,
 } from "../../../Helpers/apiHelpers.js";
 import { formatEmergencyData } from "../../../Helpers/dataHelpers";
->>>>>>> main
 
 const Emergency = (props) => {
   return (
