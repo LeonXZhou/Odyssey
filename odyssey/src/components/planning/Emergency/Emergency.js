@@ -4,78 +4,46 @@ import {
   getEmergencyContactByTripId,
   insertEmergencyContact,
   updateEmergencyContact,
+  deleteEmergencyContact,
 } from "../../../Helpers/apiHelpers.js";
 import { formatEmergencyData } from "../../../Helpers/dataHelpers";
 
 const Emergency = (props) => {
   return (
     <main className="emergency">
-      <div>Emergency Contact</div>
-
-      <form
-        className="emergency-form"
-        onSubmit={(e) => {
-          e.preventDefault();
-          console.log("SUBMIT", props.emergencyState);
-          if (props.emergencyState.id !== "") {
-            updateEmergencyContact(
-              props.emergencyState.trip_id,
-              props.emergencyState.name,
-              props.emergencyState.phone_number,
-              props.emergencyState.email,
-              props.emergencyState.send_date,
-              props.emergencyState.send_time,
-              props.emergencyState.contact_id
-            );
-          } else {
-            console.log("YES");
-            insertEmergencyContact(
-              props.trip_id,
-              props.emergencyState.name,
-              props.emergencyState.phone_number,
-              props.emergencyState.email,
-              props.emergencyState.send_date,
-              props.emergencyState.send_time,
-              props.emergencyState.contact_id
-            );
-          }
-        }}
-      >
+      <form className="emergency-form">
         <div>Contact Name</div>
         <input
-          className="name"
+          className="emergency-text"
           value={props.emergencyState.name}
           onChange={(e) => {
             props.setEmergencyState((prev) => {
               return { ...prev, name: e.target.value };
             });
           }}
-          placeholder="Contact Name"
           required
         ></input>
 
         <div>Contact Phone Number</div>
         <input
-          className="phone"
+          className="emergency-text"
           value={props.emergencyState.phone_number}
           onChange={(e) => {
             props.setEmergencyState((prev) => {
               return { ...prev, phone_number: e.target.value };
             });
           }}
-          placeholder="123-456-7890"
           required
         ></input>
         <div>Contact Email</div>
         <input
-          className="email"
+          className="emergency-text"
           value={props.emergencyState.email}
           onChange={(e) => {
             props.setEmergencyState((prev) => {
               return { ...prev, email: e.target.value };
             });
           }}
-          placeholder="example@example.com"
           required
         ></input>
         <div>Send message on this date</div>
@@ -92,7 +60,7 @@ const Emergency = (props) => {
         ></input>
         <div>Send message at this time</div>
         <input
-          className="contact-time"
+          className="send-time"
           type={"time"}
           value={props.emergencyState.send_time}
           onChange={(e) => {
@@ -102,7 +70,66 @@ const Emergency = (props) => {
           }}
           required
         ></input>
-        <button>SAVE</button>
+        {props.emergencyState.id === "" ? (
+          <button
+            className="emergency-buttons"
+            onClick={(e) => {
+              e.preventDefault();
+              console.log("SUBMIT", props.emergencyState);
+              insertEmergencyContact(
+                props.trip_id,
+                props.emergencyState.name,
+                props.emergencyState.phone_number,
+                props.emergencyState.email,
+                props.emergencyState.send_date,
+                props.emergencyState.send_time,
+                props.emergencyState.contact_id
+              ).then(() => {
+                window.location.reload();
+              });
+            }}
+          >
+            SAVE
+          </button>
+        ) : (
+          <>
+            <button
+              className="emergency-buttons"
+              onClick={(e) => {
+                e.preventDefault();
+                updateEmergencyContact(
+                  props.emergencyState.trip_id,
+                  props.emergencyState.name,
+                  props.emergencyState.phone_number,
+                  props.emergencyState.email,
+                  props.emergencyState.send_date,
+                  props.emergencyState.send_time,
+                  props.emergencyState.id
+                );
+              }}
+            >
+              Update Contact
+            </button>
+            <button
+              className="emergency-buttons"
+              onClick={(e) => {
+                e.preventDefault();
+                deleteEmergencyContact(
+                  props.emergencyState.trip_id,
+                  props.emergencyState.id
+                ).then(() => {
+                  getEmergencyContactByTripId(
+                    props.emergencyState.trip_id
+                  ).then((res) => {
+                    props.setEmergencyState(formatEmergencyData(res.data));
+                  });
+                });
+              }}
+            >
+              Remove Contact
+            </button>
+          </>
+        )}
       </form>
     </main>
   );

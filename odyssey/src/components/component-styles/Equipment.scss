@@ -1,12 +1,15 @@
 .equipment {
   display: flex;
-  width: 100%;
+  // position: relative;
+  // top: 5.5em;
+  // left: 21.25em;
+  width: 100vw;
   flex-wrap: wrap;
   overflow: auto;
   background-image: url("https://images.unsplash.com/photo-1485809052957-5113b0ff51af?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3870&q=80");
   background-size: cover;
   background-position: center;
-  color:whitesmoke;
+  color: whitesmoke;
   .equipment-card {
     display: flex;
     flex-direction: column;
@@ -19,7 +22,7 @@
     margin: 1em;
     padding: 0.25em;
     padding-right: 0.5em;
-    background-color: transparent ;
+    background-color: transparent;
     backdrop-filter: blur(10px) brightness(30%);
 
     .equipment-card-title {
@@ -31,7 +34,7 @@
         border: none;
         border-radius: 9px;
         background-color: transparent;
-        color:whitesmoke;
+        color: whitesmoke;
         font-size: 35px;
         outline: none;
       }
@@ -46,7 +49,7 @@
         background-color: transparent;
         font-size: 33px;
         outline: none;
-        color:whitesmoke;
+        color: whitesmoke;
       }
     }
 
@@ -76,7 +79,7 @@
       background-color: transparent;
       outline: none;
       font-size: 25px;
-      color:whitesmoke;
+      color: whitesmoke;
     }
 
     .equipment-card-items:hover {
@@ -88,7 +91,7 @@
       justify-content: center;
       font-size: 22px;
       .equipment-card-quantities {
-        color:whitesmoke;
+        color: whitesmoke;
         display: flex;
         border: none;
         border-radius: 7px;
@@ -114,7 +117,7 @@
       width: 100%;
       position: relative;
       right: 5px;
-      color:whitesmoke;
+      color: whitesmoke;
       outline: none;
       font-size: 20px;
     }
@@ -128,10 +131,10 @@
       width: 45%;
       margin: 0.25em;
       font-size: 20px;
-      color:whitesmoke;
+      color: whitesmoke;
     }
     .equipment-card-button:hover {
-      background-color: grey
+      background-color: grey;
     }
   }
   .equipment-card:hover {

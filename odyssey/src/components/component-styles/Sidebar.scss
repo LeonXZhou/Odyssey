@@ -1,10 +1,13 @@
 .sidebar {
   display: flex;
   flex-direction: column;
-  width: 23em;
+  width: 18%;
   background-color: #588fa7;
   border-right: 1.5px solid grey;
-  height: auto;
+  // position: fixed;
+  // top: 10%;
+  // height: 100%;
+  // z-index: 2;
   .sidebar-item {
     display: flex;
     width: 12.25em;
