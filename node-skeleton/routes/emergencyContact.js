@@ -35,7 +35,8 @@ function updateEmergencyContactInfor(
         phone_number = $2,
         email =$3,
         send_date = $4,
-        send_time = $5
+        send_time = $5,
+        message_sent = false
     WHERE id = $6 RETURNING *;`;
   const values = [name, phone_number, email, send_date, send_time, id];
   console.log(values);
