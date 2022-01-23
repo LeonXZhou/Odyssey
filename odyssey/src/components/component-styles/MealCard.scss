@@ -8,7 +8,9 @@
   border: 1.5px solid grey;
   border-radius: 7px;
   margin: 1em;
-  background-color: rgb(205, 205, 176);
+  background-color: transparent ;
+  backdrop-filter: blur(10px) brightness(30%);
+  
   // backdrop-filter: blur(50px);
   padding: 0.2em;
   .meal-card-title {
@@ -21,9 +23,10 @@
     font-weight: 600;
     height: 12%;
     width: 80%;
+    color:whitesmoke;
   }
   .meal-card-title:hover {
-    background-color: rgb(205, 205, 176);
+    background-color: grey;
   }
   .meal-table {
     display: flex;
@@ -35,31 +38,36 @@
       display: flex;
       justify-content: space-between;
       width: 100%;
+      color:whitesmoke;
 
       .meal-item-title {
         font-weight: 400;
-
+        color:whitesmoke;
         margin-left: 10px;
       }
       .meal-quantity-title {
         margin-right: 1.5em;
+        color:whitesmoke;
         font-weight: 400;
       }
     }
   }
   .meal-card-new-item {
+    color:whitesmoke;
     background-color: transparent;
     border: none;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid whitesmoke;
     width: 7.5em;
+    color:whitesmoke;
   }
   .meal-card-new-quantity {
     display: flex;
     justify-content: flex-end;
     background-color: transparent;
     border: none;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid whitesmoke;
     width: 4em;
+    color:whitesmoke;
   }
   .meal-card-add-save {
     display: flex;
@@ -67,15 +75,16 @@
     justify-content: center;
     align-content: center;
     align-items: center;
-    border: 2px solid black;
+    border: 2px solid whitesmoke;
     border-radius: 7px;
     width: 45%;
     margin: 0.25em;
     margin-top: 0.5em;
     font-size: 20px;
+    color: whitesmoke;
   }
   .meal-card-add-save:hover {
-    background-color: rgb(205, 205, 176);
+    background-color: grey;
   }
 }
 .mealCard:hover {

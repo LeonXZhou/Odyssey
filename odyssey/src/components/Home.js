@@ -38,8 +38,12 @@ const Home = (props) => {
     <main className="home-page">
       <BeginJourney userEmail={props.userEmail}></BeginJourney>
       <section className="home-discover">
-        <div>asdefrasdf</div>
-        Other Journeys
+        <div className="mission-statement">
+          <h1>
+          Mission Statement</h1>
+          <p1>asdfasdf</p1>
+          </div>
+        Discover Other
         <i className="fa fa-arrow-down down-arrow" aria-hidden="true"></i>
       </section>
       <section className="trip-cards">{displayedTrips}</section>
