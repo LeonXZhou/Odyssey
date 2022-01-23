@@ -9,7 +9,6 @@ function SingleMarkerEdit(props) {
 
     useEffect(() => {
         if (props.marker.stopId === null && markerRef.current && props.marker.tripId) {
-            console.log("this is stopid", props.stopId)
             markerRef.current.openPopup();
         }
     }, [markerRef.current])
