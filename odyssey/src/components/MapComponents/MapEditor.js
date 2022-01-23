@@ -1,6 +1,6 @@
 import 'leaflet/dist/leaflet.css';
-import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet'
-import './MapEditor.css'
+import { MapContainer, TileLayer } from 'react-leaflet'
+import './MapEditor.scss'
 
 import { useState } from 'react';
 import { useContext } from "react";
@@ -26,15 +26,14 @@ function MapEditor(props) {
     props.mapOptions.zoom = 12;
   }
 
-  const { map,setMap } = useContext(mapContext);
+  const { map, setMap } = useContext(mapContext);
   return (
     // TileLayer Component: determines theme
 
     // AddMarker Component: has to be a child of MapContainer. it attaches a listener
     // that updates the markers state if editable is set to true
 
-    <div>
-      <div>
+    <div className={"map-editor"}>
         <MapContainer center={props.mapOptions.center} zoom={props.mapOptions.zoom} scrollWheelZoom={true} doubleClickZoom={false}>
           <TileLayer attribution={mapThemeAttribution} url={mapThemeURL} />
           <MarkersEdit
@@ -49,25 +48,26 @@ function MapEditor(props) {
             mapId={props.mapOptions.mapId}
             tripId={props.trip_id}></MarkersEdit>
         </MapContainer>
+      <div className={"map-edit-form"}>
+        <select value={iconValue} onChange={(e) => { setIconValue(e.target.value) }}>
+          <option value="DEFAULT">default</option>
+          <option value="TENT">tent</option>
+        </select>
+        <button onClick={(e) => {
+          e.preventDefault();
+          if (!editable) {
+            setEditable(true);
+          }
+        }} className={"add mapButton"}>
+          Add
+        </button>
+        <button onClick={(e) => {
+          e.preventDefault();
+          updateMapById(props.mapOptions.mapId, map.getCenter().lat, map.getCenter().lng, map.getZoom())
+        }} className={"add mapButton"}>
+          Save Map
+        </button>
       </div>
-      <select value={iconValue} onChange={(e) => { setIconValue(e.target.value) }}>
-        <option value="DEFAULT">default</option>
-        <option value="TENT">tent</option>
-      </select>
-      <button onClick={(e) => {
-        e.preventDefault();
-        if (!editable) {
-          setEditable(true);
-        }
-      }} className={"add mapButton"}>
-        Add
-      </button>
-      <button onClick={(e) => {
-        e.preventDefault();
-        updateMapById(props.mapOptions.mapId,map.getCenter().lat,map.getCenter().lng,map.getZoom())
-      }} className={"add mapButton"}>
-        Save Map
-      </button>
     </div>
   )
 }
