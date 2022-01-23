@@ -1,32 +1,80 @@
 .emergency {
-  border: 2px solid red;
   display: flex;
   flex-direction: column;
   align-content: center;
   align-items: center;
-  width: 50%;
-  font-size: 40px;
+  width: 82.5%;
+  min-height: 20em;
+  color: white;
+  font-size: 35px;
+  background-image: url("../images/image8.jpeg");
+  background-size: 100%;
+  position: relative;
+  top: 2.5em;
+  left: 9.5em;
+  z-index: 0;
+
   .emergency-form {
     display: flex;
-    .first-name {
-      border-radius: 12px;
-      margin: 0.5em;
-    }
-    .last-name {
-      border-radius: 12px;
-      margin: 0.5em;
-    }
-    .phone {
-      border-radius: 12px;
-      margin: 0.5em;
-    }
-    .contact-date {
-      border-radius: 12px;
-      margin: 0.5em;
-    }
-    .contact-time {
-      border-radius: 12px;
-      margin: 0.5em;
-    }
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 1em;
+    background-color: grey;
+    opacity: 90%;
+    z-index: 0;
+    height: 100%;
+    width: 42.5%;
+    position: relative;
+  }
+  .emergency-text {
+    border-radius: 12px;
+    margin: 0.2em;
+    text-align: center;
+    width: 70%;
+    background-color: rgb(222, 222, 222);
+    border: 3px solid black;
+    transition: 0.3s;
+    outline: none;
+  }
+  .emergency-text:hover {
+    transform: scale(1.05);
+  }
+  .send-date {
+    border-radius: 12px;
+    margin: 0.25em;
+    text-align: center;
+    width: 50%;
+    background-color: rgb(222, 222, 222);
+    border: 3px solid black;
+    transition: 0.3s;
+  }
+  .send-date:hover {
+    transform: scale(1.05);
+  }
+  .send-time {
+    border-radius: 12px;
+    margin: 0.5em;
+    text-align: center;
+
+    width: 35%;
+    background-color: rgb(222, 222, 222);
+    border: 3px solid black;
+    transition: 0.3s;
+  }
+  .send-time:hover {
+    transform: scale(1.05);
+  }
+  .emergency-buttons {
+    border-radius: 20px;
+    margin: 0.5em;
+    width: 45%;
+    background-color: rgb(222, 222, 222);
+    border: 3px solid black;
+    transition: 0.3s;
+  }
+  .emergency-buttons:hover {
+    color: white;
+    background-color: rgb(55, 55, 55);
+    transform: scale(1.05);
   }
 }
