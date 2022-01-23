@@ -1,6 +1,6 @@
 const express = require("express");
-const dotenv = require("dotenv");
 const router = express.Router();
+const dotenv = require("dotenv");
 dotenv.config();
 const accountSid = process.env.TWILIO_ACC_SID;
 const authToken = process.env.TWILIO_AUTH_KEY; //CHANGES DAILY****
