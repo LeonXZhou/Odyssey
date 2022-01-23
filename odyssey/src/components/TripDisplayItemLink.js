@@ -12,9 +12,9 @@ function TripDisplayItemLink(props) {
     props.mapOptions && themeURLFinder(props.mapOptions.themeAttribution);
 
   return (
-    <Link className={"tripDisplayCard"} to={`/planning/view/${props.trip_id}`}>
+    <Link className={"tripDisplayCard"} to={`/planning/${props.edit}/${props.trip_id}`}>
       <MapDisplay
-        mapOptions={props.mapOptions}
+        mapOptions={{...props.mapOptions,scrollWheelZoom:false}}
         markers={props.markers}
       ></MapDisplay>
       <div className="descriptionContainer">

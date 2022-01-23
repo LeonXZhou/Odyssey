@@ -22,7 +22,7 @@ function MapDisplay(props) {
   const mapThemeURL = props.mapOptions && themeURLFinder(props.mapOptions.themeAttribution )
   
   return (
-    <MapContainer center={props.mapOptions.center} zoom={props.mapOptions.zoom} scrollWheelZoom={true} doubleClickZoom={false}>
+    <MapContainer center={props.mapOptions.center} zoom={props.mapOptions.zoom} scrollWheelZoom={props.mapOptions.scrollWheelZoom} doubleClickZoom={false}>
       <TileLayer
         attribution= {mapThemeAttribution}
         url= {mapThemeURL}
