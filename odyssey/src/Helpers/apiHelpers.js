@@ -293,7 +293,7 @@ export function insertEmergencyContact(
 // EMERGENCY CONTACT API END
 // EMERGENCY CONTACT API END
 // EMERGENCY CONTACT API END
-export function checkDbForMessage() {
-  return axios.post(`/api/helper`)
+// export function checkDbForMessage() {
+//   return axios.post(`/api/helper`)
   
-}
+// }
