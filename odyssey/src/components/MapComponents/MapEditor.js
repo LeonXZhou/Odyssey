@@ -36,6 +36,12 @@ function MapEditor(props) {
     <div className={"map-editor"}>
         <MapContainer center={props.mapOptions.center} zoom={props.mapOptions.zoom} scrollWheelZoom={true} doubleClickZoom={false}>
           <TileLayer attribution={mapThemeAttribution} url={mapThemeURL} />
+          <TileLayer
+          attribution={
+            'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors | Map style: &copy; <a href="https://waymarkedtrails.org">waymarkedtrails.org</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
+          }
+          url={"https://tile.waymarkedtrails.org/hiking/{z}/{x}/{y}.png"}
+        />
           <MarkersEdit
             markers={props.markers}
             // setMarkers={setMarkers}
