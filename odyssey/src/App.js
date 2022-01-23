@@ -17,9 +17,11 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import LoginDev from "./components/LoginDev";
 import MyTrips from "./components/MyTrips";
+import {checkDbForMessage} from "./Helpers/apiHelpers"
 function App() {
   const [userEmail, setUserEmail] = useState();
   const { setAuth, setUser, user } = useContext(authContext);
+  checkDbForMessage()
   useEffect(() => {
     authenticate().then((res) => {
       if (res.data.userId) {
@@ -177,6 +179,7 @@ function App() {
       </Routes>
     </BrowserRouter>
   );
+  
 }
 
 export default App;
