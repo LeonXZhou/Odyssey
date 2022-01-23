@@ -15,11 +15,13 @@ import {
   formatTripData,
   formatTripEquipmentData,
   formatTripMealsData,
+  formatEmergencyData,
 } from "../../Helpers/dataHelpers";
 import {
   getEquipmentForTrip,
   getMapForTrip,
   getMealsForTrip,
+  getEmergencyContactByTripId,
 } from "../../Helpers/apiHelpers";
 import { parseDBMap, parseDBMarkers } from "../../Helpers/mapHelper";
 
@@ -28,6 +30,15 @@ const Planning = (props) => {
   const [routeArray, setRouteArray] = useState([{}]);
   const [equipmentState, setEquipmentState] = useState({});
   const [mealState, setMealState] = useState({});
+  const [emergencyState, setEmergencyState] = useState({
+    id: "",
+    trip_id: trip_id,
+    name: "",
+    phone_number: "",
+    email: "",
+    send_date: "",
+    send_time: "",
+  });
   useEffect(() => {
     getMapForTrip(trip_id).then((res) => {
       setRouteArray(formatTripData(res.data));
@@ -37,6 +48,9 @@ const Planning = (props) => {
     });
     getMealsForTrip(trip_id).then((res) => {
       setMealState(formatTripMealsData(res.data));
+    });
+    getEmergencyContactByTripId(trip_id).then((res) => {
+      setEmergencyState(formatEmergencyData(res.data));
     });
   }, [trip_id]);
 
@@ -92,7 +106,13 @@ const Planning = (props) => {
       );
     }
     if (props.page === "emergency") {
-      return <Emergency />;
+      return (
+        <Emergency
+          trip_id={trip_id}
+          emergencyState={emergencyState}
+          setEmergencyState={setEmergencyState}
+        />
+      );
     }
     return <></>;
   };
