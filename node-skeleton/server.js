@@ -49,7 +49,7 @@ const mealsRoutes = require("./routes/meals");
 const testHelperRoutes = require("./routes/helper");
 const authentication = require("./routes/authentication");
 const emergencyContactRoutes = require("./routes/emergencyContact");
-const weatherRoute = require("./routes/weather");
+// const weatherRoute = require("./routes/weather");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own

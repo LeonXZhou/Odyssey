@@ -16,6 +16,7 @@ const MealDay = (props) => {
         edit={props.edit}
         setMealState={props.setMealState}
         dayId={props.mealDayState.dayId}
+        tripId={props.mealDayState.tripId}
       ></MealCard>
     );
   }
@@ -29,6 +30,7 @@ const MealDay = (props) => {
           <AddButton
             addButtonType={"Meal"}
             day_id={props.mealDayState.dayId}
+            trip_id={props.mealDayState.tripId}
             onSubmit={newMealOnDay}
             setState={props.setMealState}
           />

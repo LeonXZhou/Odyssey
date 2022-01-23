@@ -13,86 +13,127 @@ function getAllUserEmergencyInfo(db, user_id) {
   const values = [user_id];
   return db.query(query, values);
 }
-function updateEmergencyContactInfor(db, name, email, phone_number, id) {
-  const query = `UPDATE emergency_contacts
-    SET name = $1
-        email =$2
-        phone_number = $3
-    WHERE id = $4;`;
-  const values = [name, email, phone_number, id];
-  return db.query(query, values);
-}
-function deleteEmergencyContact(db, id) {
-  const query = ` DELETE FROM emergencey_contact
-    WHERE id =$1;`;
-  const values = [id];
-  return db.query(query, values);
-}
-function insertEmergencyContact(db, name, phone_number, email) {
-  const query = `INSERT INTO emergency_contacts (name, phone_number, email)
-    VALUES($1,$2,$3);`;
-  const values = [name, phone_number, email];
 
+function getAllEmergencyInfoByTripId(db, trip_id) {
+  const query = `SELECT * FROM emergency_contacts
+  where trip_id = $1;`;
+  const values = [trip_id];
+  return db.query(query, values);
+}
+
+function updateEmergencyContactInfor(
+  db,
+  name,
+  phone_number,
+  email,
+  send_date,
+  send_time,
+  id
+) {
+  const query = `UPDATE emergency_contacts
+    SET name = $1,
+        phone_number = $2,
+        email =$3,
+        send_date = $4,
+        send_time = $5
+    WHERE id = $6 RETURNING *;`;
+  const values = [name, phone_number, email, send_date, send_time, id];
+  console.log(values);
+  return db.query(query, values);
+}
+
+function deleteEmergencyContact(db, contact_id) {
+  const query = `DELETE FROM emergency_contacts WHERE id=$1;`;
+  const values = [contact_id];
+  return db.query(query, values);
+}
+
+function insertEmergencyContact(
+  db,
+  trip_id,
+  name,
+  phone_number,
+  email,
+  send_date,
+  send_time,
+  message_sent
+) {
+  const query = `INSERT INTO emergency_contacts
+  (trip_id, name, phone_number, email, send_date, send_time, message_sent)
+  VALUES ($1,$2,$3, $4, $5, $6, $7);`;
+  const values = [
+    trip_id,
+    name,
+    phone_number,
+    email,
+    send_date,
+    send_time,
+    message_sent,
+  ];
+  console.log(values);
   return db.query(query, values);
 }
 
 module.exports = (db) => {
-  router.get("/:user_id", (req, res) => {
-    const userID = req.params.user_id;
-    //   console.log(req.params.user_id);
-    getAllUserEmergencyInfo(db, userID)
+  router.get("/:trip_id", (req, res) => {
+    getAllEmergencyInfoByTripId(db, req.params.trip_id)
       .then((data) => {
-        const user = data.rows[0];
-        console.log(":D", user);
-        res.send(user);
+        res.send(data.rows);
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
       });
   });
 
-  router.post("/:user_id/update_contact", (req, res) => {
+  router.post("/:trip_id/update_contact", (req, res) => {
+    console.log("HIT2");
     updateEmergencyContactInfor(
+      db,
       req.body.name,
-      req.body.email,
       req.body.phone_number,
+      req.body.email,
+      req.body.send_date,
+      req.body.send_time,
       req.body.id
-    ).then((data) => {
-      res.send(data.rows).catch((err) => {
+    )
+      .then((data) => {
+        res.send(data.rows);
+      })
+      .catch((err) => {
         res.status(500).json({ error: err.message });
       });
-    });
-    console.log("this is the post request", req.body);
-    res.send("success");
   });
 
-  router.post("/:user_id/delete_contact", (req, res) => {
-    deleteEmergencyContact(req.body.id)
-    .then((data) => {
-      res.send(data.rows).catch((err) => {
+  router.post("/:trip_id/delete_contact", (req, res) => {
+    console.log("POST");
+    deleteEmergencyContact(db, req.body.id)
+      .then((data) => {
+        res.send(data.rows);
+      })
+      .catch((err) => {
         res.status(500).json({ error: err.message });
       });
-    });
-    console.log("this is the post request", req.body);
-    res.send("success");
   });
 
-  router.post("/:user_id/new_contact", (req, res) => {
-    insertEmergencyContact( req.body.name, req.body.phone_number, req.body.email)
-    .then((data) => {
-      res.send(data.rows).catch((err) => {
+  router.post("/:trip_id/new_contact", (req, res) => {
+    console.log("post");
+    insertEmergencyContact(
+      db,
+      req.params.trip_id,
+      req.body.name,
+      req.body.phone_number,
+      req.body.email,
+      req.body.send_date,
+      req.body.send_time,
+      req.body.message_sent
+    )
+      .then((data) => {
+        res.send(data.rows);
+      })
+      .catch((err) => {
         res.status(500).json({ error: err.message });
       });
-    });
-    console.log("this is the post request", req.body);
-    res.send("success");
   });
-
-
-
-
-
-
 
   return router;
 };

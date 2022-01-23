@@ -5,7 +5,6 @@ export function getTrips() {
 }
 
 export function getTripsByUser(user_id) {
-  console.log("this is userId in apid helpers", user_id);
   return axios.get(`/api/trips/user/${user_id}`);
 }
 
@@ -110,6 +109,14 @@ export function updateMealCard(day_id, meal_id, meal_name, meal_items) {
     newItems: newItems,
   };
   return axios.post(`/api/meals/${day_id}/${meal_id}`, postData);
+}
+
+export function deleteMeal(meal_id) {
+  return axios.delete(`/api/meals/${meal_id}`);
+}
+
+export function deleteMealItem(meal_item_id) {
+  return axios.delete(`/api/meals/meal_items/${meal_item_id}`);
 }
 
 //Meal API END
@@ -248,6 +255,7 @@ export function updateEmergencyContact(
   contact_send_time,
   contact_id
 ) {
+  console.log("HIT");
   return axios.post(`/api/emergency-contact/${trip_id}/update_contact`, {
     name: contact_name,
     phone_number: contact_phone_number,
@@ -258,8 +266,10 @@ export function updateEmergencyContact(
   });
 }
 
-export function deleteEmergencyContact(id) {
-  return axios.post(`/:user_id/delete_contact`);
+export function deleteEmergencyContact(trip_id, id) {
+  return axios.post(`/api/emergency-contact/${trip_id}/delete_contact`, {
+    id: id,
+  });
 }
 
 export function insertEmergencyContact(
@@ -270,7 +280,6 @@ export function insertEmergencyContact(
   contact_send_date,
   contact_send_time
 ) {
-  console.log("api");
   return axios.post(`/api/emergency-contact/${trip_id}/new_contact`, {
     name: contact_name,
     phone_number: contact_phone_number,
