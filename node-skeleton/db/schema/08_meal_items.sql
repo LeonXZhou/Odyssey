@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS meal_items CASCADE;
 CREATE TABLE meal_items (
   id SERIAL PRIMARY KEY NOT NULL,
-  meal_id INTEGER REFERENCES meals(id),
+  meal_id INTEGER REFERENCES meals(id) ON DELETE CASCADE,
   name VARCHAR(255),
   quantity VARCHAR(255)
 );

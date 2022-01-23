@@ -2,15 +2,18 @@ import React from "react";
 import "../../component-styles/MealCard.scss";
 import MealItem from "./MealItem";
 import { useState } from "react";
-import { updateMealCard } from "../../../Helpers/apiHelpers";
+import { updateMealCard, deleteMeal,getMealsForTrip } from "../../../Helpers/apiHelpers";
+import { formatTripMealsData } from "../../../Helpers/dataHelpers";
 
 const MealCard = (props) => {
+  console.log('mealCard props', props)
   const mealItemArray = [];
   const [newItemState, setNewItemState] = useState({
     name: "",
     quantity: "",
   });
   for (const mealItemKey in props.mealState.mealItems) {
+    console.log("what the actuall fuck is going on here")
     mealItemArray.push(
       <MealItem
         key={mealItemKey}
@@ -19,14 +22,16 @@ const MealCard = (props) => {
         setMealState={props.setMealState}
         mealId={props.mealState.mealId}
         dayId={props.dayId}
+        tripId={props.tripId}
       ></MealItem>
     );
   }
   return (
     <div className={"mealCard"}>
       {props.edit === "edit" ? (
+        <div className={"meal-card-title"}>
         <input
-          className="meal-card-title"
+          className="meal-card-title-input"
           value={props.mealState.mealName}
           onChange={(e) => {
             props.setMealState((prev) => {
@@ -41,6 +46,19 @@ const MealCard = (props) => {
             });
           }}
         ></input>
+        <button
+        className="meal-card-title-button"
+        onClick={() => {
+          deleteMeal(props.mealState.mealId).then(() => {
+            getMealsForTrip(props.tripId).then((res) => {
+              props.setMealState(formatTripMealsData(res.data));
+            });
+          });
+        }}
+      >
+        X
+      </button>
+      </div>
       ) : (
         <p1>{props.mealState.mealName}</p1>
       )}
@@ -72,13 +90,13 @@ const MealCard = (props) => {
                 <input
                   className="meal-card-new-quantity"
                   placeholder="Quantity"
+                  type={"text"}
                   value={newItemState.quantity}
                   onChange={(e) => {
                     setNewItemState((prev) => {
                       return { ...prev, quantity: e.target.value };
                     });
                   }}
-                  type={"number"}
                 ></input>
               )}
             </td>
@@ -94,10 +112,10 @@ const MealCard = (props) => {
                 console.log(prev);
                 const newState = { ...prev };
                 newState[props.dayId].meals[props.mealState.mealId].mealItems =
-                  {
-                    ...newState[props.dayId].meals[props.mealState.mealId]
-                      .mealItems,
-                  };
+                {
+                  ...newState[props.dayId].meals[props.mealState.mealId]
+                    .mealItems,
+                };
                 const newKey =
                   -Object.keys(
                     newState[props.dayId].meals[props.mealState.mealId]

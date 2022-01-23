@@ -6,7 +6,6 @@ import SingleMarkerEdit from "./SingleMarkerEdit";
 import MarkerForm from "./MarkerForm";
 
 function MarkersEdit(props) {
-
   const thisMap = useMapEvents({
     click: (e) => {
       if (props.editable) {
@@ -17,11 +16,11 @@ function MarkersEdit(props) {
             description:"",
             lat:e.latlng.lat,
             long:e.latlng.lng,
-            mapId:props.markers[0].mapId,
+            mapId:props.mapId,
             name:"",
             type:props.icon,
             stopId: null,
-            tripId:props.markers[0].tripId
+            tripId:props.tripId
           }]
           return newState;
         })

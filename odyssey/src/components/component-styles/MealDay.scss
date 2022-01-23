@@ -1,7 +1,6 @@
 .days {
   display: flex;
   flex-direction: column;
-  width: 60%;
   margin: 0.75em;
   font-size: 25px;
 
@@ -9,12 +8,13 @@
   .days-date {
     font-weight: 500;
     border-bottom: 2px solid black;
-    width: 150%;
+    color:whitesmoke;
+    background-color: transparent ;
+    backdrop-filter: blur(10px) brightness(30%);
   }
   .day-meals {
     display: flex;
     flex-direction: row;
-    width: 100%;
     // border: 2px solid red;
   }
 }

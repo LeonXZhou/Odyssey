@@ -95,7 +95,9 @@ export default function PopUpEdit(props) {
                     e.preventDefault();
                     if (props.stopId) {
                         updateMarkerById(props.stopId, props.name, props.date, props.description, props.position[0], props.position[1], props.type)
-                            .then(() => { props.markerRef.current.closePopup(); })
+                            .then(() => { 
+
+                                props.markerRef.current.closePopup(); })
                     }
                     if (!props.stopId) {
                         addMarker(props.mapId, props.name, props.date, props.description, props.position[0], props.position[1], props.type)
