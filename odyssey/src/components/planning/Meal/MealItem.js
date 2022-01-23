@@ -13,7 +13,7 @@ const MealItem = (props) => {
   return (
     <>
       <tr>
-        <td>
+        <td className={"delete"}>
           {props.edit === "edit" && (
             <button className="meal-item-delete"
               onClick={() => {
@@ -87,9 +87,9 @@ const MealItem = (props) => {
             <p1>{props.itemState.mealItemQuantity}</p1>
           )}
         </td>
+        <td>weight: {nutritionState.weight}</td>
+        <td>calories: {nutritionState.calories}</td>
       </tr>
-      <tr><td>weight: {nutritionState.weight}</td>
-      <td>calories: {nutritionState.calories}</td></tr>
     </>
   );
 };
