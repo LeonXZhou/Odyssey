@@ -49,19 +49,19 @@ function updateStops(db, day, name, lat, lng, type, id, description) {
   const values = [day, name, lat, lng, type, description, id];
   return db.query(query, values);
 }
-function insertNewStop(db, day, name, lat, long, type, route_id,description) {
+function insertNewStop(db, day, name, lat, long, type, route_id, description) {
   const query = `INSERT INTO stops (day, name, latitude, longitude ,type,route_id, description)
   VALUES($1,$2,$3,$4,$5,$6,$7);`;
-  const values = [day, name, lat, long, type, route_id,description];
+  const values = [day, name, lat, long, type, route_id, description];
 
   return db.query(query, values);
 }
 
 function deleteStop(db, id) {
   const query = `DELETE FROM stops
-  WHERE id = $1`
+  WHERE id = $1`;
   values = [id];
-  return db.query(query, values)
+  return db.query(query, values);
 }
 module.exports = (db) => {
   router.get("/", (req, res) => {
@@ -85,24 +85,24 @@ module.exports = (db) => {
   });
   router.get("/:trip_id", (req, res) => {
     const query = `SELECT users.id AS user_id ,
-      users.first_name , 
-      users.last_name  , 
-      users.email, 
+      users.first_name ,
+      users.last_name  ,
+      users.email,
       trips.id AS trip_id,
       trips.name AS trips_name,
       trips.description ,
       stops.id AS stops_id,
-      stops.day AS stop_day, 
+      stops.day AS stop_day,
       stops.name AS stop_name,
-      stops.type AS stop_types, 
-      stops.latitude AS stops_LAT , 
-      stops.longitude AS stops_LONG, 
+      stops.type AS stop_types,
+      stops.latitude AS stops_LAT ,
+      stops.longitude AS stops_LONG,
       stops.description as stop_description,
       routes.id AS routes_id,
       routes.latitude AS routes_LAT,
       routes.longitude AS routes_LONG,
       routes.zoom AS routes_zoom,
-      trips.start_date AS trip_start, 
+      trips.start_date AS trip_start,
       trips.end_date AS trip_end
     FROM trip_owners
     JOIN trips ON trip_owners.trip_id=trips.id
@@ -151,11 +151,16 @@ module.exports = (db) => {
   });
 
   router.post("/map/:map_id", (req, res) => {
-
     //{lat:lat,long:long,zoom:zoom})
 
     console.log(req.body);
-    updateRoute(db, req.body.lat, req.body.long, req.body.zoom, req.params.map_id)
+    updateRoute(
+      db,
+      req.body.lat,
+      req.body.long,
+      req.body.zoom,
+      req.params.map_id
+    )
       .then(() => {
         res.send("success");
       })
@@ -166,14 +171,23 @@ module.exports = (db) => {
 
   router.post("/stop/:stop_id", (req, res) => {
     console.log(req.body.description);
-    updateStops(db, req.body.date, req.body.name, req.body.lat, req.body.lng, req.body.type, req.params.stop_id, req.body.description)
+    updateStops(
+      db,
+      req.body.date,
+      req.body.name,
+      req.body.lat,
+      req.body.lng,
+      req.body.type,
+      req.params.stop_id,
+      req.body.description
+    )
       .then(() => {
         res.send("successfully updated stops");
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
       });
-  })
+  });
 
   router.delete("/stop/:stop_id", (req, res) => {
     console.log(req.body);
@@ -184,19 +198,25 @@ module.exports = (db) => {
       .catch((err) => {
         res.status(500).json({ error: err.message });
       });
-  })
-
+  });
 
   router.post("/stop", (req, res) => {
-    insertNewStop(db, req.body.date, req.body.name, req.body.lat, req.body.lng, req.body.type, req.body.route_id,req.body.description)
-      .then(() => {
-        res.send("successfully inserted new stops");
-      })
-      // .catch((err) => {
-      //   res.status(500).json({ error: err.message });
-      // });
-  })
-
+    insertNewStop(
+      db,
+      req.body.date,
+      req.body.name,
+      req.body.lat,
+      req.body.lng,
+      req.body.type,
+      req.body.route_id,
+      req.body.description
+    ).then(() => {
+      res.send("successfully inserted new stops");
+    });
+    // .catch((err) => {
+    //   res.status(500).json({ error: err.message });
+    // });
+  });
 
   return router;
 };

@@ -60,7 +60,7 @@ app.use("/api/trips", tripsRoutes(db));
 app.use("/api/meals", mealsRoutes(db));
 app.use("/api/helper", testHelperRoutes(db));
 app.use("/api/emergency-contact", emergencyContactRoutes(db));
-app.use("/api/weather-info", weatherRoute(db));
+// app.use("/api/weather-info", weatherRoute(db));
 app.use("/", authentication(db));
 // Note: mount other resources here, using the same pattern above
 

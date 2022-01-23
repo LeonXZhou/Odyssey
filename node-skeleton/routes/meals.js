@@ -98,7 +98,6 @@ function deleteItems(db, item_id) {
 
 module.exports = (db) => {
   router.get("/:trip_id", (req, res) => {
-    console.log("I got the request");
     getMealsForTrip(db, req.params.trip_id)
       .then((data) => {
         res.send(data.rows);
