@@ -241,33 +241,43 @@ export function getEmergencyContactByTripId(trip_id) {
 
 export function updateEmergencyContact(
   trip_id,
-  name,
-  phone_number,
-  email,
-  send_time,
-  message_sent,
-  send_date
+  contact_name,
+  contact_phone_number,
+  contact_email,
+  contact_send_date,
+  contact_send_time,
+  contact_id
 ) {
-  return axios.post(`/${trip_id}/update_contact`);
+  return axios.post(`/api/emergency-contact/${trip_id}/update_contact`, {
+    name: contact_name,
+    phone_number: contact_phone_number,
+    email: contact_email,
+    send_date: contact_send_date,
+    send_time: contact_send_time,
+    id: contact_id,
+  });
 }
+
 export function deleteEmergencyContact(id) {
   return axios.post(`/:user_id/delete_contact`);
 }
+
 export function insertEmergencyContact(
   trip_id,
-  name,
-  phone_number,
-  email,
-  send_date,
-  message_sent
+  contact_name,
+  contact_phone_number,
+  contact_email,
+  contact_send_date,
+  contact_send_time
 ) {
-  console.log(message_sent);
+  console.log("api");
   return axios.post(`/api/emergency-contact/${trip_id}/new_contact`, {
-    name: name,
-    phone_number: phone_number,
-    email: email,
-    message_sent: message_sent,
-    send_date: send_date,
+    name: contact_name,
+    phone_number: contact_phone_number,
+    email: contact_email,
+    send_date: contact_send_date,
+    send_time: contact_send_time,
+    message_sent: false,
   });
 }
 
