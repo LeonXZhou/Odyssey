@@ -20,6 +20,9 @@
     text-shadow: 3px 3px black;
 
     .begin-journey {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       background-color: transparent;
       border: none;
       height: 5em;

@@ -26,7 +26,7 @@ export function formatTripData(allTripData) {
         mapId: dataPoint.routes_id,
         stopId: dataPoint.stops_id,
         tripId: dataPoint.trip_id,
-        description: dataPoint.stop_description
+        description: dataPoint.stop_description,
       });
     }
     if (!formatedTripData[dataPoint.trip_id]["maps"]) {
@@ -34,7 +34,7 @@ export function formatTripData(allTripData) {
         lat: dataPoint.routes_lat,
         long: dataPoint.routes_long,
         mapId: dataPoint.routes_id,
-        zoom: dataPoint.routes_zoom
+        zoom: dataPoint.routes_zoom,
       };
     }
     if (!formatedTripData[dataPoint.trip_id]["users"]) {
@@ -44,7 +44,7 @@ export function formatTripData(allTripData) {
       };
     }
     formatedTripData[dataPoint.trip_id].startDate = dataPoint.trip_start;
-    formatedTripData[dataPoint.trip_id].endDate = dataPoint.trip_end
+    formatedTripData[dataPoint.trip_id].endDate = dataPoint.trip_end;
   }
   for (const data in formatedTripData) {
     formatedTripData[data]["trip_id"] = data;
@@ -80,7 +80,6 @@ export function formatTripEquipmentData(allTripData) {
 
   return formatedData;
 }
-
 
 export function formatTripMealsData(allMealData) {
   const formattedMealData = {};
@@ -125,29 +124,31 @@ export function formatTripMealsData(allMealData) {
     }
   }
 
-  return formattedMealData
+  return formattedMealData;
 }
 
-export function formatEmergencyData(user) {
-  const formatedData = {}
-    if(!formatedData["user_info"]){
-      formatedData["user_info"] = {
-          first_name : user.first_name,
-          last_name : user.last_name,
-          trip_name : user.name,
-          trip_description : user.description,
-          trip_start_date : user.start_date,
-          trip_end_date : user.end_date
-      }
-    }
-    if(!formatedData["user_info"]["emergency_contact"]){
+export function formatEmergencyData(contactArray) {
+  const contact = contactArray[0];
+  let formatedData = {};
 
-      formatedData["user_info"]["emergency_contact"] = {
-          emergency_contact : user.emergency_contact,
-          phone_number :user.emergency_contact_phone,
-          email : user.emergency_contact_email,
-          send_message_by : user.send_date
-      }
-    }
-      return formatedData
+  if (contact) {
+    formatedData = {
+      id: contact.id,
+      trip_id: contact.trip_id,
+      name: contact.name,
+      phone_number: contact.phone_number,
+      email: contact.email,
+      send_date: contact.send_date.slice(0, 10),
+      send_time: contact.send_time,
+    };
+  } else {
+    formatedData.id = "";
+    formatedData.name = "";
+    formatedData.phone_number = "";
+    formatedData.email = "";
+    formatedData.send_date = "";
+    formatedData.send_time = "";
+  }
+
+  return formatedData;
 }

@@ -23,9 +23,11 @@ function BeginJourney(props) {
   return (
     <>
       {journeyRenderState === BEGIN && !auth && (
-        <Link to="/register" type="button" className="banner">
-          Your journey begins here
-        </Link>
+        <div className="banner">
+          <Link to="/register" type="button" className="begin-journey">
+            Your journey begins here
+          </Link>
+        </div>
       )}
 
       {journeyRenderState === BEGIN && auth && (
