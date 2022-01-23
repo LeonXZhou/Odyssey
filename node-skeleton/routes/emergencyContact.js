@@ -86,6 +86,7 @@ module.exports = (db) => {
   });
 
   router.post("/:trip_id/update_contact", (req, res) => {
+    console.log("HIT2");
     updateEmergencyContactInfor(
       db,
       req.body.name,

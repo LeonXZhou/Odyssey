@@ -112,11 +112,11 @@ export function updateMealCard(day_id, meal_id, meal_name, meal_items) {
 }
 
 export function deleteMeal(meal_id) {
-  return axios.delete(`/api/meals/${meal_id}`)
+  return axios.delete(`/api/meals/${meal_id}`);
 }
 
 export function deleteMealItem(meal_item_id) {
-  return axios.delete(`/api/meals/meal_items/${meal_item_id}`)
+  return axios.delete(`/api/meals/meal_items/${meal_item_id}`);
 }
 
 //Meal API END
@@ -255,7 +255,8 @@ export function updateEmergencyContact(
   contact_send_time,
   contact_id
 ) {
-  return axios.post(`/api/emergency-contact/${trip_id}/delete_contact`, {
+  console.log("HIT");
+  return axios.post(`/api/emergency-contact/${trip_id}/update_contact`, {
     name: contact_name,
     phone_number: contact_phone_number,
     email: contact_email,
@@ -266,7 +267,6 @@ export function updateEmergencyContact(
 }
 
 export function deleteEmergencyContact(trip_id, id) {
-  console.log("id", id);
   return axios.post(`/api/emergency-contact/${trip_id}/delete_contact`, {
     id: id,
   });

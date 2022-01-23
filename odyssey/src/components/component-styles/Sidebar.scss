@@ -4,7 +4,10 @@
   width: 23em;
   background-color: #588fa7;
   border-right: 1.5px solid grey;
-  height: auto;
+  position: fixed;
+  top: 6.05em;
+  height: 100%;
+  z-index: 2;
   .sidebar-item {
     display: flex;
     width: 12.25em;
