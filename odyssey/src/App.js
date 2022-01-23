@@ -21,7 +21,7 @@ import {checkDbForMessage} from "./Helpers/apiHelpers"
 function App() {
   const [userEmail, setUserEmail] = useState();
   const { setAuth, setUser, user } = useContext(authContext);
-  checkDbForMessage()
+  
   useEffect(() => {
     authenticate().then((res) => {
       if (res.data.userId) {
