@@ -119,6 +119,10 @@ export function deleteMealItem(meal_item_id) {
   return axios.delete(`/api/meals/meal_items/${meal_item_id}`);
 }
 
+export function getNutrition(search)
+{
+  return axios.post(`/api/meals/nutrition/`,{search})
+}
 //Meal API END
 //Meal API END
 //Meal API END

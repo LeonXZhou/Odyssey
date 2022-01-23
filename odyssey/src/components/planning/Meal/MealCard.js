@@ -2,8 +2,9 @@ import React from "react";
 import "../../component-styles/MealCard.scss";
 import MealItem from "./MealItem";
 import { useState } from "react";
-import { updateMealCard, deleteMeal,getMealsForTrip } from "../../../Helpers/apiHelpers";
+import { updateMealCard, deleteMeal, getMealsForTrip } from "../../../Helpers/apiHelpers";
 import { formatTripMealsData } from "../../../Helpers/dataHelpers";
+import axios from "axios";
 
 const MealCard = (props) => {
   console.log('mealCard props', props)
@@ -30,35 +31,35 @@ const MealCard = (props) => {
     <div className={"mealCard"}>
       {props.edit === "edit" ? (
         <div className={"meal-card-title"}>
-        <input
-          className="meal-card-title-input"
-          value={props.mealState.mealName}
-          onChange={(e) => {
-            props.setMealState((prev) => {
-              const newState = { ...prev };
-              console.log("lool at me please", props);
-              newState[props.dayId].meals[props.mealState.mealId] = {
-                ...newState[props.dayId].meals[props.mealState.mealId],
-                mealName: e.target.value,
-              };
+          <input
+            className="meal-card-title-input"
+            value={props.mealState.mealName}
+            onChange={(e) => {
+              props.setMealState((prev) => {
+                const newState = { ...prev };
+                console.log("lool at me please", props);
+                newState[props.dayId].meals[props.mealState.mealId] = {
+                  ...newState[props.dayId].meals[props.mealState.mealId],
+                  mealName: e.target.value,
+                };
 
-              return newState;
-            });
-          }}
-        ></input>
-        <button
-        className="meal-card-title-button"
-        onClick={() => {
-          deleteMeal(props.mealState.mealId).then(() => {
-            getMealsForTrip(props.tripId).then((res) => {
-              props.setMealState(formatTripMealsData(res.data));
-            });
-          });
-        }}
-      >
-        X
-      </button>
-      </div>
+                return newState;
+              });
+            }}
+          ></input>
+          <button
+            className="meal-card-title-button"
+            onClick={() => {
+              deleteMeal(props.mealState.mealId).then(() => {
+                getMealsForTrip(props.tripId).then((res) => {
+                  props.setMealState(formatTripMealsData(res.data));
+                });
+              });
+            }}
+          >
+            X
+          </button>
+        </div>
       ) : (
         <p1>{props.mealState.mealName}</p1>
       )}
@@ -66,12 +67,16 @@ const MealCard = (props) => {
       <table>
         <tbody className="meal-table">
           <tr className="meal-table-titles">
+            <th className={"delete"}></th>
             <th className="meal-item-title">Items</th>
             <th className="meal-quantity-title">Quantity</th>
+            <th className="meal-quantity-title">Estimated Weight</th>
+            <th className="meal-quantity-title">Estimated Calories</th>
           </tr>
           {mealItemArray}
           <tr className="meal-table-items">
-            <td>
+            <td className={"delete"}></td>
+            <td  >
               {props.edit === "edit" && (
                 <input
                   className="meal-card-new-item"
@@ -155,8 +160,9 @@ const MealCard = (props) => {
             Save Card
           </button>
         </>
-      )}
-    </div>
+      )
+      }
+    </div >
   );
 };
 
