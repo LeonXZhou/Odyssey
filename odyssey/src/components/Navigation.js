@@ -2,7 +2,7 @@ import React from "react";
 import { useContext } from "react";
 import { authContext } from "./providers/AuthenticationProvider";
 import { Link } from "react-router-dom";
-import "./component-styles/Navigation.scss";
+import "./component-styles/navigation.scss";
 import odyssey_logo from "./images/odyssey_logo.png";
 
 const Navigation = (props) => {
