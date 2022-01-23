@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { authContext } from "./providers/AuthenticationProvider";
 import { Link, useNavigate } from "react-router-dom";
-import "./component-styles/Home.scss";
+import "./component-styles/home.scss";
 import { insertNewTrip } from "../Helpers/apiHelpers";
 
 const BEGIN = "BEGIN";
