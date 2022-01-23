@@ -96,6 +96,15 @@ function deleteItems(db, item_id) {
   return db.query(query, values);
 }
 
+function deleteMeal(db,meal_id){
+  const query = `
+  DELETE FROM meals
+  WHERE id =$1;
+ `;
+  const values = [meal_id];
+  return db.query(query, values);
+}
+
 module.exports = (db) => {
   router.get("/:trip_id", (req, res) => {
     console.log("I got the request");
@@ -179,6 +188,10 @@ module.exports = (db) => {
 
   router.delete("/meal_items/:meal_item_id", (req,res) => {
     deleteItems(db, req.params.meal_item_id)
+      .then(res.send('success'));
+  })
+  router.delete("/:meal_id", (req,res) => {
+    deleteMeal(db, req.params.meal_id)
       .then(res.send('success'));
   })
 
