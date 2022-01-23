@@ -5,6 +5,7 @@
   width: 1em;
   border: none;
   background-color: transparent;
+  color:whitesmoke;
 }
 
 .meal-items {
@@ -14,9 +15,10 @@
   border: none;
   border-radius: 8px;
   outline: none;
+  color: whitesmoke;
 }
 .meal-items:hover {
-  background-color: rgb(205, 205, 176);
+  background-color: grey
 }
 
 .meal-quantities {
@@ -26,7 +28,8 @@
   border: none;
   border-radius: 8px;
   outline: none;
+  color: whitesmoke
 }
 .meal-quantities:hover {
-  background-color: rgb(205, 205, 176);
+  background-color: grey
 }
