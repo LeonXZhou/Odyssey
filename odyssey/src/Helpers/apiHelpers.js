@@ -248,7 +248,7 @@ export function updateEmergencyContact(
   contact_send_time,
   contact_id
 ) {
-  return axios.post(`/api/emergency-contact/${trip_id}/update_contact`, {
+  return axios.post(`/api/emergency-contact/${trip_id}/delete_contact`, {
     name: contact_name,
     phone_number: contact_phone_number,
     email: contact_email,
@@ -258,8 +258,11 @@ export function updateEmergencyContact(
   });
 }
 
-export function deleteEmergencyContact(id) {
-  return axios.post(`/:user_id/delete_contact`);
+export function deleteEmergencyContact(trip_id, id) {
+  console.log("id", id);
+  return axios.post(`/api/emergency-contact/${trip_id}/delete_contact`, {
+    id: id,
+  });
 }
 
 export function insertEmergencyContact(
@@ -270,7 +273,6 @@ export function insertEmergencyContact(
   contact_send_date,
   contact_send_time
 ) {
-  console.log("api");
   return axios.post(`/api/emergency-contact/${trip_id}/new_contact`, {
     name: contact_name,
     phone_number: contact_phone_number,

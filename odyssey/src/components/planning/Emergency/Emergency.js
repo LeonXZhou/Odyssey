@@ -4,6 +4,7 @@ import {
   getEmergencyContactByTripId,
   insertEmergencyContact,
   updateEmergencyContact,
+  deleteEmergencyContact,
 } from "../../../Helpers/apiHelpers.js";
 import { formatEmergencyData } from "../../../Helpers/dataHelpers";
 
@@ -28,7 +29,6 @@ const Emergency = (props) => {
               props.emergencyState.contact_id
             );
           } else {
-            console.log("YES");
             insertEmergencyContact(
               props.trip_id,
               props.emergencyState.name,
@@ -104,6 +104,18 @@ const Emergency = (props) => {
         ></input>
         <button>SAVE</button>
       </form>
+      <button
+        className="delete-contact"
+        onClick={(e) => {
+          e.preventDefault();
+          deleteEmergencyContact(
+            props.emergencyState.trip_id,
+            props.emergencyState.id
+          );
+        }}
+      >
+        Remove Contact
+      </button>
     </main>
   );
 };
