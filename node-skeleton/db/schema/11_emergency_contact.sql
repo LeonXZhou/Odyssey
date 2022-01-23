@@ -7,5 +7,6 @@ CREATE TABLE emergency_contacts (
   email VARCHAR(255),
   time_date TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
   message_sent BOOLEAN,
-  send_date DATE
+  send_date DATE,
+  send_time TIME
 );
