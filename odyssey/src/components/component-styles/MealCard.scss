@@ -15,13 +15,13 @@
     background-color: grey;
   }
   .meal-table {
-    display: flex;
-    flex-direction: column;
+    // display: flex;
+    // flex-direction: column;
     justify-content: flex-start;
 
     .meal-table-titles {
-      display: flex;
-      justify-content: space-between;
+      // display: flex;
+      // justify-content: space-between;
       color:whitesmoke;
 
       .meal-item-title {
@@ -30,9 +30,11 @@
         margin-left: 10px;
       }
       .meal-quantity-title {
-        margin-right: 1.5em;
+        // margin-right: 1.5em;
         color:whitesmoke;
         font-weight: 400;
+        white-space: nowrap;
+        padding: 10px;
       }
     }
   }
@@ -70,12 +72,13 @@
     color:whitesmoke;
   }
   .meal-card-new-quantity {
-    display: flex;
-    justify-content: flex-end;
+    // display: flex;
+    // justify-content: flex-end;
     background-color: transparent;
     border: none;
     border-bottom: 1px solid whitesmoke;
     color:whitesmoke;
+    width:80%;
   }
   .meal-card-add-save {
     display: flex;
@@ -96,5 +99,8 @@
   }
 }
 .mealCard:hover {
-  transform: scale(1.05);
+  transform: scale(1.015);
+}
+td.delete{
+  width:10px;
 }

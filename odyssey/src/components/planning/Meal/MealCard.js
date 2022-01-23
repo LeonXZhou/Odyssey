@@ -67,12 +67,16 @@ const MealCard = (props) => {
       <table>
         <tbody className="meal-table">
           <tr className="meal-table-titles">
+            <th className={"delete"}></th>
             <th className="meal-item-title">Items</th>
             <th className="meal-quantity-title">Quantity</th>
+            <th className="meal-quantity-title">Estimated Weight</th>
+            <th className="meal-quantity-title">Estimated Calories</th>
           </tr>
           {mealItemArray}
           <tr className="meal-table-items">
-            <td>
+            <td className={"delete"}></td>
+            <td  >
               {props.edit === "edit" && (
                 <input
                   className="meal-card-new-item"
