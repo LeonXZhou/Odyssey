@@ -1,12 +1,21 @@
 import React from "react";
 import "../../component-styles/MealItem.scss";
 
+import { formatTripMealsData } from "../../../Helpers/dataHelpers";
+import { getMealsForTrip, deleteMealItem } from "../../../Helpers/apiHelpers";
 const MealItem = (props) => {
   return (
     <tr>
       <td>
         {props.edit === "edit" && (
-          <button className="meal-item-delete">x</button>
+          <button className="meal-item-delete"
+            onClick={() => {
+              deleteMealItem(props.itemState.mealItemId).then(() => {
+                getMealsForTrip(props.tripId).then((res) => {
+                  props.setMealState(formatTripMealsData(res.data));
+                });
+              });
+            }}>x</button>
         )}
       </td>
       <td>
@@ -16,6 +25,8 @@ const MealItem = (props) => {
             className="meal-items"
             type={"text"}
             value={props.itemState.mealItemName}
+            onBlur={(e)=>console.log(e)}
+
             onChange={(e) => {
               props.setMealState((prev) => {
                 console.log(prev);
@@ -27,7 +38,7 @@ const MealItem = (props) => {
                   props.itemState.mealItemId
                 ] = {
                   ...newState[props.dayId].meals[props.mealId].mealItems[
-                    props.itemState.mealItemId
+                  props.itemState.mealItemId
                   ],
                   mealItemName: e.target.value,
                 };
@@ -57,7 +68,7 @@ const MealItem = (props) => {
                   props.itemState.mealItemId
                 ] = {
                   ...newState[props.dayId].meals[props.mealId].mealItems[
-                    props.itemState.mealItemId
+                  props.itemState.mealItemId
                   ],
                   mealItemQuantity: e.target.value,
                 };

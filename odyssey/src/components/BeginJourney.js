@@ -11,6 +11,7 @@ const LOADING = "LOADING";
 const USER_ID = 1; // hard coded user id for insert, will update to use context
 
 function BeginJourney(props) {
+  let navigate = useNavigate();
   const [journeyRenderState, setJourneyRenderState] = useState(BEGIN);
   const { user, auth } = useContext(authContext);
   const [newJourneyState, setNewJourneyState] = useState({
@@ -19,7 +20,6 @@ function BeginJourney(props) {
     endDate: "",
   });
   const [showBanner, setShowBanner] = useState(false);
-  let navigate = useNavigate();
   return (
     <>
       {journeyRenderState === BEGIN && !auth && (
@@ -87,7 +87,8 @@ function BeginJourney(props) {
             </div>
             <button
               className="create-trip"
-              onClick={() => {
+              onClick={(e) => {
+                e.preventDefault()
                 setJourneyRenderState(LOADING);
                 insertNewTrip(
                   USER_ID,
@@ -96,6 +97,7 @@ function BeginJourney(props) {
                   newJourneyState.endDate
                 ).then((res) => {
                   console.log(res);
+                  navigate(`/planning/edit/${res.data.trip_id}`)
                 });
               }}
             >

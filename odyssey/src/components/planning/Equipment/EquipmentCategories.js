@@ -37,22 +37,22 @@ const EquipmentCategories = (props) => {
   return (
     <main>
       <div className="equipment-card">
-        <div className="equipment-card-title">
-          <input
-            className="equipment-card-title-input"
-            value={props.categoryName}
-            onChange={(e) => {
-              props.setEquipmentState((prev) => {
-                const newState = { ...prev };
-                newState[props.categoryId] = {
-                  ...prev[props.categoryId],
-                  category: e.target.value,
-                };
-                return newState;
-              });
-            }}
-          ></input>
-          {props.edit === "edit" && (
+        {props.edit === "edit" ? (
+          <div className="equipment-card-title">
+            <input
+              className="equipment-card-title-input"
+              value={props.categoryName}
+              onChange={(e) => {
+                props.setEquipmentState((prev) => {
+                  const newState = { ...prev };
+                  newState[props.categoryId] = {
+                    ...prev[props.categoryId],
+                    category: e.target.value,
+                  };
+                  return newState;
+                });
+              }}
+            ></input>
             <button
               className="equipment-card-title-button"
               onClick={() => {
@@ -65,8 +65,13 @@ const EquipmentCategories = (props) => {
             >
               X
             </button>
+          </div>) :
+          (<div className="equipment-card-title">
+            <div className="equipment-card-title-input">
+              {props.categoryName}
+            </div>
+          </div>
           )}
-        </div>
         <table>
           <thead>
             <tr>

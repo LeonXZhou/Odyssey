@@ -90,6 +90,9 @@ export function formatTripMealsData(allMealData) {
     if (!formattedMealData[mealRow.days_id]["dayId"]) {
       formattedMealData[mealRow.days_id]["dayId"] = mealRow.days_id;
     }
+    if (!formattedMealData[mealRow.days_id]["tripId"]) {
+      formattedMealData[mealRow.days_id]["tripId"] = mealRow.trip_id;
+    }
     if (!formattedMealData[mealRow.days_id]["date"]) {
       formattedMealData[mealRow.days_id]["date"] = mealRow.days_date;
     }
@@ -97,45 +100,27 @@ export function formatTripMealsData(allMealData) {
       formattedMealData[mealRow.days_id]["meals"] = {};
     }
 
-    if (!formattedMealData[mealRow.days_id]["meals"][mealRow.meals_id]) {
-      formattedMealData[mealRow.days_id]["meals"][mealRow.meals_id] = {};
-    }
+    if (mealRow.meals_id) {
+      if (!formattedMealData[mealRow.days_id]["meals"][mealRow.meals_id] && mealRow.meals_id) {
+        formattedMealData[mealRow.days_id]["meals"][mealRow.meals_id] = {}
+      }
 
-    formattedMealData[mealRow.days_id]["meals"][mealRow.meals_id]["mealId"] =
-      mealRow.meals_id;
-    formattedMealData[mealRow.days_id]["meals"][mealRow.meals_id]["mealName"] =
-      mealRow.meal;
+      formattedMealData[mealRow.days_id]["meals"][mealRow.meals_id]["mealId"] = mealRow.meals_id
+      formattedMealData[mealRow.days_id]["meals"][mealRow.meals_id]["mealName"] = mealRow.meal
 
-    if (
-      !formattedMealData[mealRow.days_id]["meals"][mealRow.meals_id][
-        "mealItems"
-      ]
-    ) {
-      formattedMealData[mealRow.days_id]["meals"][mealRow.meals_id][
-        "mealItems"
-      ] = {};
-    }
+      if (!formattedMealData[mealRow.days_id]["meals"][mealRow.meals_id]["mealItems"]) {
+        formattedMealData[mealRow.days_id]["meals"][mealRow.meals_id]["mealItems"] = {}
+      }
 
-    if (
-      !formattedMealData[mealRow.days_id]["meals"][mealRow.meals_id][
-        "mealItems"
-      ][mealRow.meal_itemid]
-    ) {
-      formattedMealData[mealRow.days_id]["meals"][mealRow.meals_id][
-        "mealItems"
-      ][mealRow.meal_itemid] = {};
-    }
 
-    if (mealRow.meal_itemid) {
-      formattedMealData[mealRow.days_id]["meals"][mealRow.meals_id][
-        "mealItems"
-      ][mealRow.meal_itemid]["mealItemName"] = mealRow.food_item;
-      formattedMealData[mealRow.days_id]["meals"][mealRow.meals_id][
-        "mealItems"
-      ][mealRow.meal_itemid]["mealItemQuantity"] = mealRow.quantity;
-      formattedMealData[mealRow.days_id]["meals"][mealRow.meals_id][
-        "mealItems"
-      ][mealRow.meal_itemid]["mealItemId"] = mealRow.meal_itemid;
+      if (mealRow.meal_itemid) {
+        if (!formattedMealData[mealRow.days_id]["meals"][mealRow.meals_id]["mealItems"][mealRow.meal_itemid]) {
+          formattedMealData[mealRow.days_id]["meals"][mealRow.meals_id]["mealItems"][mealRow.meal_itemid] = {};
+        }
+        formattedMealData[mealRow.days_id]["meals"][mealRow.meals_id]["mealItems"][mealRow.meal_itemid]["mealItemName"] = mealRow.food_item;
+        formattedMealData[mealRow.days_id]["meals"][mealRow.meals_id]["mealItems"][mealRow.meal_itemid]["mealItemQuantity"] = mealRow.quantity;
+        formattedMealData[mealRow.days_id]["meals"][mealRow.meals_id]["mealItems"][mealRow.meal_itemid]["mealItemId"] = mealRow.meal_itemid;
+      }
     }
   }
 
