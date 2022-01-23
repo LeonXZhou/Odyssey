@@ -56,7 +56,7 @@ const mealsRoutes = require("./routes/meals");
 const testHelperRoutes = require("./routes/helper");
 const authentication = require("./routes/authentication");
 const emergencyContactRoutes = require("./routes/emergencyContact");
-// const weatherRoute = require("./routes/weather");
+const weatherRoute = require("./routes/weather");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -67,7 +67,7 @@ app.use("/api/trips", tripsRoutes(db));
 app.use("/api/meals", mealsRoutes(db));
 app.use("/api/helper", testHelperRoutes(db));
 app.use("/api/emergency-contact", emergencyContactRoutes(db));
-// app.use("/api/weather-info", weatherRoute(db));
+app.use("/api/weather", weatherRoute(db));
 app.use("/", authentication(db));
 // Note: mount other resources here, using the same pattern above
 
@@ -97,7 +97,7 @@ app.listen(PORT, () => {
                                   SET message_sent = 'true'
                                   WHERE id=${item["id"]}
                                   `;
-            console.log(item["phone_number"]);
+            // console.log(item["phone_number"]);
             client.messages
               .create({
                 body: "hey did this reach you ?",
@@ -108,16 +108,16 @@ app.listen(PORT, () => {
               })
               .then((message) => {
                 if ((message.status = "accepted")) {
-                  console.log("MSG_STATUS:", message.status);
+                  // console.log("MSG_STATUS:", message.status);
                   db.query(updatedQuery).done();
                 }
               });
           }
         }
 
-        console.log(req.rows, "req.rows empty");
+        // console.log(req.rows, "req.rows empty");
 
-        console.log("new cycle");
+        // console.log("new cycle");
       })
 
       .catch((err) => {
