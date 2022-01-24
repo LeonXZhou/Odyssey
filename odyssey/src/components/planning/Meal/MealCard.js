@@ -4,17 +4,14 @@ import MealItem from "./MealItem";
 import { useState } from "react";
 import { updateMealCard, deleteMeal, getMealsForTrip } from "../../../Helpers/apiHelpers";
 import { formatTripMealsData } from "../../../Helpers/dataHelpers";
-import axios from "axios";
 
 const MealCard = (props) => {
-  console.log('mealCard props', props)
   const mealItemArray = [];
   const [newItemState, setNewItemState] = useState({
     name: "",
     quantity: "",
   });
   for (const mealItemKey in props.mealState.mealItems) {
-    console.log("what the actuall fuck is going on here")
     mealItemArray.push(
       <MealItem
         key={mealItemKey}
