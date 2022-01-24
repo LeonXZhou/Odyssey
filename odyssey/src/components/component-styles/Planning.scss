@@ -2,5 +2,9 @@
   display: flex;
   width: 100%;
   background-color: beige;
-  min-height: 100vh
+  min-height: 100vh;
+}
+
+.planning .leaflet-container{
+  height:100vh;
 }

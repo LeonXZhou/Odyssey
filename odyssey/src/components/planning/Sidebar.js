@@ -6,9 +6,17 @@ const Sidebar = (props) => {
   return (
     <section className="sidebar">
       <Link
+        to={`/planning/general/${props.edit}/${props.trip_id}`}
+        type="button"
+        className="sidebar-item"
+      >
+        <i className="fa fa-map sidebar-icon" aria-hidden="true"></i>
+        General
+      </Link>
+      <Link
         to={`/planning/${props.edit}/${props.trip_id}`}
         type="button"
-        className="btn btn-default sidebar-item"
+        className="sidebar-item"
       >
         <i className="fa fa-map sidebar-icon" aria-hidden="true"></i>
         Route
@@ -16,7 +24,7 @@ const Sidebar = (props) => {
       <Link
         to={`/planning/equipment/${props.edit}/${props.trip_id}`}
         type="button"
-        className="btn btn-default sidebar-item"
+        className="sidebar-item"
       >
         <i className="fa fa-archive sidebar-icon" aria-hidden="true"></i>
         Equipment
@@ -24,19 +32,19 @@ const Sidebar = (props) => {
       <Link
         to={`/planning/meals/${props.edit}/${props.trip_id}`}
         type="button"
-        className="btn btn-default  sidebar-item"
+        className="sidebar-item"
       >
         <i className="fa fa-cutlery sidebar-icon" aria-hidden="true"></i>
         Meals
       </Link>
-      <Link
+      {props.edit === "edit" && <Link
         to={`/planning/emergency/${props.edit}/${props.trip_id}`}
         type="button"
-        className="btn btn-default  sidebar-item"
+        className="sidebar-item"
       >
         <i className="fa fa-phone sidebar-icon" aria-hidden="true"></i>
         Emergency Contact
-      </Link>
+      </Link>}
     </section>
   );
 };

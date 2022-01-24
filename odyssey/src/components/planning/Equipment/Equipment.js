@@ -1,4 +1,8 @@
-import { updateEquipment, newCategory, getWeather } from "../../../Helpers/apiHelpers";
+import {
+  updateEquipment,
+  newCategory,
+  getWeather,
+} from "../../../Helpers/apiHelpers";
 import "../../component-styles/Equipment.scss";
 import { useEffect, useState } from "react";
 import EquipmentCategories from "./EquipmentCategories";
@@ -46,11 +50,7 @@ const Equipment = (props) => {
 
   return (
     <main className="all-equipment">
-      <div className="weather">
-        {
-          weatherArray
-        }
-      </div>
+      <div className="weather">{weatherArray}</div>
       <div className="equipment">
         {equipmentCategories}
         {props.edit === "edit" && (

@@ -1,4 +1,4 @@
-export default function WeatherBox(props){
+export default function WeatherBox(props) {
   return (
     <div className={`weather-box-${props.weather}`}>
           <h4>{props.date}</h4>
