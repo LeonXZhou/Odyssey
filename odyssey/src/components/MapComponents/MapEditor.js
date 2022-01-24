@@ -43,7 +43,7 @@ function MapEditor(props) {
       >
         <TileLayer
           continuousWorld={false}
-          noWrap={true}
+          // noWrap={true}
           attribution={
             'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors | Map style: &copy; <a href="https://waymarkedtrails.org">waymarkedtrails.org</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
           }
@@ -54,8 +54,9 @@ function MapEditor(props) {
           attribution={mapThemeAttribution}
           url={mapThemeURL}
           continuousWorld={true}
-          noWrap={true} />
-          zIndex{1}
+          noWrap={true} 
+          zIndex={1}
+          />
         <MarkersEdit
           markers={props.markers}
           // setMarkers={setMarkers}
