@@ -17,11 +17,11 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import LoginDev from "./components/LoginDev";
 import MyTrips from "./components/MyTrips";
-import {checkDbForMessage} from "./Helpers/apiHelpers"
+import { checkDbForMessage } from "./Helpers/apiHelpers"
 function App() {
   const [userEmail, setUserEmail] = useState();
   const { setAuth, setUser, user } = useContext(authContext);
-  
+
   useEffect(() => {
     authenticate().then((res) => {
       if (res.data.userId) {
@@ -44,6 +44,11 @@ function App() {
         <Route
           path="/planning/equipment/view/:trip_id"
           element={<Planning page="equipment" edit={"view"} />}
+        />
+
+        <Route
+          path="/planning/general/view/:trip_id"
+          element={<Planning page="general" edit={"view"} />}
         />
 
         <Route
@@ -71,6 +76,10 @@ function App() {
         <Route
           path="/planning/emergency/edit/:trip_id"
           element={<Planning page="emergency" edit={"edit"} />}
+        />
+        <Route
+          path="/planning/general/edit/:trip_id"
+          element={<Planning page="general" edit={"edit"} />}
         />
         {/* end of planning edit routes */}
 
@@ -179,7 +188,7 @@ function App() {
       </Routes>
     </BrowserRouter>
   );
-  
+
 }
 
 export default App;
