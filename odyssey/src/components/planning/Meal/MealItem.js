@@ -3,26 +3,40 @@ import "../../component-styles/MealItem.scss";
 import { useState, useEffect } from "react";
 
 import { formatTripMealsData } from "../../../Helpers/dataHelpers";
-import { getMealsForTrip, deleteMealItem, getNutrition } from "../../../Helpers/apiHelpers";
+import {
+  getMealsForTrip,
+  deleteMealItem,
+  getNutrition,
+} from "../../../Helpers/apiHelpers";
 const MealItem = (props) => {
-  const [nutritionState, setNutritionState] = useState({})
+  const [nutritionState, setNutritionState] = useState({});
   useEffect(() => {
-    getNutrition(`${props.itemState.mealItemQuantity} ${props.itemState.mealItemName}`)
-      .then((response) => { setNutritionState(response.data) })
-  }, [])
+    getNutrition(
+      `${props.itemState.mealItemQuantity} ${props.itemState.mealItemName}`
+    ).then((response) => {
+      setNutritionState(response.data);
+    });
+  }, []);
+  console.log("nutrition state", nutritionState.weight);
+  props.setTotalWeight(Number(props.totalWeight) + nutritionState.weight);
+  console.log("TOTAL WEIGHT", typeof props.totalWeight);
   return (
     <>
       <tr>
         <td className={"delete"}>
           {props.edit === "edit" && (
-            <button className="meal-item-delete"
+            <button
+              className="meal-item-delete"
               onClick={() => {
                 deleteMealItem(props.itemState.mealItemId).then(() => {
                   getMealsForTrip(props.tripId).then((res) => {
                     props.setMealState(formatTripMealsData(res.data));
                   });
                 });
-              }}>x</button>
+              }}
+            >
+              x
+            </button>
           )}
         </td>
         <td>
@@ -33,7 +47,6 @@ const MealItem = (props) => {
               type={"text"}
               value={props.itemState.mealItemName}
               onBlur={(e) => console.log(e)}
-
               onChange={(e) => {
                 props.setMealState((prev) => {
                   console.log(prev);
@@ -45,7 +58,7 @@ const MealItem = (props) => {
                     props.itemState.mealItemId
                   ] = {
                     ...newState[props.dayId].meals[props.mealId].mealItems[
-                    props.itemState.mealItemId
+                      props.itemState.mealItemId
                     ],
                     mealItemName: e.target.value,
                   };
@@ -75,7 +88,7 @@ const MealItem = (props) => {
                     props.itemState.mealItemId
                   ] = {
                     ...newState[props.dayId].meals[props.mealId].mealItems[
-                    props.itemState.mealItemId
+                      props.itemState.mealItemId
                     ],
                     mealItemQuantity: e.target.value,
                   };
@@ -87,8 +100,8 @@ const MealItem = (props) => {
             <p1>{props.itemState.mealItemQuantity}</p1>
           )}
         </td>
-        <td>weight: {nutritionState.weight}</td>
-        <td>calories: {nutritionState.calories}</td>
+        {/* <td className="meal-item-info">{nutritionState.weight / 1000} kg</td>
+        <td className="meal-item-info">{nutritionState.calories}</td> */}
       </tr>
     </>
   );
