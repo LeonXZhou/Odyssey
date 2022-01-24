@@ -37,14 +37,14 @@ const Sidebar = (props) => {
         <i className="fa fa-cutlery sidebar-icon" aria-hidden="true"></i>
         Meals
       </Link>
-      <Link
+      {props.edit === "edit" && <Link
         to={`/planning/emergency/${props.edit}/${props.trip_id}`}
         type="button"
         className="sidebar-item"
       >
         <i className="fa fa-phone sidebar-icon" aria-hidden="true"></i>
         Emergency Contact
-      </Link>
+      </Link>}
     </section>
   );
 };
