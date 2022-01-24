@@ -1,6 +1,7 @@
 import 'leaflet/dist/leaflet.css';
 import { MapContainer, TileLayer } from 'react-leaflet'
 import './MapEditor.scss'
+import L from 'leaflet'
 
 import { useState } from 'react';
 import { useContext } from "react";
@@ -13,6 +14,7 @@ import MarkersEdit from './MarkersEdit';
 //the MapEditor Component generates a map that can be edited
 
 function MapEditor(props) {
+
   //only enable map edit when something like an edit button is clicked. editable state keeps track of this.
   const [editable, setEditable] = useState(false);
   //markers state represents the markers on this map. defaults to the props passed in.
@@ -34,26 +36,38 @@ function MapEditor(props) {
     // that updates the markers state if editable is set to true
 
     <div className={"map-editor"}>
-        <MapContainer center={props.mapOptions.center} zoom={props.mapOptions.zoom} scrollWheelZoom={true} doubleClickZoom={false}>
-          <TileLayer attribution={mapThemeAttribution} url={mapThemeURL} />
-          <TileLayer
+      <MapContainer center={props.mapOptions.center}
+        zoom={props.mapOptions.zoom}
+        scrollWheelZoom={true}
+        doubleClickZoom={false}
+      >
+        <TileLayer
+          continuousWorld={false}
+          noWrap={true}
           attribution={
             'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors | Map style: &copy; <a href="https://waymarkedtrails.org">waymarkedtrails.org</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
           }
           url={"https://tile.waymarkedtrails.org/hiking/{z}/{x}/{y}.png"}
+          zIndex={2}
         />
-          <MarkersEdit
-            markers={props.markers}
-            // setMarkers={setMarkers}
-            icon={iconValue}
-            editable={editable}
-            setEditable={setEditable}
-            startDate={props.startDate}
-            endDate={props.endDate}
-            setRouteArray={props.setRouteArray}
-            mapId={props.mapOptions.mapId}
-            tripId={props.trip_id}></MarkersEdit>
-        </MapContainer>
+        <TileLayer
+          attribution={mapThemeAttribution}
+          url={mapThemeURL}
+          continuousWorld={true}
+          noWrap={true} />
+          zIndex{1}
+        <MarkersEdit
+          markers={props.markers}
+          // setMarkers={setMarkers}
+          icon={iconValue}
+          editable={editable}
+          setEditable={setEditable}
+          startDate={props.startDate}
+          endDate={props.endDate}
+          setRouteArray={props.setRouteArray}
+          mapId={props.mapOptions.mapId}
+          tripId={props.trip_id}></MarkersEdit>
+      </MapContainer>
       <div className={"map-edit-form"}>
         <select value={iconValue} onChange={(e) => { setIconValue(e.target.value) }}>
           <option value="DEFAULT">default</option>

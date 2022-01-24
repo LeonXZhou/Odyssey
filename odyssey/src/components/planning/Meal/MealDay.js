@@ -7,7 +7,6 @@ import { newMealOnDay } from "../../../Helpers/apiHelpers";
 const MealDay = (props) => {
   const date = new Date(props.mealDayState.date);
   const mealArray = [];
-  console.log(props.mealDayState);
   for (const mealKey in props.mealDayState.meals) {
     mealArray.push(
       <MealCard
