@@ -9,17 +9,6 @@ import {
   getNutrition,
 } from "../../../Helpers/apiHelpers";
 const MealItem = (props) => {
-  const [nutritionState, setNutritionState] = useState({});
-  useEffect(() => {
-    getNutrition(
-      `${props.itemState.mealItemQuantity} ${props.itemState.mealItemName}`
-    ).then((response) => {
-      setNutritionState(response.data);
-    });
-  }, []);
-  console.log("nutrition state", nutritionState.weight);
-  props.setTotalWeight(Number(props.totalWeight) + nutritionState.weight);
-  console.log("TOTAL WEIGHT", typeof props.totalWeight);
   return (
     <>
       <tr>
@@ -49,7 +38,6 @@ const MealItem = (props) => {
               onBlur={(e) => console.log(e)}
               onChange={(e) => {
                 props.setMealState((prev) => {
-                  console.log(prev);
                   const newState = { ...prev };
                   newState[props.dayId].mealItems = {
                     ...newState[props.dayId].mealItems,
@@ -79,7 +67,6 @@ const MealItem = (props) => {
               value={props.itemState.mealItemQuantity}
               onChange={(e) => {
                 props.setMealState((prev) => {
-                  console.log(prev);
                   const newState = { ...prev };
                   newState[props.dayId].mealItems = {
                     ...newState[props.dayId].mealItems,
