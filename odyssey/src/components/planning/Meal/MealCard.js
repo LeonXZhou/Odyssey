@@ -58,7 +58,7 @@ const MealCard = (props) => {
           </button>
         </div>
       ) : (
-        <p1>{props.mealState.mealName}</p1>
+        <p>{props.mealState.mealName}</p>
       )}
 
       <table>
