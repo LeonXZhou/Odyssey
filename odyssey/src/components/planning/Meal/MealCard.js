@@ -2,16 +2,25 @@ import React from "react";
 import "../../component-styles/MealCard.scss";
 import MealItem from "./MealItem";
 import { useState } from "react";
-import { updateMealCard, deleteMeal, getMealsForTrip } from "../../../Helpers/apiHelpers";
+import {
+  updateMealCard,
+  deleteMeal,
+  getMealsForTrip,
+} from "../../../Helpers/apiHelpers";
 import { formatTripMealsData } from "../../../Helpers/dataHelpers";
 
 const MealCard = (props) => {
+  console.log("mealCard props", props);
   const mealItemArray = [];
   const [newItemState, setNewItemState] = useState({
     name: "",
     quantity: "",
   });
+  const [totalWeight, setTotalWeight] = useState(0);
+  const [totalCalories, setTotalCalories] = useState(0);
+  console.log(props);
   for (const mealItemKey in props.mealState.mealItems) {
+    console.log("what the actuall fuck is going on here");
     mealItemArray.push(
       <MealItem
         key={mealItemKey}
@@ -21,6 +30,10 @@ const MealCard = (props) => {
         mealId={props.mealState.mealId}
         dayId={props.dayId}
         tripId={props.tripId}
+        totalWeight={totalWeight}
+        totalCalories={totalCalories}
+        setTotalWeight={setTotalWeight}
+        setTotalCalories={setTotalCalories}
       ></MealItem>
     );
   }
@@ -67,13 +80,13 @@ const MealCard = (props) => {
             <th className={"delete"}></th>
             <th className="meal-item-title">Items</th>
             <th className="meal-quantity-title">Quantity</th>
-            <th className="meal-quantity-title">Estimated Weight</th>
-            <th className="meal-quantity-title">Estimated Calories</th>
+            {/* <th className="meal-quantity-title">≈Weight</th>
+            <th className="meal-quantity-title">≈Calories</th> */}
           </tr>
           {mealItemArray}
           <tr className="meal-table-items">
             <td className={"delete"}></td>
-            <td  >
+            <td>
               {props.edit === "edit" && (
                 <input
                   className="meal-card-new-item"
@@ -114,10 +127,10 @@ const MealCard = (props) => {
                 console.log(prev);
                 const newState = { ...prev };
                 newState[props.dayId].meals[props.mealState.mealId].mealItems =
-                {
-                  ...newState[props.dayId].meals[props.mealState.mealId]
-                    .mealItems,
-                };
+                  {
+                    ...newState[props.dayId].meals[props.mealState.mealId]
+                      .mealItems,
+                  };
                 const newKey =
                   -Object.keys(
                     newState[props.dayId].meals[props.mealState.mealId]
@@ -157,9 +170,10 @@ const MealCard = (props) => {
             Save Card
           </button>
         </>
-      )
-      }
-    </div >
+      )}
+      <div>Weight: {totalWeight}</div>
+      <div>Calories: {totalCalories}</div>
+    </div>
   );
 };
 
