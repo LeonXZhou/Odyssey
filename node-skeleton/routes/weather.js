@@ -156,12 +156,13 @@ module.exports = (db) => {
     weatherFormater(req.params.lat, req.params.lng).then((data) => {
       const fData = filterWeatherData(data, req.params.startdate, req.params.enddate);
       console.log("this is the filtered data", fData);
-      res.send(data);
-    });
-    //   .catch((err) => {
-    //     res.status(500).json({ error: err.message });
-    //   });
-    
+      console.log(req.params.startdate, req.params.enddate)
+      res.send(fData);
+    })
+        .catch((err) => {
+          res.status(500).json({ error: err.message });
+        });
+
   });
   return router;
 };
