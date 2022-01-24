@@ -99,7 +99,6 @@ const Planning = (props) => {
           latTotal += Number(marker.lat);
           lngTotal += Number(marker.long);
         }
-        console.log(averageLat,averageLng);
         averageLat = latTotal/route.markers.length;
         averageLng = lngTotal/route.markers.length;
       }

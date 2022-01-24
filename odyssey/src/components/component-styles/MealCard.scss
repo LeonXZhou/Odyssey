@@ -11,6 +11,12 @@
   background-color: transparent;
   backdrop-filter: blur(10px) brightness(30%);
   // backdrop-filter: blur(50px);
+  p {
+    color:whitesmoke;
+  }
+  td {
+    color: whitesmoke;
+  }
   padding: 0.2em;
   .meal-card-title:hover {
     background-color: grey;
