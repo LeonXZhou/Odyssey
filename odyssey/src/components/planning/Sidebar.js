@@ -6,6 +6,14 @@ const Sidebar = (props) => {
   return (
     <section className="sidebar">
       <Link
+        to={`/planning/general/${props.edit}/${props.trip_id}`}
+        type="button"
+        className="sidebar-item"
+      >
+        <i className="fa fa-map sidebar-icon" aria-hidden="true"></i>
+        General
+      </Link>
+      <Link
         to={`/planning/${props.edit}/${props.trip_id}`}
         type="button"
         className="sidebar-item"
