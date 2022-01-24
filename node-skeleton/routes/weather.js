@@ -6,6 +6,7 @@ const router = express.Router();
 function filterWeatherData(weatherData, startDate, endDate) {
   const start = new Date(startDate);
   const end = new Date(endDate);
+  console.log(weatherData);
   const filteredWeather = {};
   for (const dayWeather of weatherData) {
     const day = new Date(dayWeather.date);
@@ -13,7 +14,8 @@ function filterWeatherData(weatherData, startDate, endDate) {
       filteredWeather[dayWeather.date] = {
         sunrise: dayWeather.current_day.sunrise,
         sunset: dayWeather.current_day.sunset,
-        temp: dayWeather.current_day.temp,
+        tempMax: dayWeather.temp.max,
+        tempMin: dayWeather.temp.min,
         weather: dayWeather.feels_like.description.main,
       };
     }
@@ -36,12 +38,15 @@ async function weatherFormater(latitude, longitude) {
   const response = await axios
     .get(url)
     .then((response) => {
+      console.log(response.data);
+      console.log(response.data.daily)
+      console.log(response.data.daily[0].temp.max)
+      console.log(response.data.daily[0].temp.min)
       const formatedDataArray = [];
       const weatherData = response.data;
       for (const item of weatherData.daily) {
         const formatingData = {};
         const date = new Date(item.dt * 1000);
-        console.log("this is each date", date);
         if (!formatingData["days"]) {
           formatingData["days"] = {};
         }
@@ -58,7 +63,8 @@ async function weatherFormater(latitude, longitude) {
             currentDay: currentDay.toLocaleDateString("en-CA"),
             sunrise: sunRise.toLocaleTimeString("en-CA"),
             sunset: sunSet.toLocaleTimeString("en-CA"),
-            temp: weatherData.current?.temp,
+            tempMax: item.temp.max,
+            tempMin: item.temp.min,
             feels_like: weatherData.current?.feels_like,
             pressure: weatherData.current?.pressure,
             humidity: weatherData.current?.humidity,
@@ -155,7 +161,6 @@ module.exports = (db) => {
   router.get("/:lat/:lng/:startdate/:enddate", (req, res) => {
     weatherFormater(req.params.lat, req.params.lng).then((data) => {
       const fData = filterWeatherData(data, req.params.startdate, req.params.enddate);
-      console.log("this is the filtered data", fData);
       console.log(req.params.startdate, req.params.enddate)
       res.send(fData);
     })
