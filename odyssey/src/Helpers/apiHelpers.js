@@ -297,6 +297,11 @@ export function insertEmergencyContact(
 // EMERGENCY CONTACT API END
 // EMERGENCY CONTACT API END
 // EMERGENCY CONTACT API END
+
+
+export function getWeather(lat,lng,startDate,endDate){
+  return axios.get(`/api/weather/${lat}/${lng}/${startDate}/${endDate}`)
+}
 // export function checkDbForMessage() {
 //   return axios.post(`/api/helper`)
   
