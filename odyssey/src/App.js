@@ -96,13 +96,13 @@ function App() {
         />
 
         {/* START OF PLANNING ROUTES */}
-        <Route path="/planning/:trip_id" element={<Planning page="route" />} />
+        {/* <Route path="/planning/:trip_id" element={<Planning page="route" />} />
         <Route path="/planning/route" element={<Planning page="route" />} />
         <Route
           path="/planning/equipment/:trip_id"
           element={<Planning page="equipment" />}
-        />
-        <Route
+        /> */}
+        {/* <Route
           path="/planning/meals/:trip_id"
           element={<Planning page="meals" />}
         />
@@ -123,8 +123,8 @@ function App() {
               markers={[]}
             ></MapEditor>
           }
-        />
-
+        /> */}
+{/* 
         <Route
           path="/map-display"
           element={
@@ -156,9 +156,9 @@ function App() {
               ]}
             ></MapDisplay>
           }
-        />
+        /> */}
 
-        <Route
+        {/* <Route
           path="/tripDisplayCard"
           element={
             <TripDisplayItem
@@ -184,7 +184,7 @@ function App() {
               ]}
             ></TripDisplayItem>
           }
-        />
+        /> */}
       </Routes>
     </BrowserRouter>
   );
