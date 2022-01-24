@@ -188,40 +188,48 @@ module.exports = (db) => {
   });
 
   router.delete("/meal_items/:meal_item_id", (req, res) => {
-    deleteItems(db, req.params.meal_item_id)
-      .then(res.send('success'));
-  })
+    deleteItems(db, req.params.meal_item_id).then(res.send("success"));
+  });
   router.delete("/:meal_id", (req, res) => {
-    deleteMeal(db, req.params.meal_id)
-      .then(res.send('success'));
-  })
+    deleteMeal(db, req.params.meal_id).then(res.send("success"));
+  });
 
   router.post("/nutrition", (req, res) => {
-    res.send({
-      calories: "", weight: ""
-    })
-    // console.log("this is nutrion baby", req.body.search)
-    // axios.post('https://trackapi.nutritionix.com/v2/natural/nutrients', {
-    //   "query": req.body.search,
-    // }, {
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     "x-app-id": process.env.NUTRITION_ID, "x-app-key": process.env.NUTRITION_API,
-    //     "x-remote-user-id": 0,
-    //   }
-    // })
-    //   .then((data) => {
-    //     console.log(data.data.foods)
-    //     res.send({ calories: data.data.foods[0].nf_calories, weight: data.data.foods[0].serving_weight_grams })
-    //   })
-    //   .catch((e) => {
-    //     console.log(e)
-    //     res.send({
-    //       calories: "", weight: ""
-    //     })
-    //   })
-  })
+    // res.send({
+    //   calories: "",
+    //   weight: "",
+    // });
+    console.log("this is nutrion baby", req.body.search);
+    axios
+      .post(
+        "https://trackapi.nutritionix.com/v2/natural/nutrients",
+        {
+          query: req.body.search,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "x-app-id": process.env.NUTRITION_ID,
+            "x-app-key": process.env.NUTRITION_API,
+            "x-remote-user-id": 0,
+          },
+        }
+      )
+      .then((data) => {
+        console.log(data.data.foods);
+        res.send({
+          calories: data.data.foods[0].nf_calories,
+          weight: data.data.foods[0].serving_weight_grams,
+        });
+      })
+      .catch((e) => {
+        console.log(e);
+        res.send({
+          calories: "",
+          weight: "",
+        });
+      });
+  });
 
   return router;
 };
-
