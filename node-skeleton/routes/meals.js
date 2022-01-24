@@ -217,9 +217,15 @@ module.exports = (db) => {
       )
       .then((data) => {
         console.log(data.data.foods);
+        let totalWeight = 0;
+        let totalCalories = 0;
+        for (const food of data.data.foods) {
+          totalWeight += food.serving_weight_grams;
+          totalCalories += food.nf_calories;
+        }
         res.send({
-          calories: data.data.foods[0].nf_calories,
-          weight: data.data.foods[0].serving_weight_grams,
+          calories: totalCalories,
+          weight: totalWeight,
         });
       })
       .catch((e) => {

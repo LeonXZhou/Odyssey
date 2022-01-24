@@ -119,9 +119,9 @@ export function deleteMealItem(meal_item_id) {
   return axios.delete(`/api/meals/meal_items/${meal_item_id}`);
 }
 
-export function getNutrition(search)
-{
-  return axios.post(`/api/meals/nutrition/`,{search})
+export function getNutrition(search) {
+  console.log("API HELPERS");
+  return axios.post(`/api/meals/nutrition/`, { search });
 }
 //Meal API END
 //Meal API END
@@ -298,11 +298,10 @@ export function insertEmergencyContact(
 // EMERGENCY CONTACT API END
 // EMERGENCY CONTACT API END
 
-
-export function getWeather(lat,lng,startDate,endDate){
-  return axios.get(`/api/weather/${lat}/${lng}/${startDate}/${endDate}`)
+export function getWeather(lat, lng, startDate, endDate) {
+  return axios.get(`/api/weather/${lat}/${lng}/${startDate}/${endDate}`);
 }
 // export function checkDbForMessage() {
 //   return axios.post(`/api/helper`)
-  
+
 // }
