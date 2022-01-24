@@ -25,7 +25,8 @@ const Equipment = (props) => {
       key ={weatherKey}
       date={weatherKey}
       weather={props.weatherState[weatherKey].weather}
-      temp={props.weatherState[weatherKey].temp}
+      tempMax={props.weatherState[weatherKey].tempMax}
+      tempMin={props.weatherState[weatherKey].tempMin}
       sunrise={props.weatherState[weatherKey].sunrise}
       sunset={props.weatherState[weatherKey].sunset}
       />)
