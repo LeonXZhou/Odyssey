@@ -40,7 +40,7 @@ const Planning = (props) => {
     send_date: "",
     send_time: "",
   });
-  const [weatherState,setWeatherState]=useState({})
+  const [weatherState, setWeatherState] = useState({});
   useEffect(() => {
     getMapForTrip(trip_id).then((res) => {
       setRouteArray(formatTripData(res.data));
@@ -100,8 +100,8 @@ const Planning = (props) => {
           latTotal += Number(marker.lat);
           lngTotal += Number(marker.long);
         }
-        averageLat = latTotal/route.markers.length;
-        averageLng = lngTotal/route.markers.length;
+        averageLat = latTotal / route.markers.length;
+        averageLng = lngTotal / route.markers.length;
       }
       return (
         <Equipment
@@ -141,20 +141,17 @@ const Planning = (props) => {
       Object.keys(route).length > 0 &&
       props.edit === "view"
     ) {
-      return (<General></General>
-      );
+      return <General></General>;
     }
     if (
       props.page === "general" &&
       Object.keys(route).length > 0 &&
       props.edit === "edit"
     ) {
-      return ( <General></General>
-      );
+      return <General></General>;
     }
     return <></>;
   };
-
 
   return (
     <main className="planning">
