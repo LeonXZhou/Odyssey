@@ -68,7 +68,7 @@ const Sidebar = (props) => {
             updatePrivacyForTrip(trip_id, true);
           }}
         >
-          Private
+          Your trip is now private!
         </button>
       )}
       {privacyState === true && (
@@ -80,7 +80,7 @@ const Sidebar = (props) => {
             updatePrivacyForTrip(trip_id, false);
           }}
         >
-          Public
+          Your trip is now public!
         </button>
       )}
     </section>
