@@ -10,12 +10,16 @@ import {
 } from "../../../Helpers/apiHelpers";
 import { formatTripMealsData } from "../../../Helpers/dataHelpers";
 
+const SAVE = "SAVE";
+const SAVED = "SAVED";
+
 const MealCard = (props) => {
   const mealItemArray = [];
   const [newItemState, setNewItemState] = useState({
     name: "",
     quantity: "",
   });
+  const [saveState, setSaveState] = useState(SAVE);
   const [totalWeight, setTotalWeight] = useState(0);
   const [totalCalories, setTotalCalories] = useState(0);
   let nutritionString = "";
@@ -48,6 +52,7 @@ const MealCard = (props) => {
         totalCalories={totalCalories}
         setTotalWeight={setTotalWeight}
         setTotalCalories={setTotalCalories}
+        setSaveState={setSaveState}
       ></MealItem>
     );
   }
@@ -70,6 +75,7 @@ const MealCard = (props) => {
             className="meal-card-title-input"
             value={props.mealState.mealName}
             onChange={(e) => {
+              setSaveState(SAVE);
               props.setMealState((prev) => {
                 const newState = { ...prev };
                 newState[props.dayId].meals[props.mealState.mealId] = {
@@ -147,6 +153,7 @@ const MealCard = (props) => {
           <form
             onSubmit={(e) => {
               e.preventDefault();
+              setSaveState(SAVE);
               props.setMealState((prev) => {
                 const newState = { ...prev };
                 newState[props.dayId].meals[props.mealState.mealId].mealItems =
@@ -176,21 +183,26 @@ const MealCard = (props) => {
           >
             <button className="meal-card-add-save">Add Item</button>
           </form>
-
-          <button
-            className="meal-card-add-save"
-            onClick={(e) => {
-              e.preventDefault();
-              updateMealCard(
-                props.dayId,
-                props.mealState.mealId,
-                props.mealState.mealName,
-                props.mealState.mealItems
-              );
-            }}
-          >
-            Save Card
-          </button>
+          {saveState === SAVE && (
+            <button
+              className="meal-card-add-save"
+              onClick={(e) => {
+                e.preventDefault();
+                setSaveState(SAVED);
+                updateMealCard(
+                  props.dayId,
+                  props.mealState.mealId,
+                  props.mealState.mealName,
+                  props.mealState.mealItems
+                );
+              }}
+            >
+              Save Card
+            </button>
+          )}
+          {saveState === SAVED && (
+            <button className="meal-card-add-save">Saved!</button>
+          )}
         </>
       )}
       <div className="nutrition-info">
