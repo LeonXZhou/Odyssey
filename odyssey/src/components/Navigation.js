@@ -7,10 +7,12 @@ import odyssey_logo from "./images/odyssey_logo.png";
 
 const Navigation = (props) => {
   const { user, auth } = useContext(authContext);
+  console.log("USER", user);
+  console.log("AUTH", auth);
   return (
     <main className="header-container">
       <div className="header-left">
-        <Link to="/planning" type="button" className="nav-button">
+        <Link to={`/`} type="button" className="nav-button">
           Discover
         </Link>
         <Link
