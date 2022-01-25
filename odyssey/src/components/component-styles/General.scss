@@ -39,6 +39,22 @@
   .general-text:hover {
     transform: scale(1.05);
   }
+
+  .general-textarea {
+    border-radius: 12px;
+    margin: 0.2em;
+    text-align: center;
+    min-height: 25%;
+    width: 70%;
+    background-color: rgb(222, 222, 222);
+    border: 3px solid black;
+    transition: 0.3s;
+    outline: none;
+  }
+  .general-textarea:hover {
+    transform: scale(1.05);
+  }
+
   .general-date {
     border-radius: 12px;
     margin: 0.25em;

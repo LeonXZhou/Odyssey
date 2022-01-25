@@ -54,6 +54,7 @@ const MealCard = (props) => {
 
   useEffect(() => {
     if (nutritionString.length > 0) {
+      console.log("hsjkbddfhs");
       getNutrition(nutritionString).then((response) => {
         setTotalWeight(response.data.weight);
         setTotalCalories(response.data.calories);
@@ -193,10 +194,10 @@ const MealCard = (props) => {
         </>
       )}
       <div className="nutrition-info">
-        Estimated Weight: {totalWeight / 1000} kg
+        Estimated Weight: {(totalWeight / 1000).toFixed(2)} kg
       </div>
       <div className="nutrition-info">
-        Estimated Calories: {totalCalories} cal
+        Estimated Calories: {totalCalories.toFixed(2)} cal
       </div>
     </div>
   );

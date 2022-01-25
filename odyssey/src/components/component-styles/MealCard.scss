@@ -19,7 +19,7 @@
   }
   padding: 0.2em;
   .meal-card-title:hover {
-    background-color: grey;
+    background-color: rgb(75, 75, 75);
   }
   .meal-table {
     // display: flex;
@@ -60,7 +60,7 @@
       outline: none;
     }
     .meal-card-title-input:hover {
-      background-color: grey;
+      background-color: rgb(75, 75, 75);
     }
     .meal-card-title-button {
       display: flex;
@@ -107,7 +107,7 @@
     color: whitesmoke;
   }
   .meal-card-add-save:hover {
-    background-color: grey;
+    background-color: rgb(75, 75, 75);
   }
   .nutrition-info {
     color: white;
