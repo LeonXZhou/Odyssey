@@ -9,8 +9,12 @@ import {
 import { formatTripMealsData } from "../../../Helpers/dataHelpers";
 import "../../component-styles/General.scss";
 
+const UPDATE = "UPDATE";
+const SAVED = "SAVED";
+
 export default function General(props) {
   const { trip_id } = useParams();
+  const [saveState, setSaveState] = useState(UPDATE);
   const [privacyState, setPrivacyState] = useState(false);
   useEffect(() => {
     getPrivacyForTrip(trip_id).then((res) => {
@@ -86,31 +90,53 @@ export default function General(props) {
             });
           }}
         ></input>
-        {privacyState === false && (
-          // trip is private
+        <div className="general-switch">
+          Public
+          {privacyState === false && (
+            // trip is private
+            <label className="switch">
+              <input
+                onChange={() => {
+                  setSaveState(UPDATE);
+                  setPrivacyState(true);
+                  updatePrivacyForTrip(trip_id, true);
+                }}
+                type="checkbox"
+              ></input>
+              <span className="slider round"></span>
+            </label>
+          )}
+          {privacyState === true && (
+            // trip is public
+            <label className="switch">
+              <input
+                onChange={() => {
+                  setSaveState(UPDATE);
+                  setPrivacyState(false);
+                  updatePrivacyForTrip(trip_id, false);
+                }}
+                type="checkbox"
+                checked
+              ></input>
+              <span className="slider round"></span>
+            </label>
+          )}
+        </div>
+        {saveState === UPDATE && (
           <button
-            className="general-switch"
-            onClick={() => {
-              setPrivacyState(true);
-              updatePrivacyForTrip(trip_id, true);
+            className="general-buttons"
+            onClick={(e) => {
+              e.preventDefault();
+              setSaveState(SAVED);
+              //   setTimeout(setSaveState(UPDATE), 2000);
             }}
           >
-            Private
+            Update
           </button>
         )}
-        {privacyState === true && (
-          // trip is public
-          <button
-            className="sidebar-item"
-            onClick={() => {
-              setPrivacyState(false);
-              updatePrivacyForTrip(trip_id, false);
-            }}
-          >
-            Public
-          </button>
+        {saveState === SAVED && (
+          <button className="general-buttons">Saved!</button>
         )}
-        <button className="general-buttons">Update</button>
       </form>
     </main>
   );
