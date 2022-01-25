@@ -19,6 +19,7 @@ import {
   formatEmergencyData,
 } from "../../Helpers/dataHelpers";
 import {
+  getGeneralForTrip,
   getEquipmentForTrip,
   getMapForTrip,
   getMealsForTrip,
@@ -31,6 +32,7 @@ const Planning = (props) => {
   const [routeArray, setRouteArray] = useState([{}]);
   const [equipmentState, setEquipmentState] = useState({});
   const [mealState, setMealState] = useState({});
+  const [generalState, setGeneralState] = useState({});
   const [emergencyState, setEmergencyState] = useState({
     id: "",
     trip_id: trip_id,
@@ -51,8 +53,13 @@ const Planning = (props) => {
     getMealsForTrip(trip_id).then((res) => {
       setMealState(formatTripMealsData(res.data));
     });
-    getEmergencyContactByTripId(trip_id).then((res) => {
-      setEmergencyState(formatEmergencyData(res.data));
+    if (props.edit === "edit") {
+      getEmergencyContactByTripId(trip_id).then((res) => {
+        setEmergencyState(formatEmergencyData(res.data));
+      });
+    }
+    getGeneralForTrip(trip_id).then((res) => {
+      setGeneralState(res.data);
     });
   }, [trip_id]);
   const checkPage = (props) => {
@@ -141,14 +148,20 @@ const Planning = (props) => {
       Object.keys(route).length > 0 &&
       props.edit === "view"
     ) {
-      return <General></General>;
+      return <General generalState={generalState}></General>;
     }
     if (
       props.page === "general" &&
       Object.keys(route).length > 0 &&
       props.edit === "edit"
     ) {
-      return <General></General>;
+      return (
+        <General
+          generalState={generalState}
+          setGeneralState={setGeneralState}
+          setMealState={setMealState}
+        ></General>
+      );
     }
     return <></>;
   };

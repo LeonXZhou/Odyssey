@@ -59,30 +59,6 @@ const Sidebar = (props) => {
           Emergency Contact
         </Link>
       )}
-      {privacyState === false && (
-        // trip is private
-        <button
-          className="sidebar-item"
-          onClick={() => {
-            setPrivacyState(true);
-            updatePrivacyForTrip(trip_id, true);
-          }}
-        >
-          Your trip is now private!
-        </button>
-      )}
-      {privacyState === true && (
-        // trip is public
-        <button
-          className="sidebar-item"
-          onClick={() => {
-            setPrivacyState(false);
-            updatePrivacyForTrip(trip_id, false);
-          }}
-        >
-          Your trip is now public!
-        </button>
-      )}
     </section>
   );
 };
