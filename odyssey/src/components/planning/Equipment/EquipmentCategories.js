@@ -9,6 +9,9 @@ import {
   deleteCategory,
 } from "../../../Helpers/apiHelpers";
 
+const SAVE = "SAVE";
+const SAVED = "SAVED";
+
 const EquipmentCategories = (props) => {
   // const [categoryInfo, setCategoryInfo] = useState({
   //   categoryName: props.category.category,
@@ -18,6 +21,7 @@ const EquipmentCategories = (props) => {
     name: "",
     quantity: "",
   });
+  const [saveState, setSaveState] = useState(SAVE);
   const lineItems = [];
   for (const item in props.categoryItems) {
     lineItems.push(
@@ -30,6 +34,7 @@ const EquipmentCategories = (props) => {
         setState={props.setEquipmentState}
         trip_id={props.trip_id}
         edit={props.edit}
+        setSaveState={setSaveState}
       ></EquipmentItems>
     );
   }
@@ -43,6 +48,7 @@ const EquipmentCategories = (props) => {
               className="equipment-card-title-input"
               value={props.categoryName}
               onChange={(e) => {
+                setSaveState(SAVE);
                 props.setEquipmentState((prev) => {
                   const newState = { ...prev };
                   newState[props.categoryId] = {
@@ -65,13 +71,14 @@ const EquipmentCategories = (props) => {
             >
               X
             </button>
-          </div>) :
-          (<div className="equipment-card-title">
+          </div>
+        ) : (
+          <div className="equipment-card-title">
             <div className="equipment-card-title-input">
               {props.categoryName}
             </div>
           </div>
-          )}
+        )}
         <table>
           <thead>
             <tr>
@@ -119,6 +126,7 @@ const EquipmentCategories = (props) => {
             <form
               onSubmit={(e) => {
                 e.preventDefault();
+                setSaveState(SAVE);
                 props.setEquipmentState((prev) => {
                   const newState = { ...prev };
                   const newKey =
@@ -141,24 +149,32 @@ const EquipmentCategories = (props) => {
                 Add Item
               </button>
             </form>
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                updateEquipmentCard(
-                  props.trip_id,
-                  Number(props.categoryId),
-                  props.categoryName,
-                  props.categoryItems
-                ).then(() => {
-                  getEquipmentForTrip(props.trip_id).then((res) => {
-                    props.setState(formatTripEquipmentData(res.data));
+            {saveState === SAVE && (
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  setSaveState(SAVED);
+                  updateEquipmentCard(
+                    props.trip_id,
+                    Number(props.categoryId),
+                    props.categoryName,
+                    props.categoryItems
+                  ).then(() => {
+                    getEquipmentForTrip(props.trip_id).then((res) => {
+                      props.setState(formatTripEquipmentData(res.data));
+                    });
                   });
-                });
-              }}
-              className="btn btn-default btn-sm equipment-card-button"
-            >
-              Save Card
-            </button>
+                }}
+                className="btn btn-default btn-sm equipment-card-button"
+              >
+                Save Card
+              </button>
+            )}
+            {saveState === SAVED && (
+              <button className="btn btn-default btn-sm equipment-card-button">
+                Saved!
+              </button>
+            )}
           </>
         )}
       </div>

@@ -56,9 +56,9 @@ export default function General(props) {
             });
           }}
         ></input>
-        <label>descirption</label>
+        <label>Description</label>
         <textarea
-          className="general-text"
+          className="general-textarea"
           value={
             props.generalState.description ? props.generalState.description : ""
           }
