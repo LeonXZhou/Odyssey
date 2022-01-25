@@ -18,6 +18,14 @@ const Sidebar = (props) => {
   return (
     <section className="sidebar">
       <Link
+        to={`/planning/general/${props.edit}/${props.trip_id}`}
+        type="button"
+        className="sidebar-item"
+      >
+        <i className="fa fa-map sidebar-icon" aria-hidden="true"></i>
+        General
+      </Link>
+      <Link
         to={`/planning/${props.edit}/${props.trip_id}`}
         type="button"
         className="sidebar-item"
@@ -41,15 +49,18 @@ const Sidebar = (props) => {
         <i className="fa fa-cutlery sidebar-icon" aria-hidden="true"></i>
         Meals
       </Link>
-      <Link
-        to={`/planning/emergency/${props.edit}/${props.trip_id}`}
-        type="button"
-        className="sidebar-item"
-      >
-        <i className="fa fa-phone sidebar-icon" aria-hidden="true"></i>
-        Emergency Contact
-      </Link>
+      {props.edit === "edit" && (
+        <Link
+          to={`/planning/emergency/${props.edit}/${props.trip_id}`}
+          type="button"
+          className="sidebar-item"
+        >
+          <i className="fa fa-phone sidebar-icon" aria-hidden="true"></i>
+          Emergency Contact
+        </Link>
+      )}
       {privacyState === false && (
+        // trip is private
         <button
           className="sidebar-item"
           onClick={() => {
@@ -61,6 +72,7 @@ const Sidebar = (props) => {
         </button>
       )}
       {privacyState === true && (
+        // trip is public
         <button
           className="sidebar-item"
           onClick={() => {
