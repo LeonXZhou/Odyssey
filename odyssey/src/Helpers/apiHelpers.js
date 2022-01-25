@@ -8,6 +8,15 @@ export function getTripsByUser(user_id) {
   return axios.get(`/api/trips/user/${user_id}`);
 }
 
+export function getGeneralForTrip(trip_id) {
+  return axios.get(`/api/trips/${trip_id}/general`);
+}
+
+export function updateGeneralForTrip(trip_id, generalState) {
+  return axios.put(`/api/trips/${trip_id}`,generalState);
+
+}
+
 //Map API Start
 //Map API Start
 //Map API Start
@@ -305,3 +314,19 @@ export function getWeather(lat, lng, startDate, endDate) {
 //   return axios.post(`/api/helper`)
 
 // }
+
+// PRIVACY SETTING STARTS
+// PRIVACY SETTING STARTS
+// PRIVACY SETTING STARTS
+
+export function getPrivacyForTrip(trip_id) {
+  return axios.get(`/api/trips/privacy/${trip_id}`);
+}
+
+export function updatePrivacyForTrip(trip_id, privacy) {
+  return axios.post(`/api/trips/privacy/${trip_id}`, { shared: privacy });
+}
+
+// PRIVACY SETTING ENDS
+// PRIVACY SETTING ENDS
+// PRIVACY SETTING ENDS

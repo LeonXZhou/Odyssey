@@ -55,7 +55,7 @@ const MealItem = (props) => {
               }}
             />
           ) : (
-            <p1>{props.itemState.mealItemName}</p1>
+            <p>{props.itemState.mealItemName}</p>
           )}
         </td>
         <td>
@@ -84,7 +84,7 @@ const MealItem = (props) => {
               }}
             />
           ) : (
-            <p1>{props.itemState.mealItemQuantity}</p1>
+            <p>{props.itemState.mealItemQuantity}</p>
           )}
         </td>
         {/* <td className="meal-item-info">{nutritionState.weight / 1000} kg</td>

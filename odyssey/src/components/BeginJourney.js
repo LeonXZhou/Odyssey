@@ -88,7 +88,7 @@ function BeginJourney(props) {
             <button
               className="create-trip"
               onClick={(e) => {
-                e.preventDefault()
+                e.preventDefault();
                 setJourneyRenderState(LOADING);
                 insertNewTrip(
                   USER_ID,
@@ -97,7 +97,7 @@ function BeginJourney(props) {
                   newJourneyState.endDate
                 ).then((res) => {
                   console.log(res);
-                  navigate(`/planning/edit/${res.data.trip_id}`)
+                  navigate(`/planning/edit/${res.data.trip_id}`);
                 });
               }}
             >
