@@ -8,38 +8,41 @@
   min-width: 300px;
   height: 300px;
   border: 1.5px solid grey;
-  border-radius: 7px;
+  border-radius: 12px;
   margin: 1em;
   padding: 0.5em;
-  background-color: transparent ;
+  background-color: transparent;
   backdrop-filter: blur(10px) brightness(30%);
   color: whitesmoke;
 
   .add-button-title {
     border: none;
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid whitesmoke;
     background-color: transparent;
     outline: none;
     margin: 2em;
-    max-width: 60%;
+    max-width: 70%;
     align-self: center;
-    color: whitesmoke
-
+    color: whitesmoke;
+    font-size: 30px;
+    text-align: center;
+    margin-left: -1em;
+    margin-right: -1em;
   }
   .add-button-button {
-    border: 2px solid black;
+    border: 2px solid whitesmoke;
     border-radius: 7px;
     background-color: transparent;
     position: relative;
-    font-size: 20px;
-    width:60%;
+    font-size: 25px;
+    width: 40%;
     align-self: center;
     color: whitesmoke;
   }
   .add-button-button:hover {
-    background-color: rgb(205, 205, 176);
+    background-color: rgb(75, 75, 75);
   }
 }
-.add-button-card:hover{
+.add-button-card:hover {
   transform: scale(1.015);
 }

@@ -8,6 +8,9 @@ import {
   deleteMealItem,
   getNutrition,
 } from "../../../Helpers/apiHelpers";
+
+const SAVE = "SAVE";
+
 const MealItem = (props) => {
   return (
     <>
@@ -17,6 +20,7 @@ const MealItem = (props) => {
             <button
               className="meal-item-delete"
               onClick={() => {
+                props.setSaveState(SAVE);
                 deleteMealItem(props.itemState.mealItemId).then(() => {
                   getMealsForTrip(props.tripId).then((res) => {
                     props.setMealState(formatTripMealsData(res.data));
@@ -37,6 +41,7 @@ const MealItem = (props) => {
               value={props.itemState.mealItemName}
               onBlur={(e) => console.log(e)}
               onChange={(e) => {
+                props.setSaveState(SAVE);
                 props.setMealState((prev) => {
                   const newState = { ...prev };
                   newState[props.dayId].mealItems = {
@@ -66,6 +71,7 @@ const MealItem = (props) => {
               type={"text"}
               value={props.itemState.mealItemQuantity}
               onChange={(e) => {
+                props.setSaveState(SAVE);
                 props.setMealState((prev) => {
                   const newState = { ...prev };
                   newState[props.dayId].mealItems = {
@@ -87,8 +93,6 @@ const MealItem = (props) => {
             <p>{props.itemState.mealItemQuantity}</p>
           )}
         </td>
-        {/* <td className="meal-item-info">{nutritionState.weight / 1000} kg</td>
-        <td className="meal-item-info">{nutritionState.calories}</td> */}
       </tr>
     </>
   );
