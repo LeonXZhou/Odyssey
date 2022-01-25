@@ -15,7 +15,7 @@ export default function General(props) {
       setPrivacyState(res.data[0].shared);
     });
   });
-  console.log(props.generalState);
+  console.log(props);
   let start = "";
   let end = "";
   if (props.generalState.start_date) {
@@ -79,31 +79,35 @@ export default function General(props) {
             });
           }}
         ></input>
-        {privacyState === false && (
-          // trip is private
-          <button
-            className="sidebar-item"
-            onClick={() => {
-              setPrivacyState(true);
-              updatePrivacyForTrip(trip_id, true);
-            }}
-          >
-            Private
-          </button>
-        )}
-        {privacyState === true && (
-          // trip is public
-          <button
-            className="sidebar-item"
-            onClick={() => {
-              setPrivacyState(false);
-              updatePrivacyForTrip(trip_id, false);
-            }}
-          >
-            Public
-          </button>
-        )}
-        <button>Update</button>
+        {props.edit === "edit" &&
+          <>
+            {privacyState === false && (
+              // trip is private
+              <button
+                className="sidebar-item"
+                onClick={() => {
+                  setPrivacyState(true);
+                  updatePrivacyForTrip(trip_id, true);
+                }}
+              >
+                Private
+              </button>
+            )}
+            {privacyState === true && (
+              // trip is public
+              <button
+                className="sidebar-item"
+                onClick={() => {
+                  setPrivacyState(false);
+                  updatePrivacyForTrip(trip_id, false);
+                }}
+              >
+                Public
+              </button>
+            )}
+            <button>Update</button>
+          </>
+        }
       </form>
     </main>
   );
