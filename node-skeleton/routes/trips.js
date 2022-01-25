@@ -97,9 +97,26 @@ function insertNewStop(db, day, name, lat, long, type, route_id, description) {
 function deleteStop(db, id) {
   const query = `DELETE FROM stops
   WHERE id = $1`;
-  values = [id];
+  const values = [id];
   return db.query(query, values);
 }
+
+function getPrivacy(db, trip_id) {
+  console.log("TRIP_ID", trip_id);
+  const query = `SELECT shared FROM trips WHERE id=$1;`;
+  const values = [trip_id];
+  return db.query(query, values);
+}
+
+function updatePrivacy(db, trip_id, shared) {
+  console.log("function");
+  const query = `UPDATE trips
+                SET shared = $1
+                WHERE id = $2;`;
+  const values = [shared, trip_id];
+  return db.query(query, values);
+}
+
 module.exports = (db) => {
   router.get("/", (req, res) => {
     db.query(
@@ -108,7 +125,9 @@ module.exports = (db) => {
     JOIN routes ON trips.id=routes.trip_id
     FULL JOIN stops ON trips.id=stops.route_id
     JOIN users ON trips.creator=users.id
-    ORDER BY trips.id DESC;`
+    WHERE shared=$1
+    ORDER BY trips.id DESC;`,
+      [true]
     )
       .then((req) => {
         const allTrip = req.rows;
@@ -257,6 +276,28 @@ module.exports = (db) => {
     // .catch((err) => {
     //   res.status(500).json({ error: err.message });
     // });
+  });
+
+  router.get("/privacy/:trip_id", (req, res) => {
+    console.log("GET ROUTE");
+    getPrivacy(db, req.params.trip_id)
+      .then((req) => {
+        res.send(req.rows);
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
+  router.post("/privacy/:trip_id", (req, res) => {
+    console.log("POST ROUTE");
+    updatePrivacy(db, req.params.trip_id, req.body.shared)
+      .then(() => {
+        res.send("successfully updated privacy");
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
   });
 
   return router;
