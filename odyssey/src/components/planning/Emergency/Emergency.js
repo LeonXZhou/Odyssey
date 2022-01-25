@@ -35,17 +35,7 @@ const Emergency = (props) => {
           }}
           required
         ></input>
-        <div>Contact Email</div>
-        <input
-          className="emergency-text"
-          value={props.emergencyState.email}
-          onChange={(e) => {
-            props.setEmergencyState((prev) => {
-              return { ...prev, email: e.target.value };
-            });
-          }}
-          required
-        ></input>
+        
         <div>Send message on this date</div>
         <input
           type={"date"}
