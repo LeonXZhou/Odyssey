@@ -15,7 +15,6 @@ const Home = (props) => {
 
   useEffect(() => {
     getTrips().then((res) => {
-      console.log(res.data);
       setTripsArray(formatTripData(res.data));
     });
   }, []);
@@ -39,10 +38,9 @@ const Home = (props) => {
       <BeginJourney userEmail={props.userEmail}></BeginJourney>
       <section className="home-discover">
         <div className="mission-statement">
-          <h1>
-          Mission Statement</h1>
+          <h1>Mission Statement</h1>
           <p1>asdfasdf</p1>
-          </div>
+        </div>
         Discover Other
         <i className="fa fa-arrow-down down-arrow" aria-hidden="true"></i>
       </section>
