@@ -10,6 +10,7 @@ const findMarkerIndexByStopId = function (markers, stopId) {
 
 
 export default function PopUpEdit(props) {
+    console.log(props);
     let start = "";
     let end = "";
     let stopDate = "";
@@ -95,16 +96,23 @@ export default function PopUpEdit(props) {
                     e.preventDefault();
                     if (props.stopId) {
                         updateMarkerById(props.stopId, props.name, props.date, props.description, props.position[0], props.position[1], props.type)
-                            .then(() => { 
+                            .then(() => {
 
-                                props.markerRef.current.closePopup(); })
+                                props.markerRef.current.closePopup();
+                            })
                     }
                     if (!props.stopId) {
                         addMarker(props.mapId, props.name, props.date, props.description, props.position[0], props.position[1], props.type)
                             .then(() => {
                                 getMapForTrip(props.tripId).then((res) => {
                                     props.markerRef.current.closePopup();
-                                    props.setRouteArray(formatTripData(res.data));
+                                    props.setRouteArray((prev) => {
+                                        const newState = [...formatTripData(res.data)];
+                                        newState[0].maps.theme = prev[0].maps.theme;
+                                        console.log(newState);
+                                        return newState
+                                    }
+                                    );
                                 })
                             })
                     }
@@ -115,7 +123,13 @@ export default function PopUpEdit(props) {
                         .then(() => {
                             getMapForTrip(props.tripId).then((res) => {
                                 props.markerRef.current.closePopup();
-                                props.setRouteArray(formatTripData(res.data));
+                                props.setRouteArray((prev) => {
+                                    const newState = [...formatTripData(res.data)];
+                                    newState[0].maps.theme = prev[0].maps.theme;
+                                    console.log(newState);
+                                    return newState
+                                }
+                                );
                             })
                         })
                 }}>remove</button>
