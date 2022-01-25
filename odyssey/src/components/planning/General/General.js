@@ -7,6 +7,8 @@ import {
   getPrivacyForTrip,
 } from "../../../Helpers/apiHelpers";
 import { formatTripMealsData } from "../../../Helpers/dataHelpers";
+import "../../component-styles/General.scss";
+
 export default function General(props) {
   const { trip_id } = useParams();
   const [privacyState, setPrivacyState] = useState(false);
@@ -25,8 +27,9 @@ export default function General(props) {
     end = new Date(props.generalState.end_date).toISOString().split("T")[0];
   }
   return (
-    <main>
+    <main className="general">
       <form
+        className="general-form"
         onSubmit={(e) => {
           e.preventDefault();
           updateGeneralForTrip(props.generalState.id, props.generalState).then(
@@ -40,6 +43,7 @@ export default function General(props) {
       >
         <label>Trip Name</label>
         <input
+          className="general-text"
           type={"text"}
           value={props.generalState.name ? props.generalState.name : ""}
           onChange={(e) => {
@@ -50,6 +54,7 @@ export default function General(props) {
         ></input>
         <label>descirption</label>
         <textarea
+          className="general-text"
           value={
             props.generalState.description ? props.generalState.description : ""
           }
@@ -61,6 +66,7 @@ export default function General(props) {
         ></textarea>
         <label>State Date</label>
         <input
+          className="general-date"
           type="date"
           value={start}
           onChange={(e) => {
@@ -71,6 +77,7 @@ export default function General(props) {
         ></input>
         <label>End Date</label>
         <input
+          className="general-date"
           type="date"
           value={end}
           onChange={(e) => {
@@ -82,7 +89,7 @@ export default function General(props) {
         {privacyState === false && (
           // trip is private
           <button
-            className="sidebar-item"
+            className="general-switch"
             onClick={() => {
               setPrivacyState(true);
               updatePrivacyForTrip(trip_id, true);
@@ -103,7 +110,7 @@ export default function General(props) {
             Public
           </button>
         )}
-        <button>Update</button>
+        <button className="general-buttons">Update</button>
       </form>
     </main>
   );
