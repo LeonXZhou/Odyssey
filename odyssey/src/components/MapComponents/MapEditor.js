@@ -1,14 +1,12 @@
 import 'leaflet/dist/leaflet.css';
 import { MapContainer, TileLayer } from 'react-leaflet'
 import './MapEditor.scss'
-import L from 'leaflet'
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useContext } from "react";
 import { mapContext } from "../providers/MapProvider";
 
 import { updateMapById } from "../../Helpers/apiHelpers"
-import { themeAttributionFinder, themeURLFinder } from '../../Helpers/mapHelper';
 import MarkersEdit from './MarkersEdit';
 import MapTheme from './MapTheme';
 
@@ -23,8 +21,6 @@ function MapEditor(props) {
   // const [markers, setMarkers] = useState(props.markers);
   const [iconValue, setIconValue] = useState('TENT');
   //Defaulting Map Themes (theme...Finder() converts theme string such as 'TOPO' to the random garbage string that theme actually needs)
-  let mapThemeAttribution = props.mapOptions && themeAttributionFinder(props.mapOptions.themeAttribution);
-  let mapThemeURL = props.mapOptions && themeURLFinder(props.mapOptions.themeAttribution);
   if (!props.mapOptions.zoom) {
     props.mapOptions.zoom = 12;
   }

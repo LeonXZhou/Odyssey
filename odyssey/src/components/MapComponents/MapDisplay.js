@@ -2,24 +2,15 @@
 import { MapContainer, TileLayer } from 'react-leaflet'
 
 import Markers from './Markers';
-import { themeAttributionFinder, themeURLFinder } from '../../Helpers/mapHelper';
 import MapTheme from './MapTheme';
 function MapDisplay(props) {
-  // let markers = <></>;
-
-  // if (props.markers){
-  //   markers = Markers(props.markers)
-  // }
 
   if (!props.mapOptions.zoom) {
     props.mapOptions.zoom = 8;
   }
 
 
-  //Defaulting Map Theme
-  const mapThemeAttribution = props.mapOptions && themeAttributionFinder(props.mapOptions.themeAttribution)
-  const mapThemeURL = props.mapOptions && themeURLFinder(props.mapOptions.themeAttribution)
-  console.log(props.mapOptions)
+
   return (
     <MapContainer center={props.mapOptions.center} zoom={props.mapOptions.zoom} scrollWheelZoom={props.mapOptions.scrollWheelZoom} doubleClickZoom={false}>
       <TileLayer
