@@ -11,6 +11,7 @@ import Meals from "./Meal/Meals";
 import Emergency from "./Emergency/Emergency";
 import MapEditor from "../MapComponents/MapEditor";
 import MapProvider from "../providers/MapProvider";
+import General from "./General/General";
 import {
   formatTripData,
   formatTripEquipmentData,
@@ -99,7 +100,6 @@ const Planning = (props) => {
           latTotal += Number(marker.lat);
           lngTotal += Number(marker.long);
         }
-        console.log(averageLat,averageLng);
         averageLat = latTotal/route.markers.length;
         averageLng = lngTotal/route.markers.length;
       }
@@ -136,12 +136,25 @@ const Planning = (props) => {
         />
       );
     }
+    if (
+      props.page === "general" &&
+      Object.keys(route).length > 0 &&
+      props.edit === "view"
+    ) {
+      return (<General></General>
+      );
+    }
+    if (
+      props.page === "general" &&
+      Object.keys(route).length > 0 &&
+      props.edit === "edit"
+    ) {
+      return ( <General></General>
+      );
+    }
     return <></>;
   };
-  // if (isLoggedIn) {
-  //   return <UserGreeting />;
-  // }
-  // return <GuestGreeting />;
+
 
   return (
     <main className="planning">
