@@ -11,6 +11,7 @@ import Meals from "./Meal/Meals";
 import Emergency from "./Emergency/Emergency";
 import MapEditor from "../MapComponents/MapEditor";
 import MapProvider from "../providers/MapProvider";
+import General from "./General/General";
 import {
   formatTripData,
   formatTripEquipmentData,
@@ -39,6 +40,7 @@ const Planning = (props) => {
     send_date: "",
     send_time: "",
   });
+  const [weatherState,setWeatherState]=useState({})
   useEffect(() => {
     getMapForTrip(trip_id).then((res) => {
       setRouteArray(formatTripData(res.data));
@@ -53,7 +55,6 @@ const Planning = (props) => {
       setEmergencyState(formatEmergencyData(res.data));
     });
   }, [trip_id]);
-
   const checkPage = (props) => {
     const route = routeArray[0];
     if (
@@ -88,12 +89,32 @@ const Planning = (props) => {
       );
     }
     if (props.page === "equipment") {
+      let averageLat = 0;
+      let averageLng = 0;
+      if (Object.keys(route).length && route.markers.length > 0) {
+        averageLat = Number(route.maps.lat);
+        averageLng = Number(route.maps.long);
+        let latTotal = 0;
+        let lngTotal = 0;
+        for (const marker of route.markers) {
+          latTotal += Number(marker.lat);
+          lngTotal += Number(marker.long);
+        }
+        averageLat = latTotal/route.markers.length;
+        averageLng = lngTotal/route.markers.length;
+      }
       return (
         <Equipment
           equipmentState={equipmentState}
           setEquipmentState={setEquipmentState}
           trip_id={route.trip_id}
           edit={props.edit}
+          startDate={route.startDate}
+          endDate={route.endDate}
+          averageLat={averageLat}
+          averageLng={averageLng}
+          weatherState={weatherState}
+          setWeatherState={setWeatherState}
         />
       );
     }
@@ -115,12 +136,25 @@ const Planning = (props) => {
         />
       );
     }
+    if (
+      props.page === "general" &&
+      Object.keys(route).length > 0 &&
+      props.edit === "view"
+    ) {
+      return (<General></General>
+      );
+    }
+    if (
+      props.page === "general" &&
+      Object.keys(route).length > 0 &&
+      props.edit === "edit"
+    ) {
+      return ( <General></General>
+      );
+    }
     return <></>;
   };
-  // if (isLoggedIn) {
-  //   return <UserGreeting />;
-  // }
-  // return <GuestGreeting />;
+
 
   return (
     <main className="planning">

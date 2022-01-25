@@ -4,6 +4,9 @@
   flex-direction: column;
   margin: 0.75em;
   font-size: 25px;
+  height: 100%;
+  // overflow: auto;
+  // position: relative;
 
   // border: 2px solid green;
   .days-date {
@@ -16,6 +19,7 @@
   .day-meals {
     display: flex;
     flex-direction: row;
+
     // border: 2px solid red;
   }
 }
