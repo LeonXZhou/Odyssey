@@ -72,13 +72,14 @@ const createNewTrip = (db, tripInfo, user_id) => {
   //   .then((data)=>{return data.rows[0].trip_id});
   // });
 };
-function updateRoute(db, lat, lon, zoom, id) {
+function updateRoute(db, lat, lon, zoom, id, theme) {
   const query = `UPDATE routes
     SET latitude  = $1,
     longitude   = $2,
-    zoom = $3
+    zoom = $3,
+    theme = $5
     WHERE id = $4;`;
-  const values = [lat, lon, zoom, id];
+  const values = [lat, lon, zoom, id, theme];
   return db.query(query, values);
 }
 function updateStops(db, day, name, lat, lng, type, id, description) {
@@ -191,7 +192,7 @@ module.exports = (db) => {
       routes.latitude AS routes_LAT,
       routes.longitude AS routes_LONG,
       routes.zoom AS routes_zoom,
-      routes.theme AS routes_theme
+      routes.theme AS routes_theme,
       trips.start_date AS trip_start,
       trips.end_date AS trip_end
     FROM trip_owners
@@ -207,9 +208,9 @@ module.exports = (db) => {
         const allTrip = req.rows;
         res.json(req.rows);
       })
-      .catch((err) => {
-        res.status(500).json({ error: err.message });
-      });
+      // .catch((err) => {
+      //   res.status(500).json({ error: err.message });
+      // });
   });
 
   router.get("/user/:user_id", (req, res) => {
@@ -256,7 +257,8 @@ module.exports = (db) => {
       req.body.lat,
       req.body.long,
       req.body.zoom,
-      req.params.map_id
+      req.params.map_id,
+      req.body.theme
     )
       .then(() => {
         res.send("success");

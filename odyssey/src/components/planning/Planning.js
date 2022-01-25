@@ -43,6 +43,7 @@ const Planning = (props) => {
     send_time: "",
   });
   const [weatherState, setWeatherState] = useState({});
+  console.log(routeArray)
   useEffect(() => {
     getMapForTrip(trip_id).then((res) => {
       setRouteArray(formatTripData(res.data));
