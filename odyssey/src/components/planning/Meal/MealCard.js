@@ -1,19 +1,40 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../../component-styles/MealCard.scss";
 import MealItem from "./MealItem";
 import { useState } from "react";
-import { updateMealCard, deleteMeal,getMealsForTrip } from "../../../Helpers/apiHelpers";
+import {
+  updateMealCard,
+  deleteMeal,
+  getMealsForTrip,
+  getNutrition,
+} from "../../../Helpers/apiHelpers";
 import { formatTripMealsData } from "../../../Helpers/dataHelpers";
 
 const MealCard = (props) => {
-  console.log('mealCard props', props)
   const mealItemArray = [];
   const [newItemState, setNewItemState] = useState({
     name: "",
     quantity: "",
   });
+  const [totalWeight, setTotalWeight] = useState(0);
+  const [totalCalories, setTotalCalories] = useState(0);
+  let nutritionString = "";
+  let newItemString = "";
+  // const [newItemStringState, setNewItemStringState] = useState("");
+  let previousItemString = "";
+
   for (const mealItemKey in props.mealState.mealItems) {
-    console.log("what the actuall fuck is going on here")
+    newItemString =
+      props.mealState.mealItems[mealItemKey].mealItemQuantity +
+      " " +
+      props.mealState.mealItems[mealItemKey].mealItemName;
+    if (newItemString !== previousItemString) {
+      nutritionString += ", " + newItemString;
+    }
+    previousItemString =
+      props.mealState.mealItems[mealItemKey].mealItemQuantity +
+      " " +
+      props.mealState.mealItems[mealItemKey].mealItemName;
     mealItemArray.push(
       <MealItem
         key={mealItemKey}
@@ -23,54 +44,71 @@ const MealCard = (props) => {
         mealId={props.mealState.mealId}
         dayId={props.dayId}
         tripId={props.tripId}
+        totalWeight={totalWeight}
+        totalCalories={totalCalories}
+        setTotalWeight={setTotalWeight}
+        setTotalCalories={setTotalCalories}
       ></MealItem>
     );
   }
+
+  useEffect(() => {
+    if (nutritionString.length > 0) {
+      getNutrition(nutritionString).then((response) => {
+        setTotalWeight(response.data.weight);
+        setTotalCalories(response.data.calories);
+      });
+    }
+  }, [nutritionString]);
+
   return (
     <div className={"mealCard"}>
       {props.edit === "edit" ? (
         <div className={"meal-card-title"}>
-        <input
-          className="meal-card-title-input"
-          value={props.mealState.mealName}
-          onChange={(e) => {
-            props.setMealState((prev) => {
-              const newState = { ...prev };
-              console.log("lool at me please", props);
-              newState[props.dayId].meals[props.mealState.mealId] = {
-                ...newState[props.dayId].meals[props.mealState.mealId],
-                mealName: e.target.value,
-              };
+          <input
+            className="meal-card-title-input"
+            value={props.mealState.mealName}
+            onChange={(e) => {
+              props.setMealState((prev) => {
+                const newState = { ...prev };
+                newState[props.dayId].meals[props.mealState.mealId] = {
+                  ...newState[props.dayId].meals[props.mealState.mealId],
+                  mealName: e.target.value,
+                };
 
-              return newState;
-            });
-          }}
-        ></input>
-        <button
-        className="meal-card-title-button"
-        onClick={() => {
-          deleteMeal(props.mealState.mealId).then(() => {
-            getMealsForTrip(props.tripId).then((res) => {
-              props.setMealState(formatTripMealsData(res.data));
-            });
-          });
-        }}
-      >
-        X
-      </button>
-      </div>
+                return newState;
+              });
+            }}
+          ></input>
+          <button
+            className="meal-card-title-button"
+            onClick={() => {
+              deleteMeal(props.mealState.mealId).then(() => {
+                getMealsForTrip(props.tripId).then((res) => {
+                  props.setMealState(formatTripMealsData(res.data));
+                });
+              });
+            }}
+          >
+            X
+          </button>
+        </div>
       ) : (
-        <p1>{props.mealState.mealName}</p1>
+        <p>{props.mealState.mealName}</p>
       )}
 
       <table>
         <tbody className="meal-table">
           <tr className="meal-table-titles">
+            <th className={"delete"}></th>
             <th className="meal-item-title">Items</th>
             <th className="meal-quantity-title">Quantity</th>
+            {/* <th className="meal-quantity-title">≈Weight</th>
+            <th className="meal-quantity-title">≈Calories</th> */}
           </tr>
           {mealItemArray}
           <tr className="meal-table-items">
+            <td className={"delete"}></td>
             <td>
               {props.edit === "edit" && (
                 <input
@@ -109,13 +147,12 @@ const MealCard = (props) => {
             onSubmit={(e) => {
               e.preventDefault();
               props.setMealState((prev) => {
-                console.log(prev);
                 const newState = { ...prev };
                 newState[props.dayId].meals[props.mealState.mealId].mealItems =
-                {
-                  ...newState[props.dayId].meals[props.mealState.mealId]
-                    .mealItems,
-                };
+                  {
+                    ...newState[props.dayId].meals[props.mealState.mealId]
+                      .mealItems,
+                  };
                 const newKey =
                   -Object.keys(
                     newState[props.dayId].meals[props.mealState.mealId]
@@ -128,7 +165,6 @@ const MealCard = (props) => {
                   mealItemQuantity: newItemState.quantity,
                   mealItemId: newKey,
                 };
-                console.log(newState);
                 return newState;
               });
               setNewItemState({
@@ -156,6 +192,12 @@ const MealCard = (props) => {
           </button>
         </>
       )}
+      <div className="nutrition-info">
+        Estimated Weight: {totalWeight / 1000} kg
+      </div>
+      <div className="nutrition-info">
+        Estimated Calories: {totalCalories} cal
+      </div>
     </div>
   );
 };

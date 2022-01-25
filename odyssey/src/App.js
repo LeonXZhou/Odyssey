@@ -17,11 +17,11 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import LoginDev from "./components/LoginDev";
 import MyTrips from "./components/MyTrips";
-import {checkDbForMessage} from "./Helpers/apiHelpers"
+import { checkDbForMessage } from "./Helpers/apiHelpers"
 function App() {
   const [userEmail, setUserEmail] = useState();
   const { setAuth, setUser, user } = useContext(authContext);
-  checkDbForMessage()
+
   useEffect(() => {
     authenticate().then((res) => {
       if (res.data.userId) {
@@ -44,6 +44,11 @@ function App() {
         <Route
           path="/planning/equipment/view/:trip_id"
           element={<Planning page="equipment" edit={"view"} />}
+        />
+
+        <Route
+          path="/planning/general/view/:trip_id"
+          element={<Planning page="general" edit={"view"} />}
         />
 
         <Route
@@ -72,6 +77,10 @@ function App() {
           path="/planning/emergency/edit/:trip_id"
           element={<Planning page="emergency" edit={"edit"} />}
         />
+        <Route
+          path="/planning/general/edit/:trip_id"
+          element={<Planning page="general" edit={"edit"} />}
+        />
         {/* end of planning edit routes */}
 
         <Route path="/myTrips/:user_id" element={<MyTrips />} />
@@ -87,13 +96,13 @@ function App() {
         />
 
         {/* START OF PLANNING ROUTES */}
-        <Route path="/planning/:trip_id" element={<Planning page="route" />} />
+        {/* <Route path="/planning/:trip_id" element={<Planning page="route" />} />
         <Route path="/planning/route" element={<Planning page="route" />} />
         <Route
           path="/planning/equipment/:trip_id"
           element={<Planning page="equipment" />}
-        />
-        <Route
+        /> */}
+        {/* <Route
           path="/planning/meals/:trip_id"
           element={<Planning page="meals" />}
         />
@@ -114,8 +123,8 @@ function App() {
               markers={[]}
             ></MapEditor>
           }
-        />
-
+        /> */}
+{/* 
         <Route
           path="/map-display"
           element={
@@ -147,9 +156,9 @@ function App() {
               ]}
             ></MapDisplay>
           }
-        />
+        /> */}
 
-        <Route
+        {/* <Route
           path="/tripDisplayCard"
           element={
             <TripDisplayItem
@@ -175,11 +184,11 @@ function App() {
               ]}
             ></TripDisplayItem>
           }
-        />
+        /> */}
       </Routes>
     </BrowserRouter>
   );
-  
+
 }
 
 export default App;

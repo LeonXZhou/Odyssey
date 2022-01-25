@@ -1,35 +1,41 @@
 .meal-item-delete {
-  display: flex;
-  margin-left: -8px;
-  margin-right: -5px;
-  width: 1em;
+  // display: flex;
+  // margin-left: -8px;
+  // margin-right: -5px;
+  // width: 1em;
   border: none;
   background-color: transparent;
-  color:whitesmoke;
+  color: whitesmoke;
 }
 
 .meal-items {
   display: flex;
-  width: 7em;
   background-color: transparent;
   border: none;
   border-radius: 8px;
   outline: none;
   color: whitesmoke;
+  width: 7em;
 }
 .meal-items:hover {
-  background-color: grey
+  background-color: grey;
 }
 
 .meal-quantities {
   display: flex;
-  width: 4.5em;
+  width: 2em;
   background-color: transparent;
   border: none;
   border-radius: 8px;
   outline: none;
-  color: whitesmoke
+  color: whitesmoke;
+  width: 5.5em;
+  padding: 5px;
+  padding-left: 10px;
 }
-.meal-quantities:hover {
-  background-color: grey
+
+.meal-item-info {
+  color: white;
+  padding: 5px;
+  padding-left: 20px;
 }
