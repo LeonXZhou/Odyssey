@@ -3,7 +3,7 @@ const { use } = require("express/lib/application");
 const router = express.Router();
 
 function getAllUserEmergencyInfo(db, user_id) {
-  const query = `SELECT users.id ,users.first_name , users.last_name , trips.name ,trips.description ,trips.start_date,trips.end_date, emergency_contacts.name AS emergency_contact, emergency_contacts.phone_number AS emergency_contact_phone,emergency_contacts.email AS emergency_contact_email, emergency_contacts.send_date
+  const query = `SELECT users.id ,users.first_name , users.last_name , trips.name ,trips.description ,trips.start_date,trips.end_date, emergency_contacts.name AS emergency_contact, emergency_contacts.phone_number AS emergency_contact_phone, emergency_contacts.send_date
     FROM trip_owners
     JOIN  users ON trip_owners.user_id =users.id
     JOIN  trips ON trip_owners.trip_id =trips.id
@@ -25,7 +25,6 @@ function updateEmergencyContactInfor(
   db,
   name,
   phone_number,
-  email,
   send_date,
   send_time,
   id
@@ -33,12 +32,11 @@ function updateEmergencyContactInfor(
   const query = `UPDATE emergency_contacts
     SET name = $1,
         phone_number = $2,
-        email =$3,
-        send_date = $4,
-        send_time = $5,
+        send_date = $3,
+        send_time = $4,
         message_sent = false
-    WHERE id = $6 RETURNING *;`;
-  const values = [name, phone_number, email, send_date, send_time, id];
+    WHERE id = $5 RETURNING *;`;
+  const values = [name, `+1${phone_number}`, send_date, send_time, id];
   console.log(values);
   return db.query(query, values);
 }
@@ -54,19 +52,17 @@ function insertEmergencyContact(
   trip_id,
   name,
   phone_number,
-  email,
   send_date,
   send_time,
   message_sent
 ) {
   const query = `INSERT INTO emergency_contacts
-  (trip_id, name, phone_number, email, send_date, send_time, message_sent)
-  VALUES ($1,$2,$3, $4, $5, $6, $7);`;
+  (trip_id, name, phone_number, send_date, send_time, message_sent)
+  VALUES ($1,$2,$3, $4, $5, $6);`;
   const values = [
     trip_id,
     name,
-    phone_number,
-    email,
+    `+1${phone_number}`,
     send_date,
     send_time,
     message_sent,
@@ -92,7 +88,6 @@ module.exports = (db) => {
       db,
       req.body.name,
       req.body.phone_number,
-      req.body.email,
       req.body.send_date,
       req.body.send_time,
       req.body.id
@@ -123,7 +118,6 @@ module.exports = (db) => {
       req.params.trip_id,
       req.body.name,
       req.body.phone_number,
-      req.body.email,
       req.body.send_date,
       req.body.send_time,
       req.body.message_sent
