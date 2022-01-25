@@ -100,7 +100,7 @@ app.listen(PORT, () => {
             // console.log(item["phone_number"]);
             client.messages
               .create({
-                body: "hey did this reach you ?",
+                body: "This is a message for the emergency contact.",
                 messagingServiceSid: process.env.TWILIO_MSG_SERVICEID,
                 to: /*process.env.TWILIO_PHONE_NUMBER*/ item[
                   "phone_number"
