@@ -2,7 +2,6 @@ import { useState } from "react";
 import "../component-styles/Equipment.scss";
 import "../component-styles/AddButton.scss";
 import {
-  newCategory,
   getEquipmentForTrip,
   getMealsForTrip,
 } from "../../Helpers/apiHelpers";
