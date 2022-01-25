@@ -161,6 +161,7 @@ const Planning = (props) => {
           generalState={generalState}
           setGeneralState={setGeneralState}
           setMealState={setMealState}
+          edit={props.edit}
         ></General>
       );
     }
