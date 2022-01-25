@@ -8,6 +8,15 @@ export function getTripsByUser(user_id) {
   return axios.get(`/api/trips/user/${user_id}`);
 }
 
+export function getGeneralForTrip(trip_id) {
+  return axios.get(`/api/trips/${trip_id}/general`);
+}
+
+export function updateGeneralForTrip(trip_id, generalState) {
+  return axios.put(`/api/trips/${trip_id}`,generalState);
+
+}
+
 //Map API Start
 //Map API Start
 //Map API Start

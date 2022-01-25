@@ -5,6 +5,7 @@
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
+const { Console } = require("console");
 const express = require("express");
 const router = express.Router();
 
@@ -25,15 +26,21 @@ function getDates(startDate, stopDate) {
 }
 
 const generateDays = (db, start, end, trip_id) => {
+  console.log("inside generate days", start, end);
   const startDate = new Date(start);
   const endDate = new Date(end);
   const dateToInsert = getDates(startDate, endDate);
   const allDateQueries = [];
+  console.log("inside generate days", startDate, endDate);
   const query = `INSERT INTO days (trip_id,date)
   VALUES ($1,$2)
+  ON CONFLICT
+  DO NOTHING
   RETURNING *;`;
   for (date of dateToInsert) {
-    const value = [trip_id, date];
+    const value = [trip_id, date.toISOString().split("T")[0]];
+    console.log(date.toISOString().split("T")[0]);
+    console.log(trip_id);
     allDateQueries.push(db.query(query, value));
   }
   return Promise.all(allDateQueries);
@@ -117,6 +124,33 @@ function updatePrivacy(db, trip_id, shared) {
   return db.query(query, values);
 }
 
+function getGeneral(db, trip_id) {
+  const query = `SELECT * FROM trips
+  WHERE id = $1`;
+  values = [trip_id];
+  return db.query(query, values);
+}
+
+function updateTrip(db, trip_id, name, description, start_date, end_date) {
+  const query = `UPDATE trips
+  SET name = $1, description = $2, start_date = $3, end_date = $4
+  WHERE id = $5;`;
+  values = [name, description, start_date, end_date, trip_id];
+  return db.query(query, values);
+}
+
+function deleteDays(db, trip_id, start_date, end_date) {
+  console.log(end_date);
+  const query = `DELETE FROM days
+  where trip_id = $1 AND (date < $2::date OR date > $3::date)`;
+  values = [trip_id, start_date, end_date];
+
+  return db.query(query, values);
+}
+
+function addNewDays(db, trip_id, start_date, end_date) {
+  return generateDays(db, start_date, end_date, trip_id);
+}
 module.exports = (db) => {
   router.get("/", (req, res) => {
     db.query(
@@ -298,6 +332,42 @@ module.exports = (db) => {
       .catch((err) => {
         res.status(500).json({ error: err.message });
       });
+  });
+  router.get("/:trip_id/general", (req, res) => {
+    getGeneral(db, req.params.trip_id).then((data) => {
+      res.send(data.rows[0]);
+    });
+  });
+
+  router.put("/:trip_id", (req, res) => {
+    updateTrip(
+      db,
+      req.params.trip_id,
+      req.body.name,
+      req.body.description,
+      req.body.start_date,
+      req.body.end_date
+    ).then(() => {
+      console.log(req.body.end_date);
+      deleteDays(
+        db,
+        req.params.trip_id,
+        req.body.start_date,
+        req.body.end_date
+      ).then(() => {
+        console.log(req.body.end_date);
+        addNewDays(
+          db,
+          req.params.trip_id,
+          req.body.start_date,
+          req.body.end_date
+        ).then(() => {
+          console.log("well shit");
+          res.send("woot");
+        });
+      });
+    });
+    // ()=>{res.send('success')}?
   });
 
   return router;
