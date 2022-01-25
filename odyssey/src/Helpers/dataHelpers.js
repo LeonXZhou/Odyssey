@@ -35,6 +35,7 @@ export function formatTripData(allTripData) {
         long: dataPoint.routes_long,
         mapId: dataPoint.routes_id,
         zoom: dataPoint.routes_zoom,
+        theme: dataPoint.routes_theme,
       };
     }
     if (!formatedTripData[dataPoint.trip_id]["users"]) {

@@ -3,18 +3,19 @@ import { MapContainer, TileLayer } from 'react-leaflet'
 import './MapEditor.scss'
 import L from 'leaflet'
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useContext } from "react";
 import { mapContext } from "../providers/MapProvider";
 
 import { updateMapById } from "../../Helpers/apiHelpers"
 import { themeAttributionFinder, themeURLFinder } from '../../Helpers/mapHelper';
 import MarkersEdit from './MarkersEdit';
+import MapTheme from './MapTheme';
 
 //the MapEditor Component generates a map that can be edited
 
 function MapEditor(props) {
-
+  console.log(props);
   //only enable map edit when something like an edit button is clicked. editable state keeps track of this.
   const [editable, setEditable] = useState(false);
   //markers state represents the markers on this map. defaults to the props passed in.
@@ -22,12 +23,12 @@ function MapEditor(props) {
   // const [markers, setMarkers] = useState(props.markers);
   const [iconValue, setIconValue] = useState('TENT');
   //Defaulting Map Themes (theme...Finder() converts theme string such as 'TOPO' to the random garbage string that theme actually needs)
-  const mapThemeAttribution = props.mapOptions && themeAttributionFinder(props.mapOptions.themeAttribution);
-  const mapThemeURL = props.mapOptions && themeURLFinder(props.mapOptions.themeAttribution);
+  let mapThemeAttribution = props.mapOptions && themeAttributionFinder(props.mapOptions.themeAttribution);
+  let mapThemeURL = props.mapOptions && themeURLFinder(props.mapOptions.themeAttribution);
   if (!props.mapOptions.zoom) {
     props.mapOptions.zoom = 12;
   }
-
+  
   const { map, setMap } = useContext(mapContext);
   return (
     // TileLayer Component: determines theme
@@ -50,13 +51,7 @@ function MapEditor(props) {
           url={"https://tile.waymarkedtrails.org/hiking/{z}/{x}/{y}.png"}
           zIndex={2}
         />
-        <TileLayer
-          attribution={mapThemeAttribution}
-          url={mapThemeURL}
-          continuousWorld={true}
-          noWrap={true} 
-          zIndex={1}
-          />
+        <MapTheme mapTheme={props.mapOptions.theme}></MapTheme>
         <MarkersEdit
           markers={props.markers}
           // setMarkers={setMarkers}
@@ -70,6 +65,7 @@ function MapEditor(props) {
           tripId={props.trip_id}></MarkersEdit>
       </MapContainer>
       <div className={"map-edit-form"}>
+        <label>icon</label>
         <select value={iconValue} onChange={(e) => { setIconValue(e.target.value) }}>
           <option value="DEFAULT">default</option>
           <option value="TENT">tent</option>
@@ -80,13 +76,28 @@ function MapEditor(props) {
             setEditable(true);
           }
         }} className={"add mapButton"}>
-          Add
+          Add Icon
         </button>
+        <label>map theme</label>
+        <select value={props.mapOptions.theme}
+          onChange={(e) => {
+            props.setRouteArray((prev) => {
+              console.log(prev)
+              const newState = [...prev]
+              newState[0].maps = { ...newState[0].maps, theme: e.target.value }
+              console.log("after", newState[0].maps)
+              return newState;
+            })
+          }}>
+          <option value="DEFAULT">default</option>
+          <option value="TOPO">Topographical</option>
+          <option value="SATELLITE">Satellite</option>
+        </select>
         <button onClick={(e) => {
           e.preventDefault();
-          updateMapById(props.mapOptions.mapId, map.getCenter().lat, map.getCenter().lng, map.getZoom())
+          updateMapById(props.mapOptions.mapId, map.getCenter().lat, map.getCenter().lng, map.getZoom(), props.mapOptions.theme)
         }} className={"add mapButton"}>
-          Save Map
+          Save Map Theme and Center
         </button>
       </div>
     </div>
