@@ -3,7 +3,6 @@ import { useContext } from "react";
 import { mapContext } from "../providers/MapProvider";
 import { useEffect } from "react";
 import SingleMarkerEdit from "./SingleMarkerEdit";
-import MarkerForm from "./MarkerForm";
 
 function MarkersEdit(props) {
   const thisMap = useMapEvents({
