@@ -21,7 +21,7 @@ export function themeURLFinder(themeString) {
 
 // paseDBinput {lat: number, long number}
 export function parseDBMap(tripMaps) {
-  return { center: [tripMaps.lat, tripMaps.long], mapId: tripMaps.mapId, zoom: tripMaps.zoom }
+  return { center: [tripMaps.lat, tripMaps.long], mapId: tripMaps.mapId, zoom: tripMaps.zoom, themeAttribution: tripMaps.theme, themeURL: tripMaps.theme }
 }
 // parseDBMap options
 // mapOptions={
