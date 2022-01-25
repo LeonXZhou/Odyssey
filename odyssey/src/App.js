@@ -17,7 +17,7 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import LoginDev from "./components/LoginDev";
 import MyTrips from "./components/MyTrips";
-import { checkDbForMessage } from "./Helpers/apiHelpers"
+import { checkDbForMessage } from "./Helpers/apiHelpers";
 function App() {
   const [userEmail, setUserEmail] = useState();
   const { setAuth, setUser, user } = useContext(authContext);
@@ -124,7 +124,7 @@ function App() {
             ></MapEditor>
           }
         /> */}
-{/* 
+        {/* 
         <Route
           path="/map-display"
           element={
@@ -188,7 +188,6 @@ function App() {
       </Routes>
     </BrowserRouter>
   );
-
 }
 
 export default App;
