@@ -42,11 +42,7 @@ const Planning = (props) => {
     send_date: "",
     send_time: "",
   });
-<<<<<<< HEAD
   const [weatherState, setWeatherState] = useState({});
-=======
-  const [weatherState, setWeatherState] = useState({})
->>>>>>> f9877f48fe26ad46800bb0fbee70ca5e2c7fb049
   useEffect(() => {
     getMapForTrip(trip_id).then((res) => {
       setRouteArray(formatTripData(res.data));
@@ -57,14 +53,12 @@ const Planning = (props) => {
     getMealsForTrip(trip_id).then((res) => {
       setMealState(formatTripMealsData(res.data));
     });
-    if (props.edit === "edit")
-    {
+    if (props.edit === "edit") {
       getEmergencyContactByTripId(trip_id).then((res) => {
         setEmergencyState(formatEmergencyData(res.data));
       });
     }
-    getGeneralForTrip(trip_id)
-    .then((res) => {
+    getGeneralForTrip(trip_id).then((res) => {
       setGeneralState(res.data);
     });
   }, [trip_id]);
@@ -154,24 +148,20 @@ const Planning = (props) => {
       Object.keys(route).length > 0 &&
       props.edit === "view"
     ) {
-<<<<<<< HEAD
-      return <General></General>;
-=======
-      return (<General generalState={generalState}></General>
-      );
->>>>>>> f9877f48fe26ad46800bb0fbee70ca5e2c7fb049
+      return <General generalState={generalState}></General>;
     }
     if (
       props.page === "general" &&
       Object.keys(route).length > 0 &&
       props.edit === "edit"
     ) {
-<<<<<<< HEAD
-      return <General></General>;
-=======
-      return (<General generalState={generalState} setGeneralState={setGeneralState} setMealState={setMealState}></General>
+      return (
+        <General
+          generalState={generalState}
+          setGeneralState={setGeneralState}
+          setMealState={setMealState}
+        ></General>
       );
->>>>>>> f9877f48fe26ad46800bb0fbee70ca5e2c7fb049
     }
     return <></>;
   };
