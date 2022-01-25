@@ -88,13 +88,31 @@ INSERT INTO meal_items (meal_id, name,quantity) VALUES (26,'hamburgers','2');
 
 
 INSERT INTO meal_items (meal_id, name,quantity) VALUES (27,'sheperds pie','2');
-
 INSERT INTO meal_items (meal_id, name,quantity) VALUES (28,'bacon','3');
 INSERT INTO meal_items (meal_id, name,quantity) VALUES (28,'toast','3');
-
-
 INSERT INTO meal_items (meal_id, name,quantity) VALUES (29,'soup','3 bowls');
-
-
 INSERT INTO meal_items (meal_id, name,quantity) VALUES (30,'sanwich','2');
+
+
+INSERT INTO meal_items (meal_id, name,quantity) VALUES (31,'cereal','2 bowls');
+INSERT INTO meal_items (meal_id, name,quantity) VALUES (31,'oats','1 cup');
+INSERT INTO meal_items (meal_id, name,quantity) VALUES (32,'potatoes','3');
+INSERT INTO meal_items (meal_id, name,quantity) VALUES (33,'soup','3 bowls');
+
+
+
+
+INSERT INTO meal_items (meal_id, name,quantity) VALUES (34,'sanwich','2');
+INSERT INTO meal_items (meal_id, name,quantity) VALUES (35,'ramen noodels','2');
+INSERT INTO meal_items (meal_id, name,quantity) VALUES (36,'salad','2');
+
+INSERT INTO meal_items (meal_id, name,quantity) VALUES (37,'eggs','2');
+INSERT INTO meal_items (meal_id, name,quantity) VALUES (38,'tacos','2');
+INSERT INTO meal_items (meal_id, name,quantity) VALUES (39,'salad','2');
+
+INSERT INTO meal_items (meal_id, name,quantity) VALUES (40,'fruits','6');
+INSERT INTO meal_items (meal_id, name,quantity) VALUES (41,'hot dogs','2');
+INSERT INTO meal_items (meal_id, name,quantity) VALUES (42,'soup','2');
+
+
 
