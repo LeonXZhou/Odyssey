@@ -72,13 +72,14 @@ const createNewTrip = (db, tripInfo, user_id) => {
   //   .then((data)=>{return data.rows[0].trip_id});
   // });
 };
-function updateRoute(db, lat, lon, zoom, id) {
+function updateRoute(db, lat, lon, zoom, id, theme) {
   const query = `UPDATE routes
     SET latitude  = $1,
     longitude   = $2,
-    zoom = $3
+    zoom = $3,
+    theme = $5
     WHERE id = $4;`;
-  const values = [lat, lon, zoom, id];
+  const values = [lat, lon, zoom, id, theme];
   return db.query(query, values);
 }
 function updateStops(db, day, name, lat, lng, type, id, description) {
@@ -154,7 +155,7 @@ function addNewDays(db, trip_id, start_date, end_date) {
 module.exports = (db) => {
   router.get("/", (req, res) => {
     db.query(
-      `SELECT users.id AS user_id ,users.first_name , users.last_name  , users.email, trips.id AS trip_id,trips.name AS trips_name, trips.description , stops.id AS stops_id,stops.day AS stop_days, stops.name AS stop_names,stops.type AS stop_types, stops.latitude AS stops_LAT , stops.longitude AS stops_LONG, routes.id AS routes_id,routes.latitude AS routes_LAT,routes.longitude AS routes_LONG,trips.start_date AS trip_start, trips.end_date AS trip_end,routes.zoom AS routes_zoom
+      `SELECT users.id AS user_id ,users.first_name , users.last_name  , users.email, trips.id AS trip_id,trips.name AS trips_name, trips.description , stops.id AS stops_id,stops.day AS stop_days, stops.name AS stop_names,stops.type AS stop_types, stops.latitude AS stops_LAT , stops.longitude AS stops_LONG, routes.id AS routes_id,routes.latitude AS routes_LAT,routes.longitude AS routes_LONG,trips.start_date AS trip_start, trips.end_date AS trip_end,routes.zoom AS routes_zoom, routes.theme AS routes_theme
     FROM trips
     JOIN routes ON trips.id=routes.trip_id
     FULL JOIN stops ON trips.id=stops.route_id
@@ -191,6 +192,7 @@ module.exports = (db) => {
       routes.latitude AS routes_LAT,
       routes.longitude AS routes_LONG,
       routes.zoom AS routes_zoom,
+      routes.theme AS routes_theme,
       trips.start_date AS trip_start,
       trips.end_date AS trip_end
     FROM trip_owners
@@ -206,13 +208,13 @@ module.exports = (db) => {
         const allTrip = req.rows;
         res.json(req.rows);
       })
-      .catch((err) => {
-        res.status(500).json({ error: err.message });
-      });
+      // .catch((err) => {
+      //   res.status(500).json({ error: err.message });
+      // });
   });
 
   router.get("/user/:user_id", (req, res) => {
-    const query = `SELECT users.id AS user_id ,users.first_name , users.last_name  , users.email, trips.id AS trip_id,trips.name AS trips_name, trips.description , stops.id AS stops_id,stops.day AS stop_days, stops.name AS stop_names,stops.type AS stop_types, stops.latitude AS stops_LAT , stops.longitude AS stops_LONG, routes.id AS routes_id,routes.latitude AS routes_LAT,routes.longitude AS routes_LONG,trips.start_date AS trip_start, trips.end_date AS trip_end, routes.zoom AS routes_zoom
+    const query = `SELECT users.id AS user_id ,users.first_name , users.last_name  , users.email, trips.id AS trip_id,trips.name AS trips_name, trips.description , stops.id AS stops_id,stops.day AS stop_days, stops.name AS stop_names,stops.type AS stop_types, stops.latitude AS stops_LAT , stops.longitude AS stops_LONG, routes.id AS routes_id,routes.latitude AS routes_LAT,routes.longitude AS routes_LONG,trips.start_date AS trip_start, trips.end_date AS trip_end, routes.zoom AS routes_zoom, routes.theme AS routes_theme
     FROM trip_owners
     JOIN trips ON trip_owners.trip_id=trips.id
     JOIN routes ON trip_owners.trip_id=routes.trip_id
@@ -255,7 +257,8 @@ module.exports = (db) => {
       req.body.lat,
       req.body.long,
       req.body.zoom,
-      req.params.map_id
+      req.params.map_id,
+      req.body.theme
     )
       .then(() => {
         res.send("success");

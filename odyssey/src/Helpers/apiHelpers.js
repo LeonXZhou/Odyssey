@@ -22,15 +22,17 @@ export function updateGeneralForTrip(trip_id, generalState) {
 //Map API Start
 //Map API Start
 export function getMapForTrip(trip_id) {
+
   return axios.get(`/api/trips/${trip_id}`);
 }
 
-export function updateMapById(map_id, lat, long, zoom) {
-  console.log({ lat: lat, long: long, zoom: zoom });
+export function updateMapById(map_id, lat, long, zoom, theme) {
+  console.log(theme);
   return axios.post(`/api/trips/map/${map_id}`, {
     lat: lat,
     long: long,
     zoom: zoom,
+    theme: theme
   });
 }
 
