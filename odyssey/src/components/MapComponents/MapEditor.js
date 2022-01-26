@@ -69,6 +69,9 @@ function MapEditor(props) {
         <select value={iconValue} onChange={(e) => { setIconValue(e.target.value) }}>
           <option value="DEFAULT">default</option>
           <option value="TENT">tent</option>
+          <option value="CAMPFIRE">campfire</option>
+          <option value="HIKER">hiker</option>
+          <option value="BEAVER">beaver</option>
         </select>
         <button onClick={(e) => {
           e.preventDefault();
