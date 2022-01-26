@@ -6,6 +6,8 @@ import {
   deleteCategoryItem,
 } from "../../../Helpers/apiHelpers";
 
+const SAVE = "SAVE";
+
 const EquipmentItems = (props) => {
   return (
     <tr>
@@ -14,6 +16,7 @@ const EquipmentItems = (props) => {
           <button
             className="btn equipment-card-items-delete"
             onClick={() => {
+              props.setSaveState(SAVE);
               deleteCategoryItem(props.itemId).then(() => {
                 getEquipmentForTrip(props.trip_id).then((res) => {
                   props.setState(formatTripEquipmentData(res.data));
@@ -33,6 +36,7 @@ const EquipmentItems = (props) => {
             type={"text"}
             value={props.itemName}
             onChange={(e) => {
+              props.setSaveState(SAVE);
               props.setState((prev) => {
                 const newState = { ...prev };
                 newState[props.categoryId].items = {
@@ -57,6 +61,7 @@ const EquipmentItems = (props) => {
               type={"number"}
               value={props.quantity}
               onChange={(e) => {
+                props.setSaveState(SAVE);
                 props.setState((prev) => {
                   const newState = { ...prev };
                   newState[props.categoryId].items = {
