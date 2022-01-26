@@ -5,8 +5,8 @@ function Markers(props) {
 
   const markersJSX = props.markers.map((marker, i) => {
     //setting default options for markers
-    const markerWidth = marker.iconSize ? marker.iconSize[0] : 30;
-    const markerHeight = marker.iconSize ? marker.iconSize[1] : 30;
+    const markerWidth = marker.iconSize ? marker.iconSize[0] : 40;
+    const markerHeight = marker.iconSize ? marker.iconSize[1] : 40;
     const icon = marker.icon ? marker.icon : "DEFAULT";
     const markerPosition = marker.position ? marker.position : [0, 0];
     // const iconAnchor = [markerWidth/2, markerHeight];

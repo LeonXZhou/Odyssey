@@ -13,7 +13,7 @@ function SingleMarker(props) {
             new L.Icon({
                 iconUrl: iconFinder(props.icon),
                 iconSize: new L.Point(props.markerWidth, props.markerHeight),
-                className: "leaflet-div-icon",
+                className: "",
                 // iconAnchor: iconAnchor
             })
         }
