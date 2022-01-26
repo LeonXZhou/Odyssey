@@ -74,7 +74,7 @@ const EquipmentCategories = (props) => {
           </div>
         ) : (
           <div className="equipment-card-title">
-            <div className="equipment-card-title-input">
+            <div className="equipment-card-title">
               {props.categoryName}
             </div>
           </div>
