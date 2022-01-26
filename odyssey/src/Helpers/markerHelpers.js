@@ -17,6 +17,15 @@ export function iconFinder(iconString) {
     case "BEAVER":
       return require("../components/images/markers/beaver.gif");
 
+    case "RACOON":
+      return require("../components/images/markers/racoon.gif");
+
+    case "OTTER":
+      return require("../components/images/markers/otter.gif");
+
+    case "SQUIRREL":
+      return require("../components/images/markers/squirrel.gif");
+
     default:
       return require("../components/images/markers/default.png");
   }

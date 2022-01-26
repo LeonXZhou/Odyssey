@@ -76,8 +76,8 @@ export default function PopUpEdit(props) {
                     }}></input>
                 <div className={'latlng'}>
 
-                    <label>lat</label>
-                    <input type={'number'} placeholder="lat" value={props.position[0]}
+                    <label>lat:</label>
+                    <input type={'number'} placeholder="lat" value={Math.round(props.position[0] * 10000000) / 10000000}
                         onChange={(e) => {
                             props.setRouteArray((prev) => {
                                 const newState = [...prev];
@@ -91,8 +91,8 @@ export default function PopUpEdit(props) {
                 </div>
                 <div className={'latlng'}>
 
-                    <label>lng</label>
-                    <input type={'number'} placeholder="lng" value={props.position[1]}
+                    <label>lng:</label>
+                    <input type={'number'} placeholder="lng" value={Math.round(props.position[1] * 10000000) / 10000000}
                         onChange={(e) => {
                             props.setRouteArray((prev) => {
                                 const newState = [...prev];
@@ -111,7 +111,6 @@ export default function PopUpEdit(props) {
                     if (props.stopId) {
                         updateMarkerById(props.stopId, props.name, props.date, props.description, props.position[0], props.position[1], props.type)
                             .then(() => {
-
                                 props.markerRef.current.closePopup();
                             })
                     }
