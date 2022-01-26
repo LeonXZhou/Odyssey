@@ -1,5 +1,5 @@
-INSERT INTO routes (trip_id, latitude, longitude,theme)
+INSERT INTO routes (trip_id,zoom,latitude, longitude,theme)
 VALUES
-  (1, 48.43779322177709, -124.09136293510663,'TOPO'),
-  (2, 33.831365, 135.641635,''),
-  (3, -17.939599,  -63.158204,'');
+  (1, 11,48.43779322177709, -124.09136293510663,'TOPO'),
+  (2, 11.49,33.831365, 135.641635,''),
+  (3,14 ,-17.939599,  -63.158204,'SATELLITE');
