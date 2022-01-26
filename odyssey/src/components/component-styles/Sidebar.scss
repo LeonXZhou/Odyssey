@@ -1,8 +1,10 @@
 .sidebar {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  align-content: center;
   width: 23em;
-  background-color: #588fa7;
+  background-color: #f3f2ef;
   border-right: 1.5px solid grey;
   // position: fixed;
   // top: 10%;
@@ -15,18 +17,40 @@
     font-size: 30px;
     font-weight: 450;
     margin-top: 0.3em;
+    padding-top: 0.2em;
     padding-left: 0.5em;
-    border-radius: 20px;
     color: black;
     text-decoration: none;
+    transition: 0.5s;
   }
   .sidebar-item:hover {
-    background-color: #438399;
+    // border-bottom: 3px solid black;
+    border-radius: 0;
+    color: sandybrown;
+    // animation-name: slidein;
+    // animation-duration: 0.5s;
   }
+
   .sidebar-icon {
     display: flex;
     position: relative;
     top: 0.3em;
     margin-right: 0.5em;
+  }
+
+  .selected {
+    display: flex;
+    width: 12.25em;
+    height: 2em;
+    font-size: 30px;
+    font-weight: 450;
+    margin-top: 0.3em;
+    padding-top: 0.2em;
+    padding-left: 0.5em;
+    color: black;
+    text-decoration: none;
+    transition: 1s;
+    color: sandybrown;
+    // border-bottom: 2px solid black;
   }
 }
