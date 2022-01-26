@@ -4,7 +4,12 @@
   background-image: url("https://images.unsplash.com/photo-1522041350204-22285237eeca?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3870&q=80");
   background-size: cover;
   background-position: center;
-  width:100%;
+  width: 100%;
   overflow: auto;
-  max-height: 100vh;
+  max-height: 111vh;
+  // position: relative;
+  // top: 6.5em;
+  // left: 25.5em;
+  // z-index: 0;
+  zoom: 90%;
 }
