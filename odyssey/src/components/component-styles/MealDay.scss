@@ -5,6 +5,7 @@
   margin: 0.75em;
   font-size: 25px;
   height: 100%;
+
   // overflow: auto;
   // position: relative;
 
@@ -15,6 +16,7 @@
     color: whitesmoke;
     background-color: transparent;
     backdrop-filter: blur(10px) brightness(30%);
+    padding-left: 0.5em;
   }
   .day-meals {
     display: flex;

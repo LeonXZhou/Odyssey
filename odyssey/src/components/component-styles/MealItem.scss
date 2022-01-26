@@ -18,7 +18,7 @@
   width: 7em;
 }
 .meal-items:hover {
-  background-color: grey;
+  background-color: rgb(75, 75, 75);
 }
 
 .meal-quantities {
@@ -32,6 +32,9 @@
   width: 5.5em;
   padding: 5px;
   padding-left: 10px;
+}
+.meal-quantities:hover {
+  background-color: rgb(75, 75, 75);
 }
 
 .meal-item-info {

@@ -22,7 +22,7 @@ const Sidebar = (props) => {
         type="button"
         className="sidebar-item"
       >
-        <i className="fa fa-map sidebar-icon" aria-hidden="true"></i>
+        <i className="fa fa-bandcamp sidebar-icon" aria-hidden="true"></i>
         General
       </Link>
       <Link

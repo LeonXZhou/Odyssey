@@ -120,7 +120,7 @@
           outline: none;
         }
         .equipment-card-title-input:hover {
-          background-color: grey;
+          background-color: rgb(75, 75, 75);
         }
         .equipment-card-title-button {
           display: flex;
@@ -164,7 +164,7 @@
       }
 
       .equipment-card-items:hover {
-        background-color: grey;
+        background-color: rgb(75, 75, 75);
       }
 
       .equipment-card-quantity-column {
@@ -177,7 +177,7 @@
           border: none;
           border-radius: 7px;
           height: 2em;
-          width: 1.75em;
+          width: 2.25em;
           margin-left: 0.6em;
           background-color: transparent;
           outline: none;
@@ -187,7 +187,7 @@
           }
         }
         .equipment-card-quantities:hover {
-          background-color: grey;
+          background-color: rgb(75, 75, 75);
         }
       }
       .equipment-card-new {
@@ -203,10 +203,7 @@
         font-size: 20px;
         border-radius: 7px;
       }
-      .equipment-card-new:hover {
-        background-color: grey;
-        color: white;
-      }
+
       .equipment-card-button {
         display: flex;
         justify-content: center;
@@ -220,7 +217,7 @@
         color: whitesmoke;
       }
       .equipment-card-button:hover {
-        background-color: grey;
+        background-color: rgb(75, 75, 75);
       }
     }
     .equipment-card:hover {
