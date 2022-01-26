@@ -3,7 +3,7 @@
   flex-direction: column;
   align-content: center;
   align-items: center;
-  height: 25.45em;
+  height: 24.55em;
   width: 85%;
   color: white;
   font-size: 35px;
@@ -18,7 +18,8 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    padding-top: 1em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
     background-color: transparent;
     backdrop-filter: blur(5px) brightness(60%);
     opacity: 90%;
