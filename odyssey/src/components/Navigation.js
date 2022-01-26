@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { authContext } from "./providers/AuthenticationProvider";
 import { Link } from "react-router-dom";
 import "./component-styles/Navigation.scss";
-import odyssey_logo from "./images/odyssey_logo.png";
+import odyssey_logo from "./images/odyssey_logo2.png";
 
 const Navigation = (props) => {
   const { user, auth } = useContext(authContext);

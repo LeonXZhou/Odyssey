@@ -16,7 +16,7 @@ const EMERGENCY = "EMERGENCY";
 const Sidebar = (props) => {
   const { trip_id } = useParams();
   const [privacyState, setPrivacyState] = useState(false);
-  const [selectedState, setSelectedState] = useState(GENERAL);
+  const [selectedState, setSelectedState] = useState();
   useEffect(() => {
     getPrivacyForTrip(trip_id).then((res) => {
       setPrivacyState(res.data[0].shared);
