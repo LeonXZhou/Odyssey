@@ -1,12 +1,15 @@
 // import 'leaflet/dist/leaflet.css';
-import { MapContainer, TileLayer } from 'react-leaflet'
+import { MapContainer, TileLayer } from "react-leaflet";
 
-import Markers from './Markers';
-import { themeAttributionFinder, themeURLFinder } from '../../Helpers/mapHelper';
-import MapTheme from './MapTheme';
+import Markers from "./Markers";
+import {
+  themeAttributionFinder,
+  themeURLFinder,
+} from "../../Helpers/mapHelper";
+import MapTheme from "./MapTheme";
+
 function MapDisplay(props) {
   // let markers = <></>;
-
   // if (props.markers){
   //   markers = Markers(props.markers)
   // }
@@ -15,13 +18,20 @@ function MapDisplay(props) {
     props.mapOptions.zoom = 8;
   }
 
-
   //Defaulting Map Theme
-  const mapThemeAttribution = props.mapOptions && themeAttributionFinder(props.mapOptions.themeAttribution)
-  const mapThemeURL = props.mapOptions && themeURLFinder(props.mapOptions.themeAttribution)
-  console.log(props.mapOptions)
+  const mapThemeAttribution =
+    props.mapOptions &&
+    themeAttributionFinder(props.mapOptions.themeAttribution);
+  const mapThemeURL =
+    props.mapOptions && themeURLFinder(props.mapOptions.themeAttribution);
+  console.log(props.mapOptions);
   return (
-    <MapContainer center={props.mapOptions.center} zoom={props.mapOptions.zoom} scrollWheelZoom={props.mapOptions.scrollWheelZoom} doubleClickZoom={false}>
+    <MapContainer
+      center={props.mapOptions.center}
+      zoom={props.mapOptions.zoom}
+      scrollWheelZoom={props.mapOptions.scrollWheelZoom}
+      doubleClickZoom={false}
+    >
       <TileLayer
         continuousWorld={false}
         // noWrap={true}
@@ -33,9 +43,8 @@ function MapDisplay(props) {
       />
       <MapTheme mapTheme={props.mapOptions.theme}></MapTheme>
       <Markers markers={props.markers}></Markers>
-
     </MapContainer>
-  )
+  );
 }
 
 export default MapDisplay;
