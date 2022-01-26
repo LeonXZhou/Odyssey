@@ -21,7 +21,7 @@ export default function General(props) {
       setPrivacyState(res.data[0].shared);
     });
   });
-  console.log(props.generalState);
+  console.log(props);
   let start = "";
   let end = "";
   if (props.generalState.start_date) {
@@ -90,53 +90,58 @@ export default function General(props) {
             });
           }}
         ></input>
-        <div className="general-switch">
-          Public
-          {privacyState === false && (
-            // trip is private
-            <label className="switch">
-              <input
-                onChange={() => {
-                  setSaveState(UPDATE);
-                  setPrivacyState(true);
-                  updatePrivacyForTrip(trip_id, true);
+        {props.edit === "edit" &&
+          <>
+            <div className="general-switch">
+              Public
+              {privacyState === false && (
+                // trip is private
+                <label className="switch">
+                  <input
+                    onChange={() => {
+                      setSaveState(UPDATE);
+                      setPrivacyState(true);
+                      updatePrivacyForTrip(trip_id, true);
+                    }}
+                    type="checkbox"
+                  ></input>
+                  <span className="slider round"></span>
+                </label>
+              )}
+              {privacyState === true && (
+                // trip is public
+                <label className="switch">
+                  <input
+                    onChange={() => {
+                      setSaveState(UPDATE);
+                      setPrivacyState(false);
+                      updatePrivacyForTrip(trip_id, false);
+                    }}
+                    type="checkbox"
+                    checked
+                  ></input>
+                  <span className="slider round"></span>
+                </label>
+              )}
+            </div>
+            {saveState === UPDATE && (
+              <button
+                className="general-buttons"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setSaveState(SAVED);
+                  //   setTimeout(setSaveState(UPDATE), 2000);
                 }}
-                type="checkbox"
-              ></input>
-              <span className="slider round"></span>
-            </label>
-          )}
-          {privacyState === true && (
-            // trip is public
-            <label className="switch">
-              <input
-                onChange={() => {
-                  setSaveState(UPDATE);
-                  setPrivacyState(false);
-                  updatePrivacyForTrip(trip_id, false);
-                }}
-                type="checkbox"
-                checked
-              ></input>
-              <span className="slider round"></span>
-            </label>
-          )}
-        </div>
-        {saveState === UPDATE && (
-          <button
-            className="general-buttons"
-            onClick={(e) => {
-              e.preventDefault();
-              setSaveState(SAVED);
-              //   setTimeout(setSaveState(UPDATE), 2000);
-            }}
-          >
-            Update
-          </button>
-        )}
-        {saveState === SAVED && (
-          <button className="general-buttons">Saved!</button>
-        )}
+              >
+                Update
+              </button>
+            )}
+            {saveState === SAVED && (
+              <button className="general-buttons">Saved!</button>
+            )}
+          </>
+        }
+
       </form>
     </main>
   );
