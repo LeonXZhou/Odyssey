@@ -72,6 +72,9 @@ function MapEditor(props) {
           <option value="CAMPFIRE">campfire</option>
           <option value="HIKER">hiker</option>
           <option value="BEAVER">beaver</option>
+          <option value="RACOON">racoon</option>
+          <option value="OTTER">otters</option>
+          <option value="SQUIRREL">squirrel</option>
         </select>
         <button onClick={(e) => {
           e.preventDefault();
@@ -100,7 +103,7 @@ function MapEditor(props) {
           e.preventDefault();
           updateMapById(props.mapOptions.mapId, map.getCenter().lat, map.getCenter().lng, map.getZoom(), props.mapOptions.theme)
         }} className={"add mapButton"}>
-          Save Map Theme and Center
+          Save Map
         </button>
       </div>
     </div>
