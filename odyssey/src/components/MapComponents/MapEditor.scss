@@ -5,8 +5,8 @@ button.add {
 }
 
 .map-edit-form {
-  z-index: 100000;
-  position: relative;
+  z-index: 1000000;
+  position: absolute;
   top: 100px;
   left: 450px;
   display: flex;

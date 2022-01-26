@@ -38,10 +38,15 @@ const Home = (props) => {
       <BeginJourney userEmail={props.userEmail}></BeginJourney>
       <section className="home-discover">
         <div className="mission-statement">
-          <h1>Mission Statement</h1>
-          <p1>asdfasdf</p1>
+          <div className="left">
+            <h1>Plan with Odyssey and arrive safe, even if you pissed off Poseidon</h1>
+          </div>
+          <div className="right">
+            <h1>Mission Statement</h1>
+            <p>The core vision of Odyssey is to make the outdoors more accessible and safer for everyone. We want to do this by creating a community of avid adventurers, who are keen to contribute their experience and knowledge to an extensive archive of crowd-sourced outdoor know-how that can help bridge the gap of experience between seasoned outdoor explorers and novices.</p>
+          </div>
         </div>
-        Discover Other
+        Featured Trips
         <i className="fa fa-arrow-down down-arrow" aria-hidden="true"></i>
       </section>
       <section className="trip-cards">{displayedTrips}</section>
