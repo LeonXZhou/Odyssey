@@ -1,5 +1,8 @@
 import { updateMarkerById, deleteMarker, getMapForTrip, addMarker } from "../../Helpers/apiHelpers";
 import { formatTripData } from "../../Helpers/dataHelpers";
+
+import '../component-styles/PopUpEdit.scss';
+
 const findMarkerIndexByStopId = function (markers, stopId) {
     for (const i in markers) {
         if (stopId === markers[i].stopId) {
@@ -71,28 +74,39 @@ export default function PopUpEdit(props) {
                             return newState
                         })
                     }}></input>
-                <input type={'number'} placeholder="lat" value={props.position[0]}
-                    onChange={(e) => {
-                        props.setRouteArray((prev) => {
-                            const newState = [...prev];
-                            const markerIndex = findMarkerIndexByStopId(newState[0].markers, props.stopId);
-                            newState[0].markers = [...newState[0].markers];
-                            newState[0].markers[markerIndex] = { ...newState[0].markers[markerIndex], lat: e.target.value }
-                            console.log(newState)
-                            return newState
-                        })
-                    }}></input>
-                <input type={'number'} placeholder="lng" value={props.position[1]}
-                    onChange={(e) => {
-                        props.setRouteArray((prev) => {
-                            const newState = [...prev];
-                            const markerIndex = findMarkerIndexByStopId(newState[0].markers, props.stopId);
-                            newState[0].markers = [...newState[0].markers];
-                            newState[0].markers[markerIndex] = { ...newState[0].markers[markerIndex], long: e.target.value }
-                            return newState
-                        })
-                    }}></input>
-                <button onClick={(e) => {
+                <div className={'latlng'}>
+
+                    <label>lat</label>
+                    <input type={'number'} placeholder="lat" value={props.position[0]}
+                        onChange={(e) => {
+                            props.setRouteArray((prev) => {
+                                const newState = [...prev];
+                                const markerIndex = findMarkerIndexByStopId(newState[0].markers, props.stopId);
+                                newState[0].markers = [...newState[0].markers];
+                                newState[0].markers[markerIndex] = { ...newState[0].markers[markerIndex], lat: e.target.value }
+                                console.log(newState)
+                                return newState
+                            })
+                        }}></input>
+                </div>
+                <div className={'latlng'}>
+
+                    <label>lng</label>
+                    <input type={'number'} placeholder="lng" value={props.position[1]}
+                        onChange={(e) => {
+                            props.setRouteArray((prev) => {
+                                const newState = [...prev];
+                                const markerIndex = findMarkerIndexByStopId(newState[0].markers, props.stopId);
+                                newState[0].markers = [...newState[0].markers];
+                                newState[0].markers[markerIndex] = { ...newState[0].markers[markerIndex], long: e.target.value }
+                                return newState
+                            })
+                        }}></input>
+                </div>
+                <div className={'save-remove'}>
+
+                <button className={'btn btn-success'}
+                onClick={(e) => {
                     e.preventDefault();
                     if (props.stopId) {
                         updateMarkerById(props.stopId, props.name, props.date, props.description, props.position[0], props.position[1], props.type)
@@ -117,7 +131,8 @@ export default function PopUpEdit(props) {
                             })
                     }
                 }}>save</button>
-                <button onClick={(e) => {
+                <button className={'btn btn-danger'}
+                onClick={(e) => {
                     e.preventDefault();
                     deleteMarker(props.stopId)
                         .then(() => {
@@ -133,6 +148,7 @@ export default function PopUpEdit(props) {
                             })
                         })
                 }}>remove</button>
+                </div>
             </form>
         </>
     )

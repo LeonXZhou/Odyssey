@@ -72,7 +72,7 @@ const Planning = (props) => {
     ) {
       return (
         <MapDisplay
-          mapOptions={parseDBMap(route.maps)}
+          mapOptions={{ ...parseDBMap(route.maps), scrollWheelZoom: true }}
           markers={parseDBMarkers(route.markers)}
         ></MapDisplay>
       );
