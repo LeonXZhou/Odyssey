@@ -1,6 +1,6 @@
 @font-face {
   font-family: myFirstFont;
-  src: url(./Fonts/WanderlustLetters-Regular.ttf);
+  src: url("./Fonts/WanderlustLetters-Regular.ttf");
 }
 .header-container {
   display: flex;
@@ -8,6 +8,7 @@
   align-items: center;
   background-color: #5daabd;
   border-bottom: 3px solid grey;
+  padding-top: 10px;
   // font-family: Helvetica;
   font-size: 220%;
   // position: fixed;
@@ -27,7 +28,7 @@
     .logo {
       height: 2em;
       position: relative;
-      bottom: 2px;
+      bottom: 4px;
       margin-right: 10px;
     }
     .logo:hover {
@@ -63,7 +64,7 @@
   .nav-button {
     @font-face {
       font-family: myFirstFont;
-      font-size:10px;
+      font-size: 10px;
       src: url(./Fonts/WanderlustLetters-Regular.ttf);
     }
     display: flex;
@@ -75,8 +76,7 @@
     text-decoration: none;
     font-family: myFirstFont;
   }
-  .nav-button:hover{
-    transform: scale(1.1);
+  .nav-button:hover {
+    transform: scale(1.05);
   }
-
 }
