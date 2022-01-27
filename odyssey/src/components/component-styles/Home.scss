@@ -144,17 +144,14 @@
     justify-content: space-around;
     width: 100%;
     flex-grow: 100;
+    padding-top: 1.5em;
   }
 
-
-
-  
-
-  .mission-statement{
-    display:flex;
+  .mission-statement {
+    display: flex;
     justify-content: space-around;
     width: 100%;
-    margin-top: 20px;
+    // margin-top: 20px;
     height: 20vh;
     .left {
       display: flex;
@@ -162,12 +159,12 @@
       flex-grow: 3;
       padding-left: 10px;
       padding-right: 10px;
-      background-image: url('../images/missionback.png');
+      background-image: url("../images/missionback.png");
       background-color: #5daabd;
       clip-path: polygon(0 0, 100% 0, 70% 100%, 0 100%);
       min-width: 550px;
       h1 {
-        max-width: 700px;
+        max-width: 600px;
         color: whitesmoke;
       }
     }
@@ -177,13 +174,29 @@
       align-items: center;
       flex-shrink: 30;
       font-size: 20px;
-      width:60vw;
-      p{
+      width: 60vw;
+      p {
         max-height: 175px;
-        overflow:hidden;
+        overflow: hidden;
         text-overflow: ellipsis;
       }
     }
   }
-  
+
+  .featured {
+    // border: 2px solid red;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: whitesmoke;
+    text-shadow: 3px 3px black;
+    font-size: 50px;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    backdrop-filter: blur(5px) grayscale(100%);
+  }
+  .arrow {
+    display: flex;
+  }
 }

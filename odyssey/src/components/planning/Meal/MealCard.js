@@ -206,10 +206,10 @@ const MealCard = (props) => {
         </>
       )}
       <div className="nutrition-info">
-        Estimated Weight: {(totalWeight / 1000).toFixed(2)} kg
+        Est. Weight: {(totalWeight / 1000).toFixed(2)} kg
       </div>
       <div className="nutrition-info">
-        Estimated Calories: {totalCalories.toFixed(2)} cal
+        Est. Calories: {totalCalories.toFixed(0)} cal
       </div>
     </div>
   );

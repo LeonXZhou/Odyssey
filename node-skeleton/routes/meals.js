@@ -195,46 +195,46 @@ module.exports = (db) => {
   });
 
   router.post("/nutrition", (req, res) => {
-    res.send({
-      calories: 0,
-      weight: 0,
-    });
-    // console.log("this is nutrion baby", req.body.search);
-    // axios
-    //   .post(
-    //     "https://trackapi.nutritionix.com/v2/natural/nutrients",
-    //     {
-    //       query: req.body.search,
-    //     },
-    //     {
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //         "x-app-id": process.env.NUTRITION_ID,
-    //         "x-app-key": process.env.NUTRITION_API,
-    //         "x-remote-user-id": 0,
-    //       },
-    //     }
-    //   )
-    //   .then((data) => {
-    //     console.log(data.data.foods);
-    //     let totalWeight = 0;
-    //     let totalCalories = 0;
-    //     for (const food of data.data.foods) {
-    //       totalWeight += food.serving_weight_grams;
-    //       totalCalories += food.nf_calories;
-    //     }
-    //     res.send({
-    //       calories: totalCalories,
-    //       weight: totalWeight,
-    //     });
-    //   })
-    //   .catch((e) => {
-    //     console.log(e);
-    //     res.send({
-    //       calories: "",
-    //       weight: "",
-    //     });
-    //   });
+    // res.send({
+    //   calories: 0,
+    //   weight: 0,
+    // });
+    console.log("this is nutrion baby", req.body.search);
+    axios
+      .post(
+        "https://trackapi.nutritionix.com/v2/natural/nutrients",
+        {
+          query: req.body.search,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "x-app-id": process.env.NUTRITION_ID,
+            "x-app-key": process.env.NUTRITION_API,
+            "x-remote-user-id": 0,
+          },
+        }
+      )
+      .then((data) => {
+        console.log(data.data.foods);
+        let totalWeight = 0;
+        let totalCalories = 0;
+        for (const food of data.data.foods) {
+          totalWeight += food.serving_weight_grams;
+          totalCalories += food.nf_calories;
+        }
+        res.send({
+          calories: totalCalories,
+          weight: totalWeight,
+        });
+      })
+      .catch((e) => {
+        console.log(e);
+        res.send({
+          calories: "",
+          weight: "",
+        });
+      });
   });
 
   return router;
