@@ -35,7 +35,7 @@ const Emergency = (props) => {
           }}
           required
         ></input>
-        
+
         <div>Send message on this date</div>
         <input
           type={"date"}
@@ -116,7 +116,7 @@ const Emergency = (props) => {
                 });
               }}
             >
-              Remove Contact
+              Check-In
             </button>
           </>
         )}
