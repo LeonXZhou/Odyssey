@@ -1,10 +1,8 @@
 import 'leaflet/dist/leaflet.css';
 import { MapContainer, TileLayer } from 'react-leaflet'
-import './MapEditor.scss'
-import L from 'leaflet'
+import '../component-styles/MapEditor.scss'
 
-import { useEffect, useState } from 'react';
-import { useContext } from "react";
+import { useContext, useState} from "react";
 import { mapContext } from "../providers/MapProvider";
 
 import { updateMapById } from "../../Helpers/apiHelpers"
