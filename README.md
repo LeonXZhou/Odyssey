@@ -39,7 +39,16 @@ On the emergency contact tab users have the option of setting up an emergency co
 
 ## Dependencies
 ### Frontend
+- React-Leaflet
+- axios
+- bootstrap
+- react-router
 ### Backend
+- axios
+- cookie-session
+- bcryptjs
+- body-parser
+- cron
 ### External APIs
 - Nutritionix
 - OpenWeatherMap
