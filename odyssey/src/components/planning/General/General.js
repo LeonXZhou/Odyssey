@@ -20,7 +20,7 @@ export default function General(props) {
     getPrivacyForTrip(trip_id).then((res) => {
       setPrivacyState(res.data[0].shared);
     });
-  });
+  }, []);
   console.log(props);
   let start = "";
   let end = "";
