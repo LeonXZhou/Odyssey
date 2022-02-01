@@ -20,6 +20,6 @@ odyssey/yarn-error.log*
 odyssey/package-lock.json
 odyssey/package.json
 
-node-skeleton/.env
-node-skeleton/node_modules
-node-skeleton/package-lock.json
+node-backend/.env
+node-backend/node_modules
+node-backend/package-lock.json
