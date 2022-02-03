@@ -124,9 +124,9 @@ app.listen(process.env.PORT || 8080, () => {
         // console.log("new cycle");
       })
 
-      .catch((err) => {
-        res.status(500).json({ error: err.message });
-      });
+      // .catch((err) => {
+      //   res.status(500).json({ error: err.message });
+      // });
   });
 });
 
