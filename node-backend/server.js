@@ -2,8 +2,8 @@
 // require("dotenv").config();
 const path = require('path');
 
-const dotenv = require("dotenv");
-dotenv.config();
+// const dotenv = require("dotenv");
+// dotenv.config();
 const accountSid = process.env.TWILIO_ACC_SID;
 const authToken = process.env.TWILIO_AUTH_KEY; //CHANGES DAILY****
 const cron = require("node-cron");
@@ -23,7 +23,7 @@ const cors = require("cors");
 // PG database client/connection setup
 const { Pool } = require("pg");
 const dbParams = require("./lib/db.js");
-const db = new Pool(process.env.DATABASE_URL);
+const db = new Pool({ connectionString: process.env.DATABASE_URL });
 db.connect();
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
@@ -77,9 +77,9 @@ app.use(express.static(path.join(__dirname, 'build')));
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'build','index.html'))
+  res.sendFile(path.join(__dirname, 'build', 'index.html'))
 });
-app.listen(process.env.PORT||8080, () => {
+app.listen(process.env.PORT || 8080, () => {
 
   console.log(`Example app listening on port ${PORT}`);
 
