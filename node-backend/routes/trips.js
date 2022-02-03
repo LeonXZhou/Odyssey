@@ -169,9 +169,9 @@ module.exports = (db) => {
         res.json(allTrip);
       })
 
-      .catch((err) => {
-        res.status(500).json({ error: err.message });
-      });
+      // .catch((err) => {
+      //   res.status(500).json({ error: err.message });
+      // });
   });
   router.get("/:trip_id", (req, res) => {
     const query = `SELECT users.id AS user_id ,
