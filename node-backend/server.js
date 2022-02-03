@@ -23,7 +23,7 @@ const cors = require("cors");
 // PG database client/connection setup
 const { Pool } = require("pg");
 const dbParams = require("./lib/db.js");
-const db = new Pool(dbParams);
+const db = new Pool(process.env.DATABASE_URL);
 db.connect();
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
@@ -79,7 +79,7 @@ app.use(express.static(path.join(__dirname, 'build')));
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, 'build','index.html'))
 });
-app.listen(PORT, () => {
+app.listen(process.env.PORT||8080, () => {
 
   console.log(`Example app listening on port ${PORT}`);
 
