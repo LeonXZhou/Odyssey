@@ -42,9 +42,9 @@ const getUserInfo = (db, id) => {
 };
 
 module.exports = (db) => {
-  router.get("", (req, res) => {
-    res.send(req.session.user_id);
-  });
+  // router.get("", (req, res) => {
+  //   res.send(req.session.user_id);
+  // });
 
   router.get("/authenticate", (req, res) => {
     getUserInfo(db, req.session.user_id).then((data) => {

@@ -1,5 +1,6 @@
 // load .env data into process.env
 require("dotenv").config();
+const path = require('path');
 
 const dotenv = require("dotenv");
 dotenv.config();
@@ -70,11 +71,13 @@ app.use("/api/emergency-contact", emergencyContactRoutes(db));
 app.use("/api/weather", weatherRoute(db));
 app.use("/", authentication(db));
 // Note: mount other resources here, using the same pattern above
-
+app.use(express.static(path.join(__dirname, '../odyssey/build')));
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
-
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build','index.html'))
+});
 app.listen(PORT, () => {
 
   console.log(`Example app listening on port ${PORT}`);
@@ -85,7 +88,7 @@ app.listen(PORT, () => {
         FROM emergency_contacts
         WHERE message_sent = 'false' AND time_date > send_date;
         `;
-        return db.query(query);
+    return db.query(query);
   }
 
   cron.schedule("*/05 * * * * *", function () {
