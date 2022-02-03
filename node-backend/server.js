@@ -72,7 +72,7 @@ app.use("/api/emergency-contact", emergencyContactRoutes(db));
 app.use("/api/weather", weatherRoute(db));
 app.use("/", authentication(db));
 // Note: mount other resources here, using the same pattern above
-app.use(express.static(path.join(__dirname, '../odyssey/build')));
+app.use(express.static(path.join(__dirname, 'build')));
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
