@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/static/css/main.b76cd3e6.css",
+    "main.js": "/static/js/main.0113ec43.js",
+    "static/js/787.3c715291.chunk.js": "/static/js/787.3c715291.chunk.js",
+    "static/media/squirrel.gif": "/static/media/squirrel.1ca876398aaf8e843b74.gif",
+    "static/media/otter.gif": "/static/media/otter.5a4fbe47221e12603a99.gif",
+    "static/media/image8.jpeg": "/static/media/image8.18454782ba7770f87e8b.jpeg",
+    "static/media/beaver.gif": "/static/media/beaver.8d61dafec5c59fdbea53.gif",
+    "static/media/image1.jpeg": "/static/media/image1.62a4471faead9277e897.jpeg",
+    "static/media/racoon.gif": "/static/media/racoon.b498f9ee99872a27b3a0.gif",
+    "static/media/WanderlustLetters-Regular.ttf": "/static/media/WanderlustLetters-Regular.9816642263c80fee7004.ttf",
+    "static/media/image4.jpeg": "/static/media/image4.4ea0d55946ad2e2ac2e0.jpeg",
+    "static/media/hiker.gif": "/static/media/hiker.773450f21265da658f3d.gif",
+    "static/media/odyssey_logo2.png": "/static/media/odyssey_logo2.518fe7885df9fecfbfe7.png",
+    "static/media/missionback.png": "/static/media/missionback.222d56c2ab0b2db7dfab.png",
+    "static/media/tent.png": "/static/media/tent.9947a998f88d026bc03b.png",
+    "static/media/campfire.png": "/static/media/campfire.75fa42e62bd2bf964b0f.png",
+    "static/media/default.png": "/static/media/default.ef307f004e22d315df9f.png",
+    "index.html": "/index.html",
+    "main.b76cd3e6.css.map": "/static/css/main.b76cd3e6.css.map",
+    "main.0113ec43.js.map": "/static/js/main.0113ec43.js.map",
+    "787.3c715291.chunk.js.map": "/static/js/787.3c715291.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b76cd3e6.css",
+    "static/js/main.0113ec43.js"
+  ]
+}
