@@ -1,55 +1,57 @@
 import React from "react";
 import { useContext } from "react";
 import { authContext } from "./providers/AuthenticationProvider";
-import { Link } from "react-router-dom";
+import { Link as div } from "react-router-dom";
 import "./component-styles/Navigation.scss";
 import odyssey_logo from "./images/odyssey_logo2.png";
 
 const Navigation = (props) => {
   const { user, auth } = useContext(authContext);
-  console.log("USER", user);
-  console.log("AUTH", auth);
   return (
-    <main className="header-container">
-      <div className="header-left">
-        <Link to={`/`} type="button" className="nav-button">
+    <nav className="top-nav">
+      
+      <div className="nav-left">
+        <div className="nav-button">
           Discover
-        </Link>
-        <Link
+        </div>
+        <div
           to={`/myTrips/${user.userId}`}
-          type="button"
           className="nav-button"
         >
           My Trips
-        </Link>
-        <Link to="/" type="button" className="nav-button">
+        </div>
+        <div to="/" className="nav-button">
           About
-        </Link>
-      </div>
-      <div className="header-middle">
-        <Link to="/" type="button" className="nav-button">
-          <img className="logo" src={odyssey_logo} />
-          Odyssey
-        </Link>
-      </div>
-      {auth ? (
-        <div className="header-right">
-          <div className="nav-button">{`${user.firstName}`}</div>
-          <Link to="/logout" type="button" className="nav-button">
-            Logout
-          </Link>
         </div>
-      ) : (
-        <div className="header-right">
-          <Link to="/register" type="button" className="signup">
-            Sign Up
-          </Link>
-          <Link to="/login" type="button" className="login">
-            Log In
-          </Link>
-        </div>
-      )}
-    </main>
+      </div>
+
+      <div className="nav-center">
+        <img className="logo" src={odyssey_logo} />
+        <div>Odyssey</div>
+      </div>
+
+      <div className="nav-right">
+        {auth ? (
+          <>
+            <div className="nav-button">
+              {`${user.firstName}`}
+            </div>
+            <div className="nav-button">
+              Logout
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="nav-button">
+              Sign Up
+            </div>
+            <div className="nav-button">
+              Log In
+            </div>
+          </>
+        )}
+      </div>
+    </nav>
   );
 };
 
