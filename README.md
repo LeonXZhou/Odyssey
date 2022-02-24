@@ -5,9 +5,9 @@ Odyssey is an outdoor adventure planning app that aims to bridge the gap of expi
 Odyssey is implemented using the PERN stack. It utilizes React on the frontend. The backend is implemented using Node and Express alongside a PosgresSQL database.
 
 ## Live Deployment:
-The demo version of the app is deployed at [Odyssey](https://https://odyssey-adventure-planner.herokuapp.com/login/dev).
+The demo version of the app is deployed at [Odyssey](https://odyssey-adventure-planner.herokuapp.com).
 
-To login as the test user navigate to [/login/dev endpoint](https://https://odyssey-adventure-planner.herokuapp.com/login/dev). You will be able to edit trips under my trips and create trips from the home page by clicking Your journey begins here.
+To login as the test user navigate to [/login/dev endpoint](https://odyssey-adventure-planner.herokuapp.com/login/dev). You will be able to edit trips under my trips and create trips from the home page by clicking Your journey begins here.
 
 ## Features:
 ### Home Page:
